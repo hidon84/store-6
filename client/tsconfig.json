@@ -10,7 +10,11 @@
     "allowJs": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "keyofStringsOnly": true
+    "keyofStringsOnly": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
+    }
   },
   "typeRoots": ["node_modules/@types", "src/@type"],
   "exclude": [
