@@ -14,7 +14,7 @@ export default (app: Express) => {
   app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 
   app.use(config.api.prefix, routes());
-  
+
   app.all('*', (_req, _res, next) => {
     next(new ErrorResponse(error.ERROR_NOT_FOUND));
   });
