@@ -4,6 +4,10 @@
 
 (작업 내역 확인하기 편하도록 gif 첨부)
 
+## :paperclip: 관련 이슈
+
+- closes (이슈 번호)
+
 ## :heavy_check_mark: 셀프 체크리스트
 
 > 최소 1명 이상의 assign을 받아야만 Merge 가능합니다.
