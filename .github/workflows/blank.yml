@@ -19,7 +19,7 @@ jobs:
       - name: yarn install, build, and test
         working-directory: ./client
         run: |
-          yarn ci
+          yarn install --frozen-lockfile
           yarn lint
         env:
           CI: true
