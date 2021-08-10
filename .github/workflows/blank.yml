@@ -1,4 +1,3 @@
-
 name: Test PR
 
 on: [push, pull_request]
@@ -12,15 +11,15 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      working-directory: ./client
-      run: |
-        npm ci
-        npm run lint
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: yarn install, build, and test
+        working-directory: ./client
+        run: |
+          yarn ci
+          yarn lint
+        env:
+          CI: true
