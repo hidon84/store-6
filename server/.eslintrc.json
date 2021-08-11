@@ -24,13 +24,11 @@
     ]
   },
   "settings": {
-		"import/resolver": {
+    "import/resolver": {
       "typescript": {},
-			"alias": {
-				"map": [
-					["@", "./src"]
-				]
-			}
-		}
-	}
+      "alias": {
+        "map": [["@", "./src"]]
+      }
+    }
+  }
 }

@@ -3,9 +3,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"],
-		},
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "target": "es5",
     "module": "commonjs",
     "lib": ["DOM"],
