@@ -5,7 +5,7 @@ function useLocation() {
   const [location, setLocation] = useState(pathname);
 
   const setLocationWrapper = (newLocation: string) => {
-    window.history.pushState({}, '/', newLocation);
+    window.history.pushState({}, '', newLocation);
     setLocation(newLocation);
   };
 
