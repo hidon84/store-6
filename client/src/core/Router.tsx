@@ -1,14 +1,25 @@
 import React, { createContext, useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import useLocation from '~/hooks/useLocation';
 
+interface RouterLocation {
+  pathname: string;
+  hash: string;
+  search: string;
+}
+
 interface RouterContextType {
-  location: string;
-  push: (location: string) => void;
+  location: RouterLocation;
+  push: (location: Partial<RouterLocation>) => void;
 }
 
 const RouterContext = createContext<RouterContextType>({
-  location: '',
-  push: (location: string) => {},
+  location: {
+    pathname: '/somewhere',
+    hash: '#howdy',
+    search: '?some=search-string',
+  },
+  push: (location: Partial<RouterLocation>) => {},
 });
 
 const BrowserRouter: React.FC<{
@@ -22,7 +33,8 @@ const BrowserRouter: React.FC<{
   };
 
   const handleHashChange = () => {
-    setLocation(window.location.pathname);
+    const { pathname, hash, search } = window.location;
+    setLocation({ pathname, hash, search });
   };
 
   useEffect(() => {
@@ -51,7 +63,7 @@ const Switch: React.FC<{
   const routerCtx = useContext(RouterContext);
   const acc = children.filter((route) => {
     /** TODO: route.props.exact가 true일때 구분기능 */
-    if (route.props.path === routerCtx.location) return true;
+    if (route.props.path === routerCtx.location.pathname) return true;
     return false;
   });
 
@@ -61,7 +73,48 @@ const Switch: React.FC<{
 const useRouter = () => {
   const routerCtx = useContext(RouterContext);
 
-  return [routerCtx.location, routerCtx.push] as const;
+  return routerCtx.location;
 };
 
-export { BrowserRouter, Switch, Route, useRouter as useLocation };
+const useHistory = () => {
+  const routerCtx = useContext(RouterContext);
+
+  return {
+    location: routerCtx.location,
+    push: (pathname: string) => {
+      routerCtx.push({ pathname });
+    },
+  } as const;
+};
+
+const StyledLink = styled.a`
+  cursor: pointer;
+`;
+
+const Link: React.FC<{ to: string; children: React.ReactNode }> = ({
+  to,
+  children,
+}) => {
+  const { push } = useHistory();
+  return (
+    <StyledLink
+      href={to}
+      onClick={(e) => {
+        e.preventDefault();
+        push(to);
+      }}
+    >
+      {children}
+    </StyledLink>
+  );
+};
+
+export {
+  BrowserRouter,
+  Switch,
+  Link,
+  Route,
+  useRouter as useLocation,
+  useHistory,
+  RouterLocation,
+};

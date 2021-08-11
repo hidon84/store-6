@@ -1,6 +1,6 @@
 import React from 'react';
-import Hello from '~/Components/Hello';
 import World from './Components/World';
+import LinkedHello from './Components/Hello';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/hello">
-          <Hello>안녕</Hello>
+          <LinkedHello />
         </Route>
         <Route exact path="/world">
           <World>세상아</World>

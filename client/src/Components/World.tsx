@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useLocation } from '~/core/Router';
+import { useHistory } from '~/core/Router';
 
 const Title = styled.div`
   color: red;
 `;
 
 const World: React.FC = () => {
-  const [location, setLocation] = useLocation();
+  const { location, push } = useHistory();
 
   return (
     <Title
       onClick={() => {
-        setLocation('/hello');
+        push('/hello');
       }}
     >
       World
