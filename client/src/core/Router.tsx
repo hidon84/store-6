@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import useLocation from '~/hooks/useLocation';
 
 interface RouterContextType {
@@ -14,7 +14,29 @@ const RouterContext = createContext<RouterContextType>({
 const BrowserRouter: React.FC<{
   children?: JSX.Element | JSX.Element[];
 }> = ({ children }) => {
-  return <div>{children}</div>;
+  const [location, setLocation] = useLocation();
+
+  const push = (newLocation: string) => {
+    window.history.pushState({}, '', newLocation);
+    setLocation(newLocation);
+  };
+  const ctx = {
+    location,
+    push,
+  };
+
+  const handleHashChange = () => {
+    setLocation(window.location.pathname);
+  };
+
+  useEffect(() => {
+    window.addEventListener('popstate', handleHashChange);
+    return () => window.removeEventListener('popstate', handleHashChange);
+  });
+
+  return (
+    <RouterContext.Provider value={ctx}>{children}</RouterContext.Provider>
+  );
 };
 
 class Route extends React.Component<{
@@ -30,9 +52,10 @@ class Route extends React.Component<{
 const Switch: React.FC<{
   children: JSX.Element[];
 }> = ({ children }) => {
-  const [location, setLocation] = useLocation();
+  const routerCtx = useContext(RouterContext);
   const acc = children.filter((route) => {
-    if (route.props.path === location) return true;
+    /** TODO: route.props.exact가 true일때 구분기능 */
+    if (route.props.path === routerCtx.location) return true;
     return false;
   });
 
