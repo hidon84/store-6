@@ -16,13 +16,9 @@ const BrowserRouter: React.FC<{
 }> = ({ children }) => {
   const [location, setLocation] = useLocation();
 
-  const push = (newLocation: string) => {
-    window.history.pushState({}, '', newLocation);
-    setLocation(newLocation);
-  };
   const ctx = {
     location,
-    push,
+    push: setLocation,
   };
 
   const handleHashChange = () => {
@@ -62,4 +58,10 @@ const Switch: React.FC<{
   return acc[0];
 };
 
-export { BrowserRouter, Switch, Route };
+const useRouter = () => {
+  const routerCtx = useContext(RouterContext);
+
+  return [routerCtx.location, routerCtx.push] as const;
+};
+
+export { BrowserRouter, Switch, Route, useRouter as useLocation };
