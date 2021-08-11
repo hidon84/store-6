@@ -23,7 +23,7 @@ const RouterContext = createContext<RouterContextType>({
 });
 
 const BrowserRouter: React.FC<{
-  children?: JSX.Element | JSX.Element[];
+  children?: React.ReactNode;
 }> = ({ children }) => {
   const [location, setLocation] = useLocation();
 
