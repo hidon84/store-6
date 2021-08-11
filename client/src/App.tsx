@@ -6,10 +6,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/hello" exact>
+        <Route exact path="/hello">
           <Title>안녕</Title>
         </Route>
-        <Route path="/world" exact>
+        <Route exact path="/world">
           <Title>세상아!</Title>
         </Route>
       </Switch>
