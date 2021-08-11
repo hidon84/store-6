@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   extends: [
     'airbnb',
@@ -20,10 +22,12 @@ module.exports = {
     },
     ecmaVersion: 2021,
     sourceType: 'module', // import 사용
-    project: './tsconfig.json',
+    project: 'tsconfig.json',
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/jsx-filename-extension': [
       1,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
