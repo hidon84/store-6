@@ -1,0 +1,48 @@
+import { BaseEntity, Connection } from 'typeorm';
+import dependencyInjector, { DependencyInfo } from './dependencyInjector';
+import CartEntity from '@/entity/cart';
+import CategoryEntity from '@/entity/category';
+import LikeEntity from '@/entity/like';
+import LoginEntity from '@/entity/login';
+import OptionEntity from '@/entity/option';
+import OptionItemEntity from '@/entity/optionItem';
+import ProductEntity from '@/entity/product';
+import ProductImageEntity from '@/entity/productImage';
+import ReviewEntity from '@/entity/review';
+import ShippingEntity from '@/entity/shipping';
+import UserEntity from '@/entity/user';
+import ViewEntity from '@/entity/view';
+
+const entityInjector = (connection: Connection) => {
+  CartEntity.useConnection(connection);
+  CategoryEntity.useConnection(connection);
+  LikeEntity.useConnection(connection);
+  LoginEntity.useConnection(connection);
+  OptionEntity.useConnection(connection);
+  OptionItemEntity.useConnection(connection);
+  ProductEntity.useConnection(connection);
+  ProductImageEntity.useConnection(connection);
+  ReviewEntity.useConnection(connection);
+  ShippingEntity.useConnection(connection);
+  UserEntity.useConnection(connection);
+  ViewEntity.useConnection(connection);
+
+  const entities: DependencyInfo<BaseEntity>[] = [
+    { name: 'cartEntity', dependency: new CartEntity() },
+    { name: 'categoryEntity', dependency: new CategoryEntity() },
+    { name: 'likeEntity', dependency: new LikeEntity() },
+    { name: 'loginEntity', dependency: new LoginEntity() },
+    { name: 'optionEntity', dependency: new OptionEntity() },
+    { name: 'optionItemEntity', dependency: new OptionItemEntity() },
+    { name: 'productEntity', dependency: new ProductEntity() },
+    { name: 'productImageEntity', dependency: new ProductImageEntity() },
+    { name: 'reviewEntity', dependency: new ReviewEntity() },
+    { name: 'shippingEntity', dependency: new ShippingEntity() },
+    { name: 'userEntity', dependency: new UserEntity() },
+    { name: 'viewEntity', dependency: new ViewEntity() },
+  ];
+
+  dependencyInjector<BaseEntity>(entities);
+};
+
+export default entityInjector;

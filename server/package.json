@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd -f .env.dev nodemon --exec ts-node -r tsconfig-paths/register ./src/bin/www.ts --watch ./src -e ts",
-    "start": "env-cmd ts-node -r tsconfig-paths/register ./src/bin/www.ts"
+    "start": "env-cmd ts-node -r tsconfig-paths/register ./src/bin/www.ts",
+    "lint:fix": "eslint --fix .",
+    "prettier:write": "prettier --write .",
+    "precommit": "yarn lint:fix && yarn prettier:write"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -34,6 +37,7 @@
     "mysql2": "^2.3.0",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.10.0",
-    "typeorm": "^0.2.36"
+    "typeorm": "^0.2.36",
+    "typeorm-naming-strategies": "^2.0.0"
   }
 }
