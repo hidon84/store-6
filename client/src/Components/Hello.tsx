@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from '~/core/Router';
+import { Link, useHistory } from '~/core/Router';
 
 const LinkedHello: React.FC = () => {
+  const history = useHistory();
+  // console.log(history.location.state);
   return <Link to="/world">goto world</Link>;
 };
 

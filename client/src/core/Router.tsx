@@ -6,6 +6,7 @@ interface RouterLocation {
   pathname: string;
   hash: string;
   search: string;
+  state?: Record<string, unknown>;
 }
 
 interface RouterContextType {
@@ -35,9 +36,10 @@ const BrowserRouter: React.FC<{
     },
   };
 
-  const handleHashChange = () => {
+  const handleHashChange = (popEvent: PopStateEvent) => {
     const { pathname, hash, search } = window.location;
-    setLocation({ pathname, hash, search });
+    const { state } = popEvent;
+    setLocation({ pathname, hash, search, state });
   };
 
   useEffect(() => {
@@ -107,6 +109,11 @@ const useLocation = () => {
  * history.push('/main');
  *
  * @example
+ * history = useHistory();
+ * history.push('/main', { message: 'hi' })
+ * // /main에서는 history.location.state를 통해서 message를 받음
+ *
+ * @example
  * history = uesHistory();
  * history.pathname;
  */
@@ -115,8 +122,8 @@ const useHistory = () => {
 
   return {
     location: routerCtx.location,
-    push: (pathname: string) => {
-      routerCtx.push({ pathname });
+    push: (pathname: string, state?: Record<string, unknown>) => {
+      routerCtx.push({ pathname, state });
     },
   } as const;
 };
