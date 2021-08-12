@@ -1,32 +1,48 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne, Unique } from 'typeorm';
-import User from "./user";
-import Product from "./product";
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinColumn,
+  ManyToOne,
+  Unique,
+} from 'typeorm';
+import UserEntity from './user';
+import ProductEntity from './product';
 
 @Entity()
 @Unique(['user', 'product'])
-class Review extends BaseEntity {
-@PrimaryGeneratedColumn()
-idx!: number;
-    
-@Column("text")
-content!: string;
-    
-@Column("float")
-rate!: number;
-    
-@ManyToOne(() => Product, Product => Product.idx, { onDelete: 'CASCADE', nullable: false })
-@JoinColumn({name : "product_idx"})
-product!: Product
-    
-@ManyToOne(() => User, User => User.idx, { onDelete: 'CASCADE', nullable: false })
-@JoinColumn({name : "user_idx"})
-user!: User
-    
-@CreateDateColumn({ type : "timestamp"})
-createdAt!: Date;
+class ReviewEntity extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  idx!: number;
 
-@UpdateDateColumn({ type : "timestamp"})
-updatedAt!: Date;
+  @Column('text')
+  content!: string;
+
+  @Column('float')
+  rate!: number;
+
+  @ManyToOne(() => ProductEntity, productEntity => productEntity.idx, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'product_idx' })
+  product!: ProductEntity;
+
+  @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
+  @JoinColumn({ name: 'user_idx' })
+  user!: UserEntity;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt!: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt!: Date;
 }
 
-export default Review;
+export default ReviewEntity;

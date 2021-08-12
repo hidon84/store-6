@@ -1,26 +1,37 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column ,CreateDateColumn,UpdateDateColumn ,ManyToOne,JoinColumn} from 'typeorm';
-import User from "./user";
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import UserEntity from './user';
 
 @Entity()
-class Shipping extends BaseEntity {
+class ShippingEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx!: number;
 
   @Column({ length: 45 })
   name!: string;
 
-  @Column({ length: 200})
+  @Column({ length: 200 })
   address!: string;
-    
-  @ManyToOne(() => User, User => User.idx, { onDelete: 'CASCADE'})
-  @JoinColumn({name : "user_idx"})
-  user!: User;
-    
-  @CreateDateColumn({ type : "timestamp"})
+
+  @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'user_idx' })
+  user!: UserEntity;
+
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt!: Date;
 
-  @UpdateDateColumn({ type : "timestamp"})
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt!: Date;
 }
 
-export default Shipping;
+export default ShippingEntity;
