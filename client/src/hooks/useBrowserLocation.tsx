@@ -6,15 +6,14 @@ import { RouterLocation } from '~/core/Router';
  * React Router DOM 라이브러리에서 사용하던 useLocation 함수와 같은 역할을 하는것은
  * Router에 있는 useLocation() 함수입니다.
  */
-function useLocation() {
+function useBrowserLocation() {
   const [location, setLocation] = useState(window.location);
 
   const setLocationWrapper = (newLocation: Partial<RouterLocation>) => {
-    window.history.pushState({}, '', newLocation.pathname);
     setLocation({ ...location, ...newLocation });
   };
 
   return [location, setLocationWrapper] as const;
 }
 
-export default useLocation;
+export default useBrowserLocation;

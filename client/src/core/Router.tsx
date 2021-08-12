@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import useLocation from '~/hooks/useLocation';
+import useBrowserLocation from '~/hooks/useBrowserLocation';
 
 interface RouterLocation {
   pathname: string;
@@ -25,11 +25,14 @@ const RouterContext = createContext<RouterContextType>({
 const BrowserRouter: React.FC<{
   children?: React.ReactNode;
 }> = ({ children }) => {
-  const [location, setLocation] = useLocation();
+  const [location, setLocation] = useBrowserLocation();
 
   const ctx = {
     location,
-    push: setLocation,
+    push: (newLocation: Partial<RouterLocation>) => {
+      window.history.pushState({}, '', newLocation.pathname);
+      setLocation(newLocation);
+    },
   };
 
   const handleHashChange = () => {
@@ -70,12 +73,43 @@ const Switch: React.FC<{
   return acc[0];
 };
 
-const useRouter = () => {
+/**
+ * useLocation 훅은 현재 URL을 나타내는 위치 개체를 반환합니다.
+ * URL이 변경될 때마다 새 위치를 반환하는 useState라고 생각하면 됩니다.
+ * @returns {
+ *   pathname: '/path/to',
+ *   search: '?search=배달이',
+ *   hash: '#hashTo',
+ * }
+ *
+ * @example
+ * const location = useLocation();
+ * console.log(location.search);
+ */
+const useLocation = () => {
   const routerCtx = useContext(RouterContext);
 
   return routerCtx.location;
 };
 
+/**
+ * history 객체를 반환합니다
+ * @returns {
+ *   location: {
+ *     pathname: '/path/to',
+ *     search: '?search=배달이',
+ *     hash: '#hashTo',
+ *   },
+ *   push: Function
+ * }
+ * @example
+ * history = useHistory();
+ * history.push('/main');
+ *
+ * @example
+ * history = uesHistory();
+ * history.pathname;
+ */
 const useHistory = () => {
   const routerCtx = useContext(RouterContext);
 
@@ -114,7 +148,7 @@ export {
   Switch,
   Link,
   Route,
-  useRouter as useLocation,
+  useLocation,
   useHistory,
   RouterLocation,
 };
