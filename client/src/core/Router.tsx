@@ -93,6 +93,7 @@ const Switch: React.FC<{
 }> = ({ children }) => {
   const routerCtx = useContext(RouterContext);
   let routerParams = {};
+  routerCtx.params = routerParams;
 
   for (const route of children) {
     const { exact, path } = route.props;
