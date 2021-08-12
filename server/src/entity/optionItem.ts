@@ -13,23 +13,23 @@ import OptionEntity from './option';
 @Entity({ name: 'option_item' })
 class OptionItemEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @Column({ length: 45 })
-  name!: string;
+  name: string;
 
   @ManyToOne(() => OptionEntity, optionEntity => optionEntity.idx, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'option_idx' })
-  option!: OptionEntity;
+  option: OptionEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export default OptionItemEntity;

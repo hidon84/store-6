@@ -13,35 +13,35 @@ import CategoryEntity from './category';
 @Entity({ name: 'product' })
 class ProductEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @Column('int')
-  price!: number;
+  price: number;
 
   @Column('longtext')
-  description!: string;
+  description: string;
 
   @Column('text')
-  shipSummary!: string;
+  shipSummary: string;
 
   @Column('text')
-  shipDetail!: string;
+  shipDetail: string;
 
   @Column('text')
-  policy!: string;
+  policy: string;
 
   @ManyToOne(() => CategoryEntity, categoryEntity => categoryEntity.idx, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'category_idx' })
-  category!: CategoryEntity;
+  category: CategoryEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export default ProductEntity;

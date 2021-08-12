@@ -13,29 +13,29 @@ import LoginEntity from './login';
 @Entity({ name: 'user' })
 class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @Column({ length: 320, nullable: true })
-  email!: string;
+  email: string;
 
   @Column({ length: 20 })
-  phone!: string;
+  phone: string;
 
   @Column('text', { nullable: true })
-  profile!: string;
+  profile: string;
 
   @OneToOne(() => LoginEntity, loginEntity => loginEntity.idx, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'login_idx' })
-  login!: LoginEntity;
+  login: LoginEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export default UserEntity;

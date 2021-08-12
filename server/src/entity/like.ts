@@ -15,26 +15,26 @@ import ProductEntity from './product';
 @Unique(['user', 'product'])
 class LikeEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @ManyToOne(() => ProductEntity, productEntity => productEntity.idx, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'product_idx' })
-  product!: ProductEntity;
+  product: ProductEntity;
 
   @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'user_idx' })
-  user!: UserEntity;
+  user: UserEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 export default LikeEntity;

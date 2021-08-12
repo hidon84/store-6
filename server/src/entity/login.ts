@@ -10,22 +10,22 @@ import {
 @Entity({ name: 'login' })
 class LoginEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @Column({ length: 45, unique: true })
-  id!: string;
+  id: string;
 
   @Column('text')
-  password!: string;
+  password: string;
 
   @Column({ length: 20, default: 'OWN' })
-  type!: string;
+  type: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export default LoginEntity;

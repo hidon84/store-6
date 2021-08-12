@@ -10,16 +10,16 @@ import {
 @Entity({ name: 'category' })
 class CatetoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @Column({ length: 45 })
-  name!: string;
+  name: string;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export default CatetoryEntity;

@@ -13,23 +13,23 @@ import ProductEntity from './product';
 @Entity({ name: 'product_image' })
 class ProductImageEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idx!: number;
+  idx: number;
 
   @Column('text')
-  url!: string;
+  url: string;
 
   @ManyToOne(() => ProductEntity, productEntity => productEntity.idx, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   @JoinColumn({ name: 'product_idx' })
-  product!: ProductEntity;
+  product: ProductEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export default ProductImageEntity;
