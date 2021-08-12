@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import UserEntity from './user';
 
-@Entity({name : 'shipping'})
+@Entity({ name: 'shipping' })
 class ShippingEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx!: number;

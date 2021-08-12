@@ -11,7 +11,7 @@ import {
 import UserEntity from './user';
 import ProductEntity from './product';
 
-@Entity({name : 'cart'})
+@Entity({ name: 'cart' })
 @Unique(['user', 'product'])
 class CartEntity extends BaseEntity {
   @PrimaryGeneratedColumn()

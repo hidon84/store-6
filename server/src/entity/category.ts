@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({name : 'category'})
+@Entity({ name: 'category' })
 class CatetoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx!: number;
