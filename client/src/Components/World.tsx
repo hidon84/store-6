@@ -12,7 +12,7 @@ const World: React.FC = () => {
   return (
     <Title
       onClick={() => {
-        push('/hello', { message: 'hi' });
+        push('/hello/inkyu/500', { message: 'hi' });
       }}
     >
       World

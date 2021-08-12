@@ -10,6 +10,9 @@ const App = () => {
         <Route exact path="/hello">
           <LinkedHello />
         </Route>
+        <Route path="/hello/:name/:number">
+          <LinkedHello />
+        </Route>
         <Route exact path="/world">
           <World>세상아</World>
         </Route>
