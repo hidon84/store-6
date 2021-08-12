@@ -12,7 +12,7 @@ import {
 import UserEntity from './user';
 import ProductEntity from './product';
 
-@Entity()
+@Entity({name : 'review'})
 @Unique(['user', 'product'])
 class ReviewEntity extends BaseEntity {
   @PrimaryGeneratedColumn()

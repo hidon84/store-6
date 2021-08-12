@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import ProductEntity from './product';
 
-@Entity()
+@Entity({name : 'option'})
 class OptionEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx!: number;

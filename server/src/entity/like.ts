@@ -11,7 +11,7 @@ import {
 import UserEntity from './user';
 import ProductEntity from './product';
 
-@Entity()
+@Entity({name : 'like'})
 @Unique(['user', 'product'])
 class LikeEntity extends BaseEntity {
   @PrimaryGeneratedColumn()

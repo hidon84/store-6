@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import UserEntity from './user';
 
-@Entity()
+@Entity({name : 'shipping'})
 class ShippingEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx!: number;
@@ -22,6 +22,7 @@ class ShippingEntity extends BaseEntity {
   address!: string;
 
   @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
+    nullable: false,
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_idx' })
