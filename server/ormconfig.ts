@@ -1,4 +1,4 @@
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';  
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export default {
   type: 'mysql',
