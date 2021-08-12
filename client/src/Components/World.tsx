@@ -7,7 +7,7 @@ const Title = styled.div`
 `;
 
 const World: React.FC = () => {
-  const { location, push } = useHistory();
+  const { location, push, goBack } = useHistory();
 
   return (
     <Title
