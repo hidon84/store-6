@@ -1,8 +1,24 @@
 import React from 'react';
-import Title from '~/Components/Title';
+import World from './Components/World';
+import LinkedHello from './Components/Hello';
+import { BrowserRouter, Switch, Route } from '~/core/Router';
 
 const App = () => {
-  return <Title>안녕 세상아!</Title>;
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/hello">
+          <LinkedHello />
+        </Route>
+        <Route path="/hello/:name/:number">
+          <LinkedHello />
+        </Route>
+        <Route exact path="/world">
+          <World>세상아</World>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
 };
 
 export default App;

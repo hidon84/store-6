@@ -7,7 +7,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    'js/app': ['./src/App.tsx'],
+    'js/app': ['./src/index.tsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist/'),
@@ -41,4 +41,10 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin({ typescript: true }),
   ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8080,
+    historyApiFallback: true,
+  },
 };
