@@ -102,7 +102,7 @@ const useLocation = () => {
  *     search: '?search=배달이',
  *     hash: '#hashTo',
  *   },
- *   push: Function
+ *   push: (path, state?) => void,
  * }
  * @example
  * history = useHistory();
