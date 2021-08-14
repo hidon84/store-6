@@ -1,4 +1,4 @@
-import { BaseEntity, Connection } from 'typeorm';
+import { Connection, ObjectLiteral } from 'typeorm';
 import dependencyInjector, { DependencyInfo } from './dependencyInjector';
 import CartEntity from '@/entity/cart';
 import CategoryEntity from '@/entity/category';
@@ -17,7 +17,6 @@ const entityInjector = (connection: Connection) => {
   CartEntity.useConnection(connection);
   CategoryEntity.useConnection(connection);
   LikeEntity.useConnection(connection);
-  LoginEntity.useConnection(connection);
   OptionEntity.useConnection(connection);
   OptionItemEntity.useConnection(connection);
   ProductEntity.useConnection(connection);
@@ -27,7 +26,7 @@ const entityInjector = (connection: Connection) => {
   UserEntity.useConnection(connection);
   ViewEntity.useConnection(connection);
 
-  const entities: DependencyInfo<BaseEntity>[] = [
+  const entities: DependencyInfo<ObjectLiteral>[] = [
     { name: 'cartEntity', dependency: new CartEntity() },
     { name: 'categoryEntity', dependency: new CategoryEntity() },
     { name: 'likeEntity', dependency: new LikeEntity() },
@@ -42,7 +41,7 @@ const entityInjector = (connection: Connection) => {
     { name: 'viewEntity', dependency: new ViewEntity() },
   ];
 
-  dependencyInjector<BaseEntity>(entities);
+  dependencyInjector<ObjectLiteral>(entities);
 };
 
 export default entityInjector;
