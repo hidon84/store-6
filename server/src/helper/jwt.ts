@@ -47,3 +47,8 @@ const decodeToken = (subject: string) => (tokenType: Token) => {
 
 export const decodeAccessToken = decodeToken(Token.Access);
 export const decodeRefreshToken = decodeToken(Token.Refresh);
+
+export const getRefreshExpiresInMs = () => {
+  const expireMs = 1000 * 60 * 60 * config.jwt.expire.refresh;
+  return expireMs;
+};
