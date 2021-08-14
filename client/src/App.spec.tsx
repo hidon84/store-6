@@ -1,11 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import 'jest-styled-components';
 
 import App from './App';
 
 describe('<App />', () => {
-  it('renders component correctly', () => {
+  it('should render component in document', () => {
     const { container } = render(<App />);
     expect(container).toBeInTheDocument();
   });
@@ -15,7 +15,7 @@ describe('<App />', () => {
    * 안에 인자를 비워두고 실행하면 내부의 스트링을 jest가 자동으로 완성시켜줍니다.
    * Snapshot을 비교해서 ui가 얼마나 바뀌는지 확인할 수 있습니다.
    */
-  it('renders / correctly', () => {
+  it('should route /', () => {
     const { container } = render(<App />);
     expect(container).toMatchInlineSnapshot(`
 <div>
