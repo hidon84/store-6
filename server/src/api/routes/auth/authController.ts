@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
 import * as jwtHelper from '@/helper/jwt';
+import * as authHelper from '@/helper/auth';
 import AuthService from '@/service/auth';
 
 export const handleLogin = async (
@@ -12,6 +13,12 @@ export const handleLogin = async (
     const { id, password } = req.body;
 
     const authServiceInstance = Container.get(AuthService);
+
+    const refreshToken = req.cookies['X-Refresh-Token'];
+    if (refreshToken) {
+      await authHelper.deleteRefreshToken(refreshToken);
+    }
+
     const { access, refresh } = await authServiceInstance.Login(id, password);
 
     res.cookie('X-Refresh-Token', refresh, {
