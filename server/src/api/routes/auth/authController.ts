@@ -3,7 +3,11 @@ import Container from 'typedi';
 import * as jwtHelper from '@/helper/jwt';
 import AuthService from '@/service/auth';
 
-export const handleLogin = async (req: Request, res: Response, next: NextFunction) => {
+export const handleLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id, password } = req.body;
 
@@ -22,7 +26,30 @@ export const handleLogin = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-export const handleRefresh = async (req: Request, res: Response, next: NextFunction) => {
+export const handleLogout = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const authServiceInstance = Container.get(AuthService);
+    const refreshToken = req.cookies['X-Refresh-Token'];
+
+    await authServiceInstance.Logout(refreshToken);
+
+    res.clearCookie('X-Refresh-Token');
+
+    return res.status(200).end();
+  } catch (e) {
+    return next(e);
+  }
+};
+
+export const handleRefresh = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const authServiceInstance = Container.get(AuthService);
 
