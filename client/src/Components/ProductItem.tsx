@@ -35,7 +35,7 @@ const ProductImage = styled.img`
 
 const ProductInfoConatiner = styled.div`
   position: absolute;
-  left: rem;
+  left: 0.5rem;
   bottom: 0.7rem;
 `;
 
