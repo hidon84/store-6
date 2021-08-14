@@ -1,11 +1,16 @@
-export const ERROR_NOT_FOUND = {
-  statusCode: 404,
-  message: 'Not Found',
-};
-
-export const ERROR_UNKNOWN = {
-  statusCode: 500,
-  message: 'Unkown Error',
+export const commonError = {
+  notFound: {
+    statusCode: 404,
+    message: 'Not Found',
+  },
+  wrong: {
+    statusCode: 500,
+    message: 'Something went very wrong!!!',
+  },
+  unauthorized: {
+    statusCode: 401,
+    message: 'Unauthorized',
+  },
 };
 
 export const loginError = {
@@ -16,5 +21,12 @@ export const loginError = {
   notFound: {
     statusCode: 404,
     message: 'User Not Found',
+  },
+};
+
+export const refreshError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Refresh',
   },
 };
