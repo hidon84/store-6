@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 import routes from '@/api';
 import ErrorResponse from '@/utils/errorResponse';
 import config from '@/config';
