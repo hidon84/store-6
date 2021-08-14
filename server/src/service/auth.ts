@@ -3,22 +3,15 @@ import LoginModel from '@/model/login';
 import * as hashHelper from '@/helper/hash';
 import * as jwtHelper from '@/helper/jwt';
 import * as authHelper from '@/helper/auth';
-import UserModel from '@/model/user';
 import ErrorResponse from '@/utils/errorResponse';
-import { loginError } from '@/constants/error';
+import { commonError, loginError } from '@/constants/error';
 
 @Service()
 class AuthService {
   private loginModel: LoginModel;
 
-  private userModel: UserModel;
-
-  constructor(
-    @Inject('loginModel') loginModel: LoginModel,
-    @Inject('userModel') userModel: UserModel,
-  ) {
+  constructor(@Inject('loginModel') loginModel: LoginModel) {
     this.loginModel = loginModel;
-    this.userModel = userModel;
   }
 
   async Login(id: string, password: string) {
@@ -29,18 +22,39 @@ class AuthService {
         throw new ErrorResponse(loginError.notFound);
       }
 
-      const user = await this.userModel.findUserByLoginIdx(login.idx);
       const isValid = hashHelper.comparePassword(login.password, password);
 
       if (isValid) {
-        const access = jwtHelper.generateAccessToken(user);
-        const refresh = jwtHelper.generateRefreshToken(user);
+        const access = jwtHelper.generateAccessToken(login);
+        const refresh = jwtHelper.generateRefreshToken(login);
 
         await authHelper.storeRefreshToken(refresh, login.idx);
 
         return { access, refresh };
       }
-      return {};
+
+      throw new ErrorResponse(commonError.unauthorized);
+    } catch (e) {
+      if (e instanceof ErrorResponse) {
+        throw e;
+      }
+      throw new ErrorResponse(loginError.unable);
+    }
+  }
+
+  async RefreshAccessToken(refreshToken: string) {
+    try {
+      const { idx } = jwtHelper.decodeRefreshToken(refreshToken);
+      const login = await this.loginModel.findByIdx(idx);
+      const isValid =
+        login && (await authHelper.verifyRefreshToken(refreshToken, idx));
+
+      if (isValid) {
+        const access = jwtHelper.generateAccessToken(login);
+        return { access };
+      }
+
+      throw new ErrorResponse(commonError.unauthorized);
     } catch (e) {
       if (e instanceof ErrorResponse) {
         throw e;
