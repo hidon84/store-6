@@ -2,8 +2,12 @@ import 'reflect-metadata';
 import express from 'express';
 import loadApp from './loaders';
 
-const app = express();
+const createApp = async () => {
+  const app = express();
 
-loadApp(app);
+  await loadApp(app);
 
-export default app;
+  return app;
+};
+
+export default createApp;
