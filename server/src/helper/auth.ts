@@ -18,3 +18,10 @@ export const deleteRefreshToken = (refresh: string) => {
   const delAsync = promisify(redisClient.del).bind(redisClient);
   return delAsync(refresh);
 };
+
+export const verifyRefreshToken = async (token: string, idx: number) => {
+  const redisClient = Container.get<RedisClient>('redisClient');
+  const getAsync = promisify(redisClient.get).bind(redisClient);
+  const res = await getAsync(token);
+  return res ? parseInt(res, 10) === idx : false;
+};
