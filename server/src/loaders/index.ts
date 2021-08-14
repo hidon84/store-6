@@ -11,7 +11,7 @@ export default async (app: Express) => {
   console.info('Express loaded');
 
   await connect();
-  console.info('DB connected');
+  console.info('Mysql & Redis connected');
   const connection = Container.get<Connection>('connection');
 
   entityInjector();

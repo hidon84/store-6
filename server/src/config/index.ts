@@ -14,4 +14,18 @@ export default {
       refresh: parseFloat(process.env.JWT_EXPIRE_REFRESH || '0'),
     },
   },
+  database: {
+    redis: {
+      connectionUrl: process.env.REDIS_URL,
+      connectionTlsUrl: process.env.REDIS_TLS_URL,
+      host: process.env.REDIS_HOST,
+      port: parseInt(process.env.REDIS_PORT || '6379', 10),
+    },
+    mysql: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      name: process.env.DB_NAME,
+    },
+  },
 };
