@@ -32,12 +32,12 @@ const createTokenGenerator = (subject: string, expiresIn: number) => {
 
 export const generateAccessToken = createTokenGenerator(
   Token.Access,
-  config.jwt.expire.access,
+  config.jwt.expire.access * 3600,
 );
 
 export const generateRefreshToken = createTokenGenerator(
   Token.Refresh,
-  config.jwt.expire.refresh,
+  config.jwt.expire.refresh * 3600,
 );
 
 const decodeToken = (subject: Token, token: string) => {
