@@ -5,7 +5,7 @@ const LinkedHello: React.FC = () => {
   const history = useHistory();
   const params = useParams();
   // console.log(params);
-  // console.log(history.location.state);
+  // console.log(history);
   return <Link to="/world">goto world</Link>;
 };
 
