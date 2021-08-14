@@ -24,6 +24,13 @@ export const loginError = {
   },
 };
 
+export const logoutError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Logout',
+  },
+};
+
 export const refreshError = {
   unable: {
     statusCode: 500,

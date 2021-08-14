@@ -4,7 +4,7 @@ import * as hashHelper from '@/helper/hash';
 import * as jwtHelper from '@/helper/jwt';
 import * as authHelper from '@/helper/auth';
 import ErrorResponse from '@/utils/errorResponse';
-import { commonError, loginError } from '@/constants/error';
+import { commonError, loginError, logoutError } from '@/constants/error';
 
 @Service()
 class AuthService {
@@ -39,6 +39,14 @@ class AuthService {
         throw e;
       }
       throw new ErrorResponse(loginError.unable);
+    }
+  }
+
+  async Logout(token: string) {
+    try {
+      await authHelper.deleteRefreshToken(token);
+    } catch {
+      throw new ErrorResponse(logoutError.unable);
     }
   }
 
