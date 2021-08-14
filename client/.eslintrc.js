@@ -38,5 +38,10 @@ module.exports = {
     ],
     'import/extensions': ['off'],
   },
-  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'setUpTests.ts'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    'jest.config.js',
+    'webpack.config.js',
+    'setUpTests.ts',
+  ],
 };
