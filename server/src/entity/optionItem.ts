@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -11,7 +10,7 @@ import {
 import OptionEntity from './option';
 
 @Entity({ name: 'option_item' })
-class OptionItemEntity extends BaseEntity {
+class OptionItemEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 

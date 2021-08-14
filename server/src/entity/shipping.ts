@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -11,7 +10,7 @@ import {
 import UserEntity from './user';
 
 @Entity({ name: 'shipping' })
-class ShippingEntity extends BaseEntity {
+class ShippingEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
