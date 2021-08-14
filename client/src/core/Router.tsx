@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  Component,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
 interface RouterLocation {
@@ -30,9 +36,11 @@ const RouterContext = createContext<RouterContextType>({
 const BrowserRouter: React.FC<{
   children?: React.ReactNode;
 }> = ({ children }) => {
-  const [windowLocation, setWindowLocation] = useState<RouterLocation>(
-    window.location,
-  );
+  const [windowLocation, setWindowLocation] = useState<RouterLocation>({
+    hash: window.location.hash,
+    pathname: window.location.pathname,
+    search: window.location.search,
+  });
 
   const ctx = {
     location: windowLocation,
@@ -60,7 +68,7 @@ const BrowserRouter: React.FC<{
   );
 };
 
-class Route extends React.Component<{
+class Route extends Component<{
   exact?: boolean;
   path: string;
 }> {
