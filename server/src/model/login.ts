@@ -6,6 +6,11 @@ class LoginModel extends Model<LoginEntity> {
     const account = await this.repository.find({ where: { id } });
     return account[0];
   }
+
+  async findByIdx(idx: number) {
+    const account = await this.repository.find({ where: { idx } });
+    return account[0];
+  }
 }
 
 export default LoginModel;
