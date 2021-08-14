@@ -38,4 +38,5 @@ module.exports = {
     ],
     'import/extensions': ['off'],
   },
+  ignorePatterns: ['.eslintrc.js', 'jest.config.js', 'setUpTests.ts'],
 };
