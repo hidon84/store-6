@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  Component,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
 interface RouterLocation {
@@ -60,7 +66,7 @@ const BrowserRouter: React.FC<{
   );
 };
 
-class Route extends React.Component<{
+class Route extends Component<{
   exact?: boolean;
   path: string;
 }> {
