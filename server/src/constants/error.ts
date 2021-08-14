@@ -18,10 +18,6 @@ export const loginError = {
     statusCode: 500,
     message: 'Unable to Login',
   },
-  notFound: {
-    statusCode: 404,
-    message: 'User Not Found',
-  },
 };
 
 export const logoutError = {

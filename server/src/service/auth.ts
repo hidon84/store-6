@@ -19,7 +19,7 @@ class AuthService {
       const login = await this.loginModel.findById(id);
 
       if (!login) {
-        throw new ErrorResponse(loginError.notFound);
+        throw new ErrorResponse(commonError.unauthorized);
       }
 
       const isValid = hashHelper.comparePassword(login.password, password);
