@@ -1,12 +1,16 @@
 import React from 'react';
 import World from './Components/World';
 import LinkedHello from './Components/Hello';
+import LoginPage from './Pages/Login';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
         <Route exact path="/hello">
           <LinkedHello />
         </Route>

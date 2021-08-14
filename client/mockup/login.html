@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="font.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="login.css" />
+    <title>로그인</title>
+  </head>
+  <body id="app">
+    <div class="login-container">
+      <aside class="left-doodles">
+        <div class="doodle-teasing-wrapper">
+          <img src="./assets/doodle-teasing.svg" alt="" />
+        </div>
+        <div class="doodle-skeleton-wrapper">
+          <img src="./assets/doodle-skeleton.svg" alt="" />
+        </div>
+      </aside>
+      <form class="login-form" id="login" action="submit">
+        <header class="login-form-head">
+          <div class="robot-wrapper">
+            <img src="./assets/robot-hand-drawn-toy 1.svg" alt="" />
+          </div>
+          <h1 class="text-baemin100">배민</h1>
+          <h1>문방구</h1>
+        </header>
+        <input
+          autocomplete="off"
+          class="underlined-input"
+          type="text"
+          name="id"
+          id="id"
+          placeholder="아이디"
+        />
+        <div id="id-helper">가입되지 않은 아이디입니다.</div>
+        <input
+          autocomplete="off"
+          class="underlined-input"
+          type="text"
+          name="password"
+          id="password"
+          placeholder="비밀번호"
+        />
+        <div id="password-helper">비밀번호 형식이 맞지 않습니다.</div>
+        <div class="login-submit-btn-wrapper">
+          <button class="login-submit-btn" type="submit">로그인</button>
+        </div>
+      </form>
+      <aside class="right-doodles">
+        <div class="doodle-stickman-wrapper">
+          <img src="./assets/doodle-stickman.svg" alt="" />
+        </div>
+        <div class="doodle-ass-kick-wrapper">
+          <img src="./assets/doodle-ass-kick.svg" alt="" />
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>
