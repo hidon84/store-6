@@ -11,14 +11,14 @@ export interface EditableUserInfo {
 @EntityRepository(UserEntity)
 class UserRepository extends Repository<UserEntity> {
   async findByLoginIdx(idx: number) {
-    const user = await this.findOne({ where: { login_idx: idx } });
+    const user = await this.findOne({ where: { login: { idx } } });
     return user;
   }
 
   async findByLoginIdxWithLogin(idx: number) {
     const user = await this.findOne({
-      where: { login_idx: idx },
       relations: ['login'],
+      where: { login: { idx } },
     });
     return user;
   }
@@ -29,7 +29,7 @@ class UserRepository extends Repository<UserEntity> {
   }
 
   async findByIdxWithLogin(idx: number) {
-    const user = await this.findOne({ where: { idx }, relations: ['login'] });
+    const user = await this.findOne({ relations: ['login'], where: { idx } });
     return user;
   }
 
