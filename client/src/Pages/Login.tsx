@@ -98,9 +98,7 @@ const LoginPage: FC = () => {
       </LeftDoodles>
       <LoginForm>
         <LoginFormHeader>
-          <div className="robot-wrapper">
-            <img src={doodleRobotSVG} alt="robot" />
-          </div>
+          <img src={doodleRobotSVG} alt="robot" />
           <h1 className="text-baemin100">배민</h1>
           <h1>문방구</h1>
         </LoginFormHeader>
@@ -128,21 +126,17 @@ const LoginPage: FC = () => {
         </RadioButtonWrapper>
         <Divider width="full" />
         <SocialButtons>
-          <img src={socialFacebookSVG} alt="" />
-          <img src={verticalLineSVG} alt="" />
-          <img src={socialGoogleSVG} alt="" />
+          <img src={socialFacebookSVG} alt="facebook" />
+          <img src={verticalLineSVG} alt="vertical" />
+          <img src={socialGoogleSVG} alt="google" />
         </SocialButtons>
         <Footer>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
         </Footer>
       </LoginForm>
       <RightDoodles>
-        <div>
-          <img src={doodleStickmanSVG} alt="" />
-        </div>
-        <div>
-          <img src={doodleAssKickSVG} alt="" />
-        </div>
+        <img src={doodleStickmanSVG} alt="stickman" />
+        <img src={doodleAssKickSVG} alt="assKick" />
       </RightDoodles>
     </StyledLoginPage>
   );
