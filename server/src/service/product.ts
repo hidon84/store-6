@@ -1,5 +1,7 @@
 import { Service, Inject } from 'typedi';
 import ProductModel from '@/model/product';
+import ErrorResponse from '@/utils/errorResponse';
+import { ProductError } from '@/constants/error';
 
 @Service()
 class ProductService {
@@ -9,22 +11,13 @@ class ProductService {
     this.productModel = productModel;
   }
 
-  async getProducts(querys: {
-    search?: string;
-    category?: string;
-    order?: string;
-    offset?: string;
-    limit?: string;
-  }) {
+  async getProducts(querys: object) {
     try {
-      const products = await this.productModel.findProductsByFilter(
-        querys.search,
-        querys.category,
-        querys.order,
-        querys.limit,
-        querys.offset,
-      );
-    } catch {}
+      const products = await this.productModel.findProductsByFilter(querys);
+      return products;
+    } catch {
+      throw new ErrorResponse(ProductError.unable);
+    }
   }
 }
 

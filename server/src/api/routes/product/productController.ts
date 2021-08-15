@@ -14,7 +14,7 @@ export const handleGetProducts = async (
 
     const products = await productServiceInstance.getProducts(querys);
 
-    return res.status(200).json({ products });
+    return res.status(200).json(products);
   } catch (e) {
     return next(e);
   }

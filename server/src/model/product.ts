@@ -1,15 +1,15 @@
-import { Like, FindOperator, FindManyOptions } from 'typeorm';
+import { Like, FindOperator } from 'typeorm';
 import ProductEntity from '@/entity/product';
 import Model from './model';
 
 class ProductModel extends Model<ProductEntity> {
-  async findProductsByFilter(
-    search?: string,
-    category?: string,
-    order?: string,
-    limit?: string,
-    offset?: string,
-  ) {
+  async findProductsByFilter(querys: {
+    search?: string;
+    category?: string;
+    order?: string;
+    limit?: string;
+    offset?: string;
+  }) {
     const subWhere: {
       title?: FindOperator<string>;
       category?: {
@@ -22,35 +22,40 @@ class ProductModel extends Model<ProductEntity> {
       createdAt?: any;
     } = {};
 
-    if (search) {
-      subWhere.title = Like(`%${search}%`);
+    const subOffset: number = querys.offset ? Number(querys.offset) : 0;
+
+    const subLimit: number = querys.limit ? Number(querys.limit) : 50;
+
+    if (querys.search) {
+      subWhere.title = Like(`%${querys.search}%`);
     }
 
-    if (category) {
-      subWhere.category = { idx: category };
+    if (querys.category) {
+      subWhere.category = { idx: querys.category };
     }
 
-    if (order) {
-      if (order === 'price-low') {
+    if (querys.order) {
+      if (querys.order === 'price-low') {
         subOrder.price = 'ASC';
       }
 
-      if (order === 'price-high') {
+      if (querys.order === 'price-high') {
         subOrder.price = 'DESC';
       }
 
-      if (order === 'recent') {
+      if (querys.order === 'recent') {
         subOrder.createdAt = 'DESC';
       }
     }
 
     const products = await this.repository.find({
+      select: ['idx', 'thumbnail', 'title', 'price', 'createdAt', 'updatedAt'],
       where: subWhere,
-      relations: ['category'],
       order: subOrder,
-      skip: 0,
-      take: 50,
+      skip: subOffset,
+      take: subLimit,
     });
+
     return products;
   }
 }
