@@ -1,19 +1,24 @@
-import { Service, Inject } from 'typedi';
-import ProductModel from '@/model/product';
+import { Service } from 'typedi';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
 import { ProductError } from '@/constants/error';
+import ProductRepository from '@/repository/product';
 
 @Service()
 class ProductService {
-  private productModel: ProductModel;
+  private productRepository: ProductRepository;
 
-  constructor(@Inject('productModel') productModel: ProductModel) {
-    this.productModel = productModel;
+  constructor(
+    @InjectRepository(ProductRepository) productRepository: ProductRepository,
+  ) {
+    this.productRepository = productRepository;
   }
 
   async getProducts(querys: object) {
     try {
-      const products = await this.productModel.findProductsByFilter(querys);
+      const products = await this.productRepository.findProductsByFilter(
+        querys,
+      );
       return products;
     } catch {
       throw new ErrorResponse(ProductError.unable);

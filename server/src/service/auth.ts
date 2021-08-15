@@ -1,22 +1,25 @@
-import { Service, Inject } from 'typedi';
-import LoginModel from '@/model/login';
+import { Service } from 'typedi';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 import * as hashHelper from '@/helper/hash';
 import * as jwtHelper from '@/helper/jwt';
 import * as authHelper from '@/helper/auth';
 import ErrorResponse from '@/utils/errorResponse';
 import { commonError, loginError, logoutError } from '@/constants/error';
+import LoginRepository from '@/repository/login';
 
 @Service()
 class AuthService {
-  private loginModel: LoginModel;
+  private loginRepository: LoginRepository;
 
-  constructor(@Inject('loginModel') loginModel: LoginModel) {
-    this.loginModel = loginModel;
+  constructor(
+    @InjectRepository(LoginRepository) loginRepository: LoginRepository,
+  ) {
+    this.loginRepository = loginRepository;
   }
 
   async Login(id: string, password: string) {
     try {
-      const login = await this.loginModel.findById(id);
+      const login = await this.loginRepository.findById(id);
 
       if (!login) {
         throw new ErrorResponse(commonError.unauthorized);
@@ -53,7 +56,7 @@ class AuthService {
   async RefreshAccessToken(refreshToken: string) {
     try {
       const { idx } = jwtHelper.decodeRefreshToken(refreshToken);
-      const login = await this.loginModel.findByIdx(idx);
+      const login = await this.loginRepository.findByIdx(idx);
       const isValid = await authHelper.verifyRefreshToken(refreshToken, idx);
       if (isValid && login) {
         const access = jwtHelper.generateAccessToken(login);

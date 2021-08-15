@@ -34,9 +34,23 @@ export const refreshError = {
   },
 };
 
+export const userUpdateError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Update User',
+  },
+};
+
+export const userDeleteError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Update User',
+  },
+};
+
 export const ProductError = {
   unable: {
     statusCode: 500,
-    message: 'Unable to get Products',
+    message: 'Unable to Get Products',
   },
 };

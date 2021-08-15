@@ -1,8 +1,8 @@
-import { Like, FindOperator } from 'typeorm';
+import { EntityRepository, Repository, Like, FindOperator } from 'typeorm';
 import ProductEntity from '@/entity/product';
-import Model from './model';
 
-class ProductModel extends Model<ProductEntity> {
+@EntityRepository(ProductEntity)
+class ProductRepository extends Repository<ProductEntity> {
   async findProductsByFilter(querys: {
     search?: string;
     category?: string;
@@ -48,7 +48,7 @@ class ProductModel extends Model<ProductEntity> {
       }
     }
 
-    const products = await this.repository.find({
+    const products = await this.find({
       select: ['idx', 'thumbnail', 'title', 'price', 'createdAt', 'updatedAt'],
       where: subWhere,
       order: subOrder,
@@ -60,4 +60,4 @@ class ProductModel extends Model<ProductEntity> {
   }
 }
 
-export default ProductModel;
+export default ProductRepository;
