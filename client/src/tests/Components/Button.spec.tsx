@@ -6,11 +6,6 @@ import 'jest-styled-components';
 import Button from '~/Components/Button';
 
 describe('<Button />', () => {
-  it('should render component in document', () => {
-    const { container } = render(<Button />);
-    expect(container).toBeInTheDocument();
-  });
-
   /**
    * toMatchInlineSnapshot 안에 있는 내용은 프로그래머가 직접 작성하지 않습니다.
    * 안에 인자를 비워두고 실행하면 내부의 스트링을 jest가 자동으로 완성시켜줍니다.
