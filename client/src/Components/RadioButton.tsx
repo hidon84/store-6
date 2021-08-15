@@ -1,7 +1,6 @@
-import React, { FC } from "react";
-import styled from "styled-components";
-import checkSVG from "~/assets/check.svg";
-import checkCircleSVG from "~/assets/check-circle.svg"
+import React, { FC } from 'react';
+import styled from 'styled-components';
+import { checkCircleSVG, checkSVG } from '~/assets/index';
 
 const RadioContainer = styled.div`
   display: flex;
@@ -28,12 +27,16 @@ const CheckImg = styled.img`
   left: 1px;
 `;
 
-const RadioButton: FC<{ isChecked: boolean, onClick?: () => void, label: string }> = ({ isChecked, onClick, label }) => {
+const RadioButton: FC<{
+  isChecked: boolean;
+  onClick?: () => void;
+  label: string;
+}> = ({ isChecked, onClick, label }) => {
   return (
     <RadioContainer onClick={() => onClick?.()}>
       <RadioWrapper>
-        {isChecked && <CheckImg src={checkSVG}></CheckImg> }
-        <CheckCircleImg src={checkCircleSVG}></CheckCircleImg>
+        {isChecked && <CheckImg src={checkSVG} />}
+        <CheckCircleImg src={checkCircleSVG} />
       </RadioWrapper>
       {label}
     </RadioContainer>

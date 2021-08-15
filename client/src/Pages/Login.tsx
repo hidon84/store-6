@@ -5,14 +5,16 @@ import Button from '~/Components/Button';
 import RadioButton from '~/Components/RadioButton';
 import Divider from '~/Components/Divider';
 import Footer from '~/Components/Footer';
-import doodleTeasingSVG from '~/assets/doodle-teasing.svg'
-import doodleSkeletonSVG from '~/assets/doodle-skeleton.svg';
-import doodleStickmanSVG from '~/assets/doodle-stickman.svg';
-import doodleAssKickSVG from '~/assets/doodle-ass-kick.svg';
-import doodleRobotSVG from '~/assets/doodle-robot.svg';
-import verticalLineSVG from '~/assets/vertical-line.svg';
-import socialFacebookSVG from '~/assets/social-facebook.svg';
-import socialGoogleSVG from '~/assets/social-google.svg';
+import {
+  doodleTeasingSVG,
+  doodleSkeletonSVG,
+  doodleStickmanSVG,
+  doodleAssKickSVG,
+  doodleRobotSVG,
+  verticalLineSVG,
+  socialFacebookSVG,
+  socialGoogleSVG,
+} from '~/assets/index';
 
 const StyledLoginPage = styled.main`
   display: flex;
@@ -31,7 +33,6 @@ const LeftDoodles = styled.aside`
   align-items: center;
   justify-content: space-evenly;
 `;
-
 
 const RightDoodles = styled.aside`
   display: flex;
@@ -92,7 +93,7 @@ const LoginPage: FC = () => {
         <div>
           <img src={doodleTeasingSVG} alt="teasing" />
         </div>
-        <div style={{marginLeft: '6rem'}}>
+        <div style={{ marginLeft: '6rem' }}>
           <img src={doodleSkeletonSVG} alt="skeleton" />
         </div>
       </LeftDoodles>
@@ -122,7 +123,7 @@ const LoginPage: FC = () => {
           <Button>로그인</Button>
         </ButtonWrapper>
         <RadioButtonWrapper>
-          <RadioButton isChecked={false} label="자동로그인"/>
+          <RadioButton isChecked={false} label="자동로그인" />
         </RadioButtonWrapper>
         <Divider width="full" />
         <SocialButtons>
@@ -130,13 +131,15 @@ const LoginPage: FC = () => {
           <img src={verticalLineSVG} alt="vertical" />
           <img src={socialGoogleSVG} alt="google" />
         </SocialButtons>
-        <Footer>
-          COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
-        </Footer>
+        <Footer>COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.</Footer>
       </LoginForm>
       <RightDoodles>
         <img src={doodleStickmanSVG} alt="stickman" />
-        <img src={doodleAssKickSVG} alt="assKick" style={{marginTop: '1rem'}} />
+        <img
+          src={doodleAssKickSVG}
+          alt="assKick"
+          style={{ marginTop: '1rem' }}
+        />
       </RightDoodles>
     </StyledLoginPage>
   );

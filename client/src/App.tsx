@@ -4,9 +4,9 @@ import LinkedHello from './Components/Hello';
 import LoginPage from './Pages/Login';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 
-import "~/styles/app.css";
-import "~/styles/reset.css";
-import "~/styles/font.css";
+import '~/styles/app.css';
+import '~/styles/reset.css';
+import '~/styles/font.css';
 
 const App = () => {
   return (

@@ -1,11 +1,5 @@
-import styled from "styled-components";
-import buttonSVG from '~/assets/button.svg';
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  height: 3rem;
-  width: 10rem;
-`;
+import styled from 'styled-components';
+import { buttonSVG } from '~/assets/index';
 
 const Button = styled.button`
   font-size: 1.4rem;

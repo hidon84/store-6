@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import underlineSVG from '~/assets/underline.svg';
+import styled from 'styled-components';
+import { underlineSVG } from '~/assets/index';
 
 const Input = styled.input`
   font-size: 1.2rem;
