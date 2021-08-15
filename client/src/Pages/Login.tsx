@@ -4,7 +4,7 @@ import Input from '~/Components/Input';
 import Button from '~/Components/Button';
 import RadioButton from '~/Components/RadioButton';
 import Divider from '~/Components/Divider';
-import Footer from '~/Components/Footer';
+import Copyright from '~/Components/Copyright';
 import InputHelp from '~/Components/InputHelp';
 
 import {
@@ -133,7 +133,9 @@ const LoginPage: FC = () => {
           <img src={verticalLineSVG} alt="vertical" />
           <img src={socialGoogleSVG} alt="google" />
         </SocialButtons>
-        <Footer>COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.</Footer>
+        <Copyright>
+          COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
+        </Copyright>
       </LoginForm>
       <RightDoodles>
         <img src={doodleStickmanSVG} alt="stickman" />
