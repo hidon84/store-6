@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Footer = styled.footer`
-  margin-top: 1.8rem;
+  margin-top: 28px;
   /* font-family: Noto Sans !important; */
   font-style: normal;
   font-weight: normal;

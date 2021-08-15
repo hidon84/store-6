@@ -49,41 +49,41 @@ const RightDoodles = styled.aside`
 const LoginForm = styled.form`
   display: flex;
   flex: 2;
-  min-width: 28rem;
-  max-width: 28rem;
+  min-width: 400px;
+  max-width: 400px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  gap: 0.8rem;
+  gap: 12px;
 `;
 
 const LoginFormHeader = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 4rem;
-  font-size: 3rem;
+  margin-bottom: 64px;
+  font-size: 48px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  margin-top: 2rem;
-  height: 3rem;
-  width: 10rem;
+  margin-top: 32px;
+  height: 55px;
+  width: 183px;
 `;
 
 const RadioButtonWrapper = styled.div`
   width: 100%;
-  margin-top: 2rem;
-  padding-left: 4rem;
+  margin-top: 32px;
+  padding-left: 32px;
 `;
 
 const SocialButtons = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 3rem;
+  height: 48px;
   justify-content: space-evenly;
   align-items: center;
 `;
@@ -95,7 +95,7 @@ const LoginPage: FC = () => {
         <div>
           <img src={doodleTeasingSVG} alt="teasing" />
         </div>
-        <div style={{ marginLeft: '6rem' }}>
+        <div style={{ marginLeft: '96px' }}>
           <img src={doodleSkeletonSVG} alt="skeleton" />
         </div>
       </LeftDoodles>
@@ -140,7 +140,7 @@ const LoginPage: FC = () => {
         <img
           src={doodleAssKickSVG}
           alt="assKick"
-          style={{ marginTop: '1rem' }}
+          style={{ marginTop: '16px' }}
         />
       </RightDoodles>
     </StyledLoginPage>

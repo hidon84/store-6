@@ -8,13 +8,13 @@ const RadioContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.6rem;
+  gap: 10px;
   cursor: pointer;
 `;
 
 const RadioWrapper = styled.div`
   position: relative;
-  height: 1rem;
+  height: 16px;
 `;
 
 const CheckCircleImg = styled.img`

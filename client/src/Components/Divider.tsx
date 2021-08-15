@@ -5,8 +5,8 @@ import { underlineSVG } from '~/assets/index';
 const DividerFull = styled.div`
   content: '';
   width: 100%;
-  padding-left: 2rem;
-  height: 1rem;
+  padding-left: 32px;
+  height: 16px;
   background: url(${underlineSVG}) bottom left no-repeat;
   box-sizing: border-box;
   background-size: contain;
@@ -15,8 +15,8 @@ const DividerFull = styled.div`
 const Divider80 = styled.div`
   content: '';
   width: 80%;
-  padding-left: 2rem;
-  height: 1rem;
+  padding-left: 32px;
+  height: 16px;
   background: url(${underlineSVG}) bottom left no-repeat;
   box-sizing: border-box;
   background-size: contain;

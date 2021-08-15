@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { buttonSVG } from '~/assets/index';
 
 const Button = styled.button`
-  font-size: 1.4rem;
+  font-size: 25px;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
