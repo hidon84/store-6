@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Input from '~/Components/Input';
 import Button from '~/Components/Button';
+import RadioButton from '~/Components/RadioButton';
 import doodleTeasingSVG from '~/assets/doodle-teasing.svg'
 import doodleSkeletonSVG from '~/assets/doodle-skeleton.svg';
 import doodleStickmanSVG from '~/assets/doodle-stickman.svg';
@@ -64,6 +65,12 @@ const ButtonWrapper = styled.div`
   width: 10rem;
 `;
 
+const RadioButtonWrapper = styled.div`
+  width: 100%;
+  margin-top: 2rem;
+  padding-left: 4rem;
+`;
+
 const LoginPage: FC = () => {
   return (
     <StyledLoginPage>
@@ -102,13 +109,9 @@ const LoginPage: FC = () => {
         <ButtonWrapper>
           <Button>로그인</Button>
         </ButtonWrapper>
-        <div className="auto-login-wrapper">
-          <div className="check-wrapper">
-            <img className="checked" src="./assets/check.svg" alt="" />
-            <img src="./assets/circle-unchecked.svg" alt="" />
-          </div>
-          자동 로그인
-        </div>
+        <RadioButtonWrapper>
+          <RadioButton isChecked={false} label="자동로그인"/>
+        </RadioButtonWrapper>
         <div className="divider-full"></div>
         <div className="social-btns">
           <span className="social-facebook-wrapper">
