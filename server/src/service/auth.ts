@@ -11,7 +11,9 @@ import LoginRepository from '@/repository/login';
 class AuthService {
   private loginRepository: LoginRepository;
 
-  constructor(@InjectRepository() loginRepository: LoginRepository) {
+  constructor(
+    @InjectRepository(LoginRepository) loginRepository: LoginRepository,
+  ) {
     this.loginRepository = loginRepository;
   }
 
