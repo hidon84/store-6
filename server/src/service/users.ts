@@ -21,8 +21,8 @@ class UsersService {
   private userRepository: UserRepository;
 
   constructor(
-    @InjectRepository() loginRepository: LoginRepository,
-    @InjectRepository() userRepository: UserRepository,
+    @InjectRepository(LoginRepository) loginRepository: LoginRepository,
+    @InjectRepository(UserRepository) userRepository: UserRepository,
   ) {
     this.loginRepository = loginRepository;
     this.userRepository = userRepository;
@@ -36,7 +36,7 @@ class UsersService {
       const user = await this.userRepository.findByIdxWithLogin(idx);
       const login = user?.login;
       if (!user || !login) {
-        throw new ErrorResponse(commonError.notFound);
+        throw new ErrorResponse(commonError.unauthorized);
       }
       if (password) {
         const hashedPassword = hashHelper.generateHash(password);
@@ -62,7 +62,7 @@ class UsersService {
     try {
       const user = await this.userRepository.findByIdxWithLogin(idx);
       if (!user || !user.login) {
-        throw new ErrorResponse(commonError.notFound);
+        throw new ErrorResponse(commonError.unauthorized);
       }
       this.loginRepository.removeByIdx(user.login.idx);
     } catch (e) {
