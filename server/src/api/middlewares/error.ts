@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import ErrorResponse from '@/utils/errorResponse';
+import { commonError } from '@/constants/error';
 
 const createErrorInfoDevelopment = (err: ErrorResponse) => {
   return {
@@ -13,8 +14,8 @@ const createErrorInfoDevelopment = (err: ErrorResponse) => {
 const createErrorInfoProduction = (err: ErrorResponse) => {
   return {
     success: false,
-    statusCode: err?.statusCode || 500,
-    message: err.isOperational ? err.message : 'Something went very wrong',
+    statusCode: err?.statusCode || commonError.wrong.statusCode,
+    message: err.isOperational ? err.message : commonError.wrong.message,
   };
 };
 

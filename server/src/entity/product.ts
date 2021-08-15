@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -11,7 +10,7 @@ import {
 import CategoryEntity from './category';
 
 @Entity({ name: 'product' })
-class ProductEntity extends BaseEntity {
+class ProductEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 

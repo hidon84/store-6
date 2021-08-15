@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import './declare';
 import express from 'express';
 import loadApp from './loaders';
 

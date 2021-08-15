@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -11,7 +10,7 @@ import {
 import LoginEntity from './login';
 
 @Entity({ name: 'user' })
-class UserEntity extends BaseEntity {
+class UserEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 

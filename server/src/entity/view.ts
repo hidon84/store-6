@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
@@ -13,7 +12,7 @@ import ProductEntity from './product';
 
 @Entity({ name: 'view' })
 @Unique(['user', 'product'])
-class ViewEntity extends BaseEntity {
+class ViewEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 

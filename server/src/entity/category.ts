@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -8,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'category' })
-class CatetoryEntity extends BaseEntity {
+class CatetoryEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
