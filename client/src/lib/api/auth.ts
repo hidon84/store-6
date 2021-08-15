@@ -6,6 +6,7 @@ import {
   AuthResponseBody,
   ErrorResponse,
   ErrorResponseBody,
+  LoginRequestBody,
 } from './types';
 
 export const authBaseUrl = '/api/auth';
@@ -21,15 +22,11 @@ const setAuthorizationHeader = (response: AxiosResponse<AuthResponseBody>) => {
   client.defaults.headers.common.Authorization = `Bearer ${access}`;
 };
 
-export const login = ({
-  email,
-  password,
-}): Promise<AuthResponse | ErrorResponse> =>
+export const login = (
+  reqData: LoginRequestBody,
+): Promise<AuthResponse | ErrorResponse> =>
   client
-    .post<AuthResponseBody | ErrorResponseBody>(authUrl.login, {
-      email,
-      password,
-    })
+    .post<AuthResponseBody | ErrorResponseBody>(authUrl.login, reqData)
     .then((response) => {
       if (response.status < 400) {
         const authResponse = response as AxiosResponse<AuthResponseBody>;
