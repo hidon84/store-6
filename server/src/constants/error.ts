@@ -33,3 +33,17 @@ export const refreshError = {
     message: 'Unable to Refresh',
   },
 };
+
+export const userUpdateError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Update User',
+  },
+};
+
+export const userDeleteError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Update User',
+  },
+};
