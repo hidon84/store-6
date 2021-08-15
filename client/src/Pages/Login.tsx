@@ -5,6 +5,8 @@ import Button from '~/Components/Button';
 import RadioButton from '~/Components/RadioButton';
 import Divider from '~/Components/Divider';
 import Footer from '~/Components/Footer';
+import InputHelp from '~/Components/InputHelp';
+
 import {
   doodleTeasingSVG,
   doodleSkeletonSVG,
@@ -110,7 +112,7 @@ const LoginPage: FC = () => {
           id="id"
           placeholder="아이디"
         />
-        <div id="id-helper">가입되지 않은 아이디입니다.</div>
+        <InputHelp>가입되지 않은 아이디입니다.</InputHelp>
         <Input
           autoComplete="off"
           type="password"
@@ -118,7 +120,7 @@ const LoginPage: FC = () => {
           id="password"
           placeholder="비밀번호"
         />
-        <div id="password-helper">비밀번호 형식이 맞지 않습니다.</div>
+        <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
         <ButtonWrapper>
           <Button>로그인</Button>
         </ButtonWrapper>
