@@ -33,3 +33,10 @@ export const refreshError = {
     message: 'Unable to Refresh',
   },
 };
+
+export const ProductError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to get Products',
+  },
+};
