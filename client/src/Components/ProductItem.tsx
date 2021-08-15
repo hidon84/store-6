@@ -13,7 +13,7 @@ const ProductItemContainer = styled.div`
   height: 300px;
   width: 230px;
   transition: all 300ms;
-  &: hover {
+  &:hover {
     transform: scale(1.08);
   }
 `;
@@ -54,14 +54,14 @@ const ProductPrice = styled.div`
 `;
 
 const ProductItem: React.FC<Props> = ({ idx, thumbnail, title, price }) => {
-  const [isHoverImage, setIsHoverImage] = useState<boolean>(false);
+  const [isProductImageHovered, setIsProductImageHovered] = useState<boolean>(false);
 
   const handleOnMouseEnter = (): void => {
-    setIsHoverImage(true);
+    setIsProductImageHovered(true);
   };
 
   const handleOnMouseLeave = (): void => {
-    setIsHoverImage(false);
+    setIsProductImageHovered(false);
   };
 
   return (
@@ -70,7 +70,7 @@ const ProductItem: React.FC<Props> = ({ idx, thumbnail, title, price }) => {
       onMouseLeave={handleOnMouseLeave}
     >
       <ProductImage src={thumbnail} />
-      {isHoverImage && (
+      {isProductImageHovered && (
         <ProductInfoConatiner>
           <ProductTitle>{title}</ProductTitle>
           <ProductPrice>{price}</ProductPrice>
