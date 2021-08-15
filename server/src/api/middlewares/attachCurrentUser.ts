@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { Container } from 'typeorm-typedi-extensions';
+import { Connection } from 'typeorm';
+import Container from 'typedi';
 import { commonError } from '@/constants/error';
 import UserRepository from '@/repository/user';
 import ErrorResponse from '@/utils/errorResponse';
@@ -10,7 +11,8 @@ const attachCurrentUser = async (
   next: NextFunction,
 ) => {
   try {
-    const userRepository = Container.get<UserRepository>(UserRepository);
+    const connection = Container.get<Connection>('connection');
+    const userRepository = connection.getCustomRepository(UserRepository);
     const user = await userRepository.findByLoginIdx(req.token.idx);
     if (!user) {
       return next(new ErrorResponse(commonError.unauthorized));
