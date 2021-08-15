@@ -28,10 +28,10 @@ const CheckImg = styled.img`
 `;
 
 const RadioButton: FC<{
-  isChecked: boolean;
+  checked: boolean;
   onClick?: () => void;
   label: string;
-}> = ({ isChecked, onClick, label }) => {
+}> = ({ checked: isChecked, onClick, label }) => {
   return (
     <RadioContainer onClick={() => onClick?.()}>
       <RadioWrapper>

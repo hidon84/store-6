@@ -126,7 +126,7 @@ const LoginPage: FC = () => {
           <Button>로그인</Button>
         </ButtonWrapper>
         <RadioButtonWrapper>
-          <RadioButton isChecked={false} label="자동로그인" />
+          <RadioButton checked={false} label="자동로그인" />
         </RadioButtonWrapper>
         <Divider width="full" />
         <SocialButtons>
