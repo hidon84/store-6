@@ -136,7 +136,7 @@ const LoginPage: FC = () => {
       </LoginForm>
       <RightDoodles>
         <img src={doodleStickmanSVG} alt="stickman" />
-        <img src={doodleAssKickSVG} alt="assKick" />
+        <img src={doodleAssKickSVG} alt="assKick" style={{marginTop: '1rem'}} />
       </RightDoodles>
     </StyledLoginPage>
   );
