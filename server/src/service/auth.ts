@@ -54,10 +54,8 @@ class AuthService {
     try {
       const { idx } = jwtHelper.decodeRefreshToken(refreshToken);
       const login = await this.loginModel.findByIdx(idx);
-      const isValid =
-        login && (await authHelper.verifyRefreshToken(refreshToken, idx));
-
-      if (isValid) {
+      const isValid = await authHelper.verifyRefreshToken(refreshToken, idx);
+      if (isValid && login) {
         const access = jwtHelper.generateAccessToken(login);
         return { access };
       }
