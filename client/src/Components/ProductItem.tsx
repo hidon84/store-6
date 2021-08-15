@@ -54,7 +54,8 @@ const ProductPrice = styled.div`
 `;
 
 const ProductItem: React.FC<Props> = ({ idx, thumbnail, title, price }) => {
-  const [isProductImageHovered, setIsProductImageHovered] = useState<boolean>(false);
+  const [isProductImageHovered, setIsProductImageHovered] =
+    useState<boolean>(false);
 
   const handleOnMouseEnter = (): void => {
     setIsProductImageHovered(true);
