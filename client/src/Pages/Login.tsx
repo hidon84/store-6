@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from '~/Components/Input';
 import Button from '~/Components/Button';
 import RadioButton from '~/Components/RadioButton';
+import Divider from '~/Components/Divider';
 import doodleTeasingSVG from '~/assets/doodle-teasing.svg'
 import doodleSkeletonSVG from '~/assets/doodle-skeleton.svg';
 import doodleStickmanSVG from '~/assets/doodle-stickman.svg';
@@ -112,7 +113,7 @@ const LoginPage: FC = () => {
         <RadioButtonWrapper>
           <RadioButton isChecked={false} label="자동로그인"/>
         </RadioButtonWrapper>
-        <div className="divider-full"></div>
+        <Divider width="full" />
         <div className="social-btns">
           <span className="social-facebook-wrapper">
             <img src="./assets/social-facebook.svg" alt="" />
