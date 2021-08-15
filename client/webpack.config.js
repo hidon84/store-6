@@ -15,6 +15,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
       // For Typescript
       {
         test: /\.(ts|tsx)$/,
