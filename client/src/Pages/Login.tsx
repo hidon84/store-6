@@ -4,11 +4,15 @@ import Input from '~/Components/Input';
 import Button from '~/Components/Button';
 import RadioButton from '~/Components/RadioButton';
 import Divider from '~/Components/Divider';
+import Footer from '~/Components/Footer';
 import doodleTeasingSVG from '~/assets/doodle-teasing.svg'
 import doodleSkeletonSVG from '~/assets/doodle-skeleton.svg';
 import doodleStickmanSVG from '~/assets/doodle-stickman.svg';
 import doodleAssKickSVG from '~/assets/doodle-ass-kick.svg';
 import doodleRobotSVG from '~/assets/doodle-robot.svg';
+import verticalLineSVG from '~/assets/vertical-line.svg';
+import socialFacebookSVG from '~/assets/social-facebook.svg';
+import socialGoogleSVG from '~/assets/social-google.svg';
 
 const StyledLoginPage = styled.main`
   display: flex;
@@ -72,6 +76,15 @@ const RadioButtonWrapper = styled.div`
   padding-left: 4rem;
 `;
 
+const SocialButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 3rem;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
 const LoginPage: FC = () => {
   return (
     <StyledLoginPage>
@@ -114,18 +127,14 @@ const LoginPage: FC = () => {
           <RadioButton isChecked={false} label="자동로그인"/>
         </RadioButtonWrapper>
         <Divider width="full" />
-        <div className="social-btns">
-          <span className="social-facebook-wrapper">
-            <img src="./assets/social-facebook.svg" alt="" />
-          </span>
-          <img src="./assets/vertical-line.svg" alt="" />
-          <span className="social-google-wrapper">
-            <img src="./assets/social-google.svg" alt="" />
-          </span>
-        </div>
-        <footer className="footer">
+        <SocialButtons>
+          <img src={socialFacebookSVG} alt="" />
+          <img src={verticalLineSVG} alt="" />
+          <img src={socialGoogleSVG} alt="" />
+        </SocialButtons>
+        <Footer>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
-        </footer>
+        </Footer>
       </LoginForm>
       <RightDoodles>
         <div>
