@@ -18,8 +18,8 @@ class ProductModel extends Model<ProductEntity> {
     } = {};
 
     const subOrder: {
-      price?: any;
-      createdAt?: any;
+      price?: 'ASC' | 'DESC';
+      createdAt?: 'ASC' | 'DESC';
     } = {};
 
     const subOffset: number = querys.offset ? Number(querys.offset) : 0;
