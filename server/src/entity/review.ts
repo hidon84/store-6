@@ -17,6 +17,9 @@ class ReviewEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
+  @Column({ length: 200 })
+  title: string;
+
   @Column('text')
   content: string;
 
