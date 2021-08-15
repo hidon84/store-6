@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import Input from '~/Components/Input';
+import Button from '~/Components/Button';
 import doodleTeasingSVG from '~/assets/doodle-teasing.svg'
 import doodleSkeletonSVG from '~/assets/doodle-skeleton.svg';
 import doodleStickmanSVG from '~/assets/doodle-stickman.svg';
@@ -55,6 +57,13 @@ const LoginFormHeader = styled.header`
   font-size: 3rem;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  height: 3rem;
+  width: 10rem;
+`;
+
 const LoginPage: FC = () => {
   return (
     <StyledLoginPage>
@@ -74,27 +83,25 @@ const LoginPage: FC = () => {
           <h1 className="text-baemin100">배민</h1>
           <h1>문방구</h1>
         </LoginFormHeader>
-        <input
+        <Input
           autoComplete="off"
-          className="underlined-input"
           type="text"
           name="id"
           id="id"
           placeholder="아이디"
         />
         <div id="id-helper">가입되지 않은 아이디입니다.</div>
-        <input
+        <Input
           autoComplete="off"
-          className="underlined-input"
           type="password"
           name="password"
           id="password"
           placeholder="비밀번호"
         />
         <div id="password-helper">비밀번호 형식이 맞지 않습니다.</div>
-        <div className="login-submit-btn-wrapper">
-          <button className="login-submit-btn" type="submit">로그인</button>
-        </div>
+        <ButtonWrapper>
+          <Button>로그인</Button>
+        </ButtonWrapper>
         <div className="auto-login-wrapper">
           <div className="check-wrapper">
             <img className="checked" src="./assets/check.svg" alt="" />
