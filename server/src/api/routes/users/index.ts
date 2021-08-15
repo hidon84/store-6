@@ -11,7 +11,7 @@ const usersRouter = Router();
 export default (router: Router) => {
   router.use('/users', usersRouter);
 
-  router.get(
+  usersRouter.get(
     '/me',
     middlewares.isAuth,
     middlewares.isAccessToken,
@@ -19,7 +19,7 @@ export default (router: Router) => {
     handleGetCurrentUser,
   );
 
-  router.put(
+  usersRouter.put(
     '/me',
     middlewares.isAuth,
     middlewares.isAccessToken,
@@ -27,7 +27,7 @@ export default (router: Router) => {
     handleUpdateCurrentUser,
   );
 
-  router.delete(
+  usersRouter.delete(
     '/me',
     middlewares.isAuth,
     middlewares.isAccessToken,
