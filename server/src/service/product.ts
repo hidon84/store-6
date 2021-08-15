@@ -1,9 +1,5 @@
 import { Service, Inject } from 'typedi';
 import ProductModel from '@/model/product';
-import * as hashHelper from '@/helper/hash';
-import * as jwtHelper from '@/helper/jwt';
-import ErrorResponse from '@/utils/errorResponse';
-import { commonError } from '@/constants/error';
 
 @Service()
 class ProductService {
@@ -13,11 +9,21 @@ class ProductService {
     this.productModel = productModel;
   }
 
-  async getProducts(search: string, category: number) {
+  async getProducts(querys: {
+    search?: string;
+    category?: string;
+    order?: string;
+    offset?: string;
+    limit?: string;
+  }) {
     try {
-      console.log(search, category);
-      const test = await this.productModel.findProducts(search, category);
-      console.log(test);
+      const products = await this.productModel.findProductsByFilter(
+        querys.search,
+        querys.category,
+        querys.order,
+        querys.limit,
+        querys.offset,
+      );
     } catch {}
   }
 }

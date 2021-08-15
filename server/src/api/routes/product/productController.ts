@@ -12,8 +12,7 @@ export const handleGetProducts = async (
 
     const querys = req.query;
 
-    // const info = querystring 으로 받아온 데이터
-    const products = await productServiceInstance.getProducts('haha', 1);
+    const products = await productServiceInstance.getProducts(querys);
 
     return res.status(200).json({ products });
   } catch (e) {
