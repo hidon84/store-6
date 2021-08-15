@@ -6,6 +6,9 @@ export const generateHash = (password: string) => {
   return hash;
 };
 
-export const comparePassword = (hashedPw: string, password: string):boolean => {
+export const comparePassword = (
+  hashedPw: string,
+  password: string,
+): boolean => {
   return (password && bcrypt.compareSync(password, hashedPw)) || false;
 };
