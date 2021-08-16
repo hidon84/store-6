@@ -10,10 +10,10 @@ import {
 
 /**
  * example)
- * <RadioButton checked label='로그인' />
- * <RadioButton label='로그인' />
+ * <Checkbox checked label='로그인' />
+ * <Checkbox label='로그인' />
  */
-const RadioButton: FC<{
+const Checkbox: FC<{
   checked?: boolean;
   onClick?: () => void;
   label: string;
@@ -29,4 +29,4 @@ const RadioButton: FC<{
   );
 };
 
-export default RadioButton;
+export default Checkbox;

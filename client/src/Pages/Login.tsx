@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Input from '~/Components/Input/Input';
 import Button from '~/Components/Button/Button';
-import RadioButton from '~/Components/Checkbox/Checkbox';
+import Checkbox from '~/Components/Checkbox/Checkbox';
 import Divider from '~/Components/Divider/Divider';
 import Copyright from '~/Components/Copyright/Copyright';
 import InputHelp from '~/Components/InputHelp/InputHelp';
@@ -73,7 +73,7 @@ const ButtonWrapper = styled.div`
   width: 183px;
 `;
 
-const RadioButtonWrapper = styled.div`
+const CheckboxWrapper = styled.div`
   width: 100%;
   margin-top: 32px;
   padding-left: 32px;
@@ -124,9 +124,9 @@ const LoginPage: FC = () => {
         <ButtonWrapper>
           <Button>로그인</Button>
         </ButtonWrapper>
-        <RadioButtonWrapper>
-          <RadioButton checked={false} label="자동로그인" />
-        </RadioButtonWrapper>
+        <CheckboxWrapper>
+          <Checkbox checked={false} label="자동로그인" />
+        </CheckboxWrapper>
         <Divider />
         <SocialButtons>
           <img src={socialFacebookSVG} alt="facebook" />
