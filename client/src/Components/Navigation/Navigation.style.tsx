@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import { BadgeSVG } from '~/assets/index';
 
 export const NavigationWrapper = styled.nav`
+  width: 100%;
+`;
+
+export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
   width: 920px;
-  background-color: pink;
 `;
 
 export const HeaderRightSection = styled.div`

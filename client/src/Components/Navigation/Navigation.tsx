@@ -3,6 +3,7 @@ import { useLocation } from '~/core/Router';
 
 import {
   NavigationWrapper,
+  Content,
   HeaderRightSection,
   CartWrapper,
   BadgeWrapper,
@@ -22,18 +23,20 @@ const Navigation: FC = () => {
 
   return (
     <NavigationWrapper>
-      <img src={DoodleUselessSVG} alt="useless" />
-      <img src={LogoSVG} alt="logo" />
-      <HeaderRightSection>
-        <CartWrapper>
-          <img src={CartSVG} alt="cart" />
-          <BadgeWrapper>
-            <span>15</span>
-          </BadgeWrapper>
-        </CartWrapper>
-        <img src={HeartSVG} alt="heart" />
-        <img src={MypageSVG} alt="mypage" />
-      </HeaderRightSection>
+      <Content>
+        <img src={DoodleUselessSVG} alt="useless" />
+        <img src={LogoSVG} alt="logo" />
+        <HeaderRightSection>
+          <CartWrapper>
+            <img src={CartSVG} alt="cart" />
+            <BadgeWrapper>
+              <span>15</span>
+            </BadgeWrapper>
+          </CartWrapper>
+          <img src={HeartSVG} alt="heart" />
+          <img src={MypageSVG} alt="mypage" />
+        </HeaderRightSection>
+      </Content>
     </NavigationWrapper>
   );
 };
