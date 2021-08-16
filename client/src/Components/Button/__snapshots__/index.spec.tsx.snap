@@ -1,16 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> should render <Button /> same with snapshop 1`] = `
+exports[`<Button /> should render <Button size="lg" /> same with snapshop 1`] = `
 .c0 {
-  font-size: 25px;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
   position: relative;
-  background-position-x: center;
-  background-position-y: center;
-  background: url() no-repeat;
-  background-size: cover;
+  height: 55px;
+  width: 183px;
+  font-size: 25px;
+  background: center / cover no-repeat url();
+  cursor: pointer;
+}
+
+<div>
+  <button
+    class="c0"
+  />
+</div>
+`;
+
+exports[`<Button /> should render <Button size="sm" /> same with snapshop 1`] = `
+.c0 {
+  position: relative;
+  height: 27px;
+  width: 92px;
+  font-size: 14px;
+  background: center / cover no-repeat url();
+  cursor: pointer;
 }
 
 <div>
@@ -22,15 +36,12 @@ exports[`<Button /> should render <Button /> same with snapshop 1`] = `
 
 exports[`<Button /> should render wrapped button 1`] = `
 .c1 {
-  font-size: 25px;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
   position: relative;
-  background-position-x: center;
-  background-position-y: center;
-  background: url() no-repeat;
-  background-size: cover;
+  height: 41px;
+  width: 138px;
+  font-size: 18px;
+  background: center / cover no-repeat url();
+  cursor: pointer;
 }
 
 .c0 {

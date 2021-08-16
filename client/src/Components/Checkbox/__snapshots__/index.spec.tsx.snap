@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> should render same with snapshot 1`] = `
+exports[`<Checkbox /> should render same with snapshot 1`] = `
 .c0 {
   position: relative;
   height: 16px;
@@ -30,28 +30,7 @@ exports[`<Button /> should render same with snapshot 1`] = `
 </div>
 `;
 
-exports[`<Button /> should render same with unchecked checkbox snapshot 1`] = `
-.c0 {
-  position: relative;
-  height: 16px;
-}
-
-.c1 {
-  height: 100%;
-}
-
-<div>
-  <div
-    class="c0"
-  >
-    <img
-      class="c1"
-    />
-  </div>
-</div>
-`;
-
-exports[`<Button /> unchecked snapshot 1`] = `
+exports[`<Checkbox /> should render same with unchecked checkbox snapshot 1`] = `
 .c0 {
   position: relative;
   height: 16px;

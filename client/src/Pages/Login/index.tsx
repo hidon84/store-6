@@ -64,7 +64,7 @@ const LoginPage: FC = () => {
         />
         <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
         <ButtonWrapper>
-          <Button>로그인</Button>
+          <Button size="lg">로그인</Button>
         </ButtonWrapper>
         <CheckboxSection>
           <CheckboxWrapper>

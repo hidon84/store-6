@@ -49,10 +49,7 @@ export const LoginFormHeader = styled.header`
 `;
 
 export const ButtonWrapper = styled.div`
-  display: flex;
-  margin-top: 32px;
-  height: 55px;
-  width: 183px;
+  margin-top: 42px;
 `;
 
 export const CheckboxSection = styled.section`

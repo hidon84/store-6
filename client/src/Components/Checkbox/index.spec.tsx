@@ -4,7 +4,7 @@ import 'jest-styled-components';
 
 import Checkbox from '~/Components/Checkbox';
 
-describe('<Button />', () => {
+describe('<Checkbox />', () => {
   it('should render same with snapshot', () => {
     const { container } = render(<Checkbox checked />);
     expect(container).toMatchSnapshot();
