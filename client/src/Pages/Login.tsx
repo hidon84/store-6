@@ -18,13 +18,12 @@ import {
   socialGoogleSVG,
 } from '~/assets/index';
 
-const StyledLoginPage = styled.main`
+const StyledLoginPage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1040px;
   height: 100%;
 `;
 
