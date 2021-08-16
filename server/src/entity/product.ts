@@ -14,6 +14,12 @@ class ProductEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
+  @Column({ length: 100 })
+  title: string;
+
+  @Column('text')
+  thumbnail: string;
+
   @Column('int')
   price: number;
 

@@ -26,12 +26,17 @@ const errorHandler = (
   _next: NextFunction,
 ) => {
   let errorInfo;
+  let errorResponse = err;
   const isDevelopment = process.env.NODE_ENV === 'development';
 
+  if (errorResponse.name === 'UnauthorizedError') {
+    errorResponse = new ErrorResponse(commonError.unauthorized);
+  }
+
   if (isDevelopment) {
-    errorInfo = createErrorInfoDevelopment(err);
+    errorInfo = createErrorInfoDevelopment(errorResponse);
   } else {
-    errorInfo = createErrorInfoProduction(err);
+    errorInfo = createErrorInfoProduction(errorResponse);
   }
 
   res.status(errorInfo.statusCode).json(errorInfo);
