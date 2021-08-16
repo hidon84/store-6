@@ -7,4 +7,4 @@ export interface ErrorResponseBody {
   stack?: string;
 }
 
-export interface ErrorResponse extends ApiResponse, ErrorResponseBody {}
+export type ErrorResponse = ApiResponse<ErrorResponseBody>;

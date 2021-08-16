@@ -21,7 +21,7 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
   params?: PARAMS,
   successCallback?: (response: AxiosResponse<RES>) => void,
   failureCallback?: (response: AxiosResponse<ErrorResponseBody>) => void,
-): Promise<(RES & ApiResponse) | ErrorResponse> => {
+): Promise<ApiResponse<RES> | ErrorResponse> => {
   const response = (await client({
     method,
     url,
@@ -32,10 +32,13 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
   const { status, data } = response;
   if (response.status >= 400) {
     const errorData = data as ErrorResponseBody;
-    const errorResponse: ErrorResponse = { statusCode: status, ...errorData };
+    const errorResponse: ErrorResponse = {
+      statusCode: status,
+      data: errorData,
+    };
 
     if (failureCallback) {
-      const axiosErrorResponse = response as AxiosResponse<ErrorResponse>;
+      const axiosErrorResponse = response as AxiosResponse<ErrorResponseBody>;
       failureCallback(axiosErrorResponse);
     }
     return errorResponse;
@@ -47,9 +50,10 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
   }
 
   const responseData = data as RES;
+
   const resultResponse = {
     statusCode: status,
-    ...responseData,
+    data: responseData,
   };
   return resultResponse;
 };
