@@ -47,3 +47,10 @@ export const userDeleteError = {
     message: 'Unable to Update User',
   },
 };
+
+export const ProductError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get Products',
+  },
+};
