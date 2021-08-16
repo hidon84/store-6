@@ -1,16 +1,12 @@
-import ApiResponse from './api';
+import { ApiResponse, UpdateInfo } from './common';
 
 export interface UserInfo {
   email?: string;
   phone?: string;
   profile?: string;
 }
-export interface UserUpdateInfo {
-  idx: number;
-  createdAt: Date | string;
-  updatedAt: Date | string;
-}
-export interface User extends UserInfo, UserUpdateInfo {
+
+export interface User extends UserInfo, UpdateInfo {
   id: string;
   phone: string;
 }
@@ -30,18 +26,18 @@ export interface UsersGetResponseBody extends User {
   createdAt: string;
   updatedAt: string;
 }
-export interface UsersPostResponseBody extends UserUpdateInfo {
+export interface UsersPostResponseBody extends UpdateInfo {
   createdAt: string;
   updatedAt: string;
 }
-export interface UsersPutResponseBody extends UserUpdateInfo {
+export interface UsersPutResponseBody extends UpdateInfo {
   createdAt: string;
   updatedAt: string;
 }
 
 /// //////////////////////////////////////////////////////////
 
-export interface UserResponse extends ApiResponse, UserUpdateInfo {
+export interface UserResponse extends ApiResponse, UpdateInfo {
   createdAt: Date;
   updatedAt: Date;
 }

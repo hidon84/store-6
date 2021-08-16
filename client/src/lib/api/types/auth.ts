@@ -1,4 +1,4 @@
-import ApiResponse from './api';
+import { ApiResponse } from './common';
 
 export interface LoginRequestBody {
   id: string;

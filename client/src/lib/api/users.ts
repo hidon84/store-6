@@ -12,7 +12,7 @@ import {
   UsersPutRequestBody,
   UsersPutResponse,
   UsersPutResponseBody,
-  UserUpdateInfo,
+  UpdateInfo,
 } from './types';
 
 export const usersBaseUrl = '/api/users';
@@ -22,7 +22,7 @@ export const usersUrl = {
   me: `${usersBaseUrl}/me`,
 };
 
-const userRequest = <T extends UserUpdateInfo>(
+const userRequest = <T extends UpdateInfo>(
   req: Promise<AxiosResponse<T | ErrorResponseBody>>,
 ): Promise<
   UsersGetResponse | UsersPostResponse | UsersPutResponse | ErrorResponse
