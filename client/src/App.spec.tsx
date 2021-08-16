@@ -19,6 +19,7 @@ describe('<App />', () => {
     const { container } = render(<App />);
     expect(container).toMatchInlineSnapshot(`
 .c0 {
+  height: 100%;
   width: 1156px;
 }
 
