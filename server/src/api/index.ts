@@ -10,5 +10,6 @@ export default () => {
   auth(router);
   product(router);
   users(router);
+
   return router;
 };
