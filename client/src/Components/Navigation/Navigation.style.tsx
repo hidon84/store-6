@@ -3,9 +3,11 @@ import { BadgeSVG } from '~/assets/index';
 
 export const NavigationWrapper = styled.nav`
   width: 100%;
+  height: 100px;
 `;
 
 export const Content = styled.div`
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
