@@ -7,7 +7,7 @@ import Divider from '~/Components/Divider/Divider';
 
 describe('<Button />', () => {
   it('should render same with snapshot', () => {
-    const { container } = render(<Divider width="full" />);
+    const { container } = render(<Divider />);
     expect(container).toMatchSnapshot();
   });
 });

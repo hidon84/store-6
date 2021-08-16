@@ -1,31 +1,23 @@
-import React, { FC } from 'react';
 import styled from 'styled-components';
-import { underlineSVG } from '~/assets/index';
+import { LineSVG } from '~/assets/index';
 
-const DividerFull = styled.div`
-  content: '';
-  width: 100%;
-  padding-left: 32px;
-  height: 16px;
-  background: url(${underlineSVG}) bottom left no-repeat;
-  box-sizing: border-box;
-  background-size: contain;
+/*
+ * @example
+ * <Divider width="70%" />
+ * <Divider width="32px" />
+ * <Divider thick direction="horizontal" />
+ */
+const Divider = styled.div<{
+  width?: string;
+  thick?: boolean;
+  direction?: 'vertical' | 'horizontal';
+}>`
+  width: ${({ width }) => width || '100%'};
+  height: ${({ thick }) => (thick ? '4px' : '1px')};
+  transform: ${({ direction }) =>
+    direction === 'horizontal' ? 'rotate(90deg)' : 'none'};
+  background: url(${LineSVG}) bottom left no-repeat;
+  background-size: cover;
 `;
-
-const Divider80 = styled.div`
-  content: '';
-  width: 80%;
-  padding-left: 32px;
-  height: 16px;
-  background: url(${underlineSVG}) bottom left no-repeat;
-  box-sizing: border-box;
-  background-size: contain;
-`;
-
-const Divider: FC<{ width: 'full' | '80%' }> = ({ width }) => {
-  if (width === 'full') return <DividerFull />;
-  if (width === '80%') return <Divider80 />;
-  return <div>unexpected option width: {width}</div>;
-};
 
 export default Divider;
