@@ -27,6 +27,7 @@ import {
   ButtonWrapper,
   CheckboxWrapper,
   SocialButtons,
+  CheckboxSection,
 } from './index.style';
 
 const LoginPage: FC = () => {
@@ -65,9 +66,12 @@ const LoginPage: FC = () => {
         <ButtonWrapper>
           <Button>로그인</Button>
         </ButtonWrapper>
-        <CheckboxWrapper>
-          <Checkbox checked={false} label="자동로그인" />
-        </CheckboxWrapper>
+        <CheckboxSection>
+          <CheckboxWrapper>
+            <Checkbox checked />
+            <span>자동로그인</span>
+          </CheckboxWrapper>
+        </CheckboxSection>
         <Divider />
         <SocialButtons>
           <img src={socialFacebookSVG} alt="facebook" />

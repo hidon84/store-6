@@ -1,23 +1,17 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import Checkbox from '~/Components/Checkbox';
 
 describe('<Button />', () => {
   it('should render same with snapshot', () => {
-    const { container } = render(<Checkbox checked label="~약관에 동의" />);
+    const { container } = render(<Checkbox checked />);
     expect(container).toMatchSnapshot();
   });
 
-  it('should fire onClick event', () => {
-    const onClick = jest.fn();
-    const { container } = render(
-      <Checkbox checked label="~약관에 동의" onClick={onClick} />,
-    );
-    expect(onClick).toHaveBeenCalledTimes(0);
-    const button = screen.getByText('~약관에 동의');
-    fireEvent.click(button);
-    expect(onClick).toHaveBeenCalledTimes(1);
+  it('should render same with unchecked checkbox snapshot', () => {
+    const { container } = render(<Checkbox />);
+    expect(container).toMatchSnapshot();
   });
 });

@@ -55,10 +55,18 @@ export const ButtonWrapper = styled.div`
   width: 183px;
 `;
 
-export const CheckboxWrapper = styled.div`
+export const CheckboxSection = styled.section`
   width: 100%;
+`;
+
+export const CheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
   margin-top: 32px;
-  padding-left: 32px;
+  padding-left: 14px;
+  cursor: pointer;
 `;
 
 export const SocialButtons = styled.div`
