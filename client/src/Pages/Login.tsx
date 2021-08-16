@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Input from '~/Components/Input/Input';
 import Button from '~/Components/Button/Button';
-import RadioButton from '~/Components/RadioButton/RadioButton';
+import RadioButton from '~/Components/Checkbox/Checkbox';
 import Divider from '~/Components/Divider/Divider';
 import Copyright from '~/Components/Copyright/Copyright';
 import InputHelp from '~/Components/InputHelp/InputHelp';

@@ -6,7 +6,7 @@ import {
   RadioWrapper,
   CheckImg,
   CheckCircleImg,
-} from './RadioButton.style';
+} from './Checkbox.style';
 
 /**
  * example)
