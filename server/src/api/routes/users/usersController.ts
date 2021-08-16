@@ -19,16 +19,16 @@ export const handleUpdateCurrentUser = async (
     const files = req.files as Express.MulterS3.File[];
 
     const uploadUrl = files[0]?.location;
-  
+
     const { idx, createdAt, updatedAt } = await userServiceInstance.updateUser(
       req.currentUser.idx,
       {
         ...user,
-        profile: uploadUrl
-      }
+        profile: uploadUrl,
+      },
     );
 
-    return res.json({ idx, createdAt, updatedAt, profile : uploadUrl });
+    return res.json({ idx, createdAt, updatedAt, profile: uploadUrl });
   } catch (e) {
     return next(e);
   }
