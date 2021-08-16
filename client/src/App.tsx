@@ -6,6 +6,7 @@ import Navigation from '~/Components/Navigation/Navigation';
 import LoginPage from '~/Pages/Login';
 
 const Main = styled.main`
+  height: 100%;
   width: 1156px;
 `;
 
