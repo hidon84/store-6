@@ -33,5 +33,6 @@ export default {
     secretAccessKey: process.env.AWS_PW,
     region: process.env.AWS_REGION,
     bucket: process.env.AWS_BUCKET || '',
+    maxSize : parseInt(process.env.AWS_MAX_SIZE || '1000000', 10),
   },
 };

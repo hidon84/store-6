@@ -9,7 +9,10 @@ const s3 = new aws.S3({
   region: config.s3.region,
 });
 
+
+
 const multerProduct = multer({
+  limits: { fileSize: config.s3.maxSize },
   storage: multerS3({
     s3,
     contentType: multerS3.AUTO_CONTENT_TYPE,
