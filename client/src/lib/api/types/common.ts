@@ -1,9 +1,16 @@
+export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
 export interface ApiResponse {
   statusCode: number;
 }
 
-export interface UpdateInfo {
+export interface UpdateDateInfo {
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface UpdateInfo extends UpdateDateInfo {
   idx: number;
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  createdAt: string;
+  updatedAt: string;
 }
