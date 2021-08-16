@@ -28,6 +28,7 @@ describe('<App />', () => {
   >
     <div>
       No Matching Route
+    </div>
   </main>
 </div>
 `);
