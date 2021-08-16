@@ -7,15 +7,16 @@
   "author": "gomjellie <gomjellie@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve",
+    "start": "env-cmd -f .env.dev webpack serve",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack --progress",
+    "build": "env-cmd webpack --progress",
     "lint": "npx eslint --ext .tsx --ext .ts src",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@babel/runtime": "^7.15.3",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
@@ -37,8 +39,8 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-root-import": "^6.6.0",
     "babel-plugin-styled-components": "^1.13.2",
-    "cross-env": "^7.0.3",
     "css-loader": "^6.2.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
