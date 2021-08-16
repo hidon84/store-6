@@ -25,8 +25,6 @@ const errorHandler = (
   res: Response,
   _next: NextFunction,
 ) => {
-  console.log('errrrrr', err.message);
-
   let errorInfo;
   let errorResponse = err;
   const isDevelopment = process.env.NODE_ENV === 'development';
