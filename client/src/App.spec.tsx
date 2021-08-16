@@ -18,10 +18,17 @@ describe('<App />', () => {
   it('should route /', () => {
     const { container } = render(<App />);
     expect(container).toMatchInlineSnapshot(`
+.c0 {
+  width: 1156px;
+}
+
 <div>
-  <div>
-    No Matching Route
-  </div>
+  <main
+    class="c0"
+  >
+    <div>
+      No Matching Route
+  </main>
 </div>
 `);
   });
