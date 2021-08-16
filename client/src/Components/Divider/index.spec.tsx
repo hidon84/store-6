@@ -5,7 +5,7 @@ import 'jest-styled-components';
 
 import Divider from '~/Components/Divider';
 
-describe('<Button />', () => {
+describe('<Divider />', () => {
   it('should render same with snapshot', () => {
     const { container } = render(<Divider />);
     expect(container).toMatchSnapshot();

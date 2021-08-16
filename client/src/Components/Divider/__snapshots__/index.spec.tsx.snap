@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> should render same with snapshot 1`] = `
+exports[`<Divider /> should render same with snapshot 1`] = `
 .c0 {
   width: 100%;
   height: 1px;

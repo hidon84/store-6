@@ -5,7 +5,7 @@ import 'jest-styled-components';
 
 import InputHelp from '~/Components/InputHelp';
 
-describe('<Button />', () => {
+describe('<InputHelp />', () => {
   it('should render same with snapshot', () => {
     const { container } = render(<InputHelp>비밀번호가 너무 짧아요</InputHelp>);
     expect(container).toMatchSnapshot();

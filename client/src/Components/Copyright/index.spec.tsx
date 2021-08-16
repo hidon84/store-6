@@ -5,7 +5,7 @@ import 'jest-styled-components';
 
 import Copyright from '~/Components/Copyright';
 
-describe('<Button />', () => {
+describe('<Copyright />', () => {
   it('should render same with snapshot', () => {
     const { container } = render(<Copyright>저작권 관련 내용</Copyright>);
     expect(container).toMatchSnapshot();

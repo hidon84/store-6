@@ -5,7 +5,7 @@ import 'jest-styled-components';
 
 import Input from '~/Components/Input';
 
-describe('<Button />', () => {
+describe('<Input />', () => {
   it('should render same with snapshot', () => {
     const { container } = render(<Input />);
     expect(container).toMatchSnapshot();
