@@ -127,7 +127,7 @@ const LoginPage: FC = () => {
         <RadioButtonWrapper>
           <RadioButton checked={false} label="자동로그인" />
         </RadioButtonWrapper>
-        <Divider width="full" />
+        <Divider />
         <SocialButtons>
           <img src={socialFacebookSVG} alt="facebook" />
           <img src={verticalLineSVG} alt="vertical" />
