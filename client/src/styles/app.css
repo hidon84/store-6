@@ -13,6 +13,11 @@
   align-items: center;
 }
 
+#portal{
+  display:flex;
+  justify-content: center;
+}
+
 .text-baemin100 {
   color: var(--baemin100);
 }
