@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Input from '~/Components/Input';
-import Button from '~/Components/Button';
-import RadioButton from '~/Components/RadioButton';
-import Divider from '~/Components/Divider';
-import Copyright from '~/Components/Copyright';
-import InputHelp from '~/Components/InputHelp';
+import Input from '~/Components/Input/Input';
+import Button from '~/Components/Button/Button';
+import RadioButton from '~/Components/RadioButton/RadioButton';
+import Divider from '~/Components/Divider/Divider';
+import Copyright from '~/Components/Copyright/Copyright';
+import InputHelp from '~/Components/InputHelp/InputHelp';
 
 import {
   doodleTeasingSVG,

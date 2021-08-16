@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import 'jest-styled-components';
 
-import RadioButton from '~/Components/RadioButton';
+import RadioButton from '~/Components/RadioButton/RadioButton';
 
 describe('<Button />', () => {
   it('should render same with snapshot', () => {
