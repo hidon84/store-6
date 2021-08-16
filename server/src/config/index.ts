@@ -28,4 +28,10 @@ export default {
       name: process.env.DB_NAME,
     },
   },
+  s3: {
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_PW,
+    region: process.env.AWS_REGION,
+    bucket: process.env.AWS_BUCKET || '',
+  }
 };
