@@ -20,7 +20,7 @@ const useAlert = () => {
 
     setTimeout(() => {
       alertModalDOM.classList.remove('show');
-    }, 1500);
+    }, 1200);
   };
 
   return { alert };
