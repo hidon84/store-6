@@ -20,6 +20,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true, // jsx 활성화
     },
+    tsconfigRootDir: __dirname,
     ecmaVersion: 2021,
     sourceType: 'module', // import 사용
     project: 'tsconfig.json',
@@ -43,5 +44,6 @@ module.exports = {
     'jest.config.js',
     'webpack.config.js',
     'setUpTests.ts',
+    'assets.d.ts',
   ],
 };
