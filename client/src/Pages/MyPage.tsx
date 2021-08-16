@@ -100,7 +100,7 @@ const MyPage: React.FC = () => {
           <MyPagePhotoContentContainer>
             <div>
               <label htmlFor="img" className="input-preview"></label>
-              <input name="img" id="img" className="input-preview__src" type="file"/>
+              <input name="img" id="img" className="input-preview" type="file"/>
             </div>
             <div>사진을 클릭하면 등록된 사진을 수정할 수 있습니다.</div>
           </MyPagePhotoContentContainer>
