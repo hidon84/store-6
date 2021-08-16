@@ -7,6 +7,7 @@ import '~/styles/app.css';
 import Navigation from '~/Components/Navigation';
 import LoginPage from '~/Pages/Login';
 import AlertModal from './Components/AlertModal';
+import ConfirmModal from './Components/ConfirmModal';
 
 const Main = styled.main`
   height: 100%;
@@ -30,6 +31,7 @@ const App = () => {
         </Main>
       </BrowserRouter>
       <AlertModal />
+      <ConfirmModal />
     </>
   );
 };
