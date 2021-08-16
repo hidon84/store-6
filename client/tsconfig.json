@@ -27,5 +27,5 @@
     "src/setupTests.ts",
     "./node_modules/**/*"
   ],
-  "include": ["./src/**/*", "@type", "src/assets.d.ts", "__tests__"]
+  "include": ["./src/**/*", "@type", "src/images.d.ts", "__tests__"]
 }

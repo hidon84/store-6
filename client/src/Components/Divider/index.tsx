@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LineSVG } from '~/assets/index';
+import { LineSVG } from '~/assets';
 
 /*
  * @example

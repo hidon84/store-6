@@ -15,7 +15,7 @@ import {
   HeartSVG,
   MypageSVG,
   CartSVG,
-} from '~/assets/index';
+} from '~/assets';
 import Divider from '../Divider';
 
 const Navigation: FC = () => {

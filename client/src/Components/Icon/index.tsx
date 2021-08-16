@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { SmallCircleSVG, BigCircleSVG } from '~/assets/index';
+import { SmallCircleSVG, BigCircleSVG } from '~/assets';
 import { IconWrapper, Circle } from './index.style';
 
 const BigIconPrefix =
@@ -7,7 +7,7 @@ const BigIconPrefix =
 
 /**
  *
- * @param src assets/index.tsx 의 small, big 아이콘을 넣어줍니다.
+ * @param src assets 의 small, big 아이콘을 넣어줍니다.
  * 만약, Big icon일 경우 hover 했을 시 큰 원이 보이게 되며, small 일 경우 작은 원이 보입니다.
  * @example
  * <Icon src=${SmallGiftSVG}/>

@@ -16,7 +16,7 @@ import {
   verticalLineSVG,
   socialFacebookSVG,
   socialGoogleSVG,
-} from '~/assets/index';
+} from '~/assets';
 
 import {
   StyledLoginPage,

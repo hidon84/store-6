@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { underlineSVG } from '~/assets/index';
+import { underlineSVG } from '~/assets';
 
 /**
  * width에 string으로 %를 넘겨주세요.

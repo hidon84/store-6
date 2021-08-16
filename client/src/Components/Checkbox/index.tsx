@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { checkCircleSVG, checkSVG } from '~/assets/index';
+import { checkCircleSVG, checkSVG } from '~/assets';
 
 import { RadioWrapper, CheckImg, CheckCircleImg } from './index.style';
 

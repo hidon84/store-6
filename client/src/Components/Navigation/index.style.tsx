@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BadgeSVG } from '~/assets/index';
+import { BadgeSVG } from '~/assets';
 
 export const NavigationWrapper = styled.nav`
   width: 100%;

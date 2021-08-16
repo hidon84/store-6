@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { buttonSVG } from '~/assets/index';
+import { buttonSVG } from '~/assets';
 
 type Size = 'sm' | 'md' | 'lg';
 

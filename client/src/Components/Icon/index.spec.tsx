@@ -1,7 +1,7 @@
 import 'jest-styled-components';
 import { render } from '@testing-library/react';
 
-import { BigGiftSVG, SmallGiftSVG } from '~/assets/index';
+import { BigGiftSVG, SmallGiftSVG } from '~/assets';
 import Icon from '~/Components/Icon';
 
 describe('<Icon />', () => {
