@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> should render same with snapshot 1`] = `
+.c0 {
+  font-size: 20px;
+  margin-top: 16px;
+  width: 100%;
+  padding-left: 16px;
+  line-height: 25px;
+  height: 34px;
+  background: url() bottom left no-repeat;
+  box-sizing: border-box;
+  background-size: contain;
+}
+
+<div>
+  <input
+    class="c0"
+  />
+</div>
+`;

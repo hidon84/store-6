@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Kyobo';
+  src: url('./Kyobo\ Handwriting\ 2019.otf');
+}
+
+* {
+  font-family: 'Kyobo' !important;
+}

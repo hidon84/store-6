@@ -11,9 +11,9 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "keyofStringsOnly": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
+      "~/*": ["./src/*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
     }
   },
   "typeRoots": ["node_modules/@types", "src/@type"],
@@ -27,5 +27,5 @@
     "src/setupTests.ts",
     "./node_modules/**/*"
   ],
-  "include": ["./src/**/*", "@type"]
+  "include": ["./src/**/*", "@type", "src/assets.d.ts", "__tests__"]
 }
