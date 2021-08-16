@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import ErrorResponse from '@/utils/errorResponse';
-import { commonError } from '@/constants/error';
+import { commonError, multerError } from '@/constants/error';
 
 const createErrorInfoDevelopment = (err: ErrorResponse) => {
   return {
@@ -25,12 +25,18 @@ const errorHandler = (
   res: Response,
   _next: NextFunction,
 ) => {
+  console.log('errrrrr', err.message);
+
   let errorInfo;
   let errorResponse = err;
   const isDevelopment = process.env.NODE_ENV === 'development';
 
   if (errorResponse.name === 'UnauthorizedError') {
     errorResponse = new ErrorResponse(commonError.unauthorized);
+  }
+
+  if (errorResponse.message === multerError.tooLarge) {
+    errorResponse = new ErrorResponse(commonError.tooLarge);
   }
 
   if (isDevelopment) {
