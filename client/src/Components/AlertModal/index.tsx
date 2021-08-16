@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { AlertModalWrapper } from './AlertModal.style';
+import { AlertModalWrapper } from './index.style';
 
 const AlertModalComponent = () => {
   return (

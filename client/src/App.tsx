@@ -6,7 +6,7 @@ import '~/styles/app.css';
 
 import Navigation from '~/Components/Navigation';
 import LoginPage from '~/Pages/Login';
-import AlertModal from './Components/AlertModal/AlertModal';
+import AlertModal from './Components/AlertModal';
 
 const Main = styled.main`
   height: 100%;
