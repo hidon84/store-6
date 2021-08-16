@@ -1,18 +1,72 @@
 import { Service, Inject } from 'typedi';
-import User from '@/entity/user';
+import LoginModel from '@/model/login';
+import * as hashHelper from '@/helper/hash';
+import * as jwtHelper from '@/helper/jwt';
+import * as authHelper from '@/helper/auth';
+import ErrorResponse from '@/utils/errorResponse';
+import { commonError, loginError, logoutError } from '@/constants/error';
 
 @Service()
 class AuthService {
-  private userEntity: User;
+  private loginModel: LoginModel;
 
-  constructor(@Inject('userEntity') userEntity: User) {
-    this.userEntity = userEntity;
+  constructor(@Inject('loginModel') loginModel: LoginModel) {
+    this.loginModel = loginModel;
   }
 
-  async Signup() {
-    const userNumber = new Date().getTime();
-    this.userEntity.userId = `testId${userNumber}`;
-    this.userEntity.save();
+  async Login(id: string, password: string) {
+    try {
+      const login = await this.loginModel.findById(id);
+
+      if (!login) {
+        throw new ErrorResponse(commonError.unauthorized);
+      }
+
+      const isValid = hashHelper.comparePassword(login.password, password);
+
+      if (isValid) {
+        const access = jwtHelper.generateAccessToken(login);
+        const refresh = jwtHelper.generateRefreshToken(login);
+
+        await authHelper.storeRefreshToken(refresh, login.idx);
+
+        return { access, refresh };
+      }
+
+      throw new ErrorResponse(commonError.unauthorized);
+    } catch (e) {
+      if (e instanceof ErrorResponse) {
+        throw e;
+      }
+      throw new ErrorResponse(loginError.unable);
+    }
+  }
+
+  async Logout(token: string) {
+    try {
+      await authHelper.deleteRefreshToken(token);
+    } catch {
+      throw new ErrorResponse(logoutError.unable);
+    }
+  }
+
+  async RefreshAccessToken(refreshToken: string) {
+    try {
+      const { idx } = jwtHelper.decodeRefreshToken(refreshToken);
+      const login = await this.loginModel.findByIdx(idx);
+      const isValid = await authHelper.verifyRefreshToken(refreshToken, idx);
+      if (isValid && login) {
+        const access = jwtHelper.generateAccessToken(login);
+        return { access };
+      }
+
+      throw new ErrorResponse(commonError.unauthorized);
+    } catch (e) {
+      if (e instanceof ErrorResponse) {
+        throw e;
+      }
+      throw new ErrorResponse(loginError.unable);
+    }
   }
 }
 
