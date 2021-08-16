@@ -11,6 +11,7 @@
     "prebuild": "rimraf dist",
     "build": "env-cmd webpack --progress",
     "lint": "npx eslint --ext .tsx --ext .ts src",
+    "precommit": "eslint --fix --ext .tsx --ext .ts src && prettier --write src",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
