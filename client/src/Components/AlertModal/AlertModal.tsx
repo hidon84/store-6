@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { AlertModalWrapper } from './AlertModal.style';
 
 const AlertModalComponent = () => {
@@ -8,4 +9,5 @@ const AlertModalComponent = () => {
   );
 };
 
-export default AlertModalComponent;
+export default () =>
+  createPortal(AlertModalComponent(), document.getElementById('portal'));
