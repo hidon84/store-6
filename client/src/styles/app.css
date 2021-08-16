@@ -1,3 +1,6 @@
+@import './font.css';
+@import './reset.css';
+
 :root {
   --baemin100: #2ac1bc;
 }
