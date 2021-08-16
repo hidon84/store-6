@@ -6,12 +6,12 @@ import {
   RadioWrapper,
   CheckImg,
   CheckCircleImg,
-} from './Checkbox.style';
+} from './index.style';
 
 /**
- * example)
- * <Checkbox checked label='로그인' />
- * <Checkbox label='로그인' />
+ * @example
+ *  <Checkbox checked label='로그인' />
+ *  <Checkbox label='로그인' />
  */
 const Checkbox: FC<{
   checked?: boolean;

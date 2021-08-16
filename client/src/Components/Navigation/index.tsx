@@ -7,7 +7,7 @@ import {
   HeaderRightSection,
   CartWrapper,
   BadgeWrapper,
-} from './Navigation.style';
+} from './index.style';
 
 import {
   LogoSVG,
@@ -16,7 +16,7 @@ import {
   MypageSVG,
   CartSVG,
 } from '~/assets/index';
-import Divider from '../Divider/Divider';
+import Divider from '../Divider';
 
 const Navigation: FC = () => {
   const { pathname } = useLocation();

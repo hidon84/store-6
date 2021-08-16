@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
-import Input from '~/Components/Input/Input';
-import Button from '~/Components/Button/Button';
-import Checkbox from '~/Components/Checkbox/Checkbox';
-import Divider from '~/Components/Divider/Divider';
-import Copyright from '~/Components/Copyright/Copyright';
-import InputHelp from '~/Components/InputHelp/InputHelp';
+
+import Input from '~/Components/Input';
+import Button from '~/Components/Button';
+import Checkbox from '~/Components/Checkbox';
+import Divider from '~/Components/Divider';
+import Copyright from '~/Components/Copyright';
+import InputHelp from '~/Components/InputHelp';
 
 import {
   doodleTeasingSVG,
@@ -18,75 +18,16 @@ import {
   socialGoogleSVG,
 } from '~/assets/index';
 
-const StyledLoginPage = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const LeftDoodles = styled.aside`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
-  justify-content: space-evenly;
-`;
-
-const RightDoodles = styled.aside`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
-  width: 33%;
-  align-items: center;
-  justify-content: center;
-`;
-
-const LoginForm = styled.form`
-  display: flex;
-  flex: 2;
-  min-width: 400px;
-  max-width: 400px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  gap: 12px;
-`;
-
-const LoginFormHeader = styled.header`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 64px;
-  font-size: 48px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  margin-top: 32px;
-  height: 55px;
-  width: 183px;
-`;
-
-const CheckboxWrapper = styled.div`
-  width: 100%;
-  margin-top: 32px;
-  padding-left: 32px;
-`;
-
-const SocialButtons = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 48px;
-  justify-content: space-evenly;
-  align-items: center;
-`;
+import {
+  StyledLoginPage,
+  LeftDoodles,
+  RightDoodles,
+  LoginForm,
+  LoginFormHeader,
+  ButtonWrapper,
+  CheckboxWrapper,
+  SocialButtons,
+} from './index.style';
 
 const LoginPage: FC = () => {
   return (

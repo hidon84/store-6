@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
 
-import Navigation from '~/Components/Navigation/Navigation';
+import Navigation from '~/Components/Navigation';
 import LoginPage from '~/Pages/Login';
 
 const Main = styled.main`

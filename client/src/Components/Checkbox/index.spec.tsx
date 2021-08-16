@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import 'jest-styled-components';
 
-import Checkbox from '~/Components/Checkbox/Checkbox';
+import Checkbox from '~/Components/Checkbox';
 
 describe('<Button />', () => {
   it('should render same with snapshot', () => {

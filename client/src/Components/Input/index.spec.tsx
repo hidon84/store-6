@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
-import InputHelp from '~/Components/InputHelp/InputHelp';
+import Input from '~/Components/Input';
 
 describe('<Button />', () => {
   it('should render same with snapshot', () => {
-    const { container } = render(<InputHelp>비밀번호가 너무 짧아요</InputHelp>);
+    const { container } = render(<Input />);
     expect(container).toMatchSnapshot();
   });
 });
