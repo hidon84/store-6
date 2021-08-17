@@ -1,5 +1,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+const MB1 = '1000000';
+
 export default {
   port: parseInt(process.env.PORT || '5000', 10),
   api: {
@@ -33,6 +35,6 @@ export default {
     secretAccessKey: process.env.AWS_PW,
     region: process.env.AWS_REGION,
     bucket: process.env.AWS_BUCKET || '',
-    maxSize: parseInt(process.env.AWS_MAX_SIZE || '1000000', 10),
+    maxSize: parseInt(process.env.AWS_MAX_SIZE || MB1, 10),
   },
 };
