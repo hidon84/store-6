@@ -11,6 +11,14 @@ export const commonError = {
     statusCode: 401,
     message: 'Unauthorized',
   },
+  tooLarge: {
+    statusCode: 413,
+    message: 'Payload too large',
+  },
+};
+
+export const multerError = {
+  tooLarge: 'File too large',
 };
 
 export const loginError = {

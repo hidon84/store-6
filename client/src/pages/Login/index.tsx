@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
 
+import useInputValidator from '~/lib/hooks/useInputValidator';
+import { REG_ID, REG_PW, WARNING_ID, WARNING_PW } from '~/utils/validation';
+import { alert } from '~/utils/modal';
+
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 import Checkbox from '~/components/Checkbox';
@@ -31,6 +35,34 @@ import {
 } from './index.style';
 
 const LoginPage: FC = () => {
+  const [id, idWarning, handleId] = useInputValidator('', (id_input) => {
+    const { length } = id_input;
+    if (REG_ID.test(id_input) || length === 0) {
+      return '';
+    }
+    return WARNING_ID;
+  });
+  const [pw, pwWarning, handlePW] = useInputValidator('', (pw_input) => {
+    const { length } = pw_input;
+    if (REG_PW.test(pw_input) || length === 0) {
+      return '';
+    }
+    return WARNING_PW;
+  });
+
+  const onSubmit = () => {
+    if (id.length === 0 || idWarning.length) {
+      alert('아이디를 제대로 작성해주세요');
+      return;
+    }
+    if (pw.length === 0 || pwWarning.length) {
+      alert('비밀번호를 제대로 작성해주세요');
+      return;
+    }
+
+    alert('submit!');
+  };
+
   return (
     <StyledLoginPage>
       <LeftDoodles>
@@ -53,18 +85,26 @@ const LoginPage: FC = () => {
           name="id"
           id="id"
           placeholder="아이디"
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            handleId(ev.target.value);
+          }}
         />
-        <InputHelp>가입되지 않은 아이디입니다.</InputHelp>
+        <InputHelp>{idWarning}</InputHelp>
         <Input
           autoComplete="off"
           type="password"
           name="password"
           id="password"
           placeholder="비밀번호"
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            handlePW(ev.target.value);
+          }}
         />
-        <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
+        <InputHelp>{pwWarning}</InputHelp>
         <ButtonWrapper>
-          <Button size="lg">로그인</Button>
+          <Button size="lg" onClick={onSubmit}>
+            로그인
+          </Button>
         </ButtonWrapper>
         <CheckboxSection>
           <CheckboxWrapper>
