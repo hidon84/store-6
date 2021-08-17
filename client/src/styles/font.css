@@ -1,6 +1,11 @@
 @font-face {
   font-family: 'Kyobo';
-  src: url('./Kyobo\ Handwriting\ 2019.otf');
+  src: url('../assets/fonts/KyoboHandwriting2019.otf');
+}
+
+@font-face {
+  font-family: 'BM Hanna';
+  src: url('../assets/fonts/BMHANNAProOTF.otf');
 }
 
 * {

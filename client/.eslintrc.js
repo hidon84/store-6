@@ -44,6 +44,6 @@ module.exports = {
     'jest.config.js',
     'webpack.config.js',
     'setUpTests.ts',
-    'assets.d.ts',
+    'images.d.ts',
   ],
 };
