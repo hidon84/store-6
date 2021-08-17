@@ -15,7 +15,7 @@ const Divider = styled.div<{
   width: ${({ width }) => width || '100%'};
   height: ${({ thick }) => (thick ? '4px' : '1px')};
   transform: ${({ direction }) =>
-    direction === 'horizontal' ? 'rotate(90deg)' : 'none'};
+    direction === 'vertical' ? 'rotate(90deg)' : 'none'};
   background: url(${LineSVG}) bottom left no-repeat;
   background-size: cover;
 `;
