@@ -1,6 +1,5 @@
 import React, { MutableRefObject, FC, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
 import { ConfirmModalWrapper, ControlSection } from './index.style';
 import useOnClickOutside from '~/lib/hooks/useOnClickOutside';
 
