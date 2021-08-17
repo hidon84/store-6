@@ -7,6 +7,7 @@ const InputHelp = styled.div`
   text-align: left;
   font-size: 12px;
   line-height: 15px;
+  height: 20px;
   color: #ff9e2c;
 `;
 
