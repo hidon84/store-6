@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+import useInputValidator from '~/lib/hooks/useInputValidator';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 import Checkbox from '~/components/Checkbox';
@@ -31,6 +32,20 @@ import {
 } from './index.style';
 
 const LoginPage: FC = () => {
+  const [id, idWarning, handleId] = useInputValidator('', (id_input) => {
+    const { length } = id_input;
+    if (length >= 8 || length === 0) {
+      return '';
+    }
+    return '너무 짧아요!';
+  });
+  const [pw, pwWarning, handlePW] = useInputValidator('', (pw_input) => {
+    const { length } = pw_input;
+    if (length >= 8 || length === 0) {
+      return '';
+    }
+    return '너무 짧아요!';
+  });
   return (
     <StyledLoginPage>
       <LeftDoodles>
@@ -53,16 +68,22 @@ const LoginPage: FC = () => {
           name="id"
           id="id"
           placeholder="아이디"
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            handleId(ev.target.value);
+          }}
         />
-        <InputHelp>가입되지 않은 아이디입니다.</InputHelp>
+        <InputHelp>{idWarning}</InputHelp>
         <Input
           autoComplete="off"
           type="password"
           name="password"
           id="password"
           placeholder="비밀번호"
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            handlePW(ev.target.value);
+          }}
         />
-        <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
+        <InputHelp>{pwWarning}</InputHelp>
         <ButtonWrapper>
           <Button size="lg">로그인</Button>
         </ButtonWrapper>
