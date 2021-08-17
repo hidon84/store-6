@@ -11,7 +11,7 @@ const useAlert = () => {
   let alertModalDOM: HTMLElement;
 
   useEffect(() => {
-    alertModalDOM = document.querySelector('#portal > aside');
+    alertModalDOM = document.querySelector('#portal > .alert-modal');
   }, []);
 
   const alert = (content: string) => {

@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import { AlertModalWrapper } from './index.style';
 
 const AlertModalComponent = () => (
-  <AlertModalWrapper>
+  <AlertModalWrapper className="alert-modal">
     <span />
   </AlertModalWrapper>
 );

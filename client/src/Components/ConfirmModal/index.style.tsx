@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const ConfirmModalWrapper = styled.div`
+export const ConfirmModalWrapper = styled.aside`
+  opacity: 0;
   box-sizing: border-box;
   position: absolute;
   top: calc(50% - 72px);
@@ -10,11 +11,17 @@ export const ConfirmModalWrapper = styled.div`
   background-color: #fff;
   filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.5));
   font-size: 20px;
+  z-index: -1;
 
   & > span {
     display: block;
     margin-bottom: 50px;
     line-height: 1.2;
+  }
+
+  &.show {
+    opacity: 1;
+    z-index: 9999;
   }
 `;
 

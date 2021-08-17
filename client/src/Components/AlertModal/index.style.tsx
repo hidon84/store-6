@@ -17,10 +17,11 @@ export const AlertModalWrapper = styled.aside`
   transition: all 0.8s ease;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
+  z-index: -1;
 
   &.show {
     opacity: 1;
     transform: translateY(-20px);
+    z-index: 9999;
   }
 `;

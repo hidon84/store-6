@@ -29,8 +29,11 @@ import {
   SocialButtons,
   CheckboxSection,
 } from './index.style';
+import useConfirm from '~/lib/hooks/useConfirm';
 
 const LoginPage: FC = () => {
+  const { confirm } = useConfirm();
+
   return (
     <StyledLoginPage>
       <LeftDoodles>
@@ -41,7 +44,7 @@ const LoginPage: FC = () => {
           <img src={doodleSkeletonSVG} alt="skeleton" />
         </div>
       </LeftDoodles>
-      <LoginForm>
+      <LoginForm onSubmit={(e) => e.preventDefault()}>
         <LoginFormHeader>
           <img src={doodleRobotSVG} alt="robot" />
           <h1 className="text-baemin100">배민</h1>
@@ -63,7 +66,7 @@ const LoginPage: FC = () => {
           placeholder="비밀번호"
         />
         <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
-        <ButtonWrapper>
+        <ButtonWrapper onClick={() => confirm('aslkdfjlasdkfjlkasjdf')}>
           <Button size="lg">로그인</Button>
         </ButtonWrapper>
         <CheckboxSection>
