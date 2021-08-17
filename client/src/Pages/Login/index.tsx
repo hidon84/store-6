@@ -66,7 +66,11 @@ const LoginPage: FC = () => {
           placeholder="비밀번호"
         />
         <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
-        <ButtonWrapper onClick={() => confirm('aslkdfjlasdkfjlkasjdf')}>
+        <ButtonWrapper
+          onClick={() => {
+            confirm('aslkdfjlasdkfjlkasjdf', () => console.log('성공'));
+          }}
+        >
           <Button size="lg">로그인</Button>
         </ButtonWrapper>
         <CheckboxSection>

@@ -7,11 +7,12 @@ const useConfirm = () => {
     confirmModalDOM = document.querySelector('#portal > .confirm-modal');
   }, []);
 
-  const confirm = (content: string) => {
-    // 2. 취소 눌렀을 때 없애기
+  const confirm = (content: string, onConfirm?: () => void) => {
     // 3. 확인 눌렀을 때 onSuccess
     confirmModalDOM.classList.add('show');
     confirmModalDOM.querySelector('span').innerText = content;
+    (confirmModalDOM.querySelector('.confirm') as HTMLElement).onclick =
+      onConfirm;
   };
 
   return { confirm };
