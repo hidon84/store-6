@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
 
 import Navigation from '~/components/Navigation';
-import LoginPage from '~/Pages/Login';
+import LoginPage from '~/pages/Login';
 import AlertModal from './components/AlertModal';
 import ConfirmModal from './components/ConfirmModal';
 
