@@ -74,3 +74,7 @@ export const SocialButtons = styled.div`
   justify-content: space-evenly;
   align-items: center;
 `;
+
+export const SocialButton = styled.img`
+  cursor: pointer;
+`;

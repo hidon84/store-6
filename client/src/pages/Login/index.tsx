@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import { REG_ID, REG_PW, WARNING_ID, WARNING_PW } from '~/utils/validation';
 import { alert } from '~/utils/modal';
+import { login } from '~/lib/api/auth';
 
 import Input from '~/components/Input';
 import Button from '~/components/Button';
@@ -32,6 +33,7 @@ import {
   CheckboxWrapper,
   SocialButtons,
   CheckboxSection,
+  SocialButton,
 } from './index.style';
 
 const LoginPage: FC = () => {
@@ -60,7 +62,18 @@ const LoginPage: FC = () => {
       return;
     }
 
-    alert('submit!');
+    /**
+     * @TODO response에 따라서 로그인에 실패했습니다 말고 서버응답에 따라서 다르게 표시하기.
+     * 현재 login()의 리턴값 타입추론이 이상함.
+     */
+    login({
+      id,
+      password: pw,
+    }).catch(() => alert('로그인에 실패했습니다.'));
+  };
+
+  const onSocialLogin = () => {
+    alert('소셜로그인은 아직 구현되지 않았습니다');
   };
 
   return (
@@ -114,9 +127,17 @@ const LoginPage: FC = () => {
         </CheckboxSection>
         <Divider />
         <SocialButtons>
-          <img src={socialFacebookSVG} alt="facebook" />
+          <SocialButton
+            src={socialFacebookSVG}
+            alt="facebook"
+            onClick={onSocialLogin}
+          />
           <img src={verticalLineSVG} alt="vertical" />
-          <img src={socialGoogleSVG} alt="google" />
+          <SocialButton
+            src={socialGoogleSVG}
+            alt="google"
+            onClick={onSocialLogin}
+          />
         </SocialButtons>
         <Copyright>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
