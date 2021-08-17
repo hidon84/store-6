@@ -4,7 +4,7 @@ const useConfirm = () => {
   let confirmModalDOM: HTMLElement;
 
   useEffect(() => {
-    confirmModalDOM = document.querySelector('#portal > div > .confirm-modal');
+    confirmModalDOM = document.querySelector('#portal > .confirm-modal');
   }, []);
 
   const confirm = (content: string) => {
