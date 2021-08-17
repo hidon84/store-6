@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
+import { REG_ID, REG_PW, WARNING_ID, WARNING_PW } from '~/utils/validation';
+import { alert } from '~/utils/modal';
+
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 import Checkbox from '~/components/Checkbox';
@@ -34,18 +37,32 @@ import {
 const LoginPage: FC = () => {
   const [id, idWarning, handleId] = useInputValidator('', (id_input) => {
     const { length } = id_input;
-    if (length >= 8 || length === 0) {
+    if (REG_ID.test(id_input) || length === 0) {
       return '';
     }
-    return '너무 짧아요!';
+    return WARNING_ID;
   });
   const [pw, pwWarning, handlePW] = useInputValidator('', (pw_input) => {
     const { length } = pw_input;
-    if (length >= 8 || length === 0) {
+    if (REG_PW.test(pw_input) || length === 0) {
       return '';
     }
-    return '너무 짧아요!';
+    return WARNING_PW;
   });
+
+  const onSubmit = () => {
+    if (id.length === 0 || idWarning.length) {
+      alert('id 폼이 이상해요');
+      return;
+    }
+    if (pw.length === 0 || pwWarning.length) {
+      alert('pw 폼이 이상해요');
+      return;
+    }
+
+    alert('submit!');
+  };
+
   return (
     <StyledLoginPage>
       <LeftDoodles>
@@ -85,7 +102,9 @@ const LoginPage: FC = () => {
         />
         <InputHelp>{pwWarning}</InputHelp>
         <ButtonWrapper>
-          <Button size="lg">로그인</Button>
+          <Button size="lg" onClick={onSubmit}>
+            로그인
+          </Button>
         </ButtonWrapper>
         <CheckboxSection>
           <CheckboxWrapper>
