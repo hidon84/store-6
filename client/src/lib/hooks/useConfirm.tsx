@@ -7,8 +7,7 @@ const useConfirm = () => {
     confirmModalDOM = document.querySelector('#portal > .confirm-modal');
   }, []);
 
-  const confirm = (content: string, onConfirm?: () => void) => {
-    // 3. 확인 눌렀을 때 onSuccess
+  const confirm = (content: string, onConfirm: () => void) => {
     confirmModalDOM.classList.add('show');
     confirmModalDOM.querySelector('span').innerText = content;
     (confirmModalDOM.querySelector('.confirm') as HTMLElement).onclick =

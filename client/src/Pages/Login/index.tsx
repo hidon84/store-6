@@ -29,11 +29,8 @@ import {
   SocialButtons,
   CheckboxSection,
 } from './index.style';
-import useConfirm from '~/lib/hooks/useConfirm';
 
 const LoginPage: FC = () => {
-  const { confirm } = useConfirm();
-
   return (
     <StyledLoginPage>
       <LeftDoodles>
@@ -66,11 +63,7 @@ const LoginPage: FC = () => {
           placeholder="비밀번호"
         />
         <InputHelp>비밀번호 형식이 맞지 않습니다.</InputHelp>
-        <ButtonWrapper
-          onClick={() => {
-            confirm('aslkdfjlasdkfjlkasjdf', () => console.log('성공'));
-          }}
-        >
+        <ButtonWrapper>
           <Button size="lg">로그인</Button>
         </ButtonWrapper>
         <CheckboxSection>
