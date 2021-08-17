@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
 
-import Navigation from '~/Components/Navigation';
+import Navigation from '~/components/Navigation';
 import LoginPage from '~/Pages/Login';
-import AlertModal from './Components/AlertModal';
-import ConfirmModal from './Components/ConfirmModal';
+import AlertModal from './components/AlertModal';
+import ConfirmModal from './components/ConfirmModal';
 
 const Main = styled.main`
   height: 100%;

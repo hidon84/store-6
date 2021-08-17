@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-import Input from '~/Components/Input';
-import Button from '~/Components/Button';
-import Checkbox from '~/Components/Checkbox';
-import Divider from '~/Components/Divider';
-import Copyright from '~/Components/Copyright';
-import InputHelp from '~/Components/InputHelp';
+import Input from '~/components/Input';
+import Button from '~/components/Button';
+import Checkbox from '~/components/Checkbox';
+import Divider from '~/components/Divider';
+import Copyright from '~/components/Copyright';
+import InputHelp from '~/components/InputHelp';
 
 import {
   doodleTeasingSVG,
