@@ -10,7 +10,7 @@ import { commonError } from '@/constants/error';
 
 export default (app: Express) => {
   app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
+  app.use(express.urlencoded({ extended: true }));
   app.use(cors());
   app.use(cookieParser());
   app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
