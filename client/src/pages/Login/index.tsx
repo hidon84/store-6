@@ -52,11 +52,11 @@ const LoginPage: FC = () => {
 
   const onSubmit = () => {
     if (id.length === 0 || idWarning.length) {
-      alert('id 폼이 이상해요');
+      alert('아이디를 제대로 작성해주세요');
       return;
     }
     if (pw.length === 0 || pwWarning.length) {
-      alert('pw 폼이 이상해요');
+      alert('비밀번호를 제대로 작성해주세요');
       return;
     }
 
