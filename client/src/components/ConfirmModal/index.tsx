@@ -4,16 +4,6 @@ import styled from 'styled-components';
 import { ConfirmModalWrapper, ControlSection } from './index.style';
 import useOnClickOutside from '~/lib/hooks/useOnClickOutside';
 
-const StyledDim = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 0.1;
-`;
-
 const ConfirmModalComponent = () => {
   const confirmModalRef: MutableRefObject<HTMLElement> = useRef();
   const hide = () => confirmModalRef.current.classList.remove('show');
