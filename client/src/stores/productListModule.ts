@@ -45,7 +45,7 @@ const filterReducer = (state: ProductsGetRequestQuery, action) => {
     case SET_ORDER:
       return { ...state, order: action.payload };
     case SET_SEARCH_VALUE:
-      return { ...state };
+      return { ...state, search: action.payload };
     case SET_NEXT_PAGE:
       return { ...state };
     default:
