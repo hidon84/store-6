@@ -23,11 +23,16 @@ export const postUser = (reqData: UsersPostRequestBody) =>
 
 export const getMe = () => request<UsersGetResponseBody>('GET', usersUrl.me);
 
-export const putMe = (reqData: UsersPutRequestBody) =>
-  request<UsersPutResponseBody, UsersPutRequestBody>(
+export const putMe = (reqData: UsersPutRequestBody) => {
+  const reqFormData = new FormData();
+  Object.entries(reqData).forEach((data) => {
+    reqFormData.append(data[0], data[1]);
+  });
+  return request<UsersPutResponseBody, FormData>(
     'PUT',
     usersUrl.me,
-    reqData,
+    reqFormData,
   );
+};
 
 export const deleteMe = () => request('DELETE', usersUrl.me);

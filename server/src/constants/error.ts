@@ -42,6 +42,13 @@ export const refreshError = {
   },
 };
 
+export const userCreateError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Create User',
+  },
+};
+
 export const userUpdateError = {
   unable: {
     statusCode: 500,

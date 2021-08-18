@@ -38,6 +38,7 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'import/extensions': ['off'],
+    'import/prefer-default-export': 'off'
   },
   ignorePatterns: [
     '.eslintrc.js',

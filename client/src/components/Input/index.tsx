@@ -16,7 +16,6 @@ const Input = styled.input<{ width?: string }>`
   line-height: 25px;
   font-size: 20px;
   background: bottom left / contain no-repeat url(${underlineSVG});
-
   &::placeholder {
     color: #999;
   }
