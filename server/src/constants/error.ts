@@ -17,6 +17,13 @@ export const commonError = {
   },
 };
 
+export const uploadImageError = {
+  badRequest: {
+    statusCode: 406,
+    message: 'Only jpeg, jpg, png type images are accepted.',
+  },
+};
+
 export const multerError = {
   tooLarge: 'File too large',
 };
