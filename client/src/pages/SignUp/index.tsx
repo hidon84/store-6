@@ -170,8 +170,7 @@ const SignUpPage: FC = () => {
             <PhoneInput
               autoComplete="false"
               type="text"
-              name="010"
-              id="010"
+              placeholder="010"
               onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                 handlePh0(ev.target.value);
               }}
@@ -180,6 +179,7 @@ const SignUpPage: FC = () => {
             <PhoneInput
               autoComplete="false"
               type="text"
+              placeholder="0000"
               onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                 handlePh1(ev.target.value);
               }}
@@ -188,6 +188,7 @@ const SignUpPage: FC = () => {
             <PhoneInput
               autoComplete="false"
               type="text"
+              placeholder="0000"
               onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                 handlePh2(ev.target.value);
               }}
