@@ -5,7 +5,7 @@ import Checkbox from '~/components/Checkbox';
 import Copyright from '~/components/Copyright';
 import Space from '~/components/Space';
 
-import { doodleRobotSVG } from '~/assets';
+import { doodleRobotSVG, hyphenSVG } from '~/assets';
 
 import {
   StyledLoginPage,
@@ -22,6 +22,8 @@ import {
   Label,
   WarningMessage,
   Policy,
+  PhoneInputWrapper,
+  PhoneInput,
 } from './index.style';
 
 const SignUpPage: FC = () => {
@@ -71,7 +73,13 @@ const SignUpPage: FC = () => {
             <Label>전화번호</Label>
             <WarningMessage>전화번호 형식이 맞지 않습니다.</WarningMessage>
           </LabelRow>
-          <Input type="tel" name="phone" id="phone" />
+          <PhoneInputWrapper>
+            <PhoneInput type="text" name="010" id="010" />
+            <img src={hyphenSVG} alt="hyphen" />
+            <PhoneInput type="text" name="1234" id="1234" />
+            <img src={hyphenSVG} alt="hyphen" />
+            <PhoneInput type="text" name="5678" id="5678" />
+          </PhoneInputWrapper>
         </InputWrapper>
         <Space height="48px" />
         <LabelRow>

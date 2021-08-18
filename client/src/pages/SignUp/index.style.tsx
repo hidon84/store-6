@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { underlineSVG } from '~/assets';
+import { phoneUnderLineSVG, underlineSVG } from '~/assets';
 
 const StyledLoginPage = styled.div`
   display: flex;
@@ -121,6 +121,30 @@ const Policy = styled.div`
   font-family: 'noto sans', sans-serif !important;
 `;
 
+const PhoneInputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: -16px;
+  width: 100%;
+`;
+
+const PhoneInput = styled.input`
+  text-align: center;
+  margin: 0 16px;
+  width: 110px;
+  box-sizing: border-box;
+  height: 34px;
+  padding: 0 8px 0 8px;
+  line-height: 25px;
+  font-size: 20px;
+  background: bottom left / contain no-repeat url(${phoneUnderLineSVG});
+
+  &::placeholder {
+    color: #999;
+  }
+`;
+
 export {
   ButtonWrapper,
   CheckboxSection,
@@ -136,4 +160,6 @@ export {
   SignUpFormHeader,
   StyledLoginPage,
   WarningMessage,
+  PhoneInputWrapper,
+  PhoneInput,
 };
