@@ -43,7 +43,7 @@ const SignUpPage: FC = () => {
           </LabelRow>
           <Input autoComplete="off" type="text" name="id" id="id" />
         </InputWrapper>
-        <Space height="48px" />
+        <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>비밀번호</Label>
@@ -51,7 +51,7 @@ const SignUpPage: FC = () => {
           </LabelRow>
           <Input type="password" name="password" id="password" />
         </InputWrapper>
-        <Space height="48px" />
+        <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>비밀번호 확인</Label>
@@ -59,7 +59,7 @@ const SignUpPage: FC = () => {
           </LabelRow>
           <Input type="password" name="password-retype" id="password-retype" />
         </InputWrapper>
-        <Space height="48px" />
+        <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>이메일</Label>
@@ -67,7 +67,7 @@ const SignUpPage: FC = () => {
           </LabelRow>
           <Input type="email" name="email" id="email" />
         </InputWrapper>
-        <Space height="48px" />
+        <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>전화번호</Label>
@@ -81,7 +81,7 @@ const SignUpPage: FC = () => {
             <PhoneInput type="text" name="5678" id="5678" />
           </PhoneInputWrapper>
         </InputWrapper>
-        <Space height="48px" />
+        <Space height="48px" aria-hidden />
         <LabelRow>
           <Label>약관 동의</Label>
         </LabelRow>
@@ -123,7 +123,7 @@ const SignUpPage: FC = () => {
         <Copyright>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
         </Copyright>
-        <Space height="32px" />
+        <Space height="32px" aria-hidden />
       </SignUpForm>
       <RightDoodles />
     </StyledLoginPage>
