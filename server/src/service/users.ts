@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import UserRepository, { EditableUserInfo } from '@/repository/user';
+import UserRepository, { EditableUserInfo, UserInfo } from '@/repository/user';
 import * as hashHelper from '@/helper/hash';
-import LoginRepository from '@/repository/login';
+import LoginRepository, { LoginInfo } from '@/repository/login';
 import ErrorResponse from '@/utils/errorResponse';
 import {
   commonError,
@@ -12,9 +12,15 @@ import {
 } from '@/constants/error';
 import UserEntity from '@/entity/user';
 import LoginEntity from '@/entity/login';
+import * as validationHelper from '@/helper/validation';
 
 interface EditableUser extends EditableUserInfo {
   password?: string;
+}
+
+interface CreatableUserInfo extends UserInfo, LoginInfo {
+  privacyTermsAndConditions: boolean;
+  serviceTermsAndConditions: boolean;
 }
 
 @Service()
@@ -37,14 +43,37 @@ class UsersService {
     type,
     email,
     phone,
-  }: UserEntity & LoginEntity) {
+    privacyTermsAndConditions,
+    serviceTermsAndConditions,
+  }: CreatableUserInfo) {
     try {
+      if (
+        !validationHelper.idValidator(id) ||
+        !validationHelper.pwValidator(password)
+      ) {
+        throw new ErrorResponse(userCreateError.invalidIdOrPw);
+      }
+      if (!validationHelper.phoneValidator(phone)) {
+        throw new ErrorResponse(userCreateError.invalidPhone);
+      }
+      if (!validationHelper.emailValidator(email)) {
+        throw new ErrorResponse(userCreateError.invalidEmail);
+      }
+      if (!privacyTermsAndConditions || !serviceTermsAndConditions) {
+        throw new ErrorResponse(userCreateError.invalidTermsAndConditions);
+      }
+
+      const alreadyCreatedLogin = await this.loginRepository.findById(id);
+      if (alreadyCreatedLogin) {
+        throw new ErrorResponse(userCreateError.alreadyExists);
+      }
+
       const login = new LoginEntity();
+      const hashedPassword = hashHelper.generateHash(password);
+      login.password = hashedPassword;
       login.id = id;
-      login.type = type;
-      if (password) {
-        const hashedPassword = hashHelper.generateHash(password);
-        login.password = hashedPassword;
+      if (type) {
+        login.type = type;
       }
 
       const user = new UserEntity();
@@ -58,7 +87,7 @@ class UsersService {
       const { idx, createdAt, updatedAt } = updatedUser;
       return { idx, createdAt, updatedAt };
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(userCreateError.unable);
@@ -88,7 +117,7 @@ class UsersService {
       const { createdAt, updatedAt } = updatedUser;
       return { idx: updatedUser.idx, createdAt, updatedAt };
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(userUpdateError.unable);
@@ -103,7 +132,7 @@ class UsersService {
       }
       this.loginRepository.removeByIdx(user.login.idx);
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(userDeleteError.unable);

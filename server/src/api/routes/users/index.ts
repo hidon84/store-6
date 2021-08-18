@@ -27,7 +27,7 @@ export default (router: Router) => {
     middlewares.isAuth,
     middlewares.isAccessToken,
     middlewares.attachCurrentUser,
-    middlewares.uploadImage,
+    middlewares.uploadImage('profile'),
     handleUpdateCurrentUser,
   );
 

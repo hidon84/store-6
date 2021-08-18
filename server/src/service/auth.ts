@@ -38,7 +38,7 @@ class AuthService {
 
       throw new ErrorResponse(commonError.unauthorized);
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(loginError.unable);
