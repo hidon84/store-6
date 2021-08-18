@@ -12,6 +12,7 @@ import {
 } from '@/constants/error';
 import UserEntity from '@/entity/user';
 import LoginEntity from '@/entity/login';
+import * as validationHelper from '@/helper/validation';
 
 interface EditableUser extends EditableUserInfo {
   password?: string;
@@ -39,6 +40,20 @@ class UsersService {
     phone,
   }: UserEntity & LoginEntity) {
     try {
+      if (
+        !validationHelper.idValidator(id) ||
+        !validationHelper.pwValidator(password) ||
+        !validationHelper.phoneValidator(phone) ||
+        !validationHelper.emailValidator(email)
+      ) {
+        throw new ErrorResponse(commonError.badRequest);
+      }
+
+      const alreadyCreatedLogin = await this.loginRepository.findById(id);
+      if (alreadyCreatedLogin) {
+        throw new ErrorResponse(userCreateError.alreadyExists);
+      }
+
       const login = new LoginEntity();
       login.id = id;
       login.type = type;

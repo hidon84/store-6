@@ -15,10 +15,14 @@ export const commonError = {
     statusCode: 413,
     message: 'Payload too large',
   },
+  badRequest: {
+    statusCode: 400,
+    message: 'Bad Request',
+  },
 };
 
 export const uploadImageError = {
-  badRequest: {
+  notAcceptable: {
     statusCode: 406,
     message: 'Only jpeg, jpg, png type images are accepted.',
   },
@@ -53,6 +57,10 @@ export const userCreateError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Create User',
+  },
+  alreadyExists: {
+    statusCode: 409,
+    message: 'account already exists',
   },
 };
 
