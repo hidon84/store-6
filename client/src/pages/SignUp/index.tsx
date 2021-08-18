@@ -45,16 +45,16 @@ import {
 const SignUpPage: FC = () => {
   const [id, idWarning, handleId] = useInputValidator('', (id_input) => {
     const { length } = id_input;
-    if (REG_ID.test(id_input) || length === 0) {
-      return '';
-    }
+    if (length === 0) return ' ';
+    if (REG_ID.test(id_input)) return '';
+
     return WARNING_ID;
   });
   const [pw, pwWarning, handlePW] = useInputValidator('', (pw_input) => {
     const { length } = pw_input;
-    if (REG_PW.test(pw_input) || length === 0) {
-      return '';
-    }
+    if (length === 0) return ' ';
+    if (REG_PW.test(pw_input)) return '';
+
     return WARNING_PW;
   });
 
@@ -67,7 +67,8 @@ const SignUpPage: FC = () => {
     '',
     (email_input) => {
       const { length } = email_input;
-      if (REG_EMAIL.test(email_input) || length === 0) return '';
+      if (length === 0) return ' ';
+      if (REG_EMAIL.test(email_input)) return '';
 
       return WARNING_EMAIL;
     },
@@ -75,21 +76,24 @@ const SignUpPage: FC = () => {
 
   const [ph0, ph0Warning, handlePh0] = useInputValidator('', (ph0_input) => {
     const { length } = ph0_input;
-    if (REG_PH0.test(ph0_input) || length === 0) return '';
+    if (length === 0) return ' ';
+    if (REG_PH0.test(ph0_input)) return '';
 
     return WARNING_PHONE;
   });
 
   const [ph1, ph1Warning, handlePh1] = useInputValidator('', (ph1_input) => {
     const { length } = ph1_input;
-    if (REG_PH1.test(ph1_input) || length === 0) return '';
+    if (length === 0) return ' ';
+    if (REG_PH1.test(ph1_input)) return '';
 
     return WARNING_PHONE;
   });
 
   const [ph2, ph2Warning, handlePh2] = useInputValidator('', (ph2_input) => {
     const { length } = ph2_input;
-    if (REG_PH2.test(ph2_input) || length === 0) return '';
+    if (length === 0) return ' ';
+    if (REG_PH2.test(ph2_input)) return '';
 
     return WARNING_PHONE;
   });
@@ -112,6 +116,35 @@ const SignUpPage: FC = () => {
   const handleCheck2 = useCallback(() => {
     setCheck2(!check2);
   }, [check2]);
+
+  const onSubmit = useCallback(() => {
+    if (check1 === false || check2 === false) {
+      alert('약관을 동의해주세요');
+      return;
+    }
+    const warning =
+      idWarning ||
+      pwWarning ||
+      pwReWarning ||
+      emailWarning ||
+      ph0Warning ||
+      ph1Warning ||
+      ph2Warning;
+    if (warning) {
+      alert(warning);
+      // return;
+    }
+  }, [
+    check1,
+    check2,
+    idWarning,
+    pwWarning,
+    pwReWarning,
+    emailWarning,
+    ph0Warning,
+    ph1Warning,
+    ph2Warning,
+  ]);
 
   return (
     <StyledLoginPage>
@@ -171,7 +204,7 @@ const SignUpPage: FC = () => {
           </LabelRow>
           <Input
             autoComplete="false"
-            type="email"
+            type="text"
             onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
               handleEmail(ev.target.value);
             }}
@@ -251,7 +284,9 @@ const SignUpPage: FC = () => {
           consequuntur tenetur voluptatibus voluptate.
         </Policy>
         <ButtonWrapper>
-          <Button size="lg">회원가입</Button>
+          <Button size="lg" onClick={onSubmit}>
+            회원가입
+          </Button>
         </ButtonWrapper>
         <Copyright>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
