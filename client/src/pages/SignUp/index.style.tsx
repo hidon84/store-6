@@ -36,7 +36,6 @@ const SignUpForm = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  overflow-y: scroll;
 `;
 
 const SignUpFormHeader = styled.header`
@@ -125,7 +124,7 @@ const PhoneInputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin-left: -16px;
+  margin-left: -8px;
   width: 100%;
 `;
 
