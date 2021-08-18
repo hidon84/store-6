@@ -47,15 +47,17 @@ class UsersService {
     serviceTermsAndConditions,
   }: CreatableUserInfo) {
     try {
-      if (
-        !validationHelper.idValidator(id) ||
-        !validationHelper.pwValidator(password) ||
-        !validationHelper.phoneValidator(phone) ||
-        !validationHelper.emailValidator(email) ||
-        !privacyTermsAndConditions ||
-        !serviceTermsAndConditions
-      ) {
-        throw new ErrorResponse(commonError.badRequest);
+      if (!validationHelper.idValidator(id) || !validationHelper.pwValidator(password)) {
+        throw new ErrorResponse(userCreateError.invalidIdOrPw);
+      }
+      if (!validationHelper.phoneValidator(phone)) {
+        throw new ErrorResponse(userCreateError.invalidPhone);
+      }
+      if (!validationHelper.emailValidator(email)) {
+        throw new ErrorResponse(userCreateError.invalidEmail);
+      }
+      if (!privacyTermsAndConditions || !serviceTermsAndConditions) {
+        throw new ErrorResponse(userCreateError.invalidTermsAndConditions);
       }
 
       const alreadyCreatedLogin = await this.loginRepository.findById(id);
@@ -82,7 +84,7 @@ class UsersService {
       const { idx, createdAt, updatedAt } = updatedUser;
       return { idx, createdAt, updatedAt };
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(userCreateError.unable);
@@ -112,7 +114,7 @@ class UsersService {
       const { createdAt, updatedAt } = updatedUser;
       return { idx: updatedUser.idx, createdAt, updatedAt };
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(userUpdateError.unable);
@@ -127,7 +129,7 @@ class UsersService {
       }
       this.loginRepository.removeByIdx(user.login.idx);
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
       throw new ErrorResponse(userDeleteError.unable);

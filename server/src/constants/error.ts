@@ -62,6 +62,22 @@ export const userCreateError = {
     statusCode: 409,
     message: 'account already exists',
   },
+  invalidIdOrPw: {
+    statusCode: 400,
+    message: 'invalid id or pw',
+  },
+  invalidEmail: {
+    statusCode: 400,
+    message: 'invalid email',
+  },
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
+  invalidTermsAndConditions: {
+    statusCode: 400,
+    message: 'You must agree to the terms and conditions'
+  },
 };
 
 export const userUpdateError = {
