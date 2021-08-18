@@ -8,7 +8,15 @@ export const handleCreateUser = async (
   next: NextFunction,
 ) => {
   try {
-    const { id, password, type, email, phone, privacyTermsAndConditions, serviceTermsAndConditions } = req.body;
+    const {
+      id,
+      password,
+      type,
+      email,
+      phone,
+      privacyTermsAndConditions,
+      serviceTermsAndConditions,
+    } = req.body;
     const userServiceInstance = Container.get(UsersService);
 
     const { idx, createdAt, updatedAt } = await userServiceInstance.createUser({

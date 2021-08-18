@@ -23,7 +23,7 @@ const fileFilter = (
     callback(null, true);
     return;
   }
-  callback(new ErrorResponse(uploadImageError.badRequest));
+  callback(new ErrorResponse(uploadImageError.notAcceptable));
 };
 
 const multerProduct = multer({

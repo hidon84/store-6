@@ -37,13 +37,21 @@ class UsersService {
     this.userRepository = userRepository;
   }
 
-  async createUser({ id, password, type, email, phone, privacyTermsAndConditions, serviceTermsAndConditions }: CreatableUserInfo) {
+  async createUser({
+    id,
+    password,
+    type,
+    email,
+    phone,
+    privacyTermsAndConditions,
+    serviceTermsAndConditions,
+  }: CreatableUserInfo) {
     try {
       if (
         !validationHelper.idValidator(id) ||
         !validationHelper.pwValidator(password) ||
         !validationHelper.phoneValidator(phone) ||
-        !validationHelper.emailValidator(email) || 
+        !validationHelper.emailValidator(email) ||
         !privacyTermsAndConditions ||
         !serviceTermsAndConditions
       ) {
