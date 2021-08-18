@@ -40,10 +40,16 @@ exports[`<ProductList /> should render same with snapshot 1`] = `
       class="c1"
     >
       <div>
-        카테고리 컴포넌트
+        <button
+          type="button"
+        >
+          sdfsdfsdf
+        </button>
       </div>
       <div>
-        순서 컴포넌트
+        <span>
+          순서 컴포넌트
+        </span>
       </div>
     </section>
     <div
@@ -52,9 +58,11 @@ exports[`<ProductList /> should render same with snapshot 1`] = `
     <section
       class="c3"
     >
-      <div>
+      <button
+        type="button"
+      >
         카테고리 현재 선택
-      </div>
+      </button>
       <div>
         검색
       </div>
