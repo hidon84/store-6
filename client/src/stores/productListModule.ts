@@ -35,8 +35,13 @@ export const INITIAL_FILTER_STATE: ProductsGetRequestQuery = {
 
 const filterReducer = (state: ProductsGetRequestQuery, action) => {
   switch (action.type) {
-    case SET_CATEGORY:
-      return { ...state };
+    case SET_CATEGORY: {
+      if (!state.category || state.category !== action.payload)
+        return { ...state, category: action.payload };
+
+      const { category, ...rest } = state;
+      return { ...rest };
+    }
     case SET_ORDER:
       return { ...state };
     case SET_SEARCH_VALUE:
