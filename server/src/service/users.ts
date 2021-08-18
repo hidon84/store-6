@@ -47,7 +47,10 @@ class UsersService {
     serviceTermsAndConditions,
   }: CreatableUserInfo) {
     try {
-      if (!validationHelper.idValidator(id) || !validationHelper.pwValidator(password)) {
+      if (
+        !validationHelper.idValidator(id) ||
+        !validationHelper.pwValidator(password)
+      ) {
         throw new ErrorResponse(userCreateError.invalidIdOrPw);
       }
       if (!validationHelper.phoneValidator(phone)) {
