@@ -55,7 +55,7 @@ const SignUpPage: FC = () => {
             <Label>비밀번호 확인</Label>
             <WarningMessage>비밀번호가 일치하지 않습니다.</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password" id="password" />
+          <Input type="password" name="password-retype" id="password-retype" />
         </InputWrapper>
         <Space height="48px" />
         <InputWrapper>
@@ -63,7 +63,7 @@ const SignUpPage: FC = () => {
             <Label>이메일</Label>
             <WarningMessage>이메일 형식이 맞지 않습니다.</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password" id="password" />
+          <Input type="email" name="email" id="email" />
         </InputWrapper>
         <Space height="48px" />
         <InputWrapper>
@@ -71,7 +71,7 @@ const SignUpPage: FC = () => {
             <Label>전화번호</Label>
             <WarningMessage>전화번호 형식이 맞지 않습니다.</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password" id="password" />
+          <Input type="tel" name="phone" id="phone" />
         </InputWrapper>
         <Space height="48px" />
         <LabelRow>
