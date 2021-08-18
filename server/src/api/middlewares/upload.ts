@@ -37,6 +37,6 @@ const multerProduct = multer({
   }),
 });
 
-const uploadImage = multerProduct.array('img');
+const uploadImage = (name: string) => multerProduct.array(name);
 
 export default uploadImage;
