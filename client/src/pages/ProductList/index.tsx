@@ -1,6 +1,9 @@
 import React, { FC, createContext } from 'react';
 import CategoryFilter from '~/components/CategoryFilter';
 import OrderFilter from '~/components/OrderFilter';
+import productListModule, {
+  INITIAL_FILTER_STATE,
+} from '~/stores/productListModule';
 import productModule, {
   CategoryType,
   DEFAULT_FILTER,
@@ -16,21 +19,15 @@ import {
 } from './index.style';
 
 export const FilterContext = createContext({
-  ...DEFAULT_FILTER,
-  setCategory: (_: CategoryType) => {},
-  setOrder: (_: OrderType) => {},
-  setSearchValue: (_: SearchValueType) => {},
-  setPage: () => {},
+  ...INITIAL_FILTER_STATE,
+  dispatch: (_: any) => {},
 });
 
 const ProductList: FC = () => {
-  const { filter, setCategory, setOrder, setSearchValue, setPage } =
-    productModule();
+  const { filterState, dispatch } = productListModule();
 
   return (
-    <FilterContext.Provider
-      value={{ ...filter, setCategory, setOrder, setSearchValue, setPage }}
-    >
+    <FilterContext.Provider value={{ ...filterState, dispatch }}>
       <ProductListWrapper>
         <LeftSection>
           <CategoryFilter />
