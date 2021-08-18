@@ -2,11 +2,11 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
-import MainPage from './index';
+import MyPage from './index';
 
-describe('<MainPage />', () => {
+describe('<MyPage />', () => {
   it('should render same with snapshot', () => {
-    const { container } = render(<MainPage />);
+    const { container } = render(<MyPage />);
     expect(container).toMatchSnapshot();
   });
 });
