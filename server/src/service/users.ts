@@ -6,9 +6,12 @@ import LoginRepository from '@/repository/login';
 import ErrorResponse from '@/utils/errorResponse';
 import {
   commonError,
+  userCreateError,
   userDeleteError,
   userUpdateError,
 } from '@/constants/error';
+import UserEntity from '@/entity/user';
+import LoginEntity from '@/entity/login';
 
 interface EditableUser extends EditableUserInfo {
   password?: string;
@@ -26,6 +29,40 @@ class UsersService {
   ) {
     this.loginRepository = loginRepository;
     this.userRepository = userRepository;
+  }
+
+  async createUser({
+    id,
+    password,
+    type,
+    email,
+    phone,
+  }: UserEntity & LoginEntity) {
+    try {
+      const login = new LoginEntity();
+      login.id = id;
+      login.type = type;
+      if (password) {
+        const hashedPassword = hashHelper.generateHash(password);
+        login.password = hashedPassword;
+      }
+
+      const user = new UserEntity();
+      user.email = email;
+      user.phone = phone;
+      user.login = login;
+
+      const { updatedUser } =
+        await this.userRepository.transactionSaveWithLogin(user, login);
+
+      const { idx, createdAt, updatedAt } = updatedUser;
+      return { idx, createdAt, updatedAt };
+    } catch (e) {
+      if (e instanceof ErrorResponse) {
+        throw e;
+      }
+      throw new ErrorResponse(userCreateError.unable);
+    }
   }
 
   async updateUser(

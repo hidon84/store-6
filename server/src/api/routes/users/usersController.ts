@@ -2,6 +2,25 @@ import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
 import UsersService from '@/service/users';
 
+export const handleCreateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const user = req.body;
+    const userServiceInstance = Container.get(UsersService);
+
+    const { idx, createdAt, updatedAt } = await userServiceInstance.createUser(
+      user,
+    );
+
+    return res.json({ idx, createdAt, updatedAt });
+  } catch (e) {
+    return next(e);
+  }
+};
+
 export const handleGetCurrentUser = async (req: Request, res: Response) => {
   return res.json(req.currentUser);
 };
@@ -13,11 +32,9 @@ export const handleUpdateCurrentUser = async (
 ) => {
   try {
     const user = req.body;
-
     const userServiceInstance = Container.get(UsersService);
 
     const files = req.files as Express.MulterS3.File[];
-
     const uploadUrl = files[0]?.location;
 
     const { idx, createdAt, updatedAt } = await userServiceInstance.updateUser(

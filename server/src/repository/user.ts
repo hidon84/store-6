@@ -41,9 +41,13 @@ class UserRepository extends Repository<UserEntity> {
   }
 
   async transactionSaveWithLogin(user: UserEntity, login: LoginEntity) {
+    const userToSave = user;
+    const loginToSave = login;
     return this.manager.transaction(async transactionManager => {
-      const updatedUser = await transactionManager.save(user);
-      const updatedLogin = await transactionManager.save(login);
+      const updatedLogin = await transactionManager.save(loginToSave);
+      userToSave.login = updatedLogin;
+      const updatedUser = await transactionManager.save(userToSave);
+
       return { updatedUser, updatedLogin };
     });
   }

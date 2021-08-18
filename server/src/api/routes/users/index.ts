@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import middlewares from '@/api/middlewares';
 import {
+  handleCreateUser,
   handleDeleteCurrentUser,
   handleGetCurrentUser,
   handleUpdateCurrentUser,
@@ -10,6 +11,8 @@ const usersRouter = Router();
 
 export default (router: Router) => {
   router.use('/users', usersRouter);
+
+  usersRouter.post('/', handleCreateUser);
 
   usersRouter.get(
     '/me',
