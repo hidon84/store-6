@@ -1,5 +1,17 @@
 import React, { FC } from 'react';
 
+import useInputValidator from '~/lib/hooks/useInputValidator';
+import {
+  REG_EMAIL,
+  REG_ID,
+  REG_PW,
+  WARNING_EMAIL,
+  WARNING_ID,
+  WARNING_PW,
+  WARNING_PWRE,
+} from '~/utils/validation';
+import { alert } from '~/utils/modal';
+
 import Button from '~/components/Button';
 import Checkbox from '~/components/Checkbox';
 import Copyright from '~/components/Copyright';
@@ -27,6 +39,36 @@ import {
 } from './index.style';
 
 const SignUpPage: FC = () => {
+  const [id, idWarning, handleId] = useInputValidator('', (id_input) => {
+    const { length } = id_input;
+    if (REG_ID.test(id_input) || length === 0) {
+      return '';
+    }
+    return WARNING_ID;
+  });
+  const [pw, pwWarning, handlePW] = useInputValidator('', (pw_input) => {
+    const { length } = pw_input;
+    if (REG_PW.test(pw_input) || length === 0) {
+      return '';
+    }
+    return WARNING_PW;
+  });
+
+  const [pwRe, pwReWarning, handlePWRe] = useInputValidator('', (pw_input) => {
+    if (pw_input === pw) return '';
+    return WARNING_PWRE;
+  });
+
+  const [email, emailWarning, handleEmail] = useInputValidator(
+    '',
+    (email_input) => {
+      const { length } = email_input;
+      if (REG_EMAIL.test(email_input) || length === 0) return '';
+
+      return WARNING_EMAIL;
+    },
+  );
+
   return (
     <StyledLoginPage>
       <LeftDoodles />
@@ -39,33 +81,57 @@ const SignUpPage: FC = () => {
         <InputWrapper>
           <LabelRow>
             <Label>아이디</Label>
-            <WarningMessage>중복된 아이디입니다.</WarningMessage>
+            <WarningMessage>{idWarning}</WarningMessage>
           </LabelRow>
-          <Input autoComplete="off" type="text" name="id" id="id" />
+          <Input
+            autoComplete="off"
+            type="text"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+              handleId(ev.target.value);
+            }}
+          />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>비밀번호</Label>
-            <WarningMessage>비밀번호 다시 확인할것!</WarningMessage>
+            <WarningMessage>{pwWarning}</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password" id="password" />
+          <Input
+            autoComplete="false"
+            type="password"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+              handlePW(ev.target.value);
+            }}
+          />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>비밀번호 확인</Label>
-            <WarningMessage>비밀번호가 일치하지 않습니다.</WarningMessage>
+            <WarningMessage>{pwReWarning}</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password-retype" id="password-retype" />
+          <Input
+            autoComplete="false"
+            type="password"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+              handlePWRe(ev.target.value);
+            }}
+          />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>이메일</Label>
-            <WarningMessage>이메일 형식이 맞지 않습니다.</WarningMessage>
+            <WarningMessage>{emailWarning}</WarningMessage>
           </LabelRow>
-          <Input type="email" name="email" id="email" />
+          <Input
+            autoComplete="false"
+            type="email"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+              handleEmail(ev.target.value);
+            }}
+          />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>

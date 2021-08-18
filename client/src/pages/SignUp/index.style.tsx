@@ -132,7 +132,7 @@ const PhoneInputWrapper = styled.div`
 const PhoneInput = styled.input`
   text-align: center;
   margin: 0 16px;
-  width: 110px;
+  width: 100px;
   box-sizing: border-box;
   height: 34px;
   padding: 0 8px 0 8px;

@@ -8,6 +8,7 @@ const REG_NOT_DIGITS = /[^0-9]/g;
 
 const WARNING_ID = '4자 이상으로 영어, 숫자만 사용하거라.';
 const WARNING_PW = '8자 이상으로 영어, 숫자, 특수문자만 사용하거라.';
+const WARNING_PWRE = '위에서 입력한 패스워드와 똑같이 적거라.';
 const WARNING_EMAIL = '이상한 이메일 적지 말거라.';
 
 export {
@@ -15,6 +16,7 @@ export {
   REG_PW,
   WARNING_ID,
   WARNING_PW,
+  WARNING_PWRE,
   REG_EMAIL,
   WARNING_EMAIL,
   REG_IMAGE,
