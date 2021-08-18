@@ -9,6 +9,8 @@ import doodleTeasingSVG from './doodle-teasing.svg';
 import socialFacebookSVG from './social-facebook.svg';
 import socialGoogleSVG from './social-google.svg';
 import underlineSVG from './underline.svg';
+import phoneUnderLineSVG from './phoneUnderLine.svg';
+import hyphenSVG from './hyphen.svg';
 import verticalLineSVG from './vertical-line.svg';
 
 const S3_PREFIX = 'https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com';
@@ -65,6 +67,8 @@ export {
   socialFacebookSVG,
   socialGoogleSVG,
   underlineSVG,
+  phoneUnderLineSVG,
+  hyphenSVG,
   verticalLineSVG,
   SmallBaedalSVG,
   SmallBookSVG,

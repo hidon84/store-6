@@ -1,10 +1,10 @@
 import React, { FC, createContext } from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
 import Navigation from '~/components/Navigation';
 import LoginPage from '~/pages/Login';
+import SignUpPage from '~/pages/SignUp';
 import AlertModal from './components/AlertModal';
 import ConfirmModal from './components/ConfirmModal';
 import MyPage from './pages/MyPage';
@@ -23,6 +23,9 @@ const App = () => {
           <Switch>
             <Route exact path="/login">
               <LoginPage />
+            </Route>
+            <Route exact path="/signup">
+              <SignUpPage />
             </Route>
             <Route path="/hello/:name/:number">
               <div>임시 Route</div>
