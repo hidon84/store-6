@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import UserRepository, { EditableUserInfo } from '@/repository/user';
+import UserRepository, { EditableUserInfo, UserInfo } from '@/repository/user';
 import * as hashHelper from '@/helper/hash';
-import LoginRepository from '@/repository/login';
+import LoginRepository, { LoginInfo } from '@/repository/login';
 import ErrorResponse from '@/utils/errorResponse';
 import {
   commonError,
@@ -32,13 +32,7 @@ class UsersService {
     this.userRepository = userRepository;
   }
 
-  async createUser({
-    id,
-    password,
-    type,
-    email,
-    phone,
-  }: UserEntity & LoginEntity) {
+  async createUser({ id, password, type, email, phone }: UserInfo & LoginInfo) {
     try {
       if (
         !validationHelper.idValidator(id) ||
@@ -55,11 +49,11 @@ class UsersService {
       }
 
       const login = new LoginEntity();
+      const hashedPassword = hashHelper.generateHash(password);
+      login.password = hashedPassword;
       login.id = id;
-      login.type = type;
-      if (password) {
-        const hashedPassword = hashHelper.generateHash(password);
-        login.password = hashedPassword;
+      if (type) {
+        login.type = type;
       }
 
       const user = new UserEntity();

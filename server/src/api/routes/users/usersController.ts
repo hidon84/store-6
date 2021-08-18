@@ -8,12 +8,16 @@ export const handleCreateUser = async (
   next: NextFunction,
 ) => {
   try {
-    const user = req.body;
+    const { id, password, type, email, phone } = req.body;
     const userServiceInstance = Container.get(UsersService);
 
-    const { idx, createdAt, updatedAt } = await userServiceInstance.createUser(
-      user,
-    );
+    const { idx, createdAt, updatedAt } = await userServiceInstance.createUser({
+      id,
+      password,
+      type,
+      email,
+      phone,
+    });
 
     return res.json({ idx, createdAt, updatedAt });
   } catch (e) {
@@ -31,7 +35,7 @@ export const handleUpdateCurrentUser = async (
   next: NextFunction,
 ) => {
   try {
-    const user = req.body;
+    const { password, email, phone } = req.body;
     const userServiceInstance = Container.get(UsersService);
 
     const files = req.files as Express.MulterS3.File[];
@@ -40,7 +44,9 @@ export const handleUpdateCurrentUser = async (
     const { idx, createdAt, updatedAt } = await userServiceInstance.updateUser(
       req.currentUser.idx,
       {
-        ...user,
+        password,
+        email,
+        phone,
         profile: uploadUrl,
       },
     );
