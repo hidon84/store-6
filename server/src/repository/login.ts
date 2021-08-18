@@ -1,6 +1,12 @@
 import { EntityRepository, Repository } from 'typeorm';
 import LoginEntity from '@/entity/login';
 
+export interface LoginInfo {
+  id: string;
+  password: string;
+  type?: string;
+}
+
 @EntityRepository(LoginEntity)
 class LoginRepository extends Repository<LoginEntity> {
   async findById(id: string) {

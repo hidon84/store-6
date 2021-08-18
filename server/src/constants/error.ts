@@ -15,10 +15,26 @@ export const commonError = {
     statusCode: 413,
     message: 'Payload too large',
   },
+  badRequest: {
+    statusCode: 400,
+    message: 'Bad Request',
+  },
+  unexpectedField: {
+    statusCode: 400,
+    message: 'Unexpected field',
+  },
+};
+
+export const uploadImageError = {
+  notAcceptable: {
+    statusCode: 406,
+    message: 'Only jpeg, jpg, png type images are accepted.',
+  },
 };
 
 export const multerError = {
   tooLarge: 'File too large',
+  unexpectedField: 'Unexpected field',
 };
 
 export const loginError = {
@@ -46,6 +62,26 @@ export const userCreateError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Create User',
+  },
+  alreadyExists: {
+    statusCode: 409,
+    message: 'account already exists',
+  },
+  invalidIdOrPw: {
+    statusCode: 400,
+    message: 'invalid id or pw',
+  },
+  invalidEmail: {
+    statusCode: 400,
+    message: 'invalid email',
+  },
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
+  invalidTermsAndConditions: {
+    statusCode: 400,
+    message: 'You must agree to the terms and conditions',
   },
 };
 

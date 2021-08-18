@@ -2,11 +2,12 @@ import { EntityRepository, Repository } from 'typeorm';
 import LoginEntity from '@/entity/login';
 import UserEntity from '@/entity/user';
 
-export interface EditableUserInfo {
-  email?: string;
-  phone?: string;
+export interface UserInfo {
+  email: string;
+  phone: string;
   profile?: string;
 }
+export type EditableUserInfo = Partial<UserInfo>;
 
 @EntityRepository(UserEntity)
 class UserRepository extends Repository<UserEntity> {
