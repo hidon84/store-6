@@ -4,9 +4,13 @@ import useInputValidator from '~/lib/hooks/useInputValidator';
 import {
   REG_EMAIL,
   REG_ID,
+  REG_PH0,
+  REG_PH1,
+  REG_PH2,
   REG_PW,
   WARNING_EMAIL,
   WARNING_ID,
+  WARNING_PHONE,
   WARNING_PW,
   WARNING_PWRE,
 } from '~/utils/validation';
@@ -68,6 +72,27 @@ const SignUpPage: FC = () => {
       return WARNING_EMAIL;
     },
   );
+
+  const [ph0, ph0Warning, handlePh0] = useInputValidator('', (ph0_input) => {
+    const { length } = ph0_input;
+    if (REG_PH0.test(ph0_input) || length === 0) return '';
+
+    return WARNING_PHONE;
+  });
+
+  const [ph1, ph1Warning, handlePh1] = useInputValidator('', (ph1_input) => {
+    const { length } = ph1_input;
+    if (REG_PH1.test(ph1_input) || length === 0) return '';
+
+    return WARNING_PHONE;
+  });
+
+  const [ph2, ph2Warning, handlePh2] = useInputValidator('', (ph2_input) => {
+    const { length } = ph2_input;
+    if (REG_PH2.test(ph2_input) || length === 0) return '';
+
+    return WARNING_PHONE;
+  });
 
   return (
     <StyledLoginPage>
@@ -137,14 +162,36 @@ const SignUpPage: FC = () => {
         <InputWrapper>
           <LabelRow>
             <Label>전화번호</Label>
-            <WarningMessage>전화번호 형식이 맞지 않습니다.</WarningMessage>
+            <WarningMessage>
+              {ph0Warning || ph1Warning || ph2Warning}
+            </WarningMessage>
           </LabelRow>
           <PhoneInputWrapper>
-            <PhoneInput type="text" name="010" id="010" />
+            <PhoneInput
+              autoComplete="false"
+              type="text"
+              name="010"
+              id="010"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+                handlePh0(ev.target.value);
+              }}
+            />
             <img src={hyphenSVG} alt="hyphen" />
-            <PhoneInput type="text" name="1234" id="1234" />
+            <PhoneInput
+              autoComplete="false"
+              type="text"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+                handlePh1(ev.target.value);
+              }}
+            />
             <img src={hyphenSVG} alt="hyphen" />
-            <PhoneInput type="text" name="5678" id="5678" />
+            <PhoneInput
+              autoComplete="false"
+              type="text"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+                handlePh2(ev.target.value);
+              }}
+            />
           </PhoneInputWrapper>
         </InputWrapper>
         <Space height="48px" aria-hidden />
