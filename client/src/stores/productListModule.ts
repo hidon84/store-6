@@ -4,6 +4,10 @@ import { ProductsGetRequestQuery } from '~/lib/api/types';
 export type CategoryType = ProductsGetRequestQuery['category'];
 export type OrderType = ProductsGetRequestQuery['order'];
 export type SearchValueType = ProductsGetRequestQuery['search'];
+type ActionType = {
+  type: string;
+  payload?: CategoryType & OrderType & SearchValueType;
+};
 
 const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_PRODUCTS_AMOUNT = 20;
@@ -33,7 +37,7 @@ export const INITIAL_FILTER_STATE: ProductsGetRequestQuery = {
   limit: DEFAULT_PRODUCTS_AMOUNT,
 };
 
-const filterReducer = (state: ProductsGetRequestQuery, action) => {
+const filterReducer = (state: ProductsGetRequestQuery, action: ActionType) => {
   switch (action.type) {
     case SET_CATEGORY: {
       if (!state.category || state.category !== action.payload)
@@ -47,7 +51,7 @@ const filterReducer = (state: ProductsGetRequestQuery, action) => {
     case SET_SEARCH_VALUE:
       return { ...state, search: action.payload };
     case SET_NEXT_PAGE:
-      return { ...state };
+      return { ...state, page: state.page + 1 };
     default:
       return { ...state };
   }
