@@ -18,6 +18,11 @@ interface EditableUser extends EditableUserInfo {
   password?: string;
 }
 
+interface CreatableUserInfo extends UserInfo, LoginInfo {
+  privacyTermsAndConditions: boolean;
+  serviceTermsAndConditions: boolean;
+}
+
 @Service()
 class UsersService {
   private loginRepository: LoginRepository;
@@ -32,13 +37,15 @@ class UsersService {
     this.userRepository = userRepository;
   }
 
-  async createUser({ id, password, type, email, phone }: UserInfo & LoginInfo) {
+  async createUser({ id, password, type, email, phone, privacyTermsAndConditions, serviceTermsAndConditions }: CreatableUserInfo) {
     try {
       if (
         !validationHelper.idValidator(id) ||
         !validationHelper.pwValidator(password) ||
         !validationHelper.phoneValidator(phone) ||
-        !validationHelper.emailValidator(email)
+        !validationHelper.emailValidator(email) || 
+        !privacyTermsAndConditions ||
+        !serviceTermsAndConditions
       ) {
         throw new ErrorResponse(commonError.badRequest);
       }
