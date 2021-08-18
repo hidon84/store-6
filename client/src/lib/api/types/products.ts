@@ -1,9 +1,9 @@
 export interface ProductsGetRequestQuery {
   category?: number;
   search?: string;
-  order?: string;
-  offset?: string;
-  limit?: string;
+  order?: 'recent' | 'low-price' | 'high-price';
+  page: number;
+  limit: number;
 }
 
 export interface ProductsGetResponseBody {
