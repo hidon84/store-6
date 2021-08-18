@@ -19,6 +19,10 @@ export const commonError = {
     statusCode: 400,
     message: 'Bad Request',
   },
+  unexpectedField: {
+    statusCode: 400,
+    message: 'Unexpected field',
+  },
 };
 
 export const uploadImageError = {
@@ -30,6 +34,7 @@ export const uploadImageError = {
 
 export const multerError = {
   tooLarge: 'File too large',
+  unexpectedField: 'Unexpected field',
 };
 
 export const loginError = {
@@ -76,7 +81,7 @@ export const userCreateError = {
   },
   invalidTermsAndConditions: {
     statusCode: 400,
-    message: 'You must agree to the terms and conditions'
+    message: 'You must agree to the terms and conditions',
   },
 };
 

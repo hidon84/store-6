@@ -35,6 +35,8 @@ const errorHandler = (
 
   if (errorResponse.message === multerError.tooLarge) {
     errorResponse = new ErrorResponse(commonError.tooLarge);
+  } else if (errorResponse.message === multerError.unexpectedField) {
+    errorResponse = new ErrorResponse(commonError.unexpectedField);
   }
 
   if (isDevelopment) {
