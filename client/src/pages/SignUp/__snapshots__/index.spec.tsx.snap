@@ -353,6 +353,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         />
       </div>
       <div
+        aria-hidden="true"
         class="c9"
         height="48px"
       />
@@ -381,6 +382,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         />
       </div>
       <div
+        aria-hidden="true"
         class="c9"
         height="48px"
       />
@@ -409,6 +411,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         />
       </div>
       <div
+        aria-hidden="true"
         class="c9"
         height="48px"
       />
@@ -437,6 +440,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         />
       </div>
       <div
+        aria-hidden="true"
         class="c9"
         height="48px"
       />
@@ -487,6 +491,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         </div>
       </div>
       <div
+        aria-hidden="true"
         class="c9"
         height="48px"
       />
@@ -589,6 +594,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
       </footer>
       <div
+        aria-hidden="true"
         class="c21"
         height="32px"
       />
