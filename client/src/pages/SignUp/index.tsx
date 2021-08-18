@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import {
@@ -93,6 +93,25 @@ const SignUpPage: FC = () => {
 
     return WARNING_PHONE;
   });
+
+  const [checkAll, setCheckAll] = useState(false);
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
+
+  const handleCheckAll = useCallback(() => {
+    const reversed = !checkAll;
+    setCheckAll(reversed);
+    setCheck1(reversed);
+    setCheck2(reversed);
+  }, [checkAll, check1, check2]);
+
+  const handleCheck1 = useCallback(() => {
+    setCheck1(!check1);
+  }, [check1]);
+
+  const handleCheck2 = useCallback(() => {
+    setCheck2(!check2);
+  }, [check2]);
 
   return (
     <StyledLoginPage>
@@ -200,16 +219,16 @@ const SignUpPage: FC = () => {
           <Label>약관 동의</Label>
         </LabelRow>
         <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
+          <CheckboxWrapper onClick={handleCheckAll}>
+            <Checkbox checked={checkAll} />
             <span style={{ fontSize: '20px', lineHeight: '25px' }}>
               아래 약관에 모두 동의합니다
             </span>
           </CheckboxWrapper>
         </CheckboxSection>
         <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
+          <CheckboxWrapper onClick={handleCheck1}>
+            <Checkbox checked={check1} />
             <span>개인정보 이용약관 (필수)</span>
           </CheckboxWrapper>
         </CheckboxSection>
@@ -220,8 +239,8 @@ const SignUpPage: FC = () => {
           consequuntur tenetur voluptatibus voluptate.
         </Policy>
         <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
+          <CheckboxWrapper onClick={handleCheck2}>
+            <Checkbox checked={check2} />
             <span>배민문방구 이용약관 (필수)</span>
           </CheckboxWrapper>
         </CheckboxSection>
