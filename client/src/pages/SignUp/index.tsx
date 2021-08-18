@@ -131,9 +131,15 @@ const SignUpPage: FC = () => {
       ph1Warning ||
       ph2Warning;
     if (warning) {
+      if (warning === ' ') {
+        alert('빈 항목이 있습니다.');
+        return;
+      }
+
       alert(warning);
-      // return;
     }
+
+    alert('submit!');
   }, [
     check1,
     check2,

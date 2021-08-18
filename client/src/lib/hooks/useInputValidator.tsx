@@ -5,7 +5,7 @@ function useInputValidator(
   validator: (user_input: string) => string,
 ) {
   const [input, setInput] = useState(initialValue);
-  const [warning, setWarning] = useState('');
+  const [warning, setWarning] = useState(' ');
 
   const handleInput = (user_input: string) => {
     setInput(user_input);
