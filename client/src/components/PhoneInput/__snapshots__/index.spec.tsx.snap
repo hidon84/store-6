@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PhoneInput /> should render same with snapshot 1`] = `
+.c1 {
+  box-sizing: border-box;
+  width: 90px;
+  height: 34px;
+  padding: 0 16px 10px 16px;
+  margin-top: 16px;
+  line-height: 25px;
+  font-size: 20px;
+  background: bottom left / contain no-repeat url();
+}
+
+.c1::-webkit-input-placeholder {
+  color: #999;
+}
+
+.c1::-moz-placeholder {
+  color: #999;
+}
+
+.c1:-ms-input-placeholder {
+  color: #999;
+}
+
+.c1::placeholder {
+  color: #999;
+}
+
+.c2 {
+  width: 10px;
+  height: 1px;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  background: url(https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
+  background-size: cover;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+  bottom: 4px;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <input
+      class="c1"
+      maxlength="3"
+      placeholder="입력이"
+      style="text-align: center; font-size: 14px;"
+      type="text"
+      value=""
+      width="90px"
+    />
+    <div
+      class="c2"
+      direction="horizontal"
+      style="margin: 20px;"
+      width="10px"
+    />
+    <input
+      class="c1"
+      maxlength="4"
+      placeholder="필요"
+      style="text-align: center; font-size: 14px;"
+      type="text"
+      value=""
+      width="90px"
+    />
+    <div
+      class="c2"
+      direction="horizontal"
+      style="margin: 20px;"
+      width="10px"
+    />
+    <input
+      class="c1"
+      maxlength="4"
+      placeholder="합니다"
+      style="text-align: center; font-size: 14px;"
+      type="text"
+      value=""
+      width="90px"
+    />
+  </div>
+</div>
+`;

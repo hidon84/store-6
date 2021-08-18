@@ -21,6 +21,6 @@ export interface UsersPutRequestBody {
   password?: string;
   email?: string;
   phone?: string;
-  profile?: string;
+  img?: File;
 }
 export type UsersPutResponseBody = UpdateInfo;
