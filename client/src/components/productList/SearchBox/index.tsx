@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
 import { FC, useContext, useRef, useState } from 'react';
 
@@ -18,22 +19,6 @@ import {
 } from './index.style';
 
 /**
- * localStorage와 termList에 최근 검색어를 갱신합니다.
- * 인자로 받은 검색어가 이미 최근 검색어가 있다면 반영하지 않습니다.
- */
-const reflectRenewTerm = (
-  term: string,
-  setTermList: React.Dispatch<React.SetStateAction<string[]>>,
-) => {
-  const storedTermValue = getValueOnLocalStorage('recentlySearchTerm');
-  if (storedTermValue.includes(term)) return;
-
-  const addedTermList = [...storedTermValue, term];
-  setValueOnLocalStorage('recentlySearchTerm', addedTermList);
-  setTermList(addedTermList);
-};
-
-/**
  * 최근 검색어 리스트를 관리하는 훅입니다.
  */
 const useSearchTerm = (
@@ -45,24 +30,57 @@ const useSearchTerm = (
     getValueOnLocalStorage('recentlySearchTerm'),
   );
 
-  const handleSearchFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  /**
+   * localStorage와 termList에 최근 검색어를 갱신합니다.
+   */
+  const reflectRenewTerm = (renewTermList: string[]) => {
+    setValueOnLocalStorage('recentlySearchTerm', renewTermList);
+    setTermList(renewTermList);
+  };
+
+  /**
+   * term을 리스트에 추가합니다.
+   * localStorage에 이미 term이 있을 경우, 추가하지 않습니다.
+   */
+  const addTermOnList = (term: string) => {
+    const storedTermValue = getValueOnLocalStorage('recentlySearchTerm');
+    if (storedTermValue.includes(term)) return;
+
+    const addedTermList = [...storedTermValue, term];
+    dispatch(setSearchValue(term));
+    reflectRenewTerm(addedTermList);
+  };
+
+  /**
+   * target을 termList에서 제거합니다.
+   */
+  const removeTermOnList = (target: string) => {
+    const removedTermList = termList.filter((term) => term !== target);
+    reflectRenewTerm(removedTermList);
+  };
+
+  /**
+   * input에 있는 value를 상태에 반영합니다.
+   * 만약, 빈 값을 받는다면 store의 search 값을 제거하는 요청을 보냅니다.
+   */
+  const handleSearchFormSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+  ): void => {
     e.preventDefault();
 
     const term = searchTermRef.current.value;
-    if (term === '') {
-      return dispatch(removeSearchValue());
-    }
+    if (term === '') return dispatch(removeSearchValue());
 
-    dispatch(setSearchValue(term));
-    reflectRenewTerm(term, setTermList);
+    addTermOnList(term);
   };
 
-  return { termList, handleSearchFormSubmit };
+  return { termList, handleSearchFormSubmit, removeTermOnList };
 };
 
 const SearchBox: FC = () => {
   const searchTermRef = useRef<HTMLInputElement>();
-  const { termList, handleSearchFormSubmit } = useSearchTerm(searchTermRef);
+  const { termList, handleSearchFormSubmit, removeTermOnList } =
+    useSearchTerm(searchTermRef);
 
   return (
     <>
@@ -71,7 +89,10 @@ const SearchBox: FC = () => {
         <SearchInput type="search" name="q" ref={searchTermRef} />
         <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
       </SearchBoxForm>
-      <RecentlySearchTermBox termList={termList} />
+      <RecentlySearchTermBox
+        termList={termList}
+        removeTermOnList={removeTermOnList}
+      />
     </>
   );
 };

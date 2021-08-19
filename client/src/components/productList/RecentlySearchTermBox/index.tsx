@@ -10,14 +10,23 @@ import {
   RecentlySearchTermTitle,
 } from './index.style';
 
-const RecentlySearchTermBox: FC<{ termList: string[] }> = ({ termList }) => {
+interface Props {
+  termList: string[];
+  removeTermOnList: (target: string) => void;
+}
+
+const RecentlySearchTermBox: FC<Props> = ({ termList, removeTermOnList }) => {
   return (
     <RecentlySearchTermBoxWrapper isEmpty={termList.length === 0}>
       <RecentlySearchTermTitle>최근 검색어</RecentlySearchTermTitle>
       <Divider src={VerticalDividerSVG} />
       <TermWrapper>
         {termList.map((term, idx) => (
-          <SearchTerm term={term} key={`term-${idx}`} />
+          <SearchTerm
+            term={term}
+            key={`term-${idx}`}
+            removeTermOnList={removeTermOnList}
+          />
         ))}
       </TermWrapper>
     </RecentlySearchTermBoxWrapper>
