@@ -16,7 +16,7 @@ import {
   MypageSVG,
   CartSVG,
 } from '~/assets';
-import Divider from '../Divider';
+import Divider from '~/components/common/Divider';
 
 const Navigation: FC = () => {
   const { pathname } = useLocation();

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
-import Button from '~/components/Button';
+import Button from '~/components/common/Button';
 
 describe('<Button />', () => {
   /**

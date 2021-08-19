@@ -12,10 +12,10 @@ import {
 } from '~/utils/validation';
 import { alert } from '~/utils/modal';
 
-import Button from '~/components/Button';
-import Checkbox from '~/components/Checkbox';
-import Copyright from '~/components/Copyright';
-import Space from '~/components/Space';
+import Button from '~/components/common/Button';
+import Checkbox from '~/components/common/Checkbox';
+import Copyright from '~/components/base/Copyright';
+import Space from '~/components/common/Space';
 
 import { doodleRobotSVG, hyphenSVG } from '~/assets';
 
