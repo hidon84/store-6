@@ -5,7 +5,7 @@ import {
   signUpWithGoogleSVG,
   signUpWithOwnSVG,
 } from '~/assets';
-import Space from '~/components/Space';
+import Space from '~/components/common/Space';
 import { HeaderTitle } from './index.fc';
 
 const SignUpTypesWrapper = styled.div`

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
-import Copyright from '~/components/Copyright';
+import Copyright from '~/components/base/Copyright';
 
 describe('<Copyright />', () => {
   it('should render same with snapshot', () => {
