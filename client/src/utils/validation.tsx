@@ -15,6 +15,48 @@ const WARNING_PWRE = '위에서 입력한 패스워드와 똑같이 적거라.';
 const WARNING_EMAIL = '이상한 이메일 적지 말거라.';
 const WARNING_PHONE = '이상한 번호 적지 말거라.';
 
+const idValidator = (idIn: string) => {
+  if (idIn === '') return ' ';
+  if (REG_ID.test(idIn)) return '';
+
+  return WARNING_ID;
+};
+
+const pwValidator = (pwIn: string) => {
+  if (pwIn === '') return ' ';
+  if (REG_PW.test(pwIn)) return '';
+
+  return WARNING_PW;
+};
+
+const emailValidator = (mailIn: string) => {
+  if (mailIn === '') return ' ';
+  if (REG_EMAIL.test(mailIn)) return '';
+
+  return WARNING_EMAIL;
+};
+
+const ph0Validator = (ph0In: string) => {
+  if (ph0In === '') return ' ';
+  if (REG_PH0.test(ph0In)) return '';
+
+  return WARNING_PHONE;
+};
+
+const ph1Validator = (ph1In: string) => {
+  if (ph1In === '') return ' ';
+  if (REG_PH1.test(ph1In)) return '';
+
+  return WARNING_PHONE;
+};
+
+const ph2Validator = (ph2In: string) => {
+  if (ph2In === '') return ' ';
+  if (REG_PH2.test(ph2In)) return '';
+
+  return WARNING_PHONE;
+};
+
 export {
   REG_ID,
   REG_PW,
@@ -30,4 +72,10 @@ export {
   WARNING_PWRE,
   WARNING_EMAIL,
   WARNING_PHONE,
+  idValidator,
+  pwValidator,
+  emailValidator,
+  ph0Validator,
+  ph1Validator,
+  ph2Validator,
 };

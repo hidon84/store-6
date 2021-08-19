@@ -1,17 +1,13 @@
-import React, { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import {
-  REG_EMAIL,
-  REG_ID,
-  REG_PH0,
-  REG_PH1,
-  REG_PH2,
-  REG_PW,
-  WARNING_EMAIL,
-  WARNING_ID,
-  WARNING_PHONE,
-  WARNING_PW,
+  emailValidator,
+  idValidator,
+  ph0Validator,
+  ph1Validator,
+  ph2Validator,
+  pwValidator,
   WARNING_PWRE,
 } from '~/utils/validation';
 import { alert } from '~/utils/modal';
@@ -45,19 +41,8 @@ import { useHistory } from '~/core/Router';
 
 const SignUpPage: FC = () => {
   const { push } = useHistory();
-  const [id, idWarning, handleId] = useInputValidator('', (idIn) => {
-    if (idIn === '') return ' ';
-    if (REG_ID.test(idIn)) return '';
-
-    return WARNING_ID;
-  });
-  const [pw, pwWarning, handlePW] = useInputValidator('', (pwIn) => {
-    if (pwIn === '') return ' ';
-    if (REG_PW.test(pwIn)) return '';
-
-    return WARNING_PW;
-  });
-
+  const [id, idWarning, handleId] = useInputValidator('', idValidator);
+  const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
   const [pwRe, pwReWarning, handlePWRe] = useInputValidator(
     '',
     (pwReIn) => {
@@ -67,33 +52,14 @@ const SignUpPage: FC = () => {
     [pw],
   );
 
-  const [email, emailWarning, handleEmail] = useInputValidator('', (mailIn) => {
-    if (mailIn === '') return ' ';
-    if (REG_EMAIL.test(mailIn)) return '';
+  const [email, emailWarning, handleEmail] = useInputValidator(
+    '',
+    emailValidator,
+  );
 
-    return WARNING_EMAIL;
-  });
-
-  const [ph0, ph0Warning, handlePh0] = useInputValidator('', (ph0In) => {
-    if (ph0In === '') return ' ';
-    if (REG_PH0.test(ph0In)) return '';
-
-    return WARNING_PHONE;
-  });
-
-  const [ph1, ph1Warning, handlePh1] = useInputValidator('', (ph1In) => {
-    if (ph1In === '') return ' ';
-    if (REG_PH1.test(ph1In)) return '';
-
-    return WARNING_PHONE;
-  });
-
-  const [ph2, ph2Warning, handlePh2] = useInputValidator('', (ph2In) => {
-    if (ph2In === '') return ' ';
-    if (REG_PH2.test(ph2In)) return '';
-
-    return WARNING_PHONE;
-  });
+  const [ph0, ph0Warning, handlePh0] = useInputValidator('', ph0Validator);
+  const [ph1, ph1Warning, handlePh1] = useInputValidator('', ph1Validator);
+  const [ph2, ph2Warning, handlePh2] = useInputValidator('', ph2Validator);
 
   const [checkAll, setCheckAll] = useState(false);
   const [check1, setCheck1] = useState(false);
