@@ -9,23 +9,22 @@ const StyledLoginPage = styled.div`
   width: 100%;
 `;
 
-const LeftDoodles = styled.aside`
+const LeftDoodleWrapper = styled.aside`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const RightDoodleWrapper = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
   height: 100vh;
   align-items: center;
   justify-content: space-evenly;
-`;
-
-const RightDoodles = styled.aside`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100vh;
-  width: 33%;
-  align-items: center;
-  justify-content: center;
 `;
 
 const SignUpForm = styled.form`
@@ -152,9 +151,9 @@ export {
   InputWrapper,
   Label,
   LabelRow,
-  LeftDoodles,
+  LeftDoodleWrapper,
   Policy,
-  RightDoodles,
+  RightDoodleWrapper,
   SignUpForm,
   SignUpFormHeader,
   StyledLoginPage,

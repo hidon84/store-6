@@ -25,8 +25,6 @@ import { doodleRobotSVG, hyphenSVG } from '~/assets';
 
 import {
   StyledLoginPage,
-  LeftDoodles,
-  RightDoodles,
   SignUpForm,
   SignUpFormHeader,
   ButtonWrapper,
@@ -41,6 +39,7 @@ import {
   PhoneInputWrapper,
   PhoneInput,
 } from './index.style';
+import { LeftDoodles, RightDoodles } from './index.fc';
 
 const SignUpPage: FC = () => {
   const [id, idWarning, handleId] = useInputValidator('', (idIn) => {
