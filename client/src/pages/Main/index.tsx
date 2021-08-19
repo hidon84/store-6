@@ -11,7 +11,7 @@ import {
   Colab,
   Stain,
   Logo,
-} from './icons';
+} from '~/components/main/IconButtons';
 import { MainContainer } from './index.style';
 
 const Main: FC = () => {
