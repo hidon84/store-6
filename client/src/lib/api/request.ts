@@ -31,17 +31,13 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
 
   const { status, data } = response;
   if (response.status >= 400) {
-    const errorData = data as ErrorResponseBody;
-    const errorResponse: ErrorResponse = {
-      statusCode: status,
-      data: errorData,
-    };
-
     if (failureCallback) {
       const axiosErrorResponse = response as AxiosResponse<ErrorResponseBody>;
       failureCallback(axiosErrorResponse);
     }
-    throw errorResponse;
+
+    const errorData = data as ErrorResponseBody;
+    throw new ErrorResponse(response.status, errorData);
   }
 
   if (successCallback) {
