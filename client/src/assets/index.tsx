@@ -49,6 +49,13 @@ const BigPencilSVG = `${S3_PREFIX}/common/big-icon/pencil.svg`;
 const BigTreeSVG = `${S3_PREFIX}/common/big-icon/tree.svg`;
 const BigCircleSVG = `${S3_PREFIX}/common/big-icon/circle.svg`;
 
+// Product Icons (상품 목록 페이지)
+const Hat2SVG = `${S3_PREFIX}/product/hat2.svg`;
+const SearchSVG = `${S3_PREFIX}/product/search.svg`;
+const RefreshSVG = `${S3_PREFIX}/product/refresh.svg`;
+const SpringSVG = `${S3_PREFIX}/product/spring.svg`;
+const UnderlineBaeminColorSVG = `${S3_PREFIX}/product/underline-baemin-color.svg`;
+
 export {
   LogoSVG,
   VertLineSVG,
@@ -92,4 +99,9 @@ export {
   BigPencilSVG,
   BigTreeSVG,
   BigCircleSVG,
+  Hat2SVG,
+  SearchSVG,
+  RefreshSVG,
+  SpringSVG,
+  UnderlineBaeminColorSVG,
 };
