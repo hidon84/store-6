@@ -1,12 +1,11 @@
-import React, { FC, createContext } from 'react';
+import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/CategoryFilter';
 import OrderFilter from '~/components/OrderFilter';
-import productModule, {
-  CategoryType,
-  DEFAULT_FILTER,
-  OrderType,
-  SearchValueType,
-} from '~/stores/productModule';
+import { ProductsGetRequestQuery } from '~/lib/api/types';
+import productListModule, {
+  ActionType,
+  INITIAL_FILTER_STATE,
+} from '~/stores/productListModule';
 
 import {
   ProductListWrapper,
@@ -15,22 +14,18 @@ import {
   VerticalDivider,
 } from './index.style';
 
-export const FilterContext = createContext({
-  ...DEFAULT_FILTER,
-  setCategory: (_: CategoryType) => {},
-  setOrder: (_: OrderType) => {},
-  setSearchValue: (_: SearchValueType) => {},
-  setPage: () => {},
-});
+interface FilterContextState {
+  state: ProductsGetRequestQuery;
+  dispatch: (action: ActionType) => void;
+}
+
+export const FilterContext = createContext<FilterContextState>(null);
 
 const ProductList: FC = () => {
-  const { filter, setCategory, setOrder, setSearchValue, setPage } =
-    productModule();
+  const { filterState, dispatch } = productListModule();
 
   return (
-    <FilterContext.Provider
-      value={{ ...filter, setCategory, setOrder, setSearchValue, setPage }}
-    >
+    <FilterContext.Provider value={{ state: filterState, dispatch }}>
       <ProductListWrapper>
         <LeftSection>
           <CategoryFilter />
