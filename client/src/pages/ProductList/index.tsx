@@ -1,15 +1,10 @@
-import React, { FC, createContext } from 'react';
+import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/CategoryFilter';
 import OrderFilter from '~/components/OrderFilter';
 import productListModule, {
+  ActionType,
   INITIAL_FILTER_STATE,
 } from '~/stores/productListModule';
-import productModule, {
-  CategoryType,
-  DEFAULT_FILTER,
-  OrderType,
-  SearchValueType,
-} from '~/stores/productModule';
 
 import {
   ProductListWrapper,
@@ -20,7 +15,7 @@ import {
 
 export const FilterContext = createContext({
   ...INITIAL_FILTER_STATE,
-  dispatch: (_: any) => {},
+  dispatch: (_: ActionType) => {},
 });
 
 const ProductList: FC = () => {
