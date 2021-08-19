@@ -45,8 +45,7 @@ export const setNextPage = () => ({ type: SET_NEXT_PAGE });
 
 export const resetCategory = () => ({
   type: RESET_CATEGORY,
-})
-
+});
 
 // State
 export const INITIAL_FILTER_STATE: ProductsGetRequestQuery = {
@@ -73,9 +72,10 @@ const filterReducer = (
       return { ...state, search: action.payload.search };
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
-    case RESET_CATEGORY:
-      delete state.category
-      return { ...state };
+    case RESET_CATEGORY: {
+      const { category, ...rest } = state;
+      return { ...rest };
+    }
     default:
       return { ...state };
   }

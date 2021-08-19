@@ -24,5 +24,3 @@ export const VerticalDivider = styled.div`
   background: url(${VertLineSVG}) bottom left no-repeat;
   background-size: cover;
 `;
-
-
