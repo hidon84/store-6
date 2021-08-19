@@ -16,7 +16,7 @@ export const OrderHeder = styled.div`
   img {
     width: 25px;
     &:hover {
-      transition: all 300ms;
+      transition: transform 300ms;
       transform: scale(1.2);
     }
   }

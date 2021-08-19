@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/no-array-index-key */
 
 import React, { useContext } from 'react';
 import { FilterContext } from '~/pages/ProductList';
@@ -31,8 +30,12 @@ const OrderFilter: React.FC = () => {
         <img onClick={handleResetBtnClick} src={RefreshSVG} alt="reset" />
       </OrderHeder>
       <OrderContainer>
-        {orders.map((item, index) => (
-          <OrderItem key={index} order={item.order} content={item.content} />
+        {orders.map((item) => (
+          <OrderItem
+            key={item.order}
+            order={item.order}
+            content={item.content}
+          />
         ))}
       </OrderContainer>
     </OrderFilterWrapper>
