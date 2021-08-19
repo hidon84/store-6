@@ -16,8 +16,6 @@ interface Props {
 }
 
 const ProductItemContainer: FC<Props> = ({ products }) => {
-  console.log(products);
-
   return (
     <ProductItemContainerWrapper>
       {products.map(({ idx, thumbnail, price, title }) => (
