@@ -24,12 +24,14 @@ export const FilterContext = createContext<FilterContextState>(null);
 const ProductList: FC = () => {
   const { filterState, dispatch } = productListModule();
 
+
+  
   return (
     <FilterContext.Provider value={{ state: filterState, dispatch }}>
       <ProductListWrapper>
         <LeftSection>
-          <CategoryFilter />
-          <OrderFilter />
+            <CategoryFilter />
+            <OrderFilter />
         </LeftSection>
         <VerticalDivider />
         <RightSection>
@@ -37,6 +39,203 @@ const ProductList: FC = () => {
           <div>검색</div>
           <div>상품리스트</div>
           <div>스크롤</div>
+
+          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>          <div>검색</div>
+          <div>상품리스트</div>
+          <div>스크롤</div>
+
+
         </RightSection>
       </ProductListWrapper>
     </FilterContext.Provider>

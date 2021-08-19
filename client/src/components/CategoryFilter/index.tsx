@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext ,useState } from 'react';
 import { FilterContext } from '~/pages/ProductList';
 import styled from 'styled-components';
-import { setCategory, setSearchValue } from '~/stores/productListModule';
+
 
 enum CategoryType {
-  Book,
+  Book=1,
   Stationery,
   Living,
   Green,
   Baedal,
   Kkk,
   Ulgiro,
-  Collaboration,
   Gift,
+  Collaboration,
 } 
 
 import {
@@ -26,12 +26,15 @@ import {
   SmallKKSVG,
   SmallTreeSVG,
   SmallCircleSVG,
-  RefreshSVG
+  RefreshSVG,
 } from '~/assets';
+import CategoryItem from '../CategorItem';
 
 
 const CategoryFilterWrapper = styled.div`
-
+  img{
+    cursor: pointer;
+  }
 `
 
 const CategoryHeder = styled.div`
@@ -45,22 +48,13 @@ const CategoryHeder = styled.div`
   }
 `
 
-
 const ImageWrapper = styled.div`
-  img{
-    place-self: center;
-    width: 55px;
-  }
-
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 25px;
 `
 
-
 const CategoryFilter: React.FC = () => {
-  const { dispatch, ...state } = useContext(FilterContext);
 
   return (
     <CategoryFilterWrapper>
@@ -69,18 +63,22 @@ const CategoryFilter: React.FC = () => {
         <img src={RefreshSVG} />
       </CategoryHeder>
       <ImageWrapper>
-          <img src={BigBookSVG} />
-          <img src={SmallPencilSVG} />
-          <img src={SmallHouseSVG} />
-          <img src={SmallTreeSVG} />
-          <img src={SmallBaedalSVG} />
-          <img src={SmallKKSVG} />
-          <img src={Hat2SVG} />
-          <img src={SmallGiftSVG} />
-          <img src={SmallColabSVG}/>
+        <CategoryItem idx={CategoryType.Book} image={BigBookSVG}/>
+        <CategoryItem idx={CategoryType.Stationery} image={SmallPencilSVG}/>
+        <CategoryItem idx={CategoryType.Living} image={SmallHouseSVG}/>
+        <CategoryItem idx={CategoryType.Green} image={SmallTreeSVG}/>
+        <CategoryItem idx={CategoryType.Baedal} image={SmallBaedalSVG}/>
+        <CategoryItem idx={CategoryType.Kkk} image={SmallKKSVG}/>
+        <CategoryItem idx={CategoryType.Ulgiro} image={Hat2SVG}/>
+        <CategoryItem idx={CategoryType.Gift} image={SmallGiftSVG}/>
+        <CategoryItem idx={CategoryType.Collaboration} image={SmallColabSVG}/>
       </ImageWrapper>
     </CategoryFilterWrapper>
   );
 };
 
 export default CategoryFilter;
+
+
+
+

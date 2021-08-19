@@ -7,7 +7,6 @@ export const ProductListWrapper = styled.div`
 `;
 
 export const LeftSection = styled.section`
-  width: 213px;
   height: 700px;
   position: sticky;
   margin-top: 50px;
@@ -20,7 +19,7 @@ export const RightSection = styled.section`
 
 export const VerticalDivider = styled.div`
   width: 1px;
-  margin: 0 44px 0 61px;
+  margin: 0 45px;
   min-height: 1000px;
   background: url(${VertLineSVG}) bottom left no-repeat;
   background-size: cover;
