@@ -22,6 +22,8 @@ const DEFAULT_PRODUCTS_AMOUNT = 20;
 
 // Actions
 const SET_CATEGORY = 'SET_CATEGORY';
+const RESET_CATEGORY = 'RESET_CATEGORY';
+
 const SET_ORDER = 'SET_ORDER';
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 const SET_NEXT_PAGE = 'SET_NEXT_PAGE';
@@ -42,6 +44,10 @@ export const setSearchValue = (payload: SearchValueType) => ({
 });
 export const removeSearchValue = () => ({ type: REMOVE_SEARCH_VALUE });
 export const setNextPage = () => ({ type: SET_NEXT_PAGE });
+
+export const resetCategory = () => ({
+  type: RESET_CATEGORY,
+});
 
 // State
 export const INITIAL_FILTER_STATE: ProductsGetRequestQuery = {
@@ -72,6 +78,10 @@ const filterReducer = (
     }
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
+    case RESET_CATEGORY: {
+      const { category, ...rest } = state;
+      return { ...rest };
+    }
     default:
       return { ...state };
   }

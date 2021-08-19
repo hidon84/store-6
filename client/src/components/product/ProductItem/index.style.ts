@@ -5,9 +5,6 @@ export const ProductItemContainer = styled.div`
   height: 300px;
   width: 230px;
   transition: all 300ms;
-  &:hover {
-    transform: scale(1.08);
-  }
 `;
 
 export const ProductImage = styled.img`

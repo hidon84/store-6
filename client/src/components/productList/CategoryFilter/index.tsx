@@ -1,7 +1,15 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/no-array-index-key */
+
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import { FilterContext } from '~/pages/ProductList';
-import { setCategory, setSearchValue } from '~/stores/productListModule';
+import { resetCategory } from '~/stores/productListModule';
+import {
+  CategoryFilterWrapper,
+  CategoryHeder,
+  CategoryContainer,
+} from './index.style';
 
 import {
   BigBookSVG,
@@ -13,67 +21,41 @@ import {
   SmallHouseSVG,
   SmallKKSVG,
   SmallTreeSVG,
-  SmallCircleSVG,
   RefreshSVG,
 } from '~/assets';
 
-enum CategoryType {
-  Book,
-  Stationery,
-  Living,
-  Green,
-  Baedal,
-  Kkk,
-  Ulgiro,
-  Collaboration,
-  Gift,
-}
+import CategoryItem from '../CategoryItem';
 
-const CategoryFilterWrapper = styled.div``;
-
-const CategoryHeder = styled.div`
-  font-size: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 33px;
-  img {
-    width: 25px;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  img {
-    place-self: center;
-    width: 55px;
-  }
-
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 25px;
-`;
+const Categorys = [
+  BigBookSVG,
+  SmallPencilSVG,
+  SmallHouseSVG,
+  SmallTreeSVG,
+  SmallBaedalSVG,
+  SmallKKSVG,
+  Hat2SVG,
+  SmallGiftSVG,
+  SmallColabSVG,
+];
 
 const CategoryFilter: React.FC = () => {
-  const { dispatch, ...state } = useContext(FilterContext);
+  const { dispatch, ...currentState } = useContext(FilterContext);
+
+  const handleResetBtnClick = () => {
+    dispatch(resetCategory());
+  };
 
   return (
     <CategoryFilterWrapper>
       <CategoryHeder>
         <div>카테고리</div>
-        <img src={RefreshSVG} alt="category" />
+        <img onClick={handleResetBtnClick} src={RefreshSVG} alt="reset" />
       </CategoryHeder>
-      <ImageWrapper>
-        <img src={BigBookSVG} alt="category" />
-        <img src={SmallPencilSVG} alt="category" />
-        <img src={SmallHouseSVG} alt="category" />
-        <img src={SmallTreeSVG} alt="category" />
-        <img src={SmallBaedalSVG} alt="category" />
-        <img src={SmallKKSVG} alt="category" />
-        <img src={Hat2SVG} alt="category" />
-        <img src={SmallGiftSVG} alt="category" />
-        <img src={SmallColabSVG} alt="category" />
-      </ImageWrapper>
+      <CategoryContainer>
+        {Categorys.map((item, index) => (
+          <CategoryItem key={index} idx={index + 1} image={item} />
+        ))}
+      </CategoryContainer>
     </CategoryFilterWrapper>
   );
 };
