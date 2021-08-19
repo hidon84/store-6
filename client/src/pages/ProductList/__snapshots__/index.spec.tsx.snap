@@ -1,33 +1,138 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProductList /> should render same with snapshot 1`] = `
+.c2 {
+  font-size: 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 33px;
+}
+
+.c2 img {
+  width: 25px;
+}
+
+.c3 {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 25px;
+}
+
+.c3 img {
+  place-self: center;
+  width: 55px;
+}
+
+.c10 {
+  opacity: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 0 30px 7px;
+}
+
+.c11 {
+  font-size: 16px;
+  line-height: 20px;
+  color: #999999;
+}
+
+.c12 {
+  margin: 2px 12px 0px 12px;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  max-width: 580px;
+  cursor: pointer;
+}
+
+.c6 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 700px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: 64px;
+  margin-bottom: 13px;
+}
+
+.c8 {
+  height: 46px;
+  font-size: 25px;
+  line-height: 31px;
+  padding: 0 20px 0 80px;
+}
+
+.c8::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.c7 {
+  position: absolute;
+  left: 23px;
+  bottom: 12px;
+  width: 30px;
+}
+
+.c9 {
+  height: 4px;
+  all: unset;
+  margin: 0;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  height: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
 }
 
 .c1 {
-  width: 218px;
-  height: 100%;
+  width: 213px;
+  height: 700px;
+  position: -webkit-sticky;
+  position: sticky;
+  margin-top: 50px;
+  top: 50px;
 }
 
-.c3 {
+.c5 {
   width: 700px;
-  height: 100%;
 }
 
-.c2 {
+.c4 {
   width: 1px;
-  height: 100%;
-  margin: 0 45px;
+  margin: 0 44px 0 61px;
+  min-height: 1000px;
   background: url(https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/vertical-line.svg) bottom left no-repeat;
   background-size: cover;
 }
@@ -39,12 +144,60 @@ exports[`<ProductList /> should render same with snapshot 1`] = `
     <section
       class="c1"
     >
-      <div>
-        <button
-          type="button"
+      <div
+        class=""
+      >
+        <div
+          class="c2"
         >
-          sdfsdfsdf
-        </button>
+          <div>
+            카테고리
+          </div>
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/refresh.svg"
+          />
+        </div>
+        <div
+          class="c3"
+        >
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/book.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/pencil.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/house.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/tree.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/baedal.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/kk.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/hat2.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/gift.svg"
+          />
+          <img
+            alt="category"
+            src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/colab.svg"
+          />
+        </div>
       </div>
       <div>
         <span>
@@ -53,18 +206,49 @@ exports[`<ProductList /> should render same with snapshot 1`] = `
       </div>
     </section>
     <div
-      class="c2"
+      class="c4"
     />
     <section
-      class="c3"
+      class="c5"
     >
       <button
         type="button"
       >
         카테고리 현재 선택
       </button>
-      <div>
-        검색
+      <form
+        class="c6"
+      >
+        <img
+          class="c7"
+          src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/search.svg"
+        />
+        <input
+          class="c8"
+          name="q"
+          type="search"
+        />
+        <img
+          alt="search-line"
+          class="c9"
+          src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/search-box-underline.svg"
+        />
+      </form>
+      <div
+        class="c10"
+      >
+        <span
+          class="c11"
+        >
+          최근 검색어
+        </span>
+        <img
+          class="c12"
+          src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/vertical-divider.svg"
+        />
+        <div
+          class="c13"
+        />
       </div>
       <div>
         상품리스트

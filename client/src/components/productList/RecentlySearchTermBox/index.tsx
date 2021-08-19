@@ -17,17 +17,20 @@ interface Props {
 
 const RecentlySearchTermBox: FC<Props> = ({ termList, removeTermOnList }) => {
   return (
-    <RecentlySearchTermBoxWrapper isEmpty={termList.length === 0}>
+    <RecentlySearchTermBoxWrapper
+      isEmpty={termList ? termList.length === 0 : false}
+    >
       <RecentlySearchTermTitle>최근 검색어</RecentlySearchTermTitle>
       <Divider src={VerticalDividerSVG} />
       <TermWrapper>
-        {termList.map((term, idx) => (
-          <SearchTerm
-            term={term}
-            key={`term-${idx}`}
-            removeTermOnList={removeTermOnList}
-          />
-        ))}
+        {termList &&
+          termList.map((term, idx) => (
+            <SearchTerm
+              term={term}
+              key={`term-${idx}`}
+              removeTermOnList={removeTermOnList}
+            />
+          ))}
       </TermWrapper>
     </RecentlySearchTermBoxWrapper>
   );
