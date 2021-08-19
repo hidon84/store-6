@@ -26,13 +26,6 @@ jobs:
           cd server/
           yarn
 
-      - name: Create Server Env File
-        run: |
-          cd server/
-          touch .env.dev
-          cat << EOF >> .env.dev
-          ${{ secrets.SERVER_ENV }}
-        
       - name: Make Tar File
         run: tar -cpvzf ./$GITHUB_SHA.tgz *
         shell: bash
