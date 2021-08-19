@@ -3,10 +3,6 @@ import styled from 'styled-components';
 export const CategoryFilterWrapper = styled.div`
   img {
     cursor: pointer;
-    transition: all 300ms;
-    &:hover {
-      transform: scale(1.08);
-    }
   }
 `;
 

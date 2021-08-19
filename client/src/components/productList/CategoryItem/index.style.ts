@@ -13,6 +13,13 @@ export const ImageContainer = styled.div`
     width: 47px;
   }
 
+  &:not(.selected) {
+    img:hover {
+      transition: all 300ms;
+      transform: scale(1.2);
+    }
+  }
+
   &.selected {
     transform: scale(1.2);
     background: url(${SmallCircleSVG}) no-repeat center center;

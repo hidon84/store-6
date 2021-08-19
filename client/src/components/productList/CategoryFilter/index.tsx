@@ -23,7 +23,7 @@ import {
   RefreshSVG,
 } from '~/assets';
 
-import CategoryItem from '../CategorItem';
+import CategoryItem from '../CategoryItem';
 
 enum CategoryType {
   Book = 1,

@@ -3,14 +3,6 @@
 exports[`<ProductList /> should render same with snapshot 1`] = `
 .c2 img {
   cursor: pointer;
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
-}
-
-.c2 img:hover {
-  -webkit-transform: scale(1.08);
-  -ms-transform: scale(1.08);
-  transform: scale(1.08);
 }
 
 .c3 {
@@ -63,10 +55,18 @@ exports[`<ProductList /> should render same with snapshot 1`] = `
   width: 47px;
 }
 
+.c5:not(.selected) img:hover {
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
 .c5.selected {
-  -webkit-transform: scale(1.3);
-  -ms-transform: scale(1.3);
-  transform: scale(1.3);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
   background: url(https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/circle.svg) no-repeat center center;
 }
 
