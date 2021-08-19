@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/no-array-index-key */
 
 import React, { useContext } from 'react';
 import { FilterContext } from '~/pages/ProductList';
@@ -25,17 +26,17 @@ import {
 
 import CategoryItem from '../CategoryItem';
 
-enum CategoryType {
-  Book = 1,
-  Stationery,
-  Living,
-  Green,
-  Baedal,
-  Kkk,
-  Ulgiro,
-  Gift,
-  Collaboration,
-}
+const Categorys = [
+  BigBookSVG,
+  SmallPencilSVG,
+  SmallHouseSVG,
+  SmallTreeSVG,
+  SmallBaedalSVG,
+  SmallKKSVG,
+  Hat2SVG,
+  SmallGiftSVG,
+  SmallColabSVG,
+];
 
 const CategoryFilter: React.FC = () => {
   const { dispatch, ...currentState } = useContext(FilterContext);
@@ -51,15 +52,9 @@ const CategoryFilter: React.FC = () => {
         <img onClick={handleResetBtnClick} src={RefreshSVG} alt="reset" />
       </CategoryHeder>
       <CategoryContainer>
-        <CategoryItem idx={CategoryType.Book} image={BigBookSVG} />
-        <CategoryItem idx={CategoryType.Stationery} image={SmallPencilSVG} />
-        <CategoryItem idx={CategoryType.Living} image={SmallHouseSVG} />
-        <CategoryItem idx={CategoryType.Green} image={SmallTreeSVG} />
-        <CategoryItem idx={CategoryType.Baedal} image={SmallBaedalSVG} />
-        <CategoryItem idx={CategoryType.Kkk} image={SmallKKSVG} />
-        <CategoryItem idx={CategoryType.Ulgiro} image={Hat2SVG} />
-        <CategoryItem idx={CategoryType.Gift} image={SmallGiftSVG} />
-        <CategoryItem idx={CategoryType.Collaboration} image={SmallColabSVG} />
+        {Categorys.map((item, index) => (
+          <CategoryItem key={index} idx={index + 1} image={item} />
+        ))}
       </CategoryContainer>
     </CategoryFilterWrapper>
   );
