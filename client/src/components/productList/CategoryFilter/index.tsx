@@ -11,7 +11,6 @@ import {
   CategoryContainer,
 } from './index.style';
 
-
 import {
   BigBookSVG,
   SmallPencilSVG,
@@ -38,7 +37,6 @@ const Categorys = [
   SmallGiftSVG,
   SmallColabSVG,
 ];
-
 
 const CategoryFilter: React.FC = () => {
   const { dispatch, ...currentState } = useContext(FilterContext);
