@@ -79,16 +79,12 @@ const SignUpPage: FC = () => {
     return WARNING_PHONE;
   });
 
-  const [ph1, ph1Warning, handlePh1] = useInputValidator(
-    '',
-    (ph1In) => {
-      if (ph1In === '') return ' ';
-      if (REG_PH1.test(ph1In)) return '';
+  const [ph1, ph1Warning, handlePh1] = useInputValidator('', (ph1In) => {
+    if (ph1In === '') return ' ';
+    if (REG_PH1.test(ph1In)) return '';
 
-      return WARNING_PHONE;
-    },
-    [],
-  );
+    return WARNING_PHONE;
+  });
 
   const [ph2, ph2Warning, handlePh2] = useInputValidator('', (ph2In) => {
     if (ph2In === '') return ' ';
