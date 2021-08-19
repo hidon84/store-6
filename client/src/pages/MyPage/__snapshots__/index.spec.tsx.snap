@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MainPage /> should render same with snapshot 1`] = `
+exports[`<MyPage /> should render same with snapshot 1`] = `
 .c2 {
   width: 700px;
   height: 4px;
@@ -13,16 +13,6 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
 
 .c9 {
   width: 630px;
-  height: 1px;
-  -webkit-transform: none;
-  -ms-transform: none;
-  transform: none;
-  background: url(https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
-  background-size: cover;
-}
-
-.c16 {
-  width: 10px;
   height: 1px;
   -webkit-transform: none;
   -ms-transform: none;
@@ -60,6 +50,51 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
   color: #000;
 }
 
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+  bottom: 4px;
+}
+
+.c15 {
+  text-align: center;
+  box-sizing: border-box;
+  width: 100px;
+  height: 34px;
+  padding: 0 16px 10px 16px;
+  margin-top: 16px;
+  line-height: 25px;
+  font-size: 14px;
+  background: bottom left / contain no-repeat url();
+}
+
+.c15::-webkit-input-placeholder {
+  color: #999;
+}
+
+.c15::-moz-placeholder {
+  color: #999;
+}
+
+.c15:-ms-input-placeholder {
+  color: #999;
+}
+
+.c15::placeholder {
+  color: #999;
+}
+
 .c12 {
   box-sizing: border-box;
   width: 370px;
@@ -85,50 +120,6 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
 
 .c12::placeholder {
   color: #999;
-}
-
-.c15 {
-  box-sizing: border-box;
-  width: 90px;
-  height: 34px;
-  padding: 0 16px 10px 16px;
-  margin-top: 16px;
-  line-height: 25px;
-  font-size: 20px;
-  background: bottom left / contain no-repeat url();
-}
-
-.c15::-webkit-input-placeholder {
-  color: #999;
-}
-
-.c15::-moz-placeholder {
-  color: #999;
-}
-
-.c15:-ms-input-placeholder {
-  color: #999;
-}
-
-.c15::placeholder {
-  color: #999;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: relative;
-  bottom: 4px;
 }
 
 .c0 {
@@ -334,42 +325,32 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
             disabled=""
             maxlength="3"
             placeholder="수정은"
-            style="text-align: center; font-size: 14px;"
             type="text"
             value=""
-            width="90px"
           />
-          <div
-            class="c16"
-            direction="horizontal"
-            style="margin: 20px;"
-            width="10px"
+          <img
+            alt="hyphen"
+            style="margin: 10px;"
           />
           <input
             class="c15"
             disabled=""
             maxlength="4"
             placeholder="수정"
-            style="text-align: center; font-size: 14px;"
             type="text"
             value=""
-            width="90px"
           />
-          <div
-            class="c16"
-            direction="horizontal"
-            style="margin: 20px;"
-            width="10px"
+          <img
+            alt="hyphen"
+            style="margin: 10px;"
           />
           <input
             class="c15"
             disabled=""
             maxlength="4"
             placeholder="버튼으로"
-            style="text-align: center; font-size: 14px;"
             type="text"
             value=""
-            width="90px"
           />
         </div>
         <div

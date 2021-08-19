@@ -6,12 +6,15 @@ import doodleRobotSVG from './doodle-robot.svg';
 import doodleSkeletonSVG from './doodle-skeleton.svg';
 import doodleStickmanSVG from './doodle-stickman.svg';
 import doodleTeasingSVG from './doodle-teasing.svg';
+import breakSVG from './break.svg';
 import socialFacebookSVG from './social-facebook.svg';
 import socialGoogleSVG from './social-google.svg';
 import underlineSVG from './underline.svg';
 import phoneUnderLineSVG from './phoneUnderLine.svg';
 import hyphenSVG from './hyphen.svg';
 import verticalLineSVG from './vertical-line.svg';
+import mooyahoSVG from './mooyaho.svg';
+import mooyahoWeUseSVG from './mooyahoWeUse.svg';
 
 const S3_PREFIX = 'https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
@@ -73,6 +76,7 @@ export {
   doodleSkeletonSVG,
   doodleStickmanSVG,
   doodleTeasingSVG,
+  breakSVG,
   socialFacebookSVG,
   socialGoogleSVG,
   underlineSVG,
@@ -104,4 +108,6 @@ export {
   RefreshSVG,
   SpringSVG,
   UnderlineBaeminColorSVG,
+  mooyahoSVG,
+  mooyahoWeUseSVG,
 };

@@ -1,4 +1,16 @@
-import React, { FC } from 'react';
+import { FC, useCallback, useState } from 'react';
+
+import useInputValidator from '~/lib/hooks/useInputValidator';
+import {
+  emailValidator,
+  idValidator,
+  ph0Validator,
+  ph1Validator,
+  ph2Validator,
+  pwValidator,
+  WARNING_PWRE,
+} from '~/utils/validation';
+import { alert } from '~/utils/modal';
 
 import Button from '~/components/Button';
 import Checkbox from '~/components/Checkbox';
@@ -9,8 +21,6 @@ import { doodleRobotSVG, hyphenSVG } from '~/assets';
 
 import {
   StyledLoginPage,
-  LeftDoodles,
-  RightDoodles,
   SignUpForm,
   SignUpFormHeader,
   ButtonWrapper,
@@ -25,8 +35,107 @@ import {
   PhoneInputWrapper,
   PhoneInput,
 } from './index.style';
+import { LeftDoodles, RightDoodles } from './index.fc';
+import { postUser } from '~/lib/api/users';
+import { useHistory } from '~/core/Router';
 
 const SignUpPage: FC = () => {
+  const { push } = useHistory();
+  const [id, idWarning, handleId] = useInputValidator('', idValidator);
+  const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
+  const [pwRe, pwReWarning, handlePWRe] = useInputValidator(
+    '',
+    (pwReIn) => {
+      if (pwReIn === pw) return '';
+      return WARNING_PWRE;
+    },
+    [pw],
+  );
+
+  const [email, emailWarning, handleEmail] = useInputValidator(
+    '',
+    emailValidator,
+  );
+
+  const [ph0, ph0Warning, handlePh0] = useInputValidator('', ph0Validator);
+  const [ph1, ph1Warning, handlePh1] = useInputValidator('', ph1Validator);
+  const [ph2, ph2Warning, handlePh2] = useInputValidator('', ph2Validator);
+
+  const [checkAll, setCheckAll] = useState(false);
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
+
+  const handleCheckAll = useCallback(() => {
+    const reversed = !checkAll;
+    setCheckAll(reversed);
+    setCheck1(reversed);
+    setCheck2(reversed);
+  }, [checkAll, check1, check2]);
+
+  const handleCheck1 = useCallback(() => {
+    setCheck1(!check1);
+  }, [check1]);
+
+  const handleCheck2 = useCallback(() => {
+    setCheck2(!check2);
+  }, [check2]);
+
+  const onSubmit = useCallback(async () => {
+    if (check1 === false || check2 === false) {
+      alert('약관을 동의해주세요');
+      return;
+    }
+    const warning =
+      idWarning ||
+      pwWarning ||
+      pwReWarning ||
+      emailWarning ||
+      ph0Warning ||
+      ph1Warning ||
+      ph2Warning;
+    if (warning) {
+      if (warning === ' ') {
+        alert('빈 항목이 있습니다.');
+        return;
+      }
+
+      alert(warning);
+    }
+
+    /**
+     * @todo: postUser의 response 다듬기
+     */
+    const res = await postUser({
+      id,
+      password: pw,
+      phone: `${ph0}-${ph1}-${ph2}`,
+      email,
+      privacyTermsAndConditions: check1,
+      serviceTermsAndConditions: check2,
+    });
+    if (res.statusCode > 400) {
+      alert('회원가입 실패! 유감!');
+      return;
+    }
+    push('/login', { id, from: '/signup' });
+  }, [
+    id,
+    pw,
+    email,
+    ph0,
+    ph1,
+    ph2,
+    check1,
+    check2,
+    idWarning,
+    pwWarning,
+    pwReWarning,
+    emailWarning,
+    ph0Warning,
+    ph1Warning,
+    ph2Warning,
+  ]);
+
   return (
     <StyledLoginPage>
       <LeftDoodles />
@@ -39,46 +148,63 @@ const SignUpPage: FC = () => {
         <InputWrapper>
           <LabelRow>
             <Label>아이디</Label>
-            <WarningMessage>중복된 아이디입니다.</WarningMessage>
+            <WarningMessage>{idWarning}</WarningMessage>
           </LabelRow>
-          <Input autoComplete="off" type="text" name="id" id="id" />
+          <Input autoComplete="off" type="text" onChange={handleId} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>비밀번호</Label>
-            <WarningMessage>비밀번호 다시 확인할것!</WarningMessage>
+            <WarningMessage>{pwWarning}</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password" id="password" />
+          <Input autoComplete="false" type="password" onChange={handlePW} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>비밀번호 확인</Label>
-            <WarningMessage>비밀번호가 일치하지 않습니다.</WarningMessage>
+            <WarningMessage>{pwReWarning}</WarningMessage>
           </LabelRow>
-          <Input type="password" name="password-retype" id="password-retype" />
+          <Input autoComplete="false" type="password" onChange={handlePWRe} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>이메일</Label>
-            <WarningMessage>이메일 형식이 맞지 않습니다.</WarningMessage>
+            <WarningMessage>{emailWarning}</WarningMessage>
           </LabelRow>
-          <Input type="email" name="email" id="email" />
+          <Input autoComplete="false" type="text" onChange={handleEmail} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
           <LabelRow>
             <Label>전화번호</Label>
-            <WarningMessage>전화번호 형식이 맞지 않습니다.</WarningMessage>
+            <WarningMessage>
+              {ph0Warning || ph1Warning || ph2Warning}
+            </WarningMessage>
           </LabelRow>
           <PhoneInputWrapper>
-            <PhoneInput type="text" name="010" id="010" />
+            <PhoneInput
+              autoComplete="false"
+              type="text"
+              placeholder="010"
+              onChange={handlePh0}
+            />
             <img src={hyphenSVG} alt="hyphen" />
-            <PhoneInput type="text" name="1234" id="1234" />
+            <PhoneInput
+              autoComplete="false"
+              type="text"
+              placeholder="0000"
+              onChange={handlePh1}
+            />
             <img src={hyphenSVG} alt="hyphen" />
-            <PhoneInput type="text" name="5678" id="5678" />
+            <PhoneInput
+              autoComplete="false"
+              type="text"
+              placeholder="0000"
+              onChange={handlePh2}
+            />
           </PhoneInputWrapper>
         </InputWrapper>
         <Space height="48px" aria-hidden />
@@ -86,16 +212,16 @@ const SignUpPage: FC = () => {
           <Label>약관 동의</Label>
         </LabelRow>
         <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
+          <CheckboxWrapper onClick={handleCheckAll}>
+            <Checkbox checked={checkAll} />
             <span style={{ fontSize: '20px', lineHeight: '25px' }}>
               아래 약관에 모두 동의합니다
             </span>
           </CheckboxWrapper>
         </CheckboxSection>
         <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
+          <CheckboxWrapper onClick={handleCheck1}>
+            <Checkbox checked={check1} />
             <span>개인정보 이용약관 (필수)</span>
           </CheckboxWrapper>
         </CheckboxSection>
@@ -106,8 +232,8 @@ const SignUpPage: FC = () => {
           consequuntur tenetur voluptatibus voluptate.
         </Policy>
         <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
+          <CheckboxWrapper onClick={handleCheck2}>
+            <Checkbox checked={check2} />
             <span>배민문방구 이용약관 (필수)</span>
           </CheckboxWrapper>
         </CheckboxSection>
@@ -118,7 +244,9 @@ const SignUpPage: FC = () => {
           consequuntur tenetur voluptatibus voluptate.
         </Policy>
         <ButtonWrapper>
-          <Button size="lg">회원가입</Button>
+          <Button size="lg" onClick={onSubmit}>
+            회원가입
+          </Button>
         </ButtonWrapper>
         <Copyright>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.

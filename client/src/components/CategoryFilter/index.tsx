@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { FilterContext } from '~/pages/ProductList';
 import styled from 'styled-components';
+import { setCategory, setSearchValue } from '~/stores/productListModule';
 
 enum CategoryType {
   Book,
@@ -59,7 +60,7 @@ const ImageWrapper = styled.div`
 
 
 const CategoryFilter: React.FC = () => {
-  const { setCategory, ...state } = useContext(FilterContext);
+  const { dispatch, ...state } = useContext(FilterContext);
 
   return (
     <CategoryFilterWrapper>
