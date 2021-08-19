@@ -1,0 +1,23 @@
+@import './font.css';
+@import './reset.css';
+
+:root {
+  --baemin100: #2ac1bc;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 1024px;
+  align-items: center;
+}
+
+#portal {
+  display: flex;
+  justify-content: center;
+}
+
+.text-baemin100 {
+  color: var(--baemin100);
+}

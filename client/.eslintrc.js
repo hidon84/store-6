@@ -20,11 +20,16 @@ module.exports = {
     ecmaFeatures: {
       jsx: true, // jsx 활성화
     },
+    tsconfigRootDir: __dirname,
     ecmaVersion: 2021,
     sourceType: 'module', // import 사용
     project: 'tsconfig.json',
   },
   rules: {
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'no-restricted-syntax': 'off',
+    'no-continue': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -33,5 +38,13 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'import/extensions': ['off'],
+    'import/prefer-default-export': 'off'
   },
+  ignorePatterns: [
+    '.eslintrc.js',
+    'jest.config.js',
+    'webpack.config.js',
+    'setUpTests.ts',
+    'images.d.ts',
+  ],
 };

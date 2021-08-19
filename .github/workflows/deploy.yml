@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install Client Dependencies
+        run: |
+          cd client/
+          yarn
+        
+      - name: Build Client Files
+        run: |
+          cd client/
+          yarn build
+
+      - name: Install Server Dependencies
+        run: |
+          cd server/
+          yarn
+
+      - name: Create Server Env File
+        run: |
+          cd server/
+          touch .env.dev
+          cat << EOF >> .env.dev
+          ${{ secrets.SERVER_ENV }}
+        
+      - name: Make Tar File
+        run: tar -cpvzf ./$GITHUB_SHA.tgz *
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp \
+            --region ap-northeast-2 \
+            ./$GITHUB_SHA.tgz s3://store-6-bucket/build/$GITHUB_SHA.tgz
+            
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name store-6 --file-exists-behavior OVERWRITE --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name store-6-codedeploy-group --s3-location bucket=store-6-bucket,bundleType=tgz,key=build/$GITHUB_SHA.tgz

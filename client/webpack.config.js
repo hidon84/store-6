@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -7,7 +8,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    'js/app': ['./src/App.tsx'],
+    'js/app': ['./src/index.tsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist/'),
@@ -15,6 +16,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
       // For Typescript
       {
         test: /\.(ts|tsx)$/,
@@ -29,6 +34,17 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
+      {
+        test: /\.(svg|png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -39,6 +55,15 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
     }),
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    }),
     new ForkTsCheckerWebpackPlugin({ typescript: true }),
   ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8080,
+    historyApiFallback: true,
+  },
 };

@@ -10,10 +10,11 @@
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "src/dist",
-    "strict": false,
+    "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false
   }
 }
