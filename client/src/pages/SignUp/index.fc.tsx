@@ -5,7 +5,7 @@ import { LeftDoodleWrapper, RightDoodleWrapper } from './index.style';
 const LeftDoodles: FC = () => {
   return (
     <LeftDoodleWrapper>
-      <img src={breakSVG} alt="jiroboQuote" />
+      <img src={breakSVG} alt="뷁" />
     </LeftDoodleWrapper>
   );
 };
@@ -13,8 +13,8 @@ const LeftDoodles: FC = () => {
 const RightDoodles: FC = () => {
   return (
     <RightDoodleWrapper>
-      <img src={mooyahoSVG} alt="jiroboQuote" />
-      <img src={mooyahoWeUseSVG} alt="jiroboQuote" />
+      <img src={mooyahoSVG} alt="무야호" />
+      <img src={mooyahoWeUseSVG} alt="저희가 많이 보죠" />
     </RightDoodleWrapper>
   );
 };
