@@ -2,6 +2,7 @@ import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
 import OrderFilter from '~/components/productList/OrderFilter';
+import ProductItemContainer from '~/components/productList/ProductItemContainer';
 import SearchBox from '~/components/productList/SearchBox';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
 import productListModule, { ActionType } from '~/stores/productListModule';
@@ -34,8 +35,7 @@ const ProductList: FC = () => {
         <RightSection>
           <CategoryIdentifier />
           <SearchBox />
-          <div>상품리스트</div>
-          <div>스크롤</div>
+          <ProductItemContainer />
         </RightSection>
       </ProductListWrapper>
     </FilterContext.Provider>
