@@ -14,6 +14,13 @@ import {
   VerticalDivider,
 } from './index.style';
 
+export interface ProductData {
+  idx: number;
+  title: string;
+  thumbnail: string;
+  price: number;
+}
+
 interface FilterContextState {
   state: ProductsGetRequestQuery;
   dispatch: (action: ActionType) => void;
@@ -35,7 +42,7 @@ const ProductList: FC = () => {
         <RightSection>
           <CategoryIdentifier />
           <SearchBox />
-          <ProductItemContainer />
+          <ProductItemContainer products={DUMMY_DATA} />
         </RightSection>
       </ProductListWrapper>
     </FilterContext.Provider>
@@ -43,3 +50,90 @@ const ProductList: FC = () => {
 };
 
 export default ProductList;
+
+const DUMMY_DATA: ProductData[] = [
+  {
+    idx: 0,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 1,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 2,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 3,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 4,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 5,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 6,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 7,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 8,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 9,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 10,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+  {
+    idx: 11,
+    thumbnail:
+      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
+    title: '때수건. 다 때가 있다',
+    price: 2000,
+  },
+];

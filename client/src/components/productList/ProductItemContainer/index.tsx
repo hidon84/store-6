@@ -2,22 +2,32 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 import ProductItem from '~/components/ProductItem';
+import { ProductData } from '~/pages/ProductList';
 
 const ProductItemContainerWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 31px;
   padding-left: 7px;
 `;
 
-const ProductItemContainer: FC = () => {
-  const SAMPLE_THUMBNAIL =
-    'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg';
+interface Props {
+  products: ProductData[];
+}
+
+const ProductItemContainer: FC<Props> = ({ products }) => {
+  console.log(products);
 
   return (
     <ProductItemContainerWrapper>
-      <ProductItem
-        thumbnail={SAMPLE_THUMBNAIL}
-        price="2000"
-        title="때수건. 다 때가 있다"
-      />
+      {products.map(({ idx, thumbnail, price, title }) => (
+        <ProductItem
+          key={idx}
+          thumbnail={thumbnail}
+          price={price}
+          title={title}
+        />
+      ))}
     </ProductItemContainerWrapper>
   );
 };
