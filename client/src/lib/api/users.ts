@@ -21,7 +21,8 @@ export const postUser = async (reqData: UsersPostRequestBody) =>
     reqData,
   );
 
-export const getMe = () => request<UsersGetResponseBody>('GET', usersUrl.me);
+export const getMe = async () =>
+  request<UsersGetResponseBody>('GET', usersUrl.me);
 
 export const putMe = (reqData: UsersPutRequestBody) => {
   const reqFormData = new FormData();

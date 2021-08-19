@@ -7,22 +7,23 @@ const StyledLoginPage = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
 `;
 
 const LeftDoodleWrapper = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 const RightDoodleWrapper = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   justify-content: space-evenly;
 `;
@@ -33,6 +34,8 @@ const SignUpFormWrapper = styled.form`
   min-width: 400px;
   max-width: 400px;
   flex-direction: column;
+  height: 100%;
+  gap: 28px;
   justify-content: flex-start;
   align-items: center;
 `;

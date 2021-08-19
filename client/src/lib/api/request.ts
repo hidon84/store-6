@@ -30,19 +30,20 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
   })) as AxiosResponse<RES | ErrorResponseBody>;
 
   const { status, data } = response;
-  if (response.status >= 400) {
-    const errorData = data as ErrorResponseBody;
-    const errorResponse: ErrorResponse = {
-      statusCode: status,
-      data: errorData,
-    };
+  console.log(response);
+  // if (response.status >= 400) {
+  //   const errorData = data as ErrorResponseBody;
+  //   const errorResponse: ErrorResponse = {
+  //     statusCode: status,
+  //     data: errorData,
+  //   };
 
-    if (failureCallback) {
-      const axiosErrorResponse = response as AxiosResponse<ErrorResponseBody>;
-      failureCallback(axiosErrorResponse);
-    }
-    return errorResponse;
-  }
+  //   if (failureCallback) {
+  //     const axiosErrorResponse = response as AxiosResponse<ErrorResponseBody>;
+  //     failureCallback(axiosErrorResponse);
+  //   }
+  //   return errorResponse;
+  // }
 
   if (successCallback) {
     const axiosErrorResponse = response as AxiosResponse<RES>;

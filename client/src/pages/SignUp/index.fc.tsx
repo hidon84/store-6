@@ -1,6 +1,15 @@
 import { FC } from 'react';
-import { breakSVG, mooyahoSVG, mooyahoWeUseSVG } from '~/assets';
-import { LeftDoodleWrapper, RightDoodleWrapper } from './index.style';
+import {
+  breakSVG,
+  doodleRobotSVG,
+  mooyahoSVG,
+  mooyahoWeUseSVG,
+} from '~/assets';
+import {
+  LeftDoodleWrapper,
+  RightDoodleWrapper,
+  SignUpFormHeader,
+} from './index.style';
 
 const LeftDoodles: FC = () => {
   return (
@@ -19,4 +28,14 @@ const RightDoodles: FC = () => {
   );
 };
 
-export { LeftDoodles, RightDoodles };
+const HeaderTitle: FC = () => {
+  return (
+    <SignUpFormHeader>
+      <img src={doodleRobotSVG} alt="robot" />
+      <h1 className="text-baemin100">배민</h1>
+      <h1>문방구</h1>
+    </SignUpFormHeader>
+  );
+};
+
+export { LeftDoodles, RightDoodles, HeaderTitle };

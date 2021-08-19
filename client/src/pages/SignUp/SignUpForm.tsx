@@ -17,11 +17,10 @@ import Checkbox from '~/components/Checkbox';
 import Copyright from '~/components/Copyright';
 import Space from '~/components/Space';
 
-import { doodleRobotSVG, hyphenSVG } from '~/assets';
+import { hyphenSVG } from '~/assets';
 
 import {
   SignUpFormWrapper,
-  SignUpFormHeader,
   ButtonWrapper,
   CheckboxWrapper,
   CheckboxSection,
@@ -36,6 +35,7 @@ import {
 } from './index.style';
 import { useHistory } from '~/core/Router';
 import { postUser } from '~/lib/api/users';
+import { HeaderTitle } from './index.fc';
 
 const SignUpForm: FC = () => {
   const { push } = useHistory();
@@ -136,11 +136,7 @@ const SignUpForm: FC = () => {
 
   return (
     <SignUpFormWrapper onSubmit={(e) => e.preventDefault()}>
-      <SignUpFormHeader>
-        <img src={doodleRobotSVG} alt="robot" />
-        <h1 className="text-baemin100">배민</h1>
-        <h1>문방구</h1>
-      </SignUpFormHeader>
+      <HeaderTitle />
       <InputWrapper>
         <LabelRow>
           <Label>아이디</Label>
@@ -148,7 +144,6 @@ const SignUpForm: FC = () => {
         </LabelRow>
         <Input autoComplete="off" type="text" onChange={handleId} />
       </InputWrapper>
-      <Space height="48px" aria-hidden />
       <InputWrapper>
         <LabelRow>
           <Label>비밀번호</Label>
@@ -156,7 +151,6 @@ const SignUpForm: FC = () => {
         </LabelRow>
         <Input autoComplete="false" type="password" onChange={handlePW} />
       </InputWrapper>
-      <Space height="48px" aria-hidden />
       <InputWrapper>
         <LabelRow>
           <Label>비밀번호 확인</Label>
@@ -164,7 +158,6 @@ const SignUpForm: FC = () => {
         </LabelRow>
         <Input autoComplete="false" type="password" onChange={handlePWRe} />
       </InputWrapper>
-      <Space height="48px" aria-hidden />
       <InputWrapper>
         <LabelRow>
           <Label>이메일</Label>
@@ -172,7 +165,6 @@ const SignUpForm: FC = () => {
         </LabelRow>
         <Input autoComplete="false" type="text" onChange={handleEmail} />
       </InputWrapper>
-      <Space height="48px" aria-hidden />
       <InputWrapper>
         <LabelRow>
           <Label>전화번호</Label>
@@ -203,42 +195,44 @@ const SignUpForm: FC = () => {
           />
         </PhoneInputWrapper>
       </InputWrapper>
-      <Space height="48px" aria-hidden />
-      <LabelRow>
-        <Label>약관 동의</Label>
-      </LabelRow>
-      <CheckboxSection>
-        <CheckboxWrapper onClick={handleCheckAll}>
-          <Checkbox checked={checkAll} />
-          <span style={{ fontSize: '20px', lineHeight: '25px' }}>
-            아래 약관에 모두 동의합니다
-          </span>
-        </CheckboxWrapper>
-      </CheckboxSection>
-      <CheckboxSection>
-        <CheckboxWrapper onClick={handleCheck1}>
-          <Checkbox checked={check1} />
-          <span>개인정보 이용약관 (필수)</span>
-        </CheckboxWrapper>
-      </CheckboxSection>
-      <Policy>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
-        doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis
-        ducimus? Nulla, laudantium maxime incidunt laborum iure vero
-        consequuntur tenetur voluptatibus voluptate.
-      </Policy>
-      <CheckboxSection>
-        <CheckboxWrapper onClick={handleCheck2}>
-          <Checkbox checked={check2} />
-          <span>배민문방구 이용약관 (필수)</span>
-        </CheckboxWrapper>
-      </CheckboxSection>
-      <Policy>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
-        doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis
-        ducimus? Nulla, laudantium maxime incidunt laborum iure vero
-        consequuntur tenetur voluptatibus voluptate.
-      </Policy>
+      <div>
+        <LabelRow>
+          <Label>약관 동의</Label>
+        </LabelRow>
+        <CheckboxSection>
+          <CheckboxWrapper onClick={handleCheckAll}>
+            <Checkbox checked={checkAll} />
+            <span style={{ fontSize: '20px', lineHeight: '25px' }}>
+              아래 약관에 모두 동의합니다
+            </span>
+          </CheckboxWrapper>
+        </CheckboxSection>
+        <CheckboxSection>
+          <CheckboxWrapper onClick={handleCheck1}>
+            <Checkbox checked={check1} />
+            <span>개인정보 이용약관 (필수)</span>
+          </CheckboxWrapper>
+        </CheckboxSection>
+        <Policy>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
+          doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis
+          ducimus? Nulla, laudantium maxime incidunt laborum iure vero
+          consequuntur tenetur voluptatibus voluptate.
+        </Policy>
+        <CheckboxSection>
+          <CheckboxWrapper onClick={handleCheck2}>
+            <Checkbox checked={check2} />
+            <span>배민문방구 이용약관 (필수)</span>
+          </CheckboxWrapper>
+        </CheckboxSection>
+        <Policy>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
+          doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis
+          ducimus? Nulla, laudantium maxime incidunt laborum iure vero
+          consequuntur tenetur voluptatibus voluptate.
+        </Policy>
+      </div>
+
       <ButtonWrapper>
         <Button size="lg" onClick={onSubmit}>
           회원가입
