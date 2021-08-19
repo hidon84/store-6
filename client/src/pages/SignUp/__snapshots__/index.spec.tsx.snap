@@ -302,7 +302,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
       class="c1"
     >
       <img
-        alt="jiroboQuote"
+        alt="뷁"
       />
     </aside>
     <form
@@ -585,10 +585,10 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
       class="c21"
     >
       <img
-        alt="jiroboQuote"
+        alt="무야호"
       />
       <img
-        alt="jiroboQuote"
+        alt="저희가 많이 보죠"
       />
     </aside>
   </div>
