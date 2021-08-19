@@ -40,8 +40,11 @@ import {
   PhoneInput,
 } from './index.style';
 import { LeftDoodles, RightDoodles } from './index.fc';
+import { postUser } from '~/lib/api/users';
+import { useHistory } from '~/core/Router';
 
 const SignUpPage: FC = () => {
+  const { push } = useHistory();
   const [id, idWarning, handleId] = useInputValidator('', (idIn) => {
     if (idIn === '') return ' ';
     if (REG_ID.test(idIn)) return '';
@@ -111,7 +114,7 @@ const SignUpPage: FC = () => {
     setCheck2(!check2);
   }, [check2]);
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async () => {
     if (check1 === false || check2 === false) {
       alert('약관을 동의해주세요');
       return;
@@ -133,8 +136,29 @@ const SignUpPage: FC = () => {
       alert(warning);
     }
 
-    alert('submit!');
+    /**
+     * @todo: postUser의 response 다듬기
+     */
+    const res = await postUser({
+      id,
+      password: pw,
+      phone: `${ph0}-${ph1}-${ph2}`,
+      email,
+      privacyTermsAndConditions: check1,
+      serviceTermsAndConditions: check2,
+    });
+    if (res.statusCode > 400) {
+      alert('회원가입 실패! 유감!');
+      return;
+    }
+    push('/login');
   }, [
+    id,
+    pw,
+    email,
+    ph0,
+    ph1,
+    ph2,
     check1,
     check2,
     idWarning,
