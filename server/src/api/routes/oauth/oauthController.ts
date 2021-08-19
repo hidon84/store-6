@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typeorm-typedi-extensions';
 import * as oauthHelper from '@/helper/oauth';
 import OAuthService from '@/service/oauth';
+import ErrorResponse from '@/utils/errorResponse';
+import { commonError } from '@/constants/error';
 
 export const handleOauthGoogle = (
   _req: Request,
@@ -22,6 +24,11 @@ export const handleOauthGoogleCallback = async (
 ) => {
   try {
     const { code } = req.query;
+
+    if (!code) {
+      throw new ErrorResponse(commonError.invalidQuery);
+    }
+
     const oauthServiceInstance = Container.get(OAuthService);
 
     const accessToken = await oauthServiceInstance.getGoogleAccessToken(
