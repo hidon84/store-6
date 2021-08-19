@@ -44,9 +44,10 @@ const useSearchTerm = (
    */
   const addTermOnList = (term: string) => {
     const storedTermValue = getValueOnLocalStorage('recentlySearchTerm');
-    if (storedTermValue.includes(term)) return;
+    if (storedTermValue && storedTermValue.includes(term)) return;
 
-    const addedTermList = [...storedTermValue, term];
+    const addedTermList = storedTermValue ? [...storedTermValue, term] : [term];
+
     dispatch(setSearchValue(term));
     reflectRenewTerm(addedTermList);
   };
