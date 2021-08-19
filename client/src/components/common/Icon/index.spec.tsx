@@ -2,7 +2,7 @@ import 'jest-styled-components';
 import { render } from '@testing-library/react';
 
 import { BigGiftSVG, SmallGiftSVG } from '~/assets';
-import Icon from '~/components/Icon';
+import Icon from '~/components/common/Icon';
 
 describe('<Icon />', () => {
   it('should render Small Icon same with snapshot', () => {

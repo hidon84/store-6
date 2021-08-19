@@ -2,11 +2,11 @@ import React, { FC, createContext } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
-import Navigation from '~/components/Navigation';
+import Navigation from '~/components/base/Navigation';
 import LoginPage from '~/pages/Login';
 import SignUpPage from '~/pages/SignUp';
-import AlertModal from './components/AlertModal';
-import ConfirmModal from './components/ConfirmModal';
+import AlertModal from './components/modal/AlertModal';
+import ConfirmModal from './components/modal/ConfirmModal';
 import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
 
