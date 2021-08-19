@@ -8,17 +8,13 @@ export const ImageContainer = styled.div`
   width: 83px;
   height: 83px;
 
-  img{
+  img {
     place-self: center;
     width: 47px;
-    cursor: pointer;
-    transition: all 300ms;
-    &:hover {
-      transform: scale(1.08);
-    }
   }
 
-  &.selected{
+  &.selected {
+    transform: scale(1.2);
     background: url(${SmallCircleSVG}) no-repeat center center;
   }
-`
+`;
