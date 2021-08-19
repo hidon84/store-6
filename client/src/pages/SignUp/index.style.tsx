@@ -27,7 +27,7 @@ const RightDoodleWrapper = styled.aside`
   justify-content: space-evenly;
 `;
 
-const SignUpForm = styled.form`
+const SignUpFormWrapper = styled.form`
   display: flex;
   flex: 2;
   min-width: 400px;
@@ -154,7 +154,7 @@ export {
   LeftDoodleWrapper,
   Policy,
   RightDoodleWrapper,
-  SignUpForm,
+  SignUpFormWrapper,
   SignUpFormHeader,
   StyledLoginPage,
   WarningMessage,
