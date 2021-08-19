@@ -55,11 +55,11 @@ const LoginPage: FC = () => {
 
   const onSubmit = async () => {
     if (idWarning) {
-      alert('아이디를 제대로 작성해주세요');
+      alert(`아이디 에러. ${idWarning}`);
       return;
     }
     if (pwWarning) {
-      alert('비밀번호를 제대로 작성해주세요');
+      alert(`비밀번호 에러. ${pwWarning}`);
       return;
     }
 
