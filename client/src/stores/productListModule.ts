@@ -27,6 +27,7 @@ const RESET_CATEGORY = 'RESET_CATEGORY';
 const SET_ORDER = 'SET_ORDER';
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 const SET_NEXT_PAGE = 'SET_NEXT_PAGE';
+const REMOVE_SEARCH_VALUE = 'REMOVE_SEARCH_VALUE';
 
 // Action Creator
 export const setCategory = (payload: CategoryType) => ({
@@ -41,6 +42,7 @@ export const setSearchValue = (payload: SearchValueType) => ({
   type: SET_SEARCH_VALUE,
   payload: { search: payload },
 });
+export const removeSearchValue = () => ({ type: REMOVE_SEARCH_VALUE });
 export const setNextPage = () => ({ type: SET_NEXT_PAGE });
 
 export const resetCategory = () => ({
@@ -70,6 +72,10 @@ const filterReducer = (
       return { ...state, order: action.payload.order };
     case SET_SEARCH_VALUE:
       return { ...state, search: action.payload.search };
+    case REMOVE_SEARCH_VALUE: {
+      const { search, ...rest } = state;
+      return { ...rest };
+    }
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
     case RESET_CATEGORY: {
@@ -86,6 +92,7 @@ const productListModule = () => {
     filterReducer,
     INITIAL_FILTER_STATE,
   );
+
   return { filterState, dispatch };
 };
 

@@ -58,6 +58,9 @@ const SearchSVG = `${S3_PREFIX}/product/search.svg`;
 const RefreshSVG = `${S3_PREFIX}/product/refresh.svg`;
 const SpringSVG = `${S3_PREFIX}/product/spring.svg`;
 const UnderlineBaeminColorSVG = `${S3_PREFIX}/product/underline-baemin-color.svg`;
+const SearchBoxUnderlineSVG = `${S3_PREFIX}/product/search-box-underline.svg`;
+const VerticalDividerSVG = `${S3_PREFIX}/product/vertical-divider.svg`;
+const XSVG = `${S3_PREFIX}/product/x.svg`;
 
 export {
   LogoSVG,
@@ -110,4 +113,7 @@ export {
   UnderlineBaeminColorSVG,
   mooyahoSVG,
   mooyahoWeUseSVG,
+  SearchBoxUnderlineSVG,
+  VerticalDividerSVG,
+  XSVG,
 };
