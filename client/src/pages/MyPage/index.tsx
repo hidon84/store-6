@@ -1,5 +1,5 @@
 import React, { useState, useRef, RefObject, useEffect } from 'react';
-import Divider from '~/components/Divider';
+import Divider from '~/components/common/Divider';
 import { getMe, putMe } from '~/lib/api/users';
 import { login } from '~/lib/api/auth';
 import {
@@ -13,9 +13,9 @@ import {
   REG_PHONE,
 } from '~/utils/validation';
 import { alert } from '~/utils/modal';
-import UserInfoInput from '~/components/UserInfoInput';
-import PhoneInput from '~/components/PhoneInput';
-import EmailInput from '~/components/EmailInput';
+import UserInfoInput from '~/components/my/UserInfoInput';
+import PhoneInput from '~/components/my/PhoneInput';
+import EmailInput from '~/components/my/EmailInput';
 import {
   StyledMyPage,
   Title,

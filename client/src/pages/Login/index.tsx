@@ -12,12 +12,12 @@ import {
 import { alert } from '~/utils/modal';
 import { login } from '~/lib/api/auth';
 
-import Input from '~/components/Input';
-import Button from '~/components/Button';
-import Checkbox from '~/components/Checkbox';
-import Divider from '~/components/Divider';
-import Copyright from '~/components/Copyright';
-import InputHelp from '~/components/InputHelp';
+import Input from '~/components/common/Input';
+import Button from '~/components/common/Button';
+import Checkbox from '~/components/common/Checkbox';
+import Divider from '~/components/common/Divider';
+import Copyright from '~/components/base/Copyright';
+import InputHelp from '~/components/login/InputHelp';
 
 import {
   doodleTeasingSVG,
