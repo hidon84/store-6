@@ -16,6 +16,10 @@ const setAuthorizationHeader = (response: AxiosResponse<AuthResponseBody>) => {
   client.defaults.headers.common.Authorization = `Bearer ${access}`;
 };
 
+const clearAuthorizationHeader = () => {
+  client.defaults.headers.common.Authorization = '';
+};
+
 export const login = (reqData: LoginRequestBody) =>
   request<AuthResponseBody, LoginRequestBody>(
     'POST',
@@ -25,6 +29,7 @@ export const login = (reqData: LoginRequestBody) =>
     setAuthorizationHeader,
   );
 
-export const logout = () => request('GET', authUrl.logout);
+export const logout = () =>
+  request('GET', authUrl.logout, null, null, clearAuthorizationHeader);
 
 export const refresh = () => request<AuthResponseBody>('GET', authUrl.refresh);
