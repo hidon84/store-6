@@ -117,7 +117,7 @@ const SignUpPage: FC = () => {
       alert('회원가입 실패! 유감!');
       return;
     }
-    push('/login');
+    push('/login', { id, from: '/signup' });
   }, [
     id,
     pw,
