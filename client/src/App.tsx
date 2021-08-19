@@ -9,6 +9,7 @@ import AlertModal from './components/modal/AlertModal';
 import ConfirmModal from './components/modal/ConfirmModal';
 import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
+import MainPage from './pages/Main';
 
 const Main = styled.main`
   height: 100%;
@@ -22,6 +23,9 @@ const App = () => {
         <Navigation />
         <Main>
           <Switch>
+            <Route exact path="/">
+              <MainPage />
+            </Route>
             <Route exact path="/login">
               <LoginPage />
             </Route>
