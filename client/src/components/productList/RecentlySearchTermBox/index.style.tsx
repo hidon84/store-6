@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { SearchTermWrapper } from '../SearchTerm/index.style';
 
-export const RecentlySearchTermBoxWrapper = styled.div`
+export const RecentlySearchTermBoxWrapper = styled.div<{ isEmpty: boolean }>`
+  opacity: ${({ isEmpty }) => (isEmpty ? 0 : 1)};
   display: flex;
   align-items: center;
-  opacity: 1;
   margin: 0 0 30px 7px;
 
   ${SearchTermWrapper}:not(:last-child) {

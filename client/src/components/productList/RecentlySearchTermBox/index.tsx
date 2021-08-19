@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { VerticalDividerSVG } from '~/assets';
-import { getValueOnLocalStorage } from '~/utils/localStorage';
 import SearchTerm from '../SearchTerm';
 
 import {
@@ -11,17 +10,13 @@ import {
   RecentlySearchTermTitle,
 } from './index.style';
 
-const RecentlySearchTermBox: FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string[]>(
-    getValueOnLocalStorage('recentlySearchTerm'),
-  );
-
+const RecentlySearchTermBox: FC<{ termList: string[] }> = ({ termList }) => {
   return (
-    <RecentlySearchTermBoxWrapper>
+    <RecentlySearchTermBoxWrapper isEmpty={termList.length === 0}>
       <RecentlySearchTermTitle>최근 검색어</RecentlySearchTermTitle>
       <Divider src={VerticalDividerSVG} />
       <TermWrapper>
-        {searchTerm.map((term, idx) => (
+        {termList.map((term, idx) => (
           <SearchTerm term={term} key={`term-${idx}`} />
         ))}
       </TermWrapper>
