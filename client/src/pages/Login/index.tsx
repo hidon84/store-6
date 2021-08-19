@@ -95,23 +95,15 @@ const LoginPage: FC = () => {
         <Input
           autoComplete="off"
           type="text"
-          name="id"
-          id="id"
           placeholder="아이디"
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-            handleId(ev.target.value);
-          }}
+          onChange={handleId}
         />
         <InputHelp>{idWarning}</InputHelp>
         <Input
           autoComplete="off"
           type="password"
-          name="password"
-          id="password"
           placeholder="비밀번호"
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-            handlePW(ev.target.value);
-          }}
+          onChange={handlePW}
         />
         <InputHelp>{pwWarning}</InputHelp>
         <ButtonWrapper>

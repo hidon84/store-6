@@ -43,57 +43,56 @@ import {
 } from './index.style';
 
 const SignUpPage: FC = () => {
-  const [id, idWarning, handleId] = useInputValidator('', (id_input) => {
-    const { length } = id_input;
-    if (length === 0) return ' ';
-    if (REG_ID.test(id_input)) return '';
+  const [id, idWarning, handleId] = useInputValidator('', (idIn) => {
+    if (idIn === '') return ' ';
+    if (REG_ID.test(idIn)) return '';
 
     return WARNING_ID;
   });
-  const [pw, pwWarning, handlePW] = useInputValidator('', (pw_input) => {
-    const { length } = pw_input;
-    if (length === 0) return ' ';
-    if (REG_PW.test(pw_input)) return '';
+  const [pw, pwWarning, handlePW] = useInputValidator('', (pwIn) => {
+    if (pwIn === '') return ' ';
+    if (REG_PW.test(pwIn)) return '';
 
     return WARNING_PW;
   });
 
-  const [pwRe, pwReWarning, handlePWRe] = useInputValidator('', (pw_input) => {
-    if (pw_input === pw) return '';
-    return WARNING_PWRE;
-  });
-
-  const [email, emailWarning, handleEmail] = useInputValidator(
+  const [pwRe, pwReWarning, handlePWRe] = useInputValidator(
     '',
-    (email_input) => {
-      const { length } = email_input;
-      if (length === 0) return ' ';
-      if (REG_EMAIL.test(email_input)) return '';
-
-      return WARNING_EMAIL;
+    (pwReIn) => {
+      if (pwReIn === pw) return '';
+      return WARNING_PWRE;
     },
+    [pw],
   );
 
-  const [ph0, ph0Warning, handlePh0] = useInputValidator('', (ph0_input) => {
-    const { length } = ph0_input;
-    if (length === 0) return ' ';
-    if (REG_PH0.test(ph0_input)) return '';
+  const [email, emailWarning, handleEmail] = useInputValidator('', (mailIn) => {
+    if (mailIn === '') return ' ';
+    if (REG_EMAIL.test(mailIn)) return '';
+
+    return WARNING_EMAIL;
+  });
+
+  const [ph0, ph0Warning, handlePh0] = useInputValidator('', (ph0In) => {
+    if (ph0In === '') return ' ';
+    if (REG_PH0.test(ph0In)) return '';
 
     return WARNING_PHONE;
   });
 
-  const [ph1, ph1Warning, handlePh1] = useInputValidator('', (ph1_input) => {
-    const { length } = ph1_input;
-    if (length === 0) return ' ';
-    if (REG_PH1.test(ph1_input)) return '';
+  const [ph1, ph1Warning, handlePh1] = useInputValidator(
+    '',
+    (ph1In) => {
+      if (ph1In === '') return ' ';
+      if (REG_PH1.test(ph1In)) return '';
 
-    return WARNING_PHONE;
-  });
+      return WARNING_PHONE;
+    },
+    [],
+  );
 
-  const [ph2, ph2Warning, handlePh2] = useInputValidator('', (ph2_input) => {
-    const { length } = ph2_input;
-    if (length === 0) return ' ';
-    if (REG_PH2.test(ph2_input)) return '';
+  const [ph2, ph2Warning, handlePh2] = useInputValidator('', (ph2In) => {
+    if (ph2In === '') return ' ';
+    if (REG_PH2.test(ph2In)) return '';
 
     return WARNING_PHONE;
   });
@@ -166,13 +165,7 @@ const SignUpPage: FC = () => {
             <Label>아이디</Label>
             <WarningMessage>{idWarning}</WarningMessage>
           </LabelRow>
-          <Input
-            autoComplete="off"
-            type="text"
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-              handleId(ev.target.value);
-            }}
-          />
+          <Input autoComplete="off" type="text" onChange={handleId} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
@@ -180,13 +173,7 @@ const SignUpPage: FC = () => {
             <Label>비밀번호</Label>
             <WarningMessage>{pwWarning}</WarningMessage>
           </LabelRow>
-          <Input
-            autoComplete="false"
-            type="password"
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-              handlePW(ev.target.value);
-            }}
-          />
+          <Input autoComplete="false" type="password" onChange={handlePW} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
@@ -194,13 +181,7 @@ const SignUpPage: FC = () => {
             <Label>비밀번호 확인</Label>
             <WarningMessage>{pwReWarning}</WarningMessage>
           </LabelRow>
-          <Input
-            autoComplete="false"
-            type="password"
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-              handlePWRe(ev.target.value);
-            }}
-          />
+          <Input autoComplete="false" type="password" onChange={handlePWRe} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
@@ -208,13 +189,7 @@ const SignUpPage: FC = () => {
             <Label>이메일</Label>
             <WarningMessage>{emailWarning}</WarningMessage>
           </LabelRow>
-          <Input
-            autoComplete="false"
-            type="text"
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-              handleEmail(ev.target.value);
-            }}
-          />
+          <Input autoComplete="false" type="text" onChange={handleEmail} />
         </InputWrapper>
         <Space height="48px" aria-hidden />
         <InputWrapper>
@@ -229,27 +204,21 @@ const SignUpPage: FC = () => {
               autoComplete="false"
               type="text"
               placeholder="010"
-              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                handlePh0(ev.target.value);
-              }}
+              onChange={handlePh0}
             />
             <img src={hyphenSVG} alt="hyphen" />
             <PhoneInput
               autoComplete="false"
               type="text"
               placeholder="0000"
-              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                handlePh1(ev.target.value);
-              }}
+              onChange={handlePh1}
             />
             <img src={hyphenSVG} alt="hyphen" />
             <PhoneInput
               autoComplete="false"
               type="text"
               placeholder="0000"
-              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                handlePh2(ev.target.value);
-              }}
+              onChange={handlePh2}
             />
           </PhoneInputWrapper>
         </InputWrapper>
