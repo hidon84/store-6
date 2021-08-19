@@ -17,7 +17,6 @@ enum CategoryType {
 const CategoryFilter: React.FC = () => {
   const { dispatch, ...state } = useContext(FilterContext);
 
-  console.log(state);
   return (
     <div>
       <button

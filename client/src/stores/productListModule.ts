@@ -5,9 +5,16 @@ import { ProductsGetRequestQuery } from '~/lib/api/types';
 export type CategoryType = ProductsGetRequestQuery['category'];
 export type OrderType = ProductsGetRequestQuery['order'];
 export type SearchValueType = ProductsGetRequestQuery['search'];
+
+export interface ActionPayload {
+  category?: CategoryType;
+  order?: OrderType;
+  search?: SearchValueType;
+}
+
 export interface ActionType {
   type: string;
-  payload?: CategoryType | OrderType | SearchValueType;
+  payload?: ActionPayload;
 }
 
 const DEFAULT_PAGE_NUMBER = 1;
@@ -22,15 +29,15 @@ const SET_NEXT_PAGE = 'SET_NEXT_PAGE';
 // Action Creator
 export const setCategory = (payload: CategoryType) => ({
   type: SET_CATEGORY,
-  payload,
+  payload: { category: payload },
 });
 export const setOrder = (payload: OrderType) => ({
   type: SET_ORDER,
-  payload,
+  payload: { order: payload },
 });
 export const setSearchValue = (payload: SearchValueType) => ({
   type: SET_SEARCH_VALUE,
-  payload,
+  payload: { search: payload },
 });
 export const setNextPage = () => ({ type: SET_NEXT_PAGE });
 
@@ -49,15 +56,14 @@ const filterReducer = (
   switch (action.type) {
     case SET_CATEGORY: {
       if (!('category' in state) || state.category !== action.payload)
-        return { ...state, category: action.payload as CategoryType };
-
+        return { ...state, category: action.payload.category };
       const { category, ...rest } = state;
       return { ...rest };
     }
     case SET_ORDER:
-      return { ...state, order: action.payload as OrderType };
+      return { ...state, order: action.payload.order };
     case SET_SEARCH_VALUE:
-      return { ...state, search: action.payload as SearchValueType };
+      return { ...state, search: action.payload.search };
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
     default:
@@ -70,7 +76,6 @@ const productListModule = () => {
     filterReducer,
     INITIAL_FILTER_STATE,
   );
-
   return { filterState, dispatch };
 };
 
