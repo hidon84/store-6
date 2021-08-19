@@ -12,6 +12,7 @@ export const SearchBoxForm = styled.form`
 
 export const SearchInput = styled.input`
   height: 46px;
+  font-size: 25px;
   line-height: 31px;
   padding: 0 20px 0 80px;
 

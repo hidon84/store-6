@@ -12,8 +12,14 @@ export const RecentlySearchTermBoxWrapper = styled.div`
   }
 `;
 
+export const RecentlySearchTermTitle = styled.span`
+  font-size: 16px;
+  line-height: 20px;
+  color: #999999;
+`;
+
 export const Divider = styled.img`
-  margin: 0 12px;
+  margin: 2px 12px 0px 12px;
 `;
 
 export const TermWrapper = styled.div`

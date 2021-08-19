@@ -1,29 +1,27 @@
 /* eslint-disable react/no-array-index-key */
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { VerticalDividerSVG } from '~/assets';
+import { getValueOnLocalStorage } from '~/utils/localStorage';
 import SearchTerm from '../SearchTerm';
 
 import {
   RecentlySearchTermBoxWrapper,
   Divider,
   TermWrapper,
+  RecentlySearchTermTitle,
 } from './index.style';
 
 const RecentlySearchTermBox: FC = () => {
-  const terms: string[] = [
-    '지로보',
-    '길게하면 어디까지 가려나',
-    '길게하면 어디까지 가려나',
-    '길게하면 어디까지 가려나',
-    // '길게하면 어디까지 가려나',
-  ];
+  const [searchTerm, setSearchTerm] = useState<string[]>(
+    getValueOnLocalStorage('recentlySearchTerm'),
+  );
 
   return (
     <RecentlySearchTermBoxWrapper>
-      <span>최근 검색어</span>
+      <RecentlySearchTermTitle>최근 검색어</RecentlySearchTermTitle>
       <Divider src={VerticalDividerSVG} />
       <TermWrapper>
-        {terms.map((term, idx) => (
+        {searchTerm.map((term, idx) => (
           <SearchTerm term={term} key={`term-${idx}`} />
         ))}
       </TermWrapper>
