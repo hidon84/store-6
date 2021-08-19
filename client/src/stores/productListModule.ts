@@ -5,11 +5,10 @@ import { ProductsGetRequestQuery } from '~/lib/api/types';
 export type CategoryType = ProductsGetRequestQuery['category'];
 export type OrderType = ProductsGetRequestQuery['order'];
 export type SearchValueType = ProductsGetRequestQuery['search'];
-export type ActionType = {
+export interface ActionType {
   type: string;
-  payload?: any;
-  //   payload?: CategoryType | OrderType | SearchValueType;
-};
+  payload?: CategoryType | OrderType | SearchValueType;
+}
 
 const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_PRODUCTS_AMOUNT = 20;
@@ -43,19 +42,22 @@ export const INITIAL_FILTER_STATE: ProductsGetRequestQuery = {
 };
 
 // Reducer
-const filterReducer = (state: ProductsGetRequestQuery, action: ActionType) => {
+const filterReducer = (
+  state: ProductsGetRequestQuery,
+  action: ActionType,
+): ProductsGetRequestQuery => {
   switch (action.type) {
     case SET_CATEGORY: {
       if (!('category' in state) || state.category !== action.payload)
-        return { ...state, category: action.payload };
+        return { ...state, category: action.payload as CategoryType };
 
       const { category, ...rest } = state;
       return { ...rest };
     }
     case SET_ORDER:
-      return { ...state, order: action.payload };
+      return { ...state, order: action.payload as OrderType };
     case SET_SEARCH_VALUE:
-      return { ...state, search: action.payload };
+      return { ...state, search: action.payload as SearchValueType };
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
     default:

@@ -1,6 +1,7 @@
 import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/CategoryFilter';
 import OrderFilter from '~/components/OrderFilter';
+import { ProductsGetRequestQuery } from '~/lib/api/types';
 import productListModule, {
   ActionType,
   INITIAL_FILTER_STATE,
@@ -13,16 +14,18 @@ import {
   VerticalDivider,
 } from './index.style';
 
-export const FilterContext = createContext({
-  ...INITIAL_FILTER_STATE,
-  dispatch: (_: ActionType) => {},
-});
+interface FilterContextState {
+  state: ProductsGetRequestQuery;
+  dispatch: (action: ActionType) => void;
+}
+
+export const FilterContext = createContext<FilterContextState>(null);
 
 const ProductList: FC = () => {
   const { filterState, dispatch } = productListModule();
 
   return (
-    <FilterContext.Provider value={{ ...filterState, dispatch }}>
+    <FilterContext.Provider value={{ state: filterState, dispatch }}>
       <ProductListWrapper>
         <LeftSection>
           <CategoryFilter />
