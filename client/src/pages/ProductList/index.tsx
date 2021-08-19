@@ -1,5 +1,6 @@
 import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/productList/CategoryFilter';
+import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
 import OrderFilter from '~/components/productList/OrderFilter';
 import SearchBox from '~/components/productList/SearchBox';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
@@ -31,7 +32,7 @@ const ProductList: FC = () => {
         </LeftSection>
         <VerticalDivider />
         <RightSection>
-          <button type="button">카테고리 현재 선택</button>
+          <CategoryIdentifier />
           <SearchBox />
           <div>상품리스트</div>
           <div>스크롤</div>
