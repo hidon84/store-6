@@ -10,15 +10,6 @@ const StyledLoginPage = styled.div`
   height: 100%;
 `;
 
-const LeftDoodleWrapper = styled.aside`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-
 const RightDoodleWrapper = styled.aside`
   display: flex;
   flex: 1;
@@ -38,15 +29,6 @@ const SignUpFormWrapper = styled.form`
   gap: 28px;
   justify-content: flex-start;
   align-items: center;
-`;
-
-const SignUpFormHeader = styled.header`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 64px;
-  margin-bottom: 64px;
-  font-size: 48px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -154,11 +136,9 @@ export {
   InputWrapper,
   Label,
   LabelRow,
-  LeftDoodleWrapper,
   Policy,
   RightDoodleWrapper,
   SignUpFormWrapper,
-  SignUpFormHeader,
   StyledLoginPage,
   WarningMessage,
   PhoneInputWrapper,

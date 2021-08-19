@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
 import { StyledLoginPage } from './index.style';
-import { LeftDoodles, RightDoodles } from './index.fc';
-import SignUpForm from './SignUpForm';
-import SignUpTypes from './SignUpTypes';
+import LeftDoodles from '~/components/signup/LeftDoodles';
+import RightDoodles from '~/components/signup/RightDoodles';
+import SignUpForm from '~/components/signup/SignUpForm';
+import SignUpTypes from '~/components/signup/SignUpTypes';
 
 const SignUpPage: FC = () => {
   return (

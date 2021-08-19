@@ -6,7 +6,7 @@ import {
   signUpWithOwnSVG,
 } from '~/assets';
 import Space from '~/components/common/Space';
-import { HeaderTitle } from './index.fc';
+import HeaderTitle from '~/components/signup/HeaderTitle';
 
 const SignUpTypesWrapper = styled.div`
   display: flex;

@@ -32,10 +32,11 @@ import {
   Policy,
   PhoneInputWrapper,
   PhoneInput,
-} from './index.style';
+} from '~/pages/SignUp/index.style';
 import { useHistory } from '~/core/Router';
 import { postUser } from '~/lib/api/users';
-import { HeaderTitle } from './index.fc';
+import HeaderTitle from './HeaderTitle';
+import { ErrorResponse } from '~/lib/api/types';
 
 const SignUpForm: FC = () => {
   const { push } = useHistory();
@@ -110,12 +111,13 @@ const SignUpForm: FC = () => {
       email,
       privacyTermsAndConditions: check1,
       serviceTermsAndConditions: check2,
-    });
-    if (res.statusCode > 400) {
-      alert('회원가입 실패! 유감!');
-      return;
-    }
-    push('/login', { id, from: '/signup' });
+    })
+      .then(() => {
+        push('/login', { id, from: '/signup' });
+      })
+      .catch((e: ErrorResponse) => {
+        alert(e.message);
+      });
   }, [
     id,
     pw,
