@@ -15,6 +15,10 @@ export const CategoryHeder = styled.div`
   margin-bottom: 33px;
   img {
     width: 25px;
+    &:hover {
+      transition: all 300ms;
+      transform: scale(1.2);
+    }
   }
 `;
 
