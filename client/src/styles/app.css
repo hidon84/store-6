@@ -1,5 +1,5 @@
-@import './font.css';
-@import './reset.css';
+@import "./font.css";
+@import "./reset.css";
 
 :root {
   --baemin100: #2ac1bc;
@@ -10,7 +10,6 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  min-height:1024px;
   align-items: center;
 }
 
