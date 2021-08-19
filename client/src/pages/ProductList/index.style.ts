@@ -14,7 +14,7 @@ export const LeftSection = styled.section`
 `;
 
 export const RightSection = styled.section`
-  width: 700px;
+  width: 100%;
 `;
 
 export const VerticalDivider = styled.div`
