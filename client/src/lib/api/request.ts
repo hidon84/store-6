@@ -21,7 +21,7 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
   params?: PARAMS,
   successCallback?: (response: AxiosResponse<RES>) => void,
   failureCallback?: (response: AxiosResponse<ErrorResponseBody>) => void,
-): Promise<ApiResponse<RES> | ErrorResponse> => {
+): Promise<ApiResponse<RES>> => {
   const response = (await client({
     method,
     url,
@@ -41,7 +41,7 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
       const axiosErrorResponse = response as AxiosResponse<ErrorResponseBody>;
       failureCallback(axiosErrorResponse);
     }
-    return errorResponse;
+    throw errorResponse;
   }
 
   if (successCallback) {
