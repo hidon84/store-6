@@ -12,7 +12,6 @@ import {
 } from './index.style';
 
 import {
-  BigBookSVG,
   SmallPencilSVG,
   SmallBaedalSVG,
   SmallColabSVG,
@@ -22,12 +21,13 @@ import {
   SmallKKSVG,
   SmallTreeSVG,
   RefreshSVG,
+  SmallBookSVG,
 } from '~/assets';
 
 import CategoryItem from '../CategoryItem';
 
 const Categorys = [
-  BigBookSVG,
+  SmallBookSVG,
   SmallPencilSVG,
   SmallHouseSVG,
   SmallTreeSVG,
