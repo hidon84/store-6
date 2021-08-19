@@ -7,12 +7,10 @@ export const SearchBoxForm = styled.form`
   width: 700px;
   height: fit-content;
   margin-bottom: 64px;
+  margin-bottom: 13px;
 `;
 
 export const SearchInput = styled.input`
-  width: 100%;
-  height: 44px;
-  font-size: 25px;
   line-height: 31px;
   padding: 0 20px 0 80px;
 

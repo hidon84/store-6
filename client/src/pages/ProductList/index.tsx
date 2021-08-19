@@ -1,6 +1,7 @@
 import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import OrderFilter from '~/components/productList/OrderFilter';
+import SearchBox from '~/components/productList/SearchBox';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
 import productListModule, {
   ActionType,
