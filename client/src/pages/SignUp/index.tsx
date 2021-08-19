@@ -9,7 +9,7 @@ const SignUpPage: FC = () => {
   return (
     <StyledLoginPage>
       <LeftDoodles />
-      <SignUpTypes />
+      <SignUpForm />
       <RightDoodles />
     </StyledLoginPage>
   );
