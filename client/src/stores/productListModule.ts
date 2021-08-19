@@ -7,7 +7,8 @@ export type OrderType = ProductsGetRequestQuery['order'];
 export type SearchValueType = ProductsGetRequestQuery['search'];
 export type ActionType = {
   type: string;
-  payload?: CategoryType | OrderType | SearchValueType;
+  payload?: any;
+  //   payload?: CategoryType | OrderType | SearchValueType;
 };
 
 const DEFAULT_PAGE_NUMBER = 1;

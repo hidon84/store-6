@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { FilterContext } from '~/pages/ProductList';
+import { setCategory, setSearchValue } from '~/stores/productListModule';
 
 enum CategoryType {
   Book,
@@ -14,11 +15,15 @@ enum CategoryType {
 }
 
 const CategoryFilter: React.FC = () => {
-  const { setCategory, ...state } = useContext(FilterContext);
+  const { dispatch, ...state } = useContext(FilterContext);
 
+  console.log(state);
   return (
     <div>
-      <button type="button" onClick={() => setCategory(CategoryType.Gift)}>
+      <button
+        type="button"
+        onClick={() => dispatch(setCategory(CategoryType.Book))}
+      >
         sdfsdfsdf
       </button>
     </div>
