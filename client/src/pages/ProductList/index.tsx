@@ -1,6 +1,7 @@
 import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/CategoryFilter';
 import OrderFilter from '~/components/OrderFilter';
+import SearchBox from '~/components/SearchBox';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
 import productListModule, {
   ActionType,
@@ -34,7 +35,7 @@ const ProductList: FC = () => {
         <VerticalDivider />
         <RightSection>
           <button type="button">카테고리 현재 선택</button>
-          <div>검색</div>
+          <SearchBox />
           <div>상품리스트</div>
           <div>스크롤</div>
         </RightSection>

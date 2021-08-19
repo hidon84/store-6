@@ -58,6 +58,7 @@ const SearchSVG = `${S3_PREFIX}/product/search.svg`;
 const RefreshSVG = `${S3_PREFIX}/product/refresh.svg`;
 const SpringSVG = `${S3_PREFIX}/product/spring.svg`;
 const UnderlineBaeminColorSVG = `${S3_PREFIX}/product/underline-baemin-color.svg`;
+const SearchBoxUnderlineSVG = `${S3_PREFIX}/product/search-box-underline.svg`;
 
 export {
   LogoSVG,
@@ -110,4 +111,5 @@ export {
   RefreshSVG,
   SpringSVG,
   UnderlineBaeminColorSVG,
+  SearchBoxUnderlineSVG,
 };
