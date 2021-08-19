@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { FC, createContext } from 'react';
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
