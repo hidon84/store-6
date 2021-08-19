@@ -19,7 +19,7 @@ const Book: FC = () => {
       type="button"
       style={{
         position: 'absolute',
-        left: '450px',
+        left: '20%',
         top: '110px',
         cursor: 'pointer',
       }}
@@ -34,8 +34,8 @@ const Baedal: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '550px',
-      top: '300px',
+      left: '30%',
+      top: '330px',
       cursor: 'pointer',
     }}
   >
@@ -48,7 +48,7 @@ const Hat: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '300px',
+      left: '10%',
       top: '580px',
       cursor: 'pointer',
     }}
@@ -62,7 +62,7 @@ const Gift: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '150px',
+      left: '0px',
       top: '280px',
       cursor: 'pointer',
     }}
@@ -76,7 +76,7 @@ const House: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '960px',
+      right: '30%',
       top: '240px',
       cursor: 'pointer',
     }}
@@ -90,7 +90,7 @@ const Kk: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '1100px',
+      right: '25%',
       top: '100px',
       cursor: 'pointer',
     }}
@@ -104,7 +104,7 @@ const Tree: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '800px',
+      right: '35%',
       top: '550px',
       cursor: 'pointer',
     }}
@@ -118,7 +118,7 @@ const Pencil: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '1300px',
+      right: '0%',
       top: '330px',
       cursor: 'pointer',
     }}
@@ -132,7 +132,7 @@ const Colab: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '1100px',
+      right: '10%',
       top: '550px',
       cursor: 'pointer',
     }}
@@ -146,7 +146,7 @@ const Stain: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '500px',
+      left: '20%',
       top: '100px',
       zIndex: -1,
     }}
@@ -159,7 +159,7 @@ const Logo: FC = () => (
   <button
     type="button"
     style={{
-      position: 'absolute',
+      position: 'fixed',
       left: '50px',
       top: '10px',
       cursor: 'pointer',
