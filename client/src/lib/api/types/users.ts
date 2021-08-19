@@ -7,6 +7,8 @@ export interface UsersPostRequestBody {
   email?: string;
   phone: string;
   profile?: string;
+  privacyTermsAndConditions: boolean;
+  serviceTermsAndConditions: boolean;
 }
 export type UsersPostResponseBody = UpdateInfo;
 

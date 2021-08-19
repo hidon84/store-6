@@ -1,9 +1,8 @@
 import React, { Fragment, useCallback, useMemo } from 'react';
-import Input from '~/components/Input';
-import Divider from '~/components/Divider';
 
-import { PhoneWrapper } from './index.style';
+import { PhoneWrapper, StyledPhoneInput } from './index.style';
 import { REG_NOT_DIGITS } from '~/utils/validation';
+import { hyphenSVG } from '~/assets';
 
 interface Props {
   onChange?: (phoneNumber: string) => void;
@@ -65,22 +64,16 @@ const PhoneInput: React.FC<Props> = ({
       {phoneNumbersInfo.map((phoneNumberInfo, i) => {
         return (
           <Fragment key={phoneNumberInfo.key}>
-            <Input
+            <StyledPhoneInput
               type="text"
-              width="90px"
-              value={phoneValue[i]?.slice(0, phoneNumberInfo.max) || ''}
+              value={phoneValue[i]?.slice(0, phoneNumberInfo.max) || undefined}
               onChange={setPhoneNumbers[i]}
               maxLength={phoneNumberInfo.max}
-              style={{ textAlign: 'center', fontSize: '14px' }}
               disabled={disabled}
               placeholder={phonePlaceHolder[i]}
             />
             {i !== phoneNumbersInfo.length - 1 && (
-              <Divider
-                style={{ margin: '20px' }}
-                width="10px"
-                direction="horizontal"
-              />
+              <img style={{ margin: '10px' }} src={hyphenSVG} alt="hyphen" />
             )}
           </Fragment>
         );

@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useState, useCallback, DependencyList } from 'react';
 
 function useInputValidator(
   initialValue: string,
-  validator: (user_input: string) => string,
+  validator: (userInput: string) => string,
+  deps: DependencyList = [],
 ) {
   const [input, setInput] = useState(initialValue);
-  const [warning, setWarning] = useState('');
+  const [warning, setWarning] = useState(' ');
 
-  const handleInput = (user_input: string) => {
-    setInput(user_input);
-    setWarning(validator(user_input));
+  const onInput = (userInput: string) => {
+    setInput(userInput);
+    setWarning(validator(userInput));
   };
+
+  const handleInput = useCallback((ev: React.ChangeEvent<HTMLInputElement>) => {
+    onInput(ev.target.value);
+  }, deps);
   return [input, warning, handleInput] as const;
 }
 
