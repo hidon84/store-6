@@ -73,10 +73,10 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .c21 {
@@ -91,15 +91,14 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   height: 100vh;
-  width: 33%;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
 }
 
 .c2 {
@@ -301,7 +300,11 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   >
     <aside
       class="c1"
-    />
+    >
+      <img
+        alt="jiroboQuote"
+      />
+    </aside>
     <form
       class="c2"
     >
@@ -580,7 +583,14 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
     </form>
     <aside
       class="c21"
-    />
+    >
+      <img
+        alt="jiroboQuote"
+      />
+      <img
+        alt="jiroboQuote"
+      />
+    </aside>
   </div>
 </div>
 `;
