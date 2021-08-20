@@ -43,3 +43,41 @@ export const handleOauthGoogleCallback = async (
     next(e);
   }
 };
+
+export const handleOauthFacebook = (
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    res.redirect(oauthHelper.getOauthFacebookRedirectUrl());
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const handleOauthFacebookCallback = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { code } = req.query;
+
+    if (!code) {
+      throw new ErrorResponse(commonError.invalidQuery);
+    }
+
+    const oauthServiceInstance = Container.get(OAuthService);
+
+    const accessToken = await oauthServiceInstance.getFacebookAccessToken(
+      code as string,
+    );
+    const { id, email, picture } =
+      await oauthServiceInstance.getFacebookUserInfo(accessToken);
+
+    res.json({ id, email, picture });
+  } catch (e) {
+    next(e);
+  }
+};

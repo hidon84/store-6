@@ -43,5 +43,10 @@ export default {
       clientSecret: process.env.OAUTH_GOOGLE_CLIENT_SECRET,
       callbackUrl: process.env.OAUTH_GOOGLE_CALLBACK_URL,
     },
+    facebook: {
+      clientId: process.env.OAUTH_FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.OAUTH_FACEBOOK_CLIENT_SECRET,
+      callbackUrl: process.env.OAUTH_FACEBOOK_CALLBACK_URL,
+    },
   },
 };
