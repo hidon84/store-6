@@ -3,15 +3,21 @@
 
 :root {
   --baemin100: #2ac1bc;
+  height:100%;
+}
+
+body{
+  height:100%;
 }
 
 #app {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 1024px;
+  height:100%;
   align-items: center;
 }
+
 
 #portal {
   display: flex;
