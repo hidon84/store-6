@@ -20,6 +20,7 @@ export class ErrorResponse
   constructor(statusCode: number, errorResponseBody: ErrorResponseBody) {
     super(errorResponseBody.message);
     this.statusCode = statusCode;
+    this.data = errorResponseBody;
 
     this.isApiRequestFailed = true;
 
