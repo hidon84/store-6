@@ -7,7 +7,7 @@ exports[`<MyPage /> should render same with snapshot 1`] = `
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
-  background: url(https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
+  background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
   background-size: cover;
 }
 
@@ -17,7 +17,7 @@ exports[`<MyPage /> should render same with snapshot 1`] = `
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
-  background: url(https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
+  background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
   background-size: cover;
 }
 

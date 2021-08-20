@@ -81,7 +81,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/book.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/book.svg"
       />
     </button>
     <button
@@ -90,7 +90,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/baedal.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/baedal.svg"
       />
     </button>
     <button
@@ -99,7 +99,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/hat.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/hat.svg"
       />
     </button>
     <button
@@ -108,7 +108,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/gift.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/gift.svg"
       />
     </button>
     <button
@@ -117,7 +117,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/house.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/house.svg"
       />
     </button>
     <button
@@ -126,7 +126,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/kk.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/kk.svg"
       />
     </button>
     <button
@@ -135,7 +135,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/tree.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/tree.svg"
       />
     </button>
     <button
@@ -144,7 +144,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/pencil.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/pencil.svg"
       />
     </button>
     <button
@@ -153,7 +153,7 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     >
       <img
         alt="icon"
-        src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/colab.svg"
+        src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/colab.svg"
       />
     </button>
     <button
