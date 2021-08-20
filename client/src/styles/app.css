@@ -3,13 +3,18 @@
 
 :root {
   --baemin100: #2ac1bc;
+  height: 100%;
+}
+
+body {
+  height: 100%;
 }
 
 #app {
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* height: 100vh; */
+  height: 100%;
   align-items: center;
 }
 
