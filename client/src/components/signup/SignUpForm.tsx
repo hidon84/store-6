@@ -144,7 +144,7 @@ const SignUpForm: FC = () => {
           <Label>아이디</Label>
           <WarningMessage>{idWarning}</WarningMessage>
         </LabelRow>
-        <Input autoComplete="off" type="text" onChange={handleId} />
+        <Input autoComplete="false" type="text" onChange={handleId} />
       </InputWrapper>
       <InputWrapper>
         <LabelRow>
