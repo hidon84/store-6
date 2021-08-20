@@ -52,10 +52,22 @@ const Button: FC<{ category: string; onClick?: () => void }> = ({
   </ButtonWrapper>
 );
 
-const Book: FC = () => <Button category="book" />;
-const Hat: FC = () => <Button category="hat" />;
+const Book: FC = () => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/signup'), []);
+  return <Button category="book" onClick={onClick} />;
+};
+const Hat: FC = () => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/me'), []);
+  return <Button category="hat" onClick={onClick} />;
+};
 const Gift: FC = () => <Button category="gift" />;
-const House: FC = () => <Button category="house" />;
+const House: FC = () => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/products'), []);
+  return <Button category="house" onClick={onClick} />;
+};
 const Kk: FC = () => <Button category="kk" />;
 const Tree: FC = () => <Button category="tree" />;
 const Pencil: FC = () => <Button category="pencil" />;
