@@ -1,10 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MainPage /> should render same with snapshot 1`] = `
+.c1 {
+  position: absolute;
+  cursor: pointer;
+  left: 20%;
+  top: 110px;
+}
+
+.c2 {
+  position: absolute;
+  cursor: pointer;
+  left: 30%;
+  top: 330px;
+}
+
+.c3 {
+  position: absolute;
+  cursor: pointer;
+  left: 10%;
+  top: 580px;
+}
+
+.c4 {
+  position: absolute;
+  cursor: pointer;
+  left: 0%;
+  top: 280px;
+}
+
+.c5 {
+  position: absolute;
+  cursor: pointer;
+  left: 70%;
+  top: 240px;
+}
+
+.c6 {
+  position: absolute;
+  cursor: pointer;
+  left: 75%;
+  top: 100px;
+}
+
+.c7 {
+  position: absolute;
+  cursor: pointer;
+  left: 65%;
+  top: 550px;
+}
+
+.c8 {
+  position: absolute;
+  cursor: pointer;
+  left: 100%;
+  top: 330px;
+}
+
+.c9 {
+  position: absolute;
+  cursor: pointer;
+  left: 90%;
+  top: 550px;
+}
+
 .c0 {
+  position: absolute;
   width: 100%;
-  height: 100%;
-  position: relative;
+  height: 815px;
+  top: calc(50% - 407.5px);
 }
 
 <div>
@@ -12,83 +76,83 @@ exports[`<MainPage /> should render same with snapshot 1`] = `
     class="c0"
   >
     <button
-      style="position: absolute; left: 20%; top: 110px; cursor: pointer;"
+      class="c1"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/book.svg"
       />
     </button>
     <button
-      style="position: absolute; left: 30%; top: 330px; cursor: pointer;"
+      class="c2"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/baedal.svg"
       />
     </button>
     <button
-      style="position: absolute; left: 10%; top: 580px; cursor: pointer;"
+      class="c3"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/hat.svg"
       />
     </button>
     <button
-      style="position: absolute; left: 0px; top: 280px; cursor: pointer;"
+      class="c4"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/gift.svg"
       />
     </button>
     <button
-      style="position: absolute; right: 30%; top: 240px; cursor: pointer;"
+      class="c5"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/house.svg"
       />
     </button>
     <button
-      style="position: absolute; right: 25%; top: 100px; cursor: pointer;"
+      class="c6"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/kk.svg"
       />
     </button>
     <button
-      style="position: absolute; right: 35%; top: 550px; cursor: pointer;"
+      class="c7"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/tree.svg"
       />
     </button>
     <button
-      style="position: absolute; right: 0%; top: 330px; cursor: pointer;"
+      class="c8"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/pencil.svg"
       />
     </button>
     <button
-      style="position: absolute; right: 10%; top: 550px; cursor: pointer;"
+      class="c9"
       type="button"
     >
       <img
-        alt=""
+        alt="icon"
         src="https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big-icon/colab.svg"
       />
     </button>
