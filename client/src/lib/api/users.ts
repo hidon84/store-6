@@ -14,15 +14,14 @@ export const usersUrl = {
   me: `${usersBaseUrl}/me`,
 };
 
-export const postUser = async (reqData: UsersPostRequestBody) =>
+export const postUser = (reqData: UsersPostRequestBody) =>
   request<UsersPostResponseBody, UsersPostRequestBody>(
     'POST',
     usersUrl.users,
     reqData,
   );
 
-export const getMe = async () =>
-  request<UsersGetResponseBody>('GET', usersUrl.me);
+export const getMe = () => request<UsersGetResponseBody>('GET', usersUrl.me);
 
 export const putMe = (reqData: UsersPutRequestBody) => {
   const reqFormData = new FormData();
