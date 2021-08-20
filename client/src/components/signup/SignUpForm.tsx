@@ -144,28 +144,28 @@ const SignUpForm: FC = () => {
           <Label>아이디</Label>
           <WarningMessage>{idWarning}</WarningMessage>
         </LabelRow>
-        <Input autoComplete="false" type="text" onChange={handleId} />
+        <Input autoComplete="off" type="text" onChange={handleId} />
       </InputWrapper>
       <InputWrapper>
         <LabelRow>
           <Label>비밀번호</Label>
           <WarningMessage>{pwWarning}</WarningMessage>
         </LabelRow>
-        <Input autoComplete="false" type="password" onChange={handlePW} />
+        <Input autoComplete="off" type="password" onChange={handlePW} />
       </InputWrapper>
       <InputWrapper>
         <LabelRow>
           <Label>비밀번호 확인</Label>
           <WarningMessage>{pwReWarning}</WarningMessage>
         </LabelRow>
-        <Input autoComplete="false" type="password" onChange={handlePWRe} />
+        <Input autoComplete="off" type="password" onChange={handlePWRe} />
       </InputWrapper>
       <InputWrapper>
         <LabelRow>
           <Label>이메일</Label>
           <WarningMessage>{emailWarning}</WarningMessage>
         </LabelRow>
-        <Input autoComplete="false" type="text" onChange={handleEmail} />
+        <Input autoComplete="off" type="text" onChange={handleEmail} />
       </InputWrapper>
       <InputWrapper>
         <LabelRow>
@@ -176,21 +176,21 @@ const SignUpForm: FC = () => {
         </LabelRow>
         <PhoneInputWrapper>
           <PhoneInput
-            autoComplete="false"
+            autoComplete="off"
             type="text"
             placeholder="010"
             onChange={handlePh0}
           />
           <img src={hyphenSVG} alt="hyphen" />
           <PhoneInput
-            autoComplete="false"
+            autoComplete="off"
             type="text"
             placeholder="0000"
             onChange={handlePh1}
           />
           <img src={hyphenSVG} alt="hyphen" />
           <PhoneInput
-            autoComplete="false"
+            autoComplete="off"
             type="text"
             placeholder="0000"
             onChange={handlePh2}
