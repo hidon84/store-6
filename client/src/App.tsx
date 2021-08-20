@@ -12,6 +12,7 @@ import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
 
 const Main = styled.main`
+  position: relative;
   height: 100%;
   width: 1156px;
 `;
