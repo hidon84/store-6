@@ -362,7 +362,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <input
-          autocomplete="false"
+          autocomplete="off"
           class="c8"
           type="password"
         />
@@ -385,7 +385,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <input
-          autocomplete="false"
+          autocomplete="off"
           class="c8"
           type="password"
         />
@@ -408,7 +408,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <input
-          autocomplete="false"
+          autocomplete="off"
           class="c8"
           type="text"
         />
@@ -434,7 +434,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           class="c9"
         >
           <input
-            autocomplete="false"
+            autocomplete="off"
             class="c10"
             placeholder="010"
             type="text"
@@ -443,7 +443,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
             alt="hyphen"
           />
           <input
-            autocomplete="false"
+            autocomplete="off"
             class="c10"
             placeholder="0000"
             type="text"
@@ -452,7 +452,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
             alt="hyphen"
           />
           <input
-            autocomplete="false"
+            autocomplete="off"
             class="c10"
             placeholder="0000"
             type="text"
