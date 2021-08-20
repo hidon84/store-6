@@ -19,6 +19,6 @@ export const ModifyButton = styled.div<{
   border: none;
   outline: none;
   font-size: 15px;
-
+  cursor: pointer;
   color: ${({ disabled }) => (disabled ? '#000' : '#2ac1bc')};
 `;

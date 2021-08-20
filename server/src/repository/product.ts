@@ -8,7 +8,7 @@ class ProductRepository extends Repository<ProductEntity> {
     category?: string;
     order?: string;
     limit?: string;
-    offset?: string;
+    page?: string;
   }) {
     const subWhere: {
       title?: FindOperator<string>;
@@ -22,9 +22,11 @@ class ProductRepository extends Repository<ProductEntity> {
       createdAt?: 'ASC' | 'DESC';
     } = {};
 
-    const subOffset: number = querys.offset ? Number(querys.offset) : 0;
+    const subLimit: number = querys.limit ? Number(querys.limit) : 20;
 
-    const subLimit: number = querys.limit ? Number(querys.limit) : 50;
+    const subOffset: number = querys.page
+      ? (Number(querys.page) - 1) * subLimit
+      : 0;
 
     if (querys.search) {
       subWhere.title = Like(`%${querys.search}%`);

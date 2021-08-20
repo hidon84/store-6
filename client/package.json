@@ -9,7 +9,7 @@
   "scripts": {
     "start": "env-cmd -f .env.dev webpack serve",
     "prebuild": "rimraf dist",
-    "build": "env-cmd webpack --progress",
+    "build": "env-cmd -f .env.prod webpack --progress",
     "lint": "npx eslint --ext .tsx --ext .ts src",
     "precommit": "eslint --fix --ext .tsx --ext .ts src && prettier --write src",
     "test": "jest",
