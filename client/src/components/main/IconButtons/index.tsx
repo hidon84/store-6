@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import {
   BigBaedalSVG,
   BigBookSVG,
@@ -12,6 +12,14 @@ import {
   logoSVG,
   stainSVG,
 } from '~/assets';
+import { useHistory } from '~/core/Router';
+import { alert } from '~/utils/modal';
+
+const AlertNotAvailable = () => {
+  alert(
+    '아직 구현되지 않았습니다. 배달이를 눌러서 일단 로그인 페이지로 가시죠.',
+  );
+};
 
 const Book: FC = () => {
   return (
@@ -23,25 +31,33 @@ const Book: FC = () => {
         top: '110px',
         cursor: 'pointer',
       }}
+      onClick={AlertNotAvailable}
     >
       <img src={BigBookSVG} alt="" />
     </button>
   );
 };
 
-const Baedal: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      left: '30%',
-      top: '330px',
-      cursor: 'pointer',
-    }}
-  >
-    <img src={BigBaedalSVG} alt="" />
-  </button>
-);
+const Baedal: FC = () => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => {
+    push('/login');
+  }, []);
+  return (
+    <button
+      type="button"
+      style={{
+        position: 'absolute',
+        left: '30%',
+        top: '330px',
+        cursor: 'pointer',
+      }}
+      onClick={onClick}
+    >
+      <img src={BigBaedalSVG} alt="" />
+    </button>
+  );
+};
 
 const Hat: FC = () => (
   <button
@@ -52,6 +68,7 @@ const Hat: FC = () => (
       top: '580px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigHatSVG} alt="" />
   </button>
@@ -66,6 +83,7 @@ const Gift: FC = () => (
       top: '280px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigGiftSVG} alt="" />
   </button>
@@ -80,6 +98,7 @@ const House: FC = () => (
       top: '240px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigHouseSVG} alt="" />
   </button>
@@ -94,6 +113,7 @@ const Kk: FC = () => (
       top: '100px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigKKSVG} alt="" />
   </button>
@@ -108,6 +128,7 @@ const Tree: FC = () => (
       top: '550px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigTreeSVG} alt="" />
   </button>
@@ -122,6 +143,7 @@ const Pencil: FC = () => (
       top: '330px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigPencilSVG} alt="" />
   </button>
@@ -136,6 +158,7 @@ const Colab: FC = () => (
       top: '550px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={BigColabSVG} alt="" />
   </button>
@@ -150,6 +173,7 @@ const Stain: FC = () => (
       top: '100px',
       zIndex: -1,
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={stainSVG} alt="" />
   </button>
@@ -164,6 +188,7 @@ const Logo: FC = () => (
       top: '10px',
       cursor: 'pointer',
     }}
+    onClick={AlertNotAvailable}
   >
     <img src={logoSVG} alt="" />
   </button>
