@@ -55,12 +55,12 @@ const LoginPage: FC = () => {
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
 
   const onSubmit = async () => {
-    if (idWarning) {
-      alert(`아이디 에러. ${idWarning}`);
+    if (idWarning.length > 2 || id.length < 4) {
+      alert(`아이디 폼에러. ${idWarning}`);
       return;
     }
     if (pwWarning) {
-      alert(`비밀번호 에러. ${pwWarning}`);
+      alert(`비밀번호 폼에러. ${pwWarning}`);
       return;
     }
 
