@@ -14,7 +14,7 @@ export const usersUrl = {
   me: `${usersBaseUrl}/me`,
 };
 
-export const postUser = async (reqData: UsersPostRequestBody) =>
+export const postUser = (reqData: UsersPostRequestBody) =>
   request<UsersPostResponseBody, UsersPostRequestBody>(
     'POST',
     usersUrl.users,

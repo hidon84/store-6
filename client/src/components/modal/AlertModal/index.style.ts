@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-// eslint-disable-next-line import/prefer-default-export
 export const AlertModalWrapper = styled.aside`
   opacity: 0;
-  position: absolute;
+  position: fixed;
   padding: 13px 30px;
   /* left: calc(50% - 155px); */
   bottom: calc(50% - 400px);

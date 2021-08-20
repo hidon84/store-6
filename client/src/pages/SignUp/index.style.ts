@@ -7,43 +7,28 @@ const StyledLoginPage = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-`;
-
-const LeftDoodleWrapper = styled.aside`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100vh;
-  align-items: center;
-  justify-content: flex-start;
+  height: 100%;
 `;
 
 const RightDoodleWrapper = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   justify-content: space-evenly;
 `;
 
-const SignUpForm = styled.form`
+const SignUpFormWrapper = styled.form`
   display: flex;
   flex: 2;
   min-width: 400px;
   max-width: 400px;
   flex-direction: column;
+  height: 100%;
+  gap: 28px;
   justify-content: flex-start;
   align-items: center;
-`;
-
-const SignUpFormHeader = styled.header`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 64px;
-  margin-bottom: 64px;
-  font-size: 48px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -151,11 +136,9 @@ export {
   InputWrapper,
   Label,
   LabelRow,
-  LeftDoodleWrapper,
   Policy,
   RightDoodleWrapper,
-  SignUpForm,
-  SignUpFormHeader,
+  SignUpFormWrapper,
   StyledLoginPage,
   WarningMessage,
   PhoneInputWrapper,

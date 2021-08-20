@@ -9,12 +9,15 @@ export const ProductListWrapper = styled.div`
 export const LeftSection = styled.section`
   height: 700px;
   position: sticky;
-  margin-top: 85px;
+  margin-top: 50px;
   top: 83px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
 `;
 
 export const RightSection = styled.section`
-  width: 700px;
+  width: 100%;
 `;
 
 export const VerticalDivider = styled.div`

@@ -12,7 +12,7 @@ export const CategoryHeder = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
-  margin-bottom: 33px;
+  margin-bottom: 20px;
   img {
     width: 25px;
     &:hover {

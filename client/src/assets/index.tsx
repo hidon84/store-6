@@ -15,6 +15,12 @@ import hyphenSVG from './hyphen.svg';
 import verticalLineSVG from './vertical-line.svg';
 import mooyahoSVG from './mooyaho.svg';
 import mooyahoWeUseSVG from './mooyahoWeUse.svg';
+import titleSVG from './title.svg';
+import signUpWithFacebookSVG from './signUpWithFacebook.svg';
+import signUpWithGoogleSVG from './signUpWithGoogle.svg';
+import signUpWithOwnSVG from './signUpWithOwn.svg';
+import stainSVG from './stain.svg';
+import logoSVG from './logo.svg';
 
 const S3_PREFIX = 'https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
@@ -113,6 +119,12 @@ export {
   UnderlineBaeminColorSVG,
   mooyahoSVG,
   mooyahoWeUseSVG,
+  titleSVG,
+  signUpWithFacebookSVG,
+  signUpWithGoogleSVG,
+  signUpWithOwnSVG,
+  stainSVG,
+  logoSVG,
   SearchBoxUnderlineSVG,
   VerticalDividerSVG,
   XSVG,

@@ -23,6 +23,10 @@ export const commonError = {
     statusCode: 400,
     message: 'Unexpected field',
   },
+  invalidQuery: {
+    statusCode: 400,
+    message: 'Invalid query parameters',
+  },
 };
 
 export const uploadImageError = {

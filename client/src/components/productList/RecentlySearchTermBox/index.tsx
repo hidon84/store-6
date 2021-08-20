@@ -18,7 +18,7 @@ interface Props {
 const RecentlySearchTermBox: FC<Props> = ({ termList, removeTermOnList }) => {
   return (
     <RecentlySearchTermBoxWrapper
-      isEmpty={termList ? termList.length === 0 : false}
+      isEmpty={termList ? termList.length === 0 : true}
     >
       <RecentlySearchTermTitle>최근 검색어</RecentlySearchTermTitle>
       <Divider src={VerticalDividerSVG} />

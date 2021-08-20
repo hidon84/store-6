@@ -1,43 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SignUpPage /> should render same with snapshot 1`] = `
-.c18 {
-  position: relative;
-  height: 55px;
-  width: 183px;
-  font-size: 25px;
-  background: center / cover no-repeat url();
-  cursor: pointer;
-}
-
-.c14 {
-  position: relative;
-  height: 16px;
-}
-
-.c15 {
-  height: 100%;
-}
-
-.c19 {
-  margin-top: 28px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 16px;
-  color: #999999;
-}
-
-.c9 {
-  height: 48px;
-  content: '';
-}
-
-.c20 {
-  height: 32px;
-  content: '';
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -55,50 +18,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100vh;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-}
-
-.c21 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100vh;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
+  height: 100%;
 }
 
 .c2 {
@@ -114,6 +34,8 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  height: 100%;
+  gap: 28px;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
@@ -124,32 +46,15 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   align-items: center;
 }
 
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-top: 64px;
-  margin-bottom: 64px;
-  font-size: 48px;
-}
-
-.c17 {
+.c16 {
   margin-top: 42px;
 }
 
-.c12 {
+.c11 {
   width: 100%;
 }
 
-.c13 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -236,7 +141,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   color: #ff9e2c;
 }
 
-.c16 {
+.c15 {
   display: block;
   margin-top: 8px;
   border: 1px solid #eeeeee;
@@ -250,7 +155,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   font-family: 'noto sans',sans-serif !important;
 }
 
-.c10 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -266,7 +171,7 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c10 {
   text-align: center;
   margin: 0 16px;
   width: 100px;
@@ -278,20 +183,113 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
   background: bottom left / contain no-repeat url();
 }
 
-.c11::-webkit-input-placeholder {
+.c10::-webkit-input-placeholder {
   color: #999;
 }
 
-.c11::-moz-placeholder {
+.c10::-moz-placeholder {
   color: #999;
 }
 
-.c11:-ms-input-placeholder {
+.c10:-ms-input-placeholder {
   color: #999;
 }
 
-.c11::placeholder {
+.c10::placeholder {
   color: #999;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
+.c17 {
+  position: relative;
+  height: 55px;
+  width: 183px;
+  font-size: 25px;
+  background: center / cover no-repeat url();
+  cursor: pointer;
+}
+
+.c13 {
+  position: relative;
+  height: 16px;
+}
+
+.c14 {
+  height: 100%;
+}
+
+.c18 {
+  margin-top: 28px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #999999;
+}
+
+.c19 {
+  height: 32px;
+  content: '';
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 64px;
+  margin-bottom: 64px;
+  font-size: 48px;
 }
 
 <div>
@@ -347,11 +345,6 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
         />
       </div>
       <div
-        aria-hidden="true"
-        class="c9"
-        height="48px"
-      />
-      <div
         class="c4"
       >
         <div
@@ -369,16 +362,11 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <input
-          autocomplete="false"
+          autocomplete="off"
           class="c8"
           type="password"
         />
       </div>
-      <div
-        aria-hidden="true"
-        class="c9"
-        height="48px"
-      />
       <div
         class="c4"
       >
@@ -397,16 +385,11 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <input
-          autocomplete="false"
+          autocomplete="off"
           class="c8"
           type="password"
         />
       </div>
-      <div
-        aria-hidden="true"
-        class="c9"
-        height="48px"
-      />
       <div
         class="c4"
       >
@@ -425,16 +408,11 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <input
-          autocomplete="false"
+          autocomplete="off"
           class="c8"
           type="text"
         />
       </div>
-      <div
-        aria-hidden="true"
-        class="c9"
-        height="48px"
-      />
       <div
         class="c4"
       >
@@ -453,11 +431,11 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
           </span>
         </div>
         <div
-          class="c10"
+          class="c9"
         >
           <input
-            autocomplete="false"
-            class="c11"
+            autocomplete="off"
+            class="c10"
             placeholder="010"
             type="text"
           />
@@ -465,8 +443,8 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
             alt="hyphen"
           />
           <input
-            autocomplete="false"
-            class="c11"
+            autocomplete="off"
+            class="c10"
             placeholder="0000"
             type="text"
           />
@@ -474,115 +452,112 @@ exports[`<SignUpPage /> should render same with snapshot 1`] = `
             alt="hyphen"
           />
           <input
-            autocomplete="false"
-            class="c11"
+            autocomplete="off"
+            class="c10"
             placeholder="0000"
             type="text"
           />
         </div>
       </div>
-      <div
-        aria-hidden="true"
-        class="c9"
-        height="48px"
-      />
-      <div
-        class="c5"
-      >
-        <label
-          class="c6"
+      <div>
+        <div
+          class="c5"
         >
-          약관 동의
-        </label>
+          <label
+            class="c6"
+          >
+            약관 동의
+          </label>
+        </div>
+        <section
+          class="c11"
+        >
+          <div
+            class="c12"
+          >
+            <div
+              class="c13"
+            >
+              <img
+                class="c14"
+              />
+            </div>
+            <span
+              style="font-size: 20px; line-height: 25px;"
+            >
+              아래 약관에 모두 동의합니다
+            </span>
+          </div>
+        </section>
+        <section
+          class="c11"
+        >
+          <div
+            class="c12"
+          >
+            <div
+              class="c13"
+            >
+              <img
+                class="c14"
+              />
+            </div>
+            <span>
+              개인정보 이용약관 (필수)
+            </span>
+          </div>
+        </section>
+        <div
+          class="c15"
+        >
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis ducimus? Nulla, laudantium maxime incidunt laborum iure vero consequuntur tenetur voluptatibus voluptate.
+        </div>
+        <section
+          class="c11"
+        >
+          <div
+            class="c12"
+          >
+            <div
+              class="c13"
+            >
+              <img
+                class="c14"
+              />
+            </div>
+            <span>
+              배민문방구 이용약관 (필수)
+            </span>
+          </div>
+        </section>
+        <div
+          class="c15"
+        >
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis ducimus? Nulla, laudantium maxime incidunt laborum iure vero consequuntur tenetur voluptatibus voluptate.
+        </div>
       </div>
-      <section
-        class="c12"
-      >
-        <div
-          class="c13"
-        >
-          <div
-            class="c14"
-          >
-            <img
-              class="c15"
-            />
-          </div>
-          <span
-            style="font-size: 20px; line-height: 25px;"
-          >
-            아래 약관에 모두 동의합니다
-          </span>
-        </div>
-      </section>
-      <section
-        class="c12"
-      >
-        <div
-          class="c13"
-        >
-          <div
-            class="c14"
-          >
-            <img
-              class="c15"
-            />
-          </div>
-          <span>
-            개인정보 이용약관 (필수)
-          </span>
-        </div>
-      </section>
       <div
         class="c16"
-      >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis ducimus? Nulla, laudantium maxime incidunt laborum iure vero consequuntur tenetur voluptatibus voluptate.
-      </div>
-      <section
-        class="c12"
-      >
-        <div
-          class="c13"
-        >
-          <div
-            class="c14"
-          >
-            <img
-              class="c15"
-            />
-          </div>
-          <span>
-            배민문방구 이용약관 (필수)
-          </span>
-        </div>
-      </section>
-      <div
-        class="c16"
-      >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis ducimus? Nulla, laudantium maxime incidunt laborum iure vero consequuntur tenetur voluptatibus voluptate.
-      </div>
-      <div
-        class="c17"
       >
         <button
-          class="c18"
+          class="c17"
         >
           회원가입
         </button>
       </div>
       <footer
-        class="c19"
+        class="c18"
       >
         COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
       </footer>
       <div
         aria-hidden="true"
-        class="c20"
+        class="c19"
         height="32px"
       />
     </form>
     <aside
-      class="c21"
+      class="c20"
     >
       <img
         alt="무야호"
