@@ -22,7 +22,7 @@ import signUpWithOwnSVG from './signUpWithOwn.svg';
 import stainSVG from './stain.svg';
 import logoSVG from './logo.svg';
 
-const S3_PREFIX = 'https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com';
+const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
 const LogoSVG = `${S3_PREFIX}/common/logo.svg`;
 const LineSVG = `${S3_PREFIX}/common/line.svg`;
