@@ -1,4 +1,5 @@
 import { FC, useCallback } from 'react';
+import styled from 'styled-components';
 import {
   BigBaedalSVG,
   BigBookSVG,
@@ -15,154 +16,55 @@ import {
 import { useHistory } from '~/core/Router';
 import { alert } from '~/utils/modal';
 
-const AlertNotAvailable = () => {
-  alert(
-    '아직 구현되지 않았습니다. 배달이를 눌러서 일단 로그인 페이지로 가시죠.',
-  );
+const ALERT_MESSAGE =
+  '아직 구현되지 않았습니다. 배달이를 눌러서 일단 로그인 페이지로 가시죠.';
+const AlertNotAvailable = () => alert(ALERT_MESSAGE);
+
+const BUTTON_INFOS = {
+  book: ['20%', '110px', BigBookSVG],
+  hat: ['10%', '580px', BigHatSVG],
+  baedal: ['30%', '330px', BigBaedalSVG],
+  gift: ['0%', '280px', BigGiftSVG],
+  house: ['70%', '240px', BigHouseSVG],
+  kk: ['75%', '100px', BigKKSVG],
+  tree: ['65%', '550px', BigTreeSVG],
+  pencil: ['100%', '330px', BigPencilSVG],
+  colab: ['90%', '550px', BigColabSVG],
 };
 
-const Book: FC = () => {
-  return (
-    <button
-      type="button"
-      style={{
-        position: 'absolute',
-        left: '20%',
-        top: '110px',
-        cursor: 'pointer',
-      }}
-      onClick={AlertNotAvailable}
-    >
-      <img src={BigBookSVG} alt="" />
-    </button>
-  );
-};
+const ButtonWrapper = styled.button<{ category: string }>`
+  position: absolute;
+  cursor: pointer;
+  left: ${({ category }) => BUTTON_INFOS[category][0]};
+  top: ${({ category }) => BUTTON_INFOS[category][1]};
+`;
 
+const Button: FC<{ category: string; onClick?: () => void }> = ({
+  category,
+  onClick,
+}) => (
+  <ButtonWrapper
+    category={category}
+    type="button"
+    onClick={onClick || AlertNotAvailable}
+  >
+    <img src={BUTTON_INFOS[category][2]} alt="icon" />
+  </ButtonWrapper>
+);
+
+const Book: FC = () => <Button category="book" />;
+const Hat: FC = () => <Button category="hat" />;
+const Gift: FC = () => <Button category="gift" />;
+const House: FC = () => <Button category="house" />;
+const Kk: FC = () => <Button category="kk" />;
+const Tree: FC = () => <Button category="tree" />;
+const Pencil: FC = () => <Button category="pencil" />;
+const Colab: FC = () => <Button category="colab" />;
 const Baedal: FC = () => {
   const { push } = useHistory();
-  const onClick = useCallback(() => {
-    push('/login');
-  }, []);
-  return (
-    <button
-      type="button"
-      style={{
-        position: 'absolute',
-        left: '30%',
-        top: '330px',
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <img src={BigBaedalSVG} alt="" />
-    </button>
-  );
+  const onClick = useCallback(() => push('/login'), []);
+  return <Button category="baedal" onClick={onClick} />;
 };
-
-const Hat: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      left: '10%',
-      top: '580px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigHatSVG} alt="" />
-  </button>
-);
-
-const Gift: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      left: '0px',
-      top: '280px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigGiftSVG} alt="" />
-  </button>
-);
-
-const House: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      right: '30%',
-      top: '240px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigHouseSVG} alt="" />
-  </button>
-);
-
-const Kk: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      right: '25%',
-      top: '100px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigKKSVG} alt="" />
-  </button>
-);
-
-const Tree: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      right: '35%',
-      top: '550px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigTreeSVG} alt="" />
-  </button>
-);
-
-const Pencil: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      right: '0%',
-      top: '330px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigPencilSVG} alt="" />
-  </button>
-);
-
-const Colab: FC = () => (
-  <button
-    type="button"
-    style={{
-      position: 'absolute',
-      right: '10%',
-      top: '550px',
-      cursor: 'pointer',
-    }}
-    onClick={AlertNotAvailable}
-  >
-    <img src={BigColabSVG} alt="" />
-  </button>
-);
 
 const Stain: FC = () => (
   <button
