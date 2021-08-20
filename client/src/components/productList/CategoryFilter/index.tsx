@@ -1,31 +1,62 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/no-array-index-key */
+
 import React, { useContext } from 'react';
 import { FilterContext } from '~/pages/ProductList';
-import { setCategory, setSearchValue } from '~/stores/productListModule';
+import { resetCategory } from '~/stores/productListModule';
+import {
+  CategoryFilterWrapper,
+  CategoryHeder,
+  CategoryContainer,
+} from './index.style';
 
-enum CategoryType {
-  Book,
-  Stationery,
-  Living,
-  Green,
-  Baedal,
-  Kkk,
-  Ulgiro,
-  Collaboration,
-  Gift,
-}
+import {
+  SmallPencilSVG,
+  SmallBaedalSVG,
+  SmallColabSVG,
+  SmallGiftSVG,
+  Hat2SVG,
+  SmallHouseSVG,
+  SmallKKSVG,
+  SmallTreeSVG,
+  RefreshSVG,
+  SmallBookSVG,
+} from '~/assets';
+
+import CategoryItem from '../CategoryItem';
+
+const Categorys = [
+  SmallBookSVG,
+  SmallPencilSVG,
+  SmallHouseSVG,
+  SmallTreeSVG,
+  SmallBaedalSVG,
+  SmallKKSVG,
+  Hat2SVG,
+  SmallGiftSVG,
+  SmallColabSVG,
+];
 
 const CategoryFilter: React.FC = () => {
-  const { dispatch, ...state } = useContext(FilterContext);
+  const { dispatch, ...currentState } = useContext(FilterContext);
+
+  const handleResetBtnClick = () => {
+    dispatch(resetCategory());
+  };
 
   return (
-    <div>
-      <button
-        type="button"
-        onClick={() => dispatch(setCategory(CategoryType.Book))}
-      >
-        sdfsdfsdf
-      </button>
-    </div>
+    <CategoryFilterWrapper>
+      <CategoryHeder>
+        <div>카테고리</div>
+        <img onClick={handleResetBtnClick} src={RefreshSVG} alt="reset" />
+      </CategoryHeder>
+      <CategoryContainer>
+        {Categorys.map((item, index) => (
+          <CategoryItem key={index} idx={index + 1} image={item} />
+        ))}
+      </CategoryContainer>
+    </CategoryFilterWrapper>
   );
 };
 

@@ -2,5 +2,5 @@
 REPOSITORY=/home/ubuntu/store-6/server
 cd $REPOSITORY
 
-pm2 start npm --name store-6 -- run dev --watch
-pm2 save
+cp ~/store-6-deploys-files/.env ./.env
+pm2 reload store-6

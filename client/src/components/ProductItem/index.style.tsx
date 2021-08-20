@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
-export const ProductItemContainer = styled.div`
+export const ProductItemWrapper = styled.div`
   position: relative;
   height: 300px;
   width: 230px;
   transition: all 300ms;
+  &:hover {
+    transform: scale(1.08);
+  }
 `;
 
 export const ProductImage = styled.img`
@@ -14,7 +17,7 @@ export const ProductImage = styled.img`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
     drop-shadow(2px 2px 12px rgba(0, 0, 0, 0.15));
   transition: all 300ms;
-  ${ProductItemContainer}:hover & {
+  ${ProductItemWrapper}:hover & {
     filter: brightness(60%);
     transform: scale(1.08);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
@@ -22,7 +25,7 @@ export const ProductImage = styled.img`
   }
 `;
 
-export const ProductInfoConatiner = styled.div`
+export const ProductInfoWrapper = styled.div`
   position: absolute;
   left: 0.5rem;
   bottom: 0.7rem;
