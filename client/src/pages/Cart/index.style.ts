@@ -20,4 +20,5 @@ export const HeaderItem = styled.div`
   &.selected {
     color: black;
   }
+  cursor : pointer
 `;
