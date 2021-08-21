@@ -1,44 +1,58 @@
 import React, { FC, useState } from 'react';
 import { confirm } from '~/utils/modal';
-import { CartCancle, CartCount, CartCounter, CartImg, CartItemWrapper, CartPrice, CartTitle, Count, CountBtn } from './index.style';
+import {
+  CartCancle,
+  CartCount,
+  CartCounter,
+  CartImg,
+  CartItemWrapper,
+  CartPrice,
+  CartTitle,
+  Count,
+  CountBtn,
+} from './index.style';
 
 interface Props {
-  cartIdx : number,
+  cartIdx: number;
   product: {
     idx: number;
     thumbnail: string;
     title: string;
     price: number;
-  },
-  changAmount: Function,
-  removeCartItem: Function
+  };
+  changAmount: (price: number, type: string) => void;
+  removeCartItem: (cartIdx: number) => void;
 }
 
-const CartItem: FC<Props> = ({ cartIdx, product ,changAmount , removeCartItem, }) => {
-
-  const [count, setCount] = useState(1)
-  const [orderPrice, setOrderPrice] = useState(product.price)
+const CartItem: FC<Props> = ({
+  cartIdx,
+  product,
+  changAmount,
+  removeCartItem,
+}) => {
+  const [count, setCount] = useState(1);
+  const [orderPrice, setOrderPrice] = useState(product.price);
 
   const handleUpBtnClick = () => {
-    setOrderPrice(orderPrice+product.price);
+    setOrderPrice(orderPrice + product.price);
     setCount(count + 1);
     changAmount(product.price, 'up');
-  }
+  };
 
   const handleDownBtnClick = () => {
-    if (count > 1) { 
+    if (count > 1) {
       setCount(count - 1);
       setOrderPrice(orderPrice - product.price);
       changAmount(product.price, 'down');
     }
-  }
+  };
 
   const handleRemoveBtnClick = () => {
     confirm('정말 삭제하시겠어요?', () => {
-      removeCartItem(cartIdx)
-      changAmount(count*product.price, 'down');
-    })
-  }
+      removeCartItem(cartIdx);
+      changAmount(count * product.price, 'down');
+    });
+  };
 
   return (
     <CartItemWrapper>
