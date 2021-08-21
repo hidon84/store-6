@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const ConfirmModalWrapper = styled.aside`
   opacity: 0;
   box-sizing: border-box;
-  position: absolute;
-  top: calc(50% - 72px);
+  position: fixed;
+  top: calc(50% - 300px);
   width: 463px;
   padding: 29px 39px;
   border-radius: 20px;
