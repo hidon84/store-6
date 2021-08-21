@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import useDebounce from '~/lib/hooks/useDebounce';
 import { formatPrice } from '~/utils/formatPrice';
 import {
@@ -13,9 +13,10 @@ interface Props {
   thumbnail: string;
   title: string;
   price: number;
+  onClick: () => void;
 }
 
-const ProductItem: React.FC<Props> = ({ thumbnail, title, price }) => {
+const ProductItem: React.FC<Props> = ({ thumbnail, title, price, onClick }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const DELAYED_TIME = 80;
@@ -28,6 +29,7 @@ const ProductItem: React.FC<Props> = ({ thumbnail, title, price }) => {
     <ProductItemWrapper
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
+      onClick={onClick}
     >
       <ProductImage src={thumbnail} delayedIsHovered={delayedIsHovered} />
       <ProductInfoWrapper delayedIsHovered={delayedIsHovered}>
