@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FC, createContext } from 'react';
+import { FC, createContext, useEffect, useState, useCallback } from 'react';
+
+import * as productsAPI from '~/lib/api/products';
+import {
+  ProductsGetRequestQuery,
+  ProductsGetResponseBody,
+} from '~/lib/api/types';
+import productListModule, { ActionType } from '~/stores/productListModule';
+
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
 import OrderFilter from '~/components/productList/OrderFilter';
 import ProductItemContainer from '~/components/productList/ProductItemContainer';
 import SearchBox from '~/components/productList/SearchBox';
-import { ProductsGetRequestQuery } from '~/lib/api/types';
-import productListModule, { ActionType } from '~/stores/productListModule';
 
 import {
   ProductListWrapper,
@@ -31,9 +37,16 @@ export const FilterContext = createContext<FilterContextState>(null);
 
 const ProductList: FC = () => {
   const { filterState, dispatch } = productListModule();
+  const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
+
+  const { category, order, search } = filterState;
+  useEffect(() => {
+    fetchProducts(setProducts);
+  }, [category, order, search]);
 
   return (
     <FilterContext.Provider value={{ state: filterState, dispatch }}>
+      {console.log(products)}
       <ProductListWrapper>
         <LeftSection>
           <CategoryFilter />
@@ -43,7 +56,7 @@ const ProductList: FC = () => {
         <RightSection>
           <CategoryIdentifier />
           <SearchBox />
-          <ProductItemContainer products={DUMMY_DATA} />
+          <ProductItemContainer products={products} />
         </RightSection>
       </ProductListWrapper>
     </FilterContext.Provider>
@@ -52,89 +65,14 @@ const ProductList: FC = () => {
 
 export default ProductList;
 
-const DUMMY_DATA: ProductData[] = [
-  {
-    idx: 0,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 1,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 2,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 3,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 4,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 5,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 6,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 7,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 8,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 9,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 10,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 11,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-];
+// API
+const fetchProducts = async (
+  setProducts: React.Dispatch<React.SetStateAction<ProductsGetResponseBody[]>>,
+) => {
+  try {
+    const { statusCode, data: products } = await productsAPI.getProducts();
+    if (statusCode === 200) setProducts(products);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
