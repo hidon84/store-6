@@ -3,7 +3,9 @@
 
 :root {
   --baemin100: #2ac1bc;
+  --tablet-max-width: 1440px;
   height: 100%;
+  min-width: var(--tablet-max-width);
 }
 
 body {
