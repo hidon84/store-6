@@ -28,7 +28,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
 ) => {
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
-    (idx: number) => push(`/product/${idx}`),
+    (idx: number) => push(`/products/${idx}`),
     [],
   );
 
