@@ -9,6 +9,7 @@ import ConfirmModal from './components/modal/ConfirmModal';
 import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
+import CartPage from './pages/Cart';
 
 const Main = styled.main`
   position: relative;
@@ -39,6 +40,9 @@ const App = () => {
           </Route>
           <Route exact path="/me">
             <MyPage />
+          </Route>
+          <Route exact path="/cart">
+            <CartPage />
           </Route>
         </Switch>
       </Main>

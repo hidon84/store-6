@@ -16,7 +16,11 @@ const ConfirmModalComponent = () => {
         <button type="button" className="button" onClick={(e) => hide()}>
           취소
         </button>
-        <button type="button" className="button confirm">
+        <button
+          type="button"
+          className="button confirm"
+          onClick={(e) => hide()}
+        >
           확인
         </button>
       </ControlSection>

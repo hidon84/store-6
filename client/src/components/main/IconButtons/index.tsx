@@ -68,7 +68,13 @@ const House: FC = () => {
   const onClick = useCallback(() => push('/products'), []);
   return <Button category="house" onClick={onClick} />;
 };
-const Kk: FC = () => <Button category="kk" />;
+
+const Kk: FC = () => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/cart'), []);
+  return <Button category="kk" onClick={onClick} />;
+};
+
 const Tree: FC = () => <Button category="tree" />;
 const Pencil: FC = () => <Button category="pencil" />;
 const Colab: FC = () => <Button category="colab" />;
