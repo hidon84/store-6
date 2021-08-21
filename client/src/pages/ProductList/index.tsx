@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FC, createContext, useEffect, useState, useCallback } from 'react';
+import { FC, createContext, useEffect, useState, useRef } from 'react';
 
 import * as productsAPI from '~/lib/api/products';
 import {
   ProductsGetRequestQuery,
   ProductsGetResponseBody,
 } from '~/lib/api/types';
-import productListModule, { ActionType } from '~/stores/productListModule';
+import productListModule, {
+  ActionType,
+  setNextPage,
+} from '~/stores/productListModule';
 
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
@@ -20,6 +23,7 @@ import {
   RightSection,
   VerticalDivider,
 } from './index.style';
+import useIntersection from '~/lib/hooks/useIntersection';
 
 export interface ProductData {
   idx: number;
@@ -36,16 +40,21 @@ interface FilterContextState {
 export const FilterContext = createContext<FilterContextState>(null);
 
 const ProductList: FC = () => {
-  const { filterState, dispatch } = productListModule();
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
+  const listFooterRef = useRef<HTMLDivElement>();
+  const entry = useIntersection(listFooterRef, {});
+  const { filterState, dispatch } = productListModule();
 
   useEffect(() => {
     fetchProducts(filterState, setProducts);
   }, [filterState]);
 
+  useEffect(() => {
+    if (entry?.isIntersecting) dispatch(setNextPage());
+  }, [entry]);
+
   return (
     <FilterContext.Provider value={{ state: filterState, dispatch }}>
-      {console.log(products)}
       <ProductListWrapper>
         <LeftSection>
           <CategoryFilter />
@@ -55,7 +64,7 @@ const ProductList: FC = () => {
         <RightSection>
           <CategoryIdentifier />
           <SearchBox />
-          <ProductItemContainer products={products} />
+          <ProductItemContainer products={products} ref={listFooterRef} />
         </RightSection>
       </ProductListWrapper>
     </FilterContext.Provider>
@@ -73,7 +82,12 @@ const fetchProducts = async (
     const { statusCode, data: products } = await productsAPI.getProducts(
       filterState,
     );
-    if (statusCode === 200) setProducts(products);
+    if (statusCode === 200) {
+      const isNextPageRequest = filterState.page !== 1;
+
+      if (!isNextPageRequest) setProducts(products);
+      else setProducts((prev) => [...prev, ...products]);
+    }
   } catch (error) {
     throw new Error(error);
   }
