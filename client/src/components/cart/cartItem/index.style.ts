@@ -47,15 +47,15 @@ export const CountBtn = styled.button`
   color: #999999;
   cursor: pointer;
 
-  &:hover{
-    color:#45C8C4;
+  &:hover {
+    color: #45c8c4;
   }
 `;
 
 export const Count = styled.div`
   min-width: 40px;
-  text-align:center;
-`
+  text-align: center;
+`;
 
 export const CartCancle = styled.div`
   width: 10px;
@@ -65,7 +65,7 @@ export const CartCancle = styled.div`
   align-items: center;
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     transition: transform 300ms;
     transform: scale(1.08);
   }

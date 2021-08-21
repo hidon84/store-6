@@ -7,11 +7,11 @@ export interface CartGetResponseBody {
     price: number;
     description: string;
     shipSummary: string;
-    shipDetail:string;
+    shipDetail: string;
     policy: string;
     createdAt: string;
     updatedAt: string;
-  }
+  };
   createdAt: string;
   updatedAt: string;
 }

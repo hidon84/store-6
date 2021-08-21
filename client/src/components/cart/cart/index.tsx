@@ -4,51 +4,50 @@ import Divider from '~/components/common/Divider';
 import { deleteCartItem, getCartItems } from '~/lib/api/cart';
 import { alert } from '~/utils/modal';
 import CartItem from '../cartItem';
-import { CartFooter, CartHeader } from './index.style'
+import { CartFooter, CartHeader } from './index.style';
 
 const Cart: FC = () => {
-
-  const calAmount = () => { 
-    return cartItems.reduce((acc, cur) => { 
-      return acc+cur.product.price
-    },0)
-  }
-
   const [cartItems, setCartItems] = useState([]);
-  const [amount, setAmount] = useState(calAmount());
+  const [amount, setAmount] = useState(0);
 
-  useEffect(() => {
-    fetchCart();
-  },[]);
+  const calAmount = (items) => {
+    return items.reduce((acc, cur) => {
+      return acc + cur.product.price;
+    }, 0);
+  };
 
   const fetchCart = async () => {
     const response = await getCartItems();
     if (response.statusCode === 200) {
-        const cartItems = response.data;
-        setCartItems(cartItems)
+      setCartItems(response.data);
+      setAmount(calAmount(response.data));
     }
   };
 
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
   const onSubmit = () => {
-    alert('결제기능은 준비되지 않았습니다.')
+    alert('결제기능은 준비되지 않았습니다.');
   };
 
-  const changAmount = (price:number, type: string) => { 
-    if (type === 'up') { 
-      setAmount(amount+price)
+  const changAmount = (price: number, type: string) => {
+    if (type === 'up') {
+      setAmount(amount + price);
     }
 
     if (type === 'down') {
-      setAmount(amount-price);
+      setAmount(amount - price);
     }
-  }
+  };
 
-  const removeCartItem = async(cartIdx: number) => {
+  const removeCartItem = async (cartIdx: number) => {
     const response = await deleteCartItem(cartIdx);
-    if (response.statusCode === 200) { 
-      await fetchCart();
+    if (response.statusCode === 200) {
+      fetchCart();
     }
-  }
+  };
 
   return (
     <div>
@@ -63,7 +62,12 @@ const Cart: FC = () => {
         {cartItems &&
           cartItems.map((item) => (
             <div key={item.idx}>
-              <CartItem cartIdx={item.idx} product={item.product} changAmount={changAmount} removeCartItem={removeCartItem}/>
+              <CartItem
+                cartIdx={item.idx}
+                product={item.product}
+                changAmount={changAmount}
+                removeCartItem={removeCartItem}
+              />
               <Divider width="950px" direction="horizontal" />
             </div>
           ))}
