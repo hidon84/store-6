@@ -23,6 +23,7 @@ const Main: FC = () => {
       <PixelArt className="chicken" coord={{ left: '40%' }} />
       <PixelArt className="flower" coord={{ right: '10%' }} />
       <PixelArt className="flower" coord={{ bottom: '20%' }} />
+      <PixelArt className="hedgehog" coord={{ bottom: '20%', right: '40%' }} />
       <Book />
       <Baedal />
       <Hat />
