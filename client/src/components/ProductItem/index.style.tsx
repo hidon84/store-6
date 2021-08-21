@@ -31,7 +31,7 @@ export const ProductTitle = styled.span`
   display: block;
   width: 169px;
   font-family: 'BM Hanna' !important;
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 10px;
 `;
 
