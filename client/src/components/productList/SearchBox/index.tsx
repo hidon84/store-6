@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 import { FC, useContext, useEffect, useRef, useState } from 'react';
 
-import { SearchBoxUnderlineSVG, SearchSVG } from '~/assets';
+import { SearchBoxUnderlineSVG, SearchSVG, XSVG } from '~/assets';
 import { FilterContext } from '~/pages/ProductList';
 import { removeSearchValue, setSearchValue } from '~/stores/productListModule';
 import {
@@ -17,19 +17,26 @@ import {
   SearchInput,
   SearchButton,
   SearchLine,
+  ValueRemoveButton,
 } from './index.style';
 
 const SearchBox: FC = () => {
   const searchTermRef = useRef<HTMLInputElement>();
+  const isSearchValueEmpty = searchTermRef.current?.value.length === 0;
   const { termList, handleSearchTrigger, removeTermOnList } =
     useSearchTerm(searchTermRef);
 
-  const filterValue = useContext(FilterContext);
+  const { dispatch, ...filterValue } = useContext(FilterContext);
   const currentSearchTerm = filterValue.state.search;
 
   useEffect(() => {
     if (currentSearchTerm) searchTermRef.current.value = currentSearchTerm;
   }, [currentSearchTerm]);
+
+  const removeTerm = () => {
+    dispatch(removeSearchValue());
+    searchTermRef.current.value = '';
+  };
 
   return (
     <>
@@ -39,6 +46,13 @@ const SearchBox: FC = () => {
         </SearchButton>
         <SearchInput type="search" name="q" ref={searchTermRef} />
         <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
+        <ValueRemoveButton
+          type="button"
+          isEmpty={isSearchValueEmpty}
+          onClick={removeTerm}
+        >
+          <img src={XSVG} alt="x" />
+        </ValueRemoveButton>
       </SearchBoxForm>
       <RecentlySearchTermBox
         termList={termList}
