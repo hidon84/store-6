@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
 import { FC, useContext, useRef, useState } from 'react';
@@ -17,6 +18,28 @@ import {
   SearchIcon,
   SearchLine,
 } from './index.style';
+
+const SearchBox: FC = () => {
+  const searchTermRef = useRef<HTMLInputElement>();
+  const { termList, handleSearchFormSubmit, removeTermOnList } =
+    useSearchTerm(searchTermRef);
+
+  return (
+    <>
+      <SearchBoxForm onSubmit={handleSearchFormSubmit}>
+        <SearchIcon src={SearchSVG} />
+        <SearchInput type="search" name="q" ref={searchTermRef} />
+        <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
+      </SearchBoxForm>
+      <RecentlySearchTermBox
+        termList={termList}
+        removeTermOnList={removeTermOnList}
+      />
+    </>
+  );
+};
+
+export default SearchBox;
 
 /**
  * 최근 검색어 리스트를 관리하는 훅입니다.
@@ -77,25 +100,3 @@ const useSearchTerm = (
 
   return { termList, handleSearchFormSubmit, removeTermOnList };
 };
-
-const SearchBox: FC = () => {
-  const searchTermRef = useRef<HTMLInputElement>();
-  const { termList, handleSearchFormSubmit, removeTermOnList } =
-    useSearchTerm(searchTermRef);
-
-  return (
-    <>
-      <SearchBoxForm onSubmit={handleSearchFormSubmit}>
-        <SearchIcon src={SearchSVG} />
-        <SearchInput type="search" name="q" ref={searchTermRef} />
-        <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
-      </SearchBoxForm>
-      <RecentlySearchTermBox
-        termList={termList}
-        removeTermOnList={removeTermOnList}
-      />
-    </>
-  );
-};
-
-export default SearchBox;
