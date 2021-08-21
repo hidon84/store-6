@@ -4,20 +4,28 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  Unique,
 } from 'typeorm';
 
+export enum LoginType {
+  Own = 'OWN',
+  Facebook = 'FACEBOOK',
+  Google = 'GOOGLE',
+}
+
 @Entity({ name: 'login' })
+@Unique(['id', 'type'])
 class LoginEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
-  @Column({ length: 45, unique: true })
+  @Column({ length: 45 })
   id: string;
 
   @Column('text')
   password: string;
 
-  @Column({ length: 20, default: 'OWN' })
+  @Column({ length: 20, default: LoginType.Own })
   type: string;
 
   @CreateDateColumn({ type: 'timestamp' })

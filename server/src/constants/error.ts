@@ -27,6 +27,10 @@ export const commonError = {
     statusCode: 400,
     message: 'Invalid query parameters',
   },
+  invalidState: {
+    statusCode: 422,
+    message: 'Invalid state',
+  },
 };
 
 export const uploadImageError = {
