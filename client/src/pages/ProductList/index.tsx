@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FC, createContext, useEffect, useState, useRef } from 'react';
+import {
+  FC,
+  createContext,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react';
 
 import * as productsAPI from '~/lib/api/products';
 import {
@@ -24,6 +31,7 @@ import {
   VerticalDivider,
 } from './index.style';
 import useIntersection from '~/lib/hooks/useIntersection';
+import ScrollToTop from '~/components/productList/ScrollToTop';
 
 export interface ProductData {
   idx: number;
@@ -39,11 +47,23 @@ interface FilterContextState {
 
 export const FilterContext = createContext<FilterContextState>(null);
 
+const useScrollPoint = (targetPoint: number): boolean => {
+  const [isScrollPoint, setIsScrollPoint] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    setIsScrollPoint(window.pageYOffset > targetPoint);
+  }, []);
+  window.addEventListener('scroll', handleScroll);
+  return isScrollPoint;
+};
+
 const ProductList: FC = () => {
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
   const listFooterRef = useRef<HTMLDivElement>();
   const entry = useIntersection(listFooterRef, {});
   const { filterState, dispatch } = productListModule();
+  const TARGET_POINT = 700;
+  const isScrollPoint = useScrollPoint(TARGET_POINT);
 
   useEffect(() => {
     fetchProducts(filterState, setProducts);
@@ -66,6 +86,7 @@ const ProductList: FC = () => {
           <SearchBox />
           <ProductItemContainer products={products} ref={listFooterRef} />
         </RightSection>
+        <ScrollToTop isVisible={isScrollPoint} />
       </ProductListWrapper>
     </FilterContext.Provider>
   );
@@ -89,6 +110,7 @@ const fetchProducts = async (
       else setProducts((prev) => [...prev, ...products]);
     }
   } catch (error) {
+    // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
     throw new Error(error);
   }
 };
