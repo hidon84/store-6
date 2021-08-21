@@ -11,12 +11,14 @@ import { commonError } from '@/constants/error';
 export default (app: Express) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(
-    cors({
-      origin: true,
-      credentials: true,
-    }),
-  );
+  if (process.env.NODE_ENV === 'development') {
+    app.use(
+      cors({
+        origin: true,
+        credentials: true,
+      }),
+    );
+  }
   app.use(cookieParser());
   app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 
