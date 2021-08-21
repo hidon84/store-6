@@ -32,4 +32,11 @@ export const login = (reqData: LoginRequestBody) =>
 export const logout = () =>
   request('GET', authUrl.logout, null, null, clearAuthorizationHeader);
 
-export const refresh = () => request<AuthResponseBody>('GET', authUrl.refresh);
+export const refresh = () =>
+  request<AuthResponseBody>(
+    'GET',
+    authUrl.refresh,
+    null,
+    null,
+    setAuthorizationHeader,
+  );
