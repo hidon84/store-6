@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
+import { confirm } from '~/utils/modal';
 
 const CartItemWrapper = styled.div`
   padding: 41px 10px;
@@ -7,12 +8,12 @@ const CartItemWrapper = styled.div`
   align-items: center;
   font-size: 15px;
   > * {
-    padding-left: 60px;
+    margin-left: 60px;
   }
 `;
 
 const CartImg = styled.img`
-  padding: 0;
+  margin: 0;
   width: 90px;
   height: 120px;
   border-radius: 10px;
@@ -39,37 +40,83 @@ const CartCount = styled.div`
 `;
 
 const CartCounter = styled.div`
+  width: 80px;
   display: flex;
   gap: 10px;
 `;
 
-const CountBtn = styled.div`
+const CountBtn = styled.button`
   color: #999999;
   cursor: pointer;
+
+  &:hover{
+    color:#45C8C4;
+  }
 `;
 
+const Count = styled.div`
+  min-width: 40px;
+  text-align:center;
+`
+
 const CartCancle = styled.div`
+  width: 10px;
   font-size: 25px;
   font-weight: bold;
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  &:hover{
+    transition: transform 300ms;
+    transform: scale(1.08);
+  }
 `;
 
 interface Props {
+  cartIdx : number,
+
   product: {
     idx: number;
     thumbnail: string;
     title: string;
     price: number;
-  };
+  },
+
+  changAmount: Function,
+
+  removeCartItem: Function
 }
 
 const withComma = (x: number): string => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-const CartItem: FC<Props> = ({ product }) => {
+
+const CartItem: FC<Props> = ({ product ,changAmount , removeCartItem, cartIdx}) => {
+
+  const [count, setCount] = useState(1)
+
+  const handleUpBtnClick = () => {
+    changAmount(product.price, 'up');
+    setCount(count + 1);
+  }
+
+  const handleDownBtnClick = () => {
+    if (count > 1) { 
+      changAmount(product.price, 'down');
+      setCount(count - 1);
+    }
+  }
+
+  const handleRemoveBtnClick = () => {
+    
+    confirm('정말 삭제하시겠어요?', () => {
+      removeCartItem(cartIdx)
+      changAmount(count*product.price, 'down');
+    })
+  }
+
   return (
     <CartItemWrapper>
       <CartImg src={product.thumbnail} />
@@ -77,11 +124,12 @@ const CartItem: FC<Props> = ({ product }) => {
       <CartPrice>{withComma(product.price)}</CartPrice>
       <CartCount>{withComma(product.price)}</CartCount>
       <CartCounter>
-        <CountBtn>&uarr;</CountBtn>
-        <div>2개</div>
-        <CountBtn>&darr;</CountBtn>
+        <CountBtn onClick={handleUpBtnClick}>&uarr;</CountBtn>
+        <Count>{count}개</Count>
+        <CountBtn onClick={handleDownBtnClick}>&darr;</CountBtn>
       </CartCounter>
-      <CartCancle>x</CartCancle>
+      <CartCancle onClick={handleRemoveBtnClick}>x</CartCancle>
+      
     </CartItemWrapper>
   );
 };
