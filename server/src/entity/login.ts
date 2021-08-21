@@ -6,7 +6,12 @@ import {
   UpdateDateColumn,
   Unique,
 } from 'typeorm';
-import { LoginType } from '@/constants/login';
+
+export enum LoginType {
+  Own = 'OWN',
+  Facebook = 'FACEBOOK',
+  Google = 'GOOGLE',
+}
 
 @Entity({ name: 'login' })
 @Unique(['id', 'type'])

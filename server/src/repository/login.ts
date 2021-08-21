@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import LoginEntity from '@/entity/login';
-import { LoginType } from '@/constants/login';
+import LoginEntity, { LoginType } from '@/entity/login';
 
 export interface LoginInfo {
   id: string;
