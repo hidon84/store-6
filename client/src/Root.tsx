@@ -7,9 +7,9 @@ const Root = () => {
   const [user, setUser] = useAutoLogin();
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
-        <App/>
+        <App />
       </BrowserRouter>
     </UserContext.Provider>
   );
