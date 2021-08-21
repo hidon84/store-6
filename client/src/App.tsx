@@ -10,6 +10,8 @@ import ConfirmModal from './components/modal/ConfirmModal';
 import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
+import useAutoLogin from './lib/hooks/useAutoLogin';
+import UserContext from './lib/contexts/userContext';
 
 const Main = styled.main`
   position: relative;
@@ -18,35 +20,41 @@ const Main = styled.main`
 `;
 
 const App = () => {
+  const [user, setUser, requestError] = useAutoLogin();
+
+  console.log(user, requestError);
+
   return (
     <>
-      <BrowserRouter>
-        <Navigation />
-        <Main>
-          <Switch>
-            <Route exact path="/">
-              <MainPage />
-            </Route>
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
-            <Route exact path="/signup">
-              <SignUpPage />
-            </Route>
-            <Route path="/hello/:name/:number">
-              <div>임시 Route</div>
-            </Route>
-            <Route exact path="/products">
-              <ProductList />
-            </Route>
-            <Route exact path="/me">
-              <MyPage />
-            </Route>
-          </Switch>
-        </Main>
-      </BrowserRouter>
-      <AlertModal />
-      <ConfirmModal />
+      <UserContext.Provider value={{ user, setUser }}>
+        <BrowserRouter>
+          <Navigation />
+          <Main>
+            <Switch>
+              <Route exact path="/">
+                <MainPage />
+              </Route>
+              <Route exact path="/login">
+                <LoginPage />
+              </Route>
+              <Route exact path="/signup">
+                <SignUpPage />
+              </Route>
+              <Route path="/hello/:name/:number">
+                <div>임시 Route</div>
+              </Route>
+              <Route exact path="/products">
+                <ProductList />
+              </Route>
+              <Route exact path="/me">
+                <MyPage />
+              </Route>
+            </Switch>
+          </Main>
+        </BrowserRouter>
+        <AlertModal />
+        <ConfirmModal />
+      </UserContext.Provider>
     </>
   );
 };
