@@ -109,3 +109,10 @@ export const ProductError = {
     message: 'Unable to Get Products',
   },
 };
+
+export const CartError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get CartItems',
+  },
+};
