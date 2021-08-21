@@ -15,19 +15,21 @@ import RecentlySearchTermBox from '../RecentlySearchTermBox';
 import {
   SearchBoxForm,
   SearchInput,
-  SearchIcon,
+  SearchButton,
   SearchLine,
 } from './index.style';
 
 const SearchBox: FC = () => {
   const searchTermRef = useRef<HTMLInputElement>();
-  const { termList, handleSearchFormSubmit, removeTermOnList } =
+  const { termList, handleSearchTrigger, removeTermOnList } =
     useSearchTerm(searchTermRef);
 
   return (
     <>
-      <SearchBoxForm onSubmit={handleSearchFormSubmit}>
-        <SearchIcon src={SearchSVG} />
+      <SearchBoxForm onSubmit={handleSearchTrigger}>
+        <SearchButton type="submit">
+          <img src={SearchSVG} alt="search" />
+        </SearchButton>
         <SearchInput type="search" name="q" ref={searchTermRef} />
         <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
       </SearchBoxForm>
@@ -57,9 +59,7 @@ const useSearchTerm = (
    * input에 있는 value를 상태에 반영합니다.
    * 만약, 빈 값을 받는다면 store의 search 값을 제거하는 요청을 보냅니다.
    */
-  const handleSearchFormSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-  ): void => {
+  const handleSearchTrigger = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const term = searchTermRef.current.value;
@@ -98,5 +98,5 @@ const useSearchTerm = (
     setTermList(renewTermList);
   };
 
-  return { termList, handleSearchFormSubmit, removeTermOnList };
+  return { termList, handleSearchTrigger, removeTermOnList };
 };

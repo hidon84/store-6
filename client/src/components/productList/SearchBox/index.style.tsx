@@ -21,11 +21,13 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const SearchIcon = styled.img`
+export const SearchButton = styled.button`
+  all: unset;
   position: absolute;
   left: 23px;
   bottom: 12px;
   width: 30px;
+  cursor: pointer;
 `;
 
 export const SearchLine = styled.img`
