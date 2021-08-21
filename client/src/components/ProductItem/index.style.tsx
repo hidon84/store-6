@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ProductItemWrapper = styled.div`
+export const ProductItemWrapper = styled.li`
   position: relative;
   height: 300px;
   width: 230px;
