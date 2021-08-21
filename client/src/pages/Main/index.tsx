@@ -14,6 +14,7 @@ import {
 } from '~/components/main/IconButtons';
 import PixelArt from '~/components/main/pixelArts';
 import { MainContainer } from './index.style';
+import socket from '~/lib/api/socket';
 
 const Main: FC = () => {
   const [y, setY] = useState(0);
@@ -36,7 +37,14 @@ const Main: FC = () => {
       default:
         break;
     }
+    socket.emit('move', { op: JSON.stringify({ y, x }) });
   };
+
+  useEffect(() => {
+    socket.on('update-moves', ({ op }: { op: string }) => {
+      console.log(op);
+    });
+  });
 
   useEffect(() => {
     document.body.addEventListener('keydown', onKeyDown);

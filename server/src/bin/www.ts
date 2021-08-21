@@ -1,4 +1,5 @@
 import http from 'http';
+import { Server, Socket } from 'socket.io';
 import createApp from '@/app';
 import config from '@/config';
 
@@ -7,6 +8,19 @@ const { port } = config;
 createApp().then(app => {
   app.set('port', port);
   const server = http.createServer(app);
+  const io = new Server(server, {
+    cors: {
+      origin: '*',
+    },
+  });
+
+  io.on('connection', (socket: Socket) => {
+    socket.on('move', (data: any) => {
+      console.log('move', data);
+      io.emit('update-moves', data);
+    });
+    console.log('a user connected');
+  });
 
   /**
    * Event listener for HTTP server "error" event.
