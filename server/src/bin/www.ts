@@ -15,11 +15,11 @@ createApp().then(app => {
   });
 
   io.on('connection', (socket: Socket) => {
+    console.log('a user connected');
     socket.on('move', (data: any) => {
       console.log('move', data);
       io.emit('update-moves', data);
     });
-    console.log('a user connected');
   });
 
   /**
