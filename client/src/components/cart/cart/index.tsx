@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { deleteCartItem, getCartItems } from '~/lib/api/cart';
+import useUser from '~/lib/hooks/useUser';
 import { alert } from '~/utils/modal';
 import CartItem from '../cartItem';
 import { CartFooter, CartHeader } from './index.style';
@@ -9,6 +10,7 @@ import { CartFooter, CartHeader } from './index.style';
 const Cart: FC = () => {
   const [cartItems, setCartItems] = useState([]);
   const [amount, setAmount] = useState(0);
+  const [user] = useUser();
 
   const calAmount = (items) => {
     return items.reduce((acc, cur) => {
@@ -25,8 +27,10 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (user) {
+      fetchCart();
+    }
+  }, [user]);
 
   const onSubmit = () => {
     alert('결제기능은 준비되지 않았습니다.');
