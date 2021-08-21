@@ -4,14 +4,16 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  Unique,
 } from 'typeorm';
 
 @Entity({ name: 'login' })
+@Unique(['id', 'type'])
 class LoginEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
-  @Column({ length: 45, unique: true })
+  @Column({ length: 45 })
   id: string;
 
   @Column('text')
