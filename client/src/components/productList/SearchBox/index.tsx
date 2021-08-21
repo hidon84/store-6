@@ -73,6 +73,7 @@ const useSearchTerm = (
     if (term === '') return dispatch(removeSearchValue());
 
     addTermOnList(term);
+    dispatch(setSearchValue(term));
   };
 
   /**
@@ -84,8 +85,6 @@ const useSearchTerm = (
     if (storedTermValue && storedTermValue.includes(term)) return;
 
     const addedTermList = storedTermValue ? [...storedTermValue, term] : [term];
-
-    dispatch(setSearchValue(term));
     reflectRenewTerm(addedTermList);
   };
 
