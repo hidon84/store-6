@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
-import { FC, useContext, useRef, useState } from 'react';
+import { FC, useContext, useEffect, useRef, useState } from 'react';
 
 import { SearchBoxUnderlineSVG, SearchSVG } from '~/assets';
 import { FilterContext } from '~/pages/ProductList';
@@ -23,6 +23,13 @@ const SearchBox: FC = () => {
   const searchTermRef = useRef<HTMLInputElement>();
   const { termList, handleSearchTrigger, removeTermOnList } =
     useSearchTerm(searchTermRef);
+
+  const filterValue = useContext(FilterContext);
+  const currentSearchTerm = filterValue.state.search;
+
+  useEffect(() => {
+    if (currentSearchTerm) searchTermRef.current.value = currentSearchTerm;
+  }, [currentSearchTerm]);
 
   return (
     <>
