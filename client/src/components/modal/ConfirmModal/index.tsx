@@ -19,7 +19,7 @@ const ConfirmModalComponent = () => {
         <button
           type="button"
           className="button confirm"
-          onClick={(e) => hide()}
+          onClick={() => hide()}
         >
           확인
         </button>

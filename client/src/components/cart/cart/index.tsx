@@ -36,14 +36,12 @@ const Cart: FC = () => {
     alert('결제기능은 준비되지 않았습니다.');
   };
 
-  const changAmount = (price: number, type: string) => {
-    if (type === 'up') {
-      setAmount(amount + price);
-    }
+  const changeAmount = (price: number, type: string) => {
 
-    if (type === 'down') {
-      setAmount(amount - price);
-    }
+    const offset = type === 'down' ? price * -1 : price;
+
+    setAmount(amount + offset);
+
   };
 
   const removeCartItem = async (cartIdx: number) => {
@@ -69,7 +67,7 @@ const Cart: FC = () => {
               <CartItem
                 cartIdx={item.idx}
                 product={item.product}
-                changAmount={changAmount}
+                changeAmount={changeAmount}
                 removeCartItem={removeCartItem}
               />
               <Divider width="950px" direction="horizontal" />

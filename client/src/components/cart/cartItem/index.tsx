@@ -20,14 +20,14 @@ interface Props {
     title: string;
     price: number;
   };
-  changAmount: (price: number, type: string) => void;
+  changeAmount: (price: number, type: string) => void;
   removeCartItem: (cartIdx: number) => void;
 }
 
 const CartItem: FC<Props> = ({
   cartIdx,
   product,
-  changAmount,
+  changeAmount,
   removeCartItem,
 }) => {
   const [count, setCount] = useState(1);
@@ -36,21 +36,21 @@ const CartItem: FC<Props> = ({
   const handleUpBtnClick = () => {
     setOrderPrice(orderPrice + product.price);
     setCount(count + 1);
-    changAmount(product.price, 'up');
+    changeAmount(product.price, 'up');
   };
 
   const handleDownBtnClick = () => {
     if (count > 1) {
       setCount(count - 1);
       setOrderPrice(orderPrice - product.price);
-      changAmount(product.price, 'down');
+      changeAmount(product.price, 'down');
     }
   };
 
   const handleRemoveBtnClick = () => {
     confirm('정말 삭제하시겠어요?', () => {
       removeCartItem(cartIdx);
-      changAmount(count * product.price, 'down');
+      changeAmount(count * product.price, 'down');
     });
   };
 
