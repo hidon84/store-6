@@ -41,13 +41,18 @@ const Cart: FC = () => {
     const offset = type === 'down' ? price * -1 : price;
 
     setAmount(amount + offset);
-
   };
 
-  const removeCartItem = async (cartIdx: number) => {
+  const removeCartItem = async (cartIdx: number , count: number, price:number) => {
     const response = await deleteCartItem(cartIdx);
+
     if (response.statusCode === 200) {
-      fetchCart();
+      const filtered = cartItems.filter(item => { 
+          return item.idx !== cartIdx
+      })
+
+      setCartItems(filtered)
+      changeAmount(count * price, 'down')
     }
   };
 

@@ -21,7 +21,7 @@ interface Props {
     price: number;
   };
   changeAmount: (price: number, type: string) => void;
-  removeCartItem: (cartIdx: number) => void;
+  removeCartItem: (cartIdx: number, count:number, price:number) => void;
 }
 
 const CartItem: FC<Props> = ({
@@ -49,7 +49,7 @@ const CartItem: FC<Props> = ({
 
   const handleRemoveBtnClick = () => {
     confirm('정말 삭제하시겠어요?', () => {
-      removeCartItem(cartIdx);
+      removeCartItem(cartIdx, count, product.price);
       changeAmount(count * product.price, 'down');
     });
   };
