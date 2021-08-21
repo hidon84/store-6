@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   Unique,
 } from 'typeorm';
+import { LoginType } from '@/constants/login';
 
 @Entity({ name: 'login' })
 @Unique(['id', 'type'])
@@ -19,7 +20,7 @@ class LoginEntity {
   @Column('text')
   password: string;
 
-  @Column({ length: 20, default: 'OWN' })
+  @Column({ length: 20, default: LoginType.Own })
   type: string;
 
   @CreateDateColumn({ type: 'timestamp' })
