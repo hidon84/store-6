@@ -1,8 +1,13 @@
 import { FC } from 'react';
 import './flower.css';
+import Coord from '../coord';
 
-const Flower: FC = () => {
-  return <div className="flower"> </div>;
+const Flower: FC<{ coord?: Coord }> = ({ coord }) => {
+  return (
+    <div style={{ ...coord }} className="flower">
+      {' '}
+    </div>
+  );
 };
 
 export default Flower;

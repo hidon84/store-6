@@ -1,7 +1,5 @@
 .sonic {
   position: absolute;
-  left: 150px;
-  top: 250px;
   animation: sonic 2s infinite;
   -webkit-animation: sonic 2s infinite;
   -moz-animation: sonic 2s infinite;
