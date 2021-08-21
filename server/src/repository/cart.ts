@@ -13,6 +13,11 @@ class CartRepository extends Repository<CartEntity> {
     });
     return cartItems;
   }
+
+
+  async deleteItem(cartIdx: number) {
+    await this.delete({idx:cartIdx})
+  }
 }
 
 export default CartRepository;

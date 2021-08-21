@@ -17,3 +17,22 @@ export const handleGetCartItems = async (
     return next(e);
   }
 };
+
+
+export const handleDeleteCartItem = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const cartServiceInstance = Container.get(CartService);
+
+    const cartIdx = Number(req.params.id)
+
+    await cartServiceInstance.deleteCartItem(cartIdx);
+
+    return res.json();
+  } catch (e) {
+    return next(e);
+  }
+};

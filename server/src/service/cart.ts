@@ -22,6 +22,14 @@ class CartService {
       throw new ErrorResponse(CartError.unable);
     }
   }
+
+  async deleteCartItem(cartIdx:number) {
+    try {
+      await this.cartRepository.deleteItem(cartIdx);
+    } catch {
+      throw new ErrorResponse(CartError.unable);
+    }
+  }
 }
 
 export default CartService;
