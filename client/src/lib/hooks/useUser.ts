@@ -5,7 +5,7 @@ const useUser = () => {
   const userContext = useContext(UserContext);
 
   if (!userContext) {
-    return [null, null];
+    return [null, null] as const;
   }
 
   const { user, setUser } = userContext;
