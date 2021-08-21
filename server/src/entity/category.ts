@@ -14,7 +14,7 @@ class CatetoryEntity {
   @Column({ length: 45 })
   name: string;
 
-  @Column('text')
+  @Column('text', { nullable: true })
   image: string;
 
   @CreateDateColumn({ type: 'timestamp' })
