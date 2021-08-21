@@ -12,21 +12,17 @@ import {
   Stain,
   Logo,
 } from '~/components/main/IconButtons';
-import Cat from '~/components/main/pixelArts/cat';
-import Sonic from '~/components/main/pixelArts/sonic';
-import Chicken from '~/components/main/pixelArts/chicken';
-import Flower from '~/components/main/pixelArts/flower';
-import Ladybug from '~/components/main/pixelArts/ladybug/ladybug';
+import PixelArt from '~/components/main/pixelArts';
 import { MainContainer } from './index.style';
 
 const Main: FC = () => {
   return (
     <MainContainer>
-      <Cat />
-      <Sonic coord={{ left: '15%', top: '30%' }} />
-      <Chicken coord={{ left: '40%' }} />
-      <Flower coord={{ right: '10%' }} />
-      <Ladybug coord={{ bottom: '20%' }} />
+      <PixelArt className="cat" />
+      <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
+      <PixelArt className="chicken" coord={{ left: '40%' }} />
+      <PixelArt className="flower" coord={{ right: '10%' }} />
+      <PixelArt className="flower" coord={{ bottom: '20%' }} />
       <Book />
       <Baedal />
       <Hat />
