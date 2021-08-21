@@ -39,10 +39,9 @@ const ProductList: FC = () => {
   const { filterState, dispatch } = productListModule();
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
 
-  const { category, order, search } = filterState;
   useEffect(() => {
-    fetchProducts(setProducts);
-  }, [category, order, search]);
+    fetchProducts(filterState, setProducts);
+  }, [filterState]);
 
   return (
     <FilterContext.Provider value={{ state: filterState, dispatch }}>
@@ -67,10 +66,13 @@ export default ProductList;
 
 // API
 const fetchProducts = async (
+  filterState: ProductsGetRequestQuery,
   setProducts: React.Dispatch<React.SetStateAction<ProductsGetResponseBody[]>>,
 ) => {
   try {
-    const { statusCode, data: products } = await productsAPI.getProducts();
+    const { statusCode, data: products } = await productsAPI.getProducts(
+      filterState,
+    );
     if (statusCode === 200) setProducts(products);
   } catch (error) {
     throw new Error(error);
