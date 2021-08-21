@@ -9,8 +9,8 @@ export interface LoginInfo {
 
 @EntityRepository(LoginEntity)
 class LoginRepository extends Repository<LoginEntity> {
-  async findById(id: string) {
-    const account = await this.findOne({ where: { id } });
+  async findById(id: string, type: string = 'OWN') {
+    const account = await this.findOne({ where: { id, type } });
     return account;
   }
 
