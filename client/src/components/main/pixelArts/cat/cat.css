@@ -1,7 +1,5 @@
 .cat {
   position: absolute;
-  top: 100px;
-  left: 100px;
   animation: cat 1s infinite;
   -webkit-animation: cat 1s infinite;
   -moz-animation: cat 1s infinite;

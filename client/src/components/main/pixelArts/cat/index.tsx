@@ -1,9 +1,13 @@
 import { FC } from 'react';
-import styled from 'styled-components';
 import './cat.css';
+import Coord from '../coord';
 
-const Cat: FC = () => {
-  return <div className="cat"> </div>;
+const Cat: FC<{ coord?: Coord }> = ({ coord }) => {
+  return (
+    <div style={{ ...coord }} className="cat">
+      {' '}
+    </div>
+  );
 };
 
 export default Cat;
