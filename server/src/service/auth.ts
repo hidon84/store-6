@@ -4,7 +4,7 @@ import * as hashHelper from '@/helper/hash';
 import * as jwtHelper from '@/helper/jwt';
 import * as authHelper from '@/helper/auth';
 import ErrorResponse from '@/utils/errorResponse';
-import { commonError, loginError, logoutError } from '@/constants/error';
+import { commonError, loginError, logoutError, refreshError } from '@/constants/error';
 import LoginRepository from '@/repository/login';
 
 @Service()
@@ -55,6 +55,9 @@ class AuthService {
 
   async RefreshAccessToken(refreshToken: string) {
     try {
+      if (!refreshToken) {
+        throw new ErrorResponse(commonError.unauthorized);
+      }
       const { idx } = jwtHelper.decodeRefreshToken(refreshToken);
       const login = await this.loginRepository.findByIdx(idx);
       const isValid = await authHelper.verifyRefreshToken(refreshToken, idx);
@@ -65,10 +68,10 @@ class AuthService {
 
       throw new ErrorResponse(commonError.unauthorized);
     } catch (e) {
-      if (e instanceof ErrorResponse) {
+      if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(loginError.unable);
+      throw new ErrorResponse(refreshError.unable);
     }
   }
 }

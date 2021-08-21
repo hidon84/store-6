@@ -1,6 +1,5 @@
-import React, { FC, createContext } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter, Switch, Route } from '~/core/Router';
+import { Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
 import Navigation from '~/components/base/Navigation';
 import LoginPage from '~/pages/Login';
@@ -20,31 +19,29 @@ const Main = styled.main`
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Navigation />
-        <Main>
-          <Switch>
-            <Route exact path="/">
-              <MainPage />
-            </Route>
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
-            <Route exact path="/signup">
-              <SignUpPage />
-            </Route>
-            <Route path="/hello/:name/:number">
-              <div>임시 Route</div>
-            </Route>
-            <Route exact path="/products">
-              <ProductList />
-            </Route>
-            <Route exact path="/me">
-              <MyPage />
-            </Route>
-          </Switch>
-        </Main>
-      </BrowserRouter>
+      <Navigation />
+      <Main>
+        <Switch>
+          <Route exact path="/">
+            <MainPage />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
+          <Route exact path="/signup">
+            <SignUpPage />
+          </Route>
+          <Route path="/hello/:name/:number">
+            <div>임시 Route</div>
+          </Route>
+          <Route exact path="/products">
+            <ProductList />
+          </Route>
+          <Route exact path="/me">
+            <MyPage />
+          </Route>
+        </Switch>
+      </Main>
       <AlertModal />
       <ConfirmModal />
     </>
