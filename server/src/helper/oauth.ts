@@ -35,11 +35,41 @@ export interface OauthFacebookInfoResponse {
   };
 }
 
-export const getOauthGoogleRedirectUrl = () => {
+export const oauthStateDecoder = (state: string) => {
+  const result: Record<string, string> = {};
+  const splittedState = state.split('&').map(v => v.split('='));
+  splittedState.forEach(([key, value]) => {
+    result[key] = value;
+  });
+  return result;
+};
+
+export const oauthStateEncoder = (state: object) => {
+  const urlEscapeMap = {
+    '=': '%3D',
+    '&': '%26',
+  };
+  return Object.entries(state)
+    .reduce(
+      (acc, cur) =>
+        `${acc}${cur[0]}${urlEscapeMap['=']}${cur[1]}${urlEscapeMap['&']}`,
+      '',
+    )
+    .slice(0, urlEscapeMap['&'].length * -1);
+};
+
+export const getOauthGoogleRedirectUrl = (
+  isLoginRequest: boolean = false,
+  csrfToken: string,
+) => {
   const params = {
     redirect_uri: config.oauth.google.callbackUrl,
     scope: googleOauthScope,
     client_id: config.oauth.google.clientId,
+    state: oauthStateEncoder({
+      is_login_request: isLoginRequest,
+      csrf_token: csrfToken,
+    }),
     response_type: 'code',
     access_type: 'offline',
   };
