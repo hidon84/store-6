@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
+import ShipItem from '../shippItem';
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   margin-right: 150px;
+
+  &:last-child{
+    margin-top: 40px;
+  }
 `
 
 const ShipHeader = styled.div`
@@ -19,16 +24,46 @@ const ShipHeader = styled.div`
   font-size: 15px;
 
   div {
-    width: 100px;
     margin-left: 170px;
   }
-
 `
+
+
+const mockData = [
+  {
+    idx: 1,
+    user: {
+      name: '황병현',
+      phone: '010-5022-2332',
+    },
+    address: '서울 영등포구 선유로 200가길 39\n우형빌딩200호',
+    selected: 0
+  },
+  {
+    idx: 2,
+    user: {
+      name: '황병현',
+      phone: '010-5022-2332',
+    },
+    address: '서울 영등포구 선유로 200가길 39\n우형빌딩200호',
+    selected: 1
+  },
+  {
+    idx: 3,
+    user: {
+      name: '황병현',
+      phone: '010-5022-2332',
+    },
+    address: '서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39\n우형빌딩200호',
+    selected: 0
+  },
+]
+
 
 
 const Shipping: FC = () => {
 
-  const [shipItems, setShipItems] = useState([]);
+  const [shipItems, setShipItems] = useState(mockData);
 
   const handleNewBtnClick = () => { 
       alert('기다려')
@@ -38,7 +73,7 @@ const Shipping: FC = () => {
   return (
     <div>
       <ButtonWrapper>
-        <Button size="lg" onClick={handleNewBtnClick}>
+        <Button size="md" onClick={handleNewBtnClick}>
             신규주소 등록
         </Button>
       </ButtonWrapper>
@@ -48,9 +83,19 @@ const Shipping: FC = () => {
       </ShipHeader>
       <Divider width="950px" direction="horizontal" />
       <div>
-        맵돌리는 부분
+        {shipItems &&
+          shipItems.map((item) => (
+            <div key={item.idx}>
+              <ShipItem shipIdx={item.idx} user={item.user} selected={item.selected} address={item.address}/>
+              <Divider width="950px" direction="horizontal" />
+            </div>
+          ))}
       </div>
-      <div>선택주소 사용하기</div>
+      <ButtonWrapper>
+        <Button size="lg" onClick={handleNewBtnClick}>
+            선택주소 사용하기
+        </Button>
+      </ButtonWrapper>
     </div>
   );
 };

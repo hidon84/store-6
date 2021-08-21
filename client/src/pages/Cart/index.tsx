@@ -6,7 +6,7 @@ import Divider from '~/components/common/Divider';
 import { CartPageWrapper, Header, HeaderItem } from './index.style';
 
 const CartPage: FC = () => {
-  const [isCartComponent, setIsCartComponent] = useState<boolean>(true);
+  const [isCartComponent, setIsCartComponent] = useState<boolean>(false);
 
   const handleSetIsCartComponent = (state: boolean) => {
     setIsCartComponent(state);
