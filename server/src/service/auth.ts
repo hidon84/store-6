@@ -4,7 +4,12 @@ import * as hashHelper from '@/helper/hash';
 import * as jwtHelper from '@/helper/jwt';
 import * as authHelper from '@/helper/auth';
 import ErrorResponse from '@/utils/errorResponse';
-import { commonError, loginError, logoutError, refreshError } from '@/constants/error';
+import {
+  commonError,
+  loginError,
+  logoutError,
+  refreshError,
+} from '@/constants/error';
 import LoginRepository from '@/repository/login';
 
 @Service()

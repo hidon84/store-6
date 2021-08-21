@@ -26,6 +26,7 @@ const request = async <RES = unknown, REQ = null, PARAMS = null>(
     method,
     url,
     params,
+    withCredentials: true,
     ...(body && { data: body }),
   })) as AxiosResponse<RES | ErrorResponseBody>;
 
