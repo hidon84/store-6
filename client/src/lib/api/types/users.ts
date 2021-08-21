@@ -23,6 +23,6 @@ export interface UsersPutRequestBody {
   password?: string;
   email?: string;
   phone?: string;
-  img?: File;
+  profile?: File;
 }
 export type UsersPutResponseBody = UpdateInfo;
