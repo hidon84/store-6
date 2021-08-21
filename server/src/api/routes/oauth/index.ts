@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   handleOauthFacebook,
   handleOauthFacebookCallback,
+  handleOauthFacebookLogin,
   handleOauthGoogle,
   handleOauthGoogleCallback,
   handleOauthGoogleLogin,
@@ -17,6 +18,7 @@ export default (router: Router) => {
   oauthRouter.get('/google/callback', handleOauthGoogleCallback);
 
   oauthRouter.get('/facebook', handleOauthFacebook);
+  oauthRouter.get('/facebook/login', handleOauthFacebookLogin);
   oauthRouter.get('/facebook/callback', handleOauthFacebookCallback);
 
   return router;

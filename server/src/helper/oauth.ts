@@ -107,11 +107,18 @@ export const getGoogleUserInfo = async (accessToken: string) => {
   return response.data;
 };
 
-export const getOauthFacebookRedirectUrl = () => {
+export const getOauthFacebookRedirectUrl = (
+  isLoginRequest: boolean = false,
+  csrfToken: string,
+) => {
   const params = {
     redirect_uri: config.oauth.facebook.callbackUrl,
     client_id: config.oauth.facebook.clientId,
     scope: facebookOauthScope,
+    state: oauthStateEncoder({
+      is_login_request: isLoginRequest,
+      csrf_token: csrfToken,
+    }),
   };
   const result = `${facebookOauthUrl}${Object.entries(params).reduce(
     (acc, cur) => `${acc}&${cur[0]}=${cur[1]}`,
