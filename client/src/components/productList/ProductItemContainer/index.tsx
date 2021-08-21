@@ -14,7 +14,6 @@ const ProductItemContainerWrapper = styled.ul`
 const ListFooter = styled.div`
   width: 100%;
   height: 20px;
-  background-color: black;
 `;
 
 interface Props {
@@ -38,7 +37,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
           />
         ))}
       </ProductItemContainerWrapper>
-      {/* TODO: 원활한 UX를 위하여 추후에 로딩 스피너를 추가해야 합니다. */}
+      {/* TODO: 원활한 UX를 위하여 추후에 로딩 스피너 또는 lazy loading 로직을 추가해야 합니다. */}
       <ListFooter ref={ref} />
     </>
   );
