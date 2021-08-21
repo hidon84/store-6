@@ -7,7 +7,7 @@
     "start": "env-cmd ts-node -r tsconfig-paths/register ./src/bin/www.ts",
     "lint:fix": "eslint --fix .",
     "prettier:write": "prettier --write .",
-    "precommit": "yarn lint:fix && yarn prettier:write",
+    "precommit": "yarn lint-staged",
     "test": "env-cmd -f .env.dev jest --detectOpenHandles --forceExit",
     "coverage": "env-cmd -f .env.dev jest --coverage --detectOpenHandles --forceExit"
   },
@@ -35,6 +35,7 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.6",
+    "lint-staged": "^11.1.2",
     "nodemon": "^2.0.12",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
