@@ -54,11 +54,18 @@ const useSearchTerm = (
   );
 
   /**
-   * localStorage와 termList에 최근 검색어를 갱신합니다.
+   * input에 있는 value를 상태에 반영합니다.
+   * 만약, 빈 값을 받는다면 store의 search 값을 제거하는 요청을 보냅니다.
    */
-  const reflectRenewTerm = (renewTermList: string[]) => {
-    setValueOnLocalStorage('recentlySearchTerm', renewTermList);
-    setTermList(renewTermList);
+  const handleSearchFormSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+  ): void => {
+    e.preventDefault();
+
+    const term = searchTermRef.current.value;
+    if (term === '') return dispatch(removeSearchValue());
+
+    addTermOnList(term);
   };
 
   /**
@@ -84,18 +91,11 @@ const useSearchTerm = (
   };
 
   /**
-   * input에 있는 value를 상태에 반영합니다.
-   * 만약, 빈 값을 받는다면 store의 search 값을 제거하는 요청을 보냅니다.
+   * localStorage와 termList에 최근 검색어를 갱신합니다.
    */
-  const handleSearchFormSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-  ): void => {
-    e.preventDefault();
-
-    const term = searchTermRef.current.value;
-    if (term === '') return dispatch(removeSearchValue());
-
-    addTermOnList(term);
+  const reflectRenewTerm = (renewTermList: string[]) => {
+    setValueOnLocalStorage('recentlySearchTerm', renewTermList);
+    setTermList(renewTermList);
   };
 
   return { termList, handleSearchFormSubmit, removeTermOnList };
