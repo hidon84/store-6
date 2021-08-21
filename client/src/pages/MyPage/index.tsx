@@ -26,6 +26,7 @@ import {
   ImageDesc,
   ImageInput,
 } from './index.style';
+import useUser from '~/lib/hooks/useUser';
 
 const message = {
   EMAIL_UPDATE_SUCCESS: '이메일이 수정되었습니다.',
@@ -41,7 +42,7 @@ const MyPage: React.FC = () => {
     'https://user-images.githubusercontent.com/47776356/129712816-13701b24-57cc-451e-93c6-ca7afe190af1.jpeg',
   );
 
-  const [userInfo, setUserInfo] = useState<UsersGetResponseBody | null>(null);
+  const [userInfo, setUserInfo] = useUser();
   const imagePreviewRef: RefObject<HTMLLabelElement> = useRef();
 
   const handleSubmitEmail = async (value: string) => {
@@ -62,7 +63,7 @@ const MyPage: React.FC = () => {
 
   const handleSubmitProfile = async (file, fileToString) => {
     const response = await putMe({
-      img: file,
+      profile: file,
     });
 
     if (response.statusCode === 200) {
@@ -97,27 +98,10 @@ const MyPage: React.FC = () => {
   }, [imagePreviewRef, profile]);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      // 로그인 기능이 아직 구현되어있지 않아, 테스트를 위해 로그인 로직을 추가해놓았습니다.
-      // const test = await login({
-      //   id: 'test',
-      //   password: 'hahahahoho',
-      // });
-
-      const response = await getMe();
-
-      if (response.statusCode === 200) {
-        const user = response.data as UsersGetResponseBody;
-
-        if (user.profile) {
-          setProfile(user.profile);
-        }
-
-        setUserInfo(user);
-      }
-    };
-    fetchUser();
-  }, []);
+    if (userInfo?.profile) {
+      setProfile(userInfo.profile);
+    }
+  }, [userInfo]);
 
   return (
     <StyledMyPage>
