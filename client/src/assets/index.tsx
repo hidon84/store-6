@@ -21,6 +21,10 @@ import signUpWithGoogleSVG from './signUpWithGoogle.svg';
 import signUpWithOwnSVG from './signUpWithOwn.svg';
 import stainSVG from './stain.svg';
 import logoSVG from './logo.svg';
+import modifySVG from './modify-pencil.svg';
+import cancleSVG from './cancle.svg';
+import underlineShortSVG from './underline-baemin-short.svg';
+import underbaeminSVG from './underline-baemin-color.svg';
 
 const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
@@ -136,6 +140,10 @@ export {
   SearchBoxUnderlineSVG,
   VerticalDividerSVG,
   XSVG,
+  cancleSVG,
+  modifySVG,
+  underlineShortSVG,
+  underbaeminSVG,
   BackArrowSVG,
   BelowArrowSVG,
   FilledHeartSVG,

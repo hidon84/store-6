@@ -13,13 +13,13 @@ describe('<CartItem />', () => {
       title: 'test',
       price: 2,
     };
-    const changAmount = (price: number, type: string) => {};
+    const changeAmount = (price: number, type: string) => {};
     const removeCartItem = (cartId: number) => {};
     const { container } = render(
       <CartItem
         cartIdx={cartIdx}
         product={product}
-        changAmount={changAmount}
+        changeAmount={changeAmount}
         removeCartItem={removeCartItem}
       />,
     );

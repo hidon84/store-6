@@ -144,7 +144,9 @@ exports[`<CartItem /> should render same with snapshot 1`] = `
     <div
       class="c8"
     >
-      x
+      <img
+        alt="cancle"
+      />
     </div>
   </div>
 </div>
