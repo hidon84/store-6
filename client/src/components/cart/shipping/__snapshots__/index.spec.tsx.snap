@@ -80,10 +80,9 @@ exports[`<Shipping /> should render same with snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   width: 370px;
   line-height: 1.4;
   white-space: pre-wrap;
@@ -228,7 +227,12 @@ exports[`<Shipping /> should render same with snapshot 1`] = `
         <div
           class="c9"
         >
-          서울 영등포구 선유로 200가길 39
+          <div>
+            서울 영등포구 선유로 200가길 39
+          </div>
+          <div>
+            우형빌딩200호
+          </div>
         </div>
         <div
           class="c10"
@@ -303,7 +307,12 @@ exports[`<Shipping /> should render same with snapshot 1`] = `
         <div
           class="c9"
         >
-          서울 영등포구 선유로 200가길 39
+          <div>
+            서울 영등포구 선유로 200가길 39
+          </div>
+          <div>
+            우형빌딩200호
+          </div>
         </div>
         <div
           class="c10"
@@ -381,7 +390,12 @@ exports[`<Shipping /> should render same with snapshot 1`] = `
         <div
           class="c9"
         >
-          서울 영등포구 선유로 200가길 39
+          <div>
+            서울 영등포구 선유로 200가길 39
+          </div>
+          <div>
+            우형빌딩200호
+          </div>
         </div>
         <div
           class="c10"

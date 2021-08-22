@@ -52,10 +52,9 @@ exports[`<ShippingItem /> should render same with snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   width: 370px;
   line-height: 1.4;
   white-space: pre-wrap;
@@ -139,7 +138,12 @@ exports[`<ShippingItem /> should render same with snapshot 1`] = `
     <div
       class="c6"
     >
-      test
+      <div>
+        test
+      </div>
+      <div>
+        test
+      </div>
     </div>
     <div
       class="c7"
