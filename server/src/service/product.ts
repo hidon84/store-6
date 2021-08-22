@@ -12,9 +12,12 @@ import ReviewRepository from '@/repository/review';
 import LikeRepository from '@/repository/like';
 import CartRepository from '@/repository/cart';
 import ProductImageRepository from '@/repository/productImage';
+import UserRepository from '@/repository/user';
 
 @Service()
 class ProductService {
+  private userRepository: UserRepository;
+
   private productRepository: ProductRepository;
 
   private productImageRepository: ProductImageRepository;
@@ -28,6 +31,7 @@ class ProductService {
   private cartRepository: CartRepository;
 
   constructor(
+    @InjectRepository(UserRepository) userRepository: UserRepository,
     @InjectRepository(ProductRepository) productRepository: ProductRepository,
     @InjectRepository(ProductImageRepository)
     productImageRepository: ProductImageRepository,
@@ -36,6 +40,7 @@ class ProductService {
     @InjectRepository(LikeRepository) likeRepository: LikeRepository,
     @InjectRepository(CartRepository) cartRepository: CartRepository,
   ) {
+    this.userRepository = userRepository;
     this.productRepository = productRepository;
     this.productImageRepository = productImageRepository;
     this.viewRepository = viewRepository;
@@ -55,7 +60,7 @@ class ProductService {
     }
   }
 
-  async getProductDetail(productIdx: number, userIdx?: number) {
+  async getProductDetail(productIdx: number, loginIdx?: number) {
     try {
       const product = await this.productRepository.findByIdx(productIdx);
 
@@ -81,12 +86,17 @@ class ProductService {
         isCart: false,
       };
 
-      if (!userIdx) {
+      if (!loginIdx) {
+        return result;
+      }
+
+      const user = await this.userRepository.findByLoginIdx(loginIdx);
+      if (!user) {
         return result;
       }
 
       const like = await this.likeRepository.findByIdxOfProductAndUser(
-        userIdx,
+        user.idx,
         productIdx,
       );
       if (like) {
@@ -94,7 +104,7 @@ class ProductService {
       }
 
       const cartItem = await this.cartRepository.findByIdxOfProductAndUser(
-        userIdx,
+        user.idx,
         productIdx,
       );
       if (cartItem) {
