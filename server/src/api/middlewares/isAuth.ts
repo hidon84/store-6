@@ -9,7 +9,7 @@ import config from '@/config';
  *
  * @returns Header에서 파싱한 Token 문자열. 만약 없을 경우 null 반환
  */
-const getTokenFromHeader = (req: Request) => {
+export const getTokenFromHeader = (req: Request) => {
   const { authorization } = req.headers;
   if (
     authorization &&
