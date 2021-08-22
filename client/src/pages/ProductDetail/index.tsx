@@ -1,4 +1,7 @@
-import { FC } from 'react';
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import { FC, useEffect, useState } from 'react';
+
+import ProductDetailContainer from '~/components/productDetail/ProductDetailContainer';
 
 import { BackArrowSVG, ProductPageLayoutDividerSVG } from '~/assets';
 import {
@@ -9,17 +12,21 @@ import {
   PrevPageButton,
 } from './index.style';
 
-const ProductDetail: FC = () => (
-  <ProductDetailWrapper>
-    <PrevPageButton>
-      <img src={BackArrowSVG} alt="back" />
-    </PrevPageButton>
-    <LeftSection />
-    <LayoutDivider aria-hidden="true">
-      <img src={ProductPageLayoutDividerSVG} alt="divider" />
-    </LayoutDivider>
-    <RightSection />
-  </ProductDetailWrapper>
-);
+const ProductDetail: FC = () => {
+  return (
+    <ProductDetailWrapper>
+      <PrevPageButton>
+        <img src={BackArrowSVG} alt="back" />
+      </PrevPageButton>
+      <LeftSection />
+      <LayoutDivider aria-hidden="true">
+        <img src={ProductPageLayoutDividerSVG} alt="divider" />
+      </LayoutDivider>
+      <RightSection>
+        <ProductDetailContainer />
+      </RightSection>
+    </ProductDetailWrapper>
+  );
+};
 
 export default ProductDetail;

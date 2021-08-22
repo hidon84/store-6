@@ -16,6 +16,7 @@ export const LeftSection = styled.section`
 
 export const RightSection = styled(LeftSection)`
   background-color: lightblue;
+  height: 900px;
 `;
 
 export const LayoutDivider = styled.div`
