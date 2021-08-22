@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BackArrowSVG, ProductPageLayoutDividerSVG } from '~/assets';
 
 export const ProductDetailWrapper = styled.main`
   display: flex;
@@ -23,9 +24,19 @@ export const LayoutDivider = styled.div`
   width: fit-content;
 `;
 
+export const DivideLine = styled.img.attrs({
+  src: ProductPageLayoutDividerSVG,
+  alt: 'divider',
+})``;
+
 export const PrevPageButton = styled.div`
   position: absolute;
   top: 90px;
   left: 0;
   width: 40px;
 `;
+
+export const PrevPageArrow = styled.img.attrs({
+  src: BackArrowSVG,
+  alt: 'prev-page',
+})``;
