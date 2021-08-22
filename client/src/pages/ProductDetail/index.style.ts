@@ -12,11 +12,12 @@ export const ProductDetailWrapper = styled.main`
 
 export const LeftSection = styled.section`
   width: 400px;
-  background-color: lightcoral;
 `;
 
 export const RightSection = styled(LeftSection)`
-  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 900px;
 `;
 
