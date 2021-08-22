@@ -26,6 +26,9 @@ class ShippingEntity {
   @Column({ length: 45 })
   code: string;
 
+  @Column({default: false})
+  selected: boolean;
+
   @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
     nullable: false,
     onDelete: 'CASCADE',
