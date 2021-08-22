@@ -10,6 +10,7 @@ import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
 import CartPage from './pages/Cart';
+import ProductDetail from './pages/ProductDetail';
 import GoogleCallbackPage from './pages/GoogleCallback';
 import FacebookCallbackPage from './pages/FacebookCallback';
 
@@ -39,6 +40,9 @@ const App = () => {
           </Route>
           <Route exact path="/products">
             <ProductList />
+          </Route>
+          <Route path="/products/:id">
+            <ProductDetail />
           </Route>
           <Route exact path="/me">
             <MyPage />
