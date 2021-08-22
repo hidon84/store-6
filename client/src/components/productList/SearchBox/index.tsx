@@ -88,7 +88,7 @@ const SearchBox: FC = () => {
       <SearchBoxForm onSubmit={handleSearchFormSubmit}>
         <SearchIcon src={SearchSVG} />
         <SearchInput type="search" name="q" ref={searchTermRef} />
-        <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
+        <SearchLine src={SearchBoxUnderlineSVG} alt="search line" />
       </SearchBoxForm>
       <RecentlySearchTermBox
         termList={termList}

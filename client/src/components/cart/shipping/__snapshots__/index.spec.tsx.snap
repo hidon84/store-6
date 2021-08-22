@@ -1,0 +1,456 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Shipping /> should render same with snapshot 1`] = `
+.c1 {
+  position: relative;
+  height: 41px;
+  width: 138px;
+  font-size: 18px;
+  background: center / cover no-repeat url();
+  cursor: pointer;
+}
+
+.c14 {
+  position: relative;
+  height: 55px;
+  width: 183px;
+  font-size: 25px;
+  background: center / cover no-repeat url();
+  cursor: pointer;
+}
+
+.c3 {
+  width: 950px;
+  height: 1px;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
+  background-size: cover;
+}
+
+.c6 {
+  position: relative;
+  height: 16px;
+}
+
+.c7 {
+  height: 100%;
+}
+
+.c13 {
+  position: absolute;
+  bottom: 5px;
+  left: 1px;
+}
+
+.c4 {
+  padding: 41px 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.c4 > * {
+  margin-left: 70px;
+}
+
+.c5 {
+  width: 20px;
+  cursor: pointer;
+}
+
+.c8 {
+  line-height: 1.4;
+  width: 150px;
+}
+
+.c8 div:last-child {
+  color: #999999;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 370px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  gap: 15px;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.c11 img:last-child {
+  opacity: 0;
+}
+
+.c11:hover img {
+  opacity: 1;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 80px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-right: 150px;
+}
+
+.c0:last-child {
+  margin-top: 40px;
+}
+
+.c2 {
+  height: 50px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.c2 div {
+  margin-left: 170px;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <button
+      class="c1"
+    >
+      신규주소 등록
+    </button>
+  </div>
+  <div
+    class="c2"
+  >
+    <div>
+      수령인 정보
+    </div>
+    <div>
+      주소지 정보
+    </div>
+  </div>
+  <div
+    class="c3"
+    direction="horizontal"
+    width="950px"
+  />
+  <div>
+    <div>
+      <div
+        class="c4"
+      >
+        <div
+          class="c5"
+        >
+          <div
+            class="c6"
+          >
+            <img
+              class="c7"
+            />
+          </div>
+        </div>
+        <div
+          class="c8"
+        >
+          <div>
+            황병현
+          </div>
+          <div>
+            010-5022-2332
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div>
+            서울 영등포구 선유로 200가길 39
+          </div>
+          <div>
+            우형빌딩200호
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c11"
+          >
+            <div
+              class="c12"
+            >
+              <img
+                alt="modify"
+              />
+              <div>
+                수정
+              </div>
+            </div>
+            <img
+              alt="underline"
+            />
+          </div>
+          <div
+            class="c11"
+          >
+            <div
+              class="c12"
+            >
+              <img
+                alt="cancle"
+              />
+              <div>
+                삭제
+              </div>
+            </div>
+            <img
+              alt="underline"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c3"
+        direction="horizontal"
+        width="950px"
+      />
+    </div>
+    <div>
+      <div
+        class="c4"
+      >
+        <div
+          class="c5"
+        >
+          <div
+            class="c6"
+          >
+            <img
+              class="c7"
+            />
+          </div>
+        </div>
+        <div
+          class="c8"
+        >
+          <div>
+            황병현2
+          </div>
+          <div>
+            010-5022-2332
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div>
+            서울 영등포구 선유로 200가길 39
+          </div>
+          <div>
+            우형빌딩200호
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c11"
+          >
+            <div
+              class="c12"
+            >
+              <img
+                alt="modify"
+              />
+              <div>
+                수정
+              </div>
+            </div>
+            <img
+              alt="underline"
+            />
+          </div>
+          <div
+            class="c11"
+          >
+            <div
+              class="c12"
+            >
+              <img
+                alt="cancle"
+              />
+              <div>
+                삭제
+              </div>
+            </div>
+            <img
+              alt="underline"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c3"
+        direction="horizontal"
+        width="950px"
+      />
+    </div>
+    <div>
+      <div
+        class="c4"
+      >
+        <div
+          class="c5"
+        >
+          <div
+            class="c6"
+          >
+            <img
+              class="c13"
+            />
+            <img
+              class="c7"
+            />
+          </div>
+        </div>
+        <div
+          class="c8"
+        >
+          <div>
+            황병현3
+          </div>
+          <div>
+            010-5022-2332
+          </div>
+        </div>
+        <div
+          class="c9"
+        >
+          <div>
+            서울 영등포구 선유로 200가길 39
+          </div>
+          <div>
+            우형빌딩200호
+          </div>
+        </div>
+        <div
+          class="c10"
+        >
+          <div
+            class="c11"
+          >
+            <div
+              class="c12"
+            >
+              <img
+                alt="modify"
+              />
+              <div>
+                수정
+              </div>
+            </div>
+            <img
+              alt="underline"
+            />
+          </div>
+          <div
+            class="c11"
+          >
+            <div
+              class="c12"
+            >
+              <img
+                alt="cancle"
+              />
+              <div>
+                삭제
+              </div>
+            </div>
+            <img
+              alt="underline"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="c3"
+        direction="horizontal"
+        width="950px"
+      />
+    </div>
+  </div>
+  <div
+    class="c0"
+  >
+    <button
+      class="c14"
+    >
+      선택주소 사용하기
+    </button>
+  </div>
+</div>
+`;

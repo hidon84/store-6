@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { cancleSVG } from '~/assets';
 import { confirm } from '~/utils/modal';
 import {
   CartCancle,
@@ -20,14 +21,14 @@ interface Props {
     title: string;
     price: number;
   };
-  changAmount: (price: number, type: string) => void;
-  removeCartItem: (cartIdx: number) => void;
+  changeAmount: (price: number, type: string) => void;
+  removeCartItem: (cartIdx: number, count: number, price: number) => void;
 }
 
 const CartItem: FC<Props> = ({
   cartIdx,
   product,
-  changAmount,
+  changeAmount,
   removeCartItem,
 }) => {
   const [count, setCount] = useState(1);
@@ -36,21 +37,21 @@ const CartItem: FC<Props> = ({
   const handleUpBtnClick = () => {
     setOrderPrice(orderPrice + product.price);
     setCount(count + 1);
-    changAmount(product.price, 'up');
+    changeAmount(product.price, 'up');
   };
 
   const handleDownBtnClick = () => {
     if (count > 1) {
       setCount(count - 1);
       setOrderPrice(orderPrice - product.price);
-      changAmount(product.price, 'down');
+      changeAmount(product.price, 'down');
     }
   };
 
   const handleRemoveBtnClick = () => {
     confirm('정말 삭제하시겠어요?', () => {
-      removeCartItem(cartIdx);
-      changAmount(count * product.price, 'down');
+      removeCartItem(cartIdx, count, product.price);
+      changeAmount(count * product.price, 'down');
     });
   };
 
@@ -65,7 +66,9 @@ const CartItem: FC<Props> = ({
         <Count>{count}개</Count>
         <CountBtn onClick={handleDownBtnClick}>&darr;</CountBtn>
       </CartCounter>
-      <CartCancle onClick={handleRemoveBtnClick}>x</CartCancle>
+      <CartCancle onClick={handleRemoveBtnClick}>
+        <img src={cancleSVG} alt="cancle" />
+      </CartCancle>
     </CartItemWrapper>
   );
 };

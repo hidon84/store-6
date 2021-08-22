@@ -10,11 +10,9 @@ const devOption = {
 const prodOption = {
   host: '/',
   path: '/p2p',
-  debug: 3,
+  debug: 0,
   secure: true,
 };
-
-console.log(process.env.NODE_ENV);
 
 const peer = new Peer(
   undefined,
