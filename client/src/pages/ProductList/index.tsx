@@ -100,17 +100,14 @@ const fetchProducts = async (
   setProducts: React.Dispatch<React.SetStateAction<ProductsGetResponseBody[]>>,
 ) => {
   try {
-    const { statusCode, data: products } = await productsAPI.getProducts(
-      filterState,
-    );
-    if (statusCode === 200) {
-      const isNextPageRequest = filterState.page !== 1;
+    const { data: products } = await productsAPI.getProducts(filterState);
+    const isNextPageRequest = filterState.page !== 1;
 
-      if (!isNextPageRequest) setProducts(products);
-      else setProducts((prev) => [...prev, ...products]);
-    }
+    if (!isNextPageRequest) setProducts(products);
+    else setProducts((prev) => [...prev, ...products]);
   } catch (error) {
     // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
+    // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
     throw new Error(error);
   }
 };
