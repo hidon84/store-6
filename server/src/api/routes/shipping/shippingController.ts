@@ -1,20 +1,23 @@
+import { getTokenFromHeader } from '@/api/middlewares/isAuth';
 import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
 import ShippingService from '@/service/shipping';
 
 
 export const handleGetShippingItems = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
+  req: Request,
+  res: Response,
+  next: NextFunction,
   ) => {
-    try {
+  try {
+  const ShippingServiceInstance = Container.get(ShippingService);
+    
+  const shippingItems = await ShippingServiceInstance.getShippingItems(req.currentUser.idx);
 
-  
-      return res.status(200).json();
-    } catch (e) {
-      return next(e);
-    }
+  return res.json(shippingItems);
+  } catch (e) {
+    return next(e);
+  }
 };
 
 

@@ -131,3 +131,10 @@ export const CartError = {
     message: 'Unable to Get CartItems',
   },
 };
+
+export const ShippingError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get ShippingItems',
+  },
+}
