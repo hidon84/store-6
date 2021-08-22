@@ -1,80 +1,166 @@
-import React, { FC, useState } from 'react';
-import styled from 'styled-components';
+import React, { FC, useEffect, useState } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
 import ShipItem from '../shippItem';
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  height: 80px;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 150px;
-
-  &:last-child{
-    margin-top: 40px;
-  }
-`
-
-const ShipHeader = styled.div`
-  height: 50px;
-  display : flex;
-  align-items: center;
-  font-size: 15px;
-
-  div {
-    margin-left: 170px;
-  }
-`
-
+import useUser from '~/lib/hooks/useUser';
+import ShippingModal from '../shippingModal';
+import { ButtonWrapper, ShipHeader } from './index.style';
 
 const mockData = [
   {
-    idx: 1,
-    user: {
-      name: '황병현',
-      phone: '010-5022-2332',
-    },
-    address: '서울 영등포구 선유로 200가길 39\n우형빌딩200호',
-    selected: 0
+    idx: 5,
+    name: '황병현',
+    phone: '010-5022-2332',
+    code: '123213',
+    address: '서울 영등포구 선유로 200가길 39',
+    detailAddress: '우형빌딩200호',
+    selected: 0,
   },
   {
-    idx: 2,
-    user: {
-      name: '황병현',
-      phone: '010-5022-2332',
-    },
-    address: '서울 영등포구 선유로 200가길 39\n우형빌딩200호',
-    selected: 1
+    idx: 10,
+    name: '황병현2',
+    phone: '010-5022-2332',
+    code: '123213',
+    address: '서울 영등포구 선유로 200가길 39',
+    detailAddress: '우형빌딩200호',
+    selected: 0,
   },
   {
-    idx: 3,
-    user: {
-      name: '황병현',
-      phone: '010-5022-2332',
-    },
-    address: '서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39서울 영등포구 선유로 200가길 39\n우형빌딩200호',
-    selected: 0
+    idx: 100,
+    name: '황병현3',
+    phone: '010-5022-2332',
+    code: '123213',
+    address: '서울 영등포구 선유로 200가길 39',
+    detailAddress: '우형빌딩200호',
+    selected: 1,
   },
-]
+];
 
-
+export type ShipType = {
+  idx?: number;
+  name: string;
+  phone: string;
+  code: string;
+  address: string;
+  detailAddress: string;
+  selected?: number;
+};
 
 const Shipping: FC = () => {
+  // const [user] = useUser();
+  const [shipItems, setShipItems] = useState<ShipType[]>([]);
+  const [selectedShipIdx, setSelectedShipIdx] = useState<number>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isWriteModal, setIsWriteModal] = useState<boolean>(true);
+  const [modifyItem, setmodifyItem] = useState<ShipType>();
 
-  const [shipItems, setShipItems] = useState(mockData);
+  const fetchShipping = async () => {
+    /**
+     * 주소지 가져오기 api 호출
+     * const response = await getShippingItems();
+     * if (response.statusCode === 200) {
+     *  setShipItems(response.data);
+     * }
+     */
+    setShipItems(mockData);
+    const selectedIdx = mockData.findIndex((item) => item.selected === 1);
+    setSelectedShipIdx(mockData[selectedIdx].idx);
+    alert(`기본 설정 idx는 ${mockData[selectedIdx].idx}`);
+  };
 
-  const handleNewBtnClick = () => { 
-      alert('기다려')
-  }
+  // useEffect(() => {
+  //   if (user) { fetchShipping();}
+  // }, [user]);
 
+  useEffect(() => {
+    fetchShipping();
+  }, []);
+
+  const handleNewBtnClick = () => {
+    alert('모달 오픈');
+    setIsModalOpen(true);
+  };
+
+  const handleUseThisAddress = () => {
+    alert(`기본배송지가 ${selectedShipIdx}로 설정`);
+    /**
+     * 주소지 선택 api 호출
+     * const response = await putShippingItem(selectedShipIdx);
+     * if (response.statusCode === 200) {
+     *  alert('수정이 완료되었습니다.)
+     * }
+     */
+  };
+
+  const changeSelectedBtn = (shipIdx: number) => {
+    alert(`${shipIdx}선택`);
+    setSelectedShipIdx(shipIdx);
+  };
+
+  const removeShippingItem = (shipIdx: number) => {
+    alert(`${shipIdx}삭제`);
+    /**
+     * 삭제 api 호출
+     * const await deleteShippingItem();
+     * if (response.statusCode === 200) {
+     *  fetchShipping()
+     * }
+     */
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setIsWriteModal(true);
+    setmodifyItem(null);
+  };
+
+  const modifyBtnClick = (shipIdx: number) => {
+    alert(`${shipIdx}에 대한 수정 모달`);
+    const selectedIdx = mockData.findIndex((item) => item.idx === shipIdx);
+    setIsWriteModal(false);
+    setmodifyItem(mockData[selectedIdx]);
+    setIsModalOpen(true);
+  };
+
+  const handleWriteShipping = (info: ShipType) => {
+    alert('배송지가 등록되었습니다.');
+    handleModalClose();
+    /**
+     * 등록 api 호출
+     * const await postShippingItem();
+     * if (response.statusCode === 200) {
+     *  fetchShipping()
+     * }
+     */
+  };
+
+  const handleUpdateShipping = (info: ShipType) => {
+    alert('배송지가 수정되었습니다.');
+    handleModalClose();
+    /**
+     * 수정 api 호출
+     * const await putShippingItem();
+     * if (response.statusCode === 200) {
+     *  fetchShipping()
+     * }
+     */
+  };
 
   return (
-    <div>
+    <>
+      {isModalOpen && (
+        <ShippingModal
+          isWrite={isWriteModal}
+          modifyItem={modifyItem}
+          handleModalClose={handleModalClose}
+          handleWriteShipping={handleWriteShipping}
+          handleUpdateShipping={handleUpdateShipping}
+        />
+      )}
       <ButtonWrapper>
         <Button size="md" onClick={handleNewBtnClick}>
-            신규주소 등록
+          신규주소 등록
         </Button>
       </ButtonWrapper>
       <ShipHeader>
@@ -86,17 +172,23 @@ const Shipping: FC = () => {
         {shipItems &&
           shipItems.map((item) => (
             <div key={item.idx}>
-              <ShipItem shipIdx={item.idx} user={item.user} selected={item.selected} address={item.address}/>
+              <ShipItem
+                shipItem={item}
+                selected={selectedShipIdx === item.idx}
+                changeSelectedBtn={changeSelectedBtn}
+                removeShippingItem={removeShippingItem}
+                modifyBtnClick={modifyBtnClick}
+              />
               <Divider width="950px" direction="horizontal" />
             </div>
           ))}
       </div>
       <ButtonWrapper>
-        <Button size="lg" onClick={handleNewBtnClick}>
-            선택주소 사용하기
+        <Button size="lg" onClick={handleUseThisAddress}>
+          선택주소 사용하기
         </Button>
       </ButtonWrapper>
-    </div>
+    </>
   );
 };
 
