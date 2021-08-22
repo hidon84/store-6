@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
@@ -53,7 +53,7 @@ const Shipping: FC = () => {
   const [selectedShipIdx, setSelectedShipIdx] = useState<number>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isWriteModal, setIsWriteModal] = useState<boolean>(true);
-  const [modifyItem, setmodifyItem] = useState<ShipType>();
+  const [modifyItem, setModifyItem] = useState<ShipType>();
 
   const fetchShipping = async () => {
     /**
@@ -82,7 +82,7 @@ const Shipping: FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleUseThisAddress = () => {
+  const handleUseThisAddress = useCallback(() => {
     alert(`기본배송지가 ${selectedShipIdx}로 설정`);
     /**
      * 주소지 선택 api 호출
@@ -91,14 +91,14 @@ const Shipping: FC = () => {
      *  alert('수정이 완료되었습니다.)
      * }
      */
-  };
+  }, []);
 
-  const changeSelectedBtn = (shipIdx: number) => {
+  const changeSelectedBtn = useCallback((shipIdx: number) => {
     alert(`${shipIdx}선택`);
     setSelectedShipIdx(shipIdx);
-  };
+  }, []);
 
-  const removeShippingItem = (shipIdx: number) => {
+  const removeShippingItem = useCallback((shipIdx: number) => {
     alert(`${shipIdx}삭제`);
     /**
      * 삭제 api 호출
@@ -107,23 +107,23 @@ const Shipping: FC = () => {
      *  fetchShipping()
      * }
      */
-  };
+  }, []);
 
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setIsModalOpen(false);
     setIsWriteModal(true);
-    setmodifyItem(null);
-  };
+    setModifyItem(null);
+  }, []);
 
-  const modifyBtnClick = (shipIdx: number) => {
+  const modifyBtnClick = useCallback((shipIdx: number) => {
     alert(`${shipIdx}에 대한 수정 모달`);
     const selectedIdx = mockData.findIndex((item) => item.idx === shipIdx);
     setIsWriteModal(false);
-    setmodifyItem(mockData[selectedIdx]);
+    setModifyItem(mockData[selectedIdx]);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleWriteShipping = (info: ShipType) => {
+  const handleWriteShipping = useCallback((info: ShipType) => {
     alert('배송지가 등록되었습니다.');
     handleModalClose();
     /**
@@ -133,9 +133,9 @@ const Shipping: FC = () => {
      *  fetchShipping()
      * }
      */
-  };
+  }, []);
 
-  const handleUpdateShipping = (info: ShipType) => {
+  const handleUpdateShipping = useCallback((info: ShipType) => {
     alert('배송지가 수정되었습니다.');
     handleModalClose();
     /**
@@ -145,7 +145,7 @@ const Shipping: FC = () => {
      *  fetchShipping()
      * }
      */
-  };
+  }, []);
 
   return (
     <>

@@ -50,9 +50,7 @@ const Cart: FC = () => {
     const response = await deleteCartItem(cartIdx);
 
     if (response.statusCode === 200) {
-      const filtered = cartItems.filter((item) => {
-        return item.idx !== cartIdx;
-      });
+      const filtered = cartItems.filter((item) => item.idx !== cartIdx);
 
       setCartItems(filtered);
       changeAmount(count * price, 'down');

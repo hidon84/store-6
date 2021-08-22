@@ -84,6 +84,10 @@ const ShippingModal: FC<Props> = ({
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = '';
+    /**
+     * addressType R은 도로명 주소 타입을 의미합니다(Road).
+     * bnamed은 동이름을 의미합니다.
+     */
     if (data.addressType === 'R') {
       if (data.bname !== '') {
         extraAddress += data.bname;
@@ -99,9 +103,11 @@ const ShippingModal: FC<Props> = ({
     handlePostModalClose();
   };
 
+  const emptyEssage = '빈 항목이 있습니다.';
+
   const validationCheck = () => {
     if (!name || !ph0 || !ph1 || !ph2 || !code || !address || !detailAddress) {
-      alert('빈 항목이 있습니다.');
+      alert(emptyEssage);
       return;
     }
 
