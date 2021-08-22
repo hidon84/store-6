@@ -16,6 +16,16 @@ class UserRepository extends Repository<UserEntity> {
     return user;
   }
 
+  async findIdxByLoginIdx(idx: number) {
+    const user = await this.findOne({
+      select: ['idx'],
+      where: {
+        login: { idx },
+      },
+    });
+    return user?.idx;
+  }
+
   async findByLoginIdxWithLogin(idx: number) {
     const user = await this.findOne({
       relations: ['login'],
