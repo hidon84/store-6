@@ -1,10 +1,10 @@
 import { useState, useCallback, DependencyList } from 'react';
 
-function useInputValidator(
+const useInputValidator = (
   initialValue: string,
   validator: (userInput: string) => string,
   deps: DependencyList = [],
-) {
+) => {
   const [input, setInput] = useState(initialValue);
   const [warning, setWarning] = useState(' ');
 
@@ -17,6 +17,6 @@ function useInputValidator(
     onInput(ev.target.value);
   }, deps);
   return [input, warning, handleInput] as const;
-}
+};
 
 export default useInputValidator;

@@ -8,14 +8,37 @@ export const NavigationWrapper = styled.nav`
 
 export const Content = styled.div`
   height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  height: 100px;
   margin: 0 auto;
   width: 920px;
 `;
 
+const uselessDoodleHeight = '16px';
+export const UselessDoodle = styled.div`
+  position: absolute;
+  top: calc(50% - ${uselessDoodleHeight} / 2);
+  left: 0;
+  height: ${uselessDoodleHeight};
+`;
+
+const logoHeight = '71px';
+const logoWidth = '203px';
+const logoOffset = '10px';
+export const Logo = styled.div`
+  position: absolute;
+  top: calc(50% - ${logoHeight} / 2);
+  left: calc(50% - ${logoWidth} / 2 - ${logoOffset});
+  width: ${logoWidth};
+  height: ${logoHeight};
+`;
+
+const headerRightSectionHeight = '34px';
 export const HeaderRightSection = styled.div`
+  position: absolute;
+  top: calc(50% - ${headerRightSectionHeight} / 2);
+  height: fit-content;
+  right: 0;
   display: flex;
   gap: 35px;
 `;

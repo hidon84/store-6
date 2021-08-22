@@ -11,12 +11,14 @@ export const authUrl = {
   refresh: `${authBaseUrl}/refresh`,
 };
 
-const setAuthorizationHeader = (response: AxiosResponse<AuthResponseBody>) => {
+export const setAuthorizationHeader = (
+  response: AxiosResponse<AuthResponseBody>,
+) => {
   const { access } = response.data;
   client.defaults.headers.common.Authorization = `Bearer ${access}`;
 };
 
-const clearAuthorizationHeader = () => {
+export const clearAuthorizationHeader = () => {
   client.defaults.headers.common.Authorization = '';
 };
 
@@ -32,4 +34,11 @@ export const login = (reqData: LoginRequestBody) =>
 export const logout = () =>
   request('GET', authUrl.logout, null, null, clearAuthorizationHeader);
 
-export const refresh = () => request<AuthResponseBody>('GET', authUrl.refresh);
+export const refresh = () =>
+  request<AuthResponseBody>(
+    'GET',
+    authUrl.refresh,
+    null,
+    null,
+    setAuthorizationHeader,
+  );

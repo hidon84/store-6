@@ -4,6 +4,7 @@ import auth from './routes/auth';
 import oauth from './routes/oauth';
 import product from './routes/product';
 import users from './routes/users';
+import cart from './routes/cart';
 
 export default () => {
   const router = Router();
@@ -13,6 +14,7 @@ export default () => {
   oauth(router);
   product(router);
   users(router);
+  cart(router);
 
   return router;
 };

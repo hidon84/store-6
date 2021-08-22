@@ -1,12 +1,28 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FC, createContext } from 'react';
+import {
+  FC,
+  createContext,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react';
+
+import * as productsAPI from '~/lib/api/products';
+import {
+  ProductsGetRequestQuery,
+  ProductsGetResponseBody,
+} from '~/lib/api/types';
+import productListModule, {
+  ActionType,
+  setNextPage,
+} from '~/stores/productListModule';
+
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
 import OrderFilter from '~/components/productList/OrderFilter';
 import ProductItemContainer from '~/components/productList/ProductItemContainer';
 import SearchBox from '~/components/productList/SearchBox';
-import { ProductsGetRequestQuery } from '~/lib/api/types';
-import productListModule, { ActionType } from '~/stores/productListModule';
 
 import {
   ProductListWrapper,
@@ -14,6 +30,8 @@ import {
   RightSection,
   VerticalDivider,
 } from './index.style';
+import useIntersection from '~/lib/hooks/useIntersection';
+import ScrollToTop from '~/components/productList/ScrollToTop';
 
 export interface ProductData {
   idx: number;
@@ -29,8 +47,31 @@ interface FilterContextState {
 
 export const FilterContext = createContext<FilterContextState>(null);
 
+const useScrollPoint = (targetPoint: number): boolean => {
+  const [isScrollPoint, setIsScrollPoint] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    setIsScrollPoint(window.pageYOffset > targetPoint);
+  }, []);
+  window.addEventListener('scroll', handleScroll);
+  return isScrollPoint;
+};
+
 const ProductList: FC = () => {
+  const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
+  const listFooterRef = useRef<HTMLDivElement>();
+  const entry = useIntersection(listFooterRef, {});
   const { filterState, dispatch } = productListModule();
+  const TARGET_POINT = 700;
+  const isScrollPoint = useScrollPoint(TARGET_POINT);
+
+  useEffect(() => {
+    fetchProducts(filterState, setProducts);
+  }, [filterState]);
+
+  useEffect(() => {
+    if (entry?.isIntersecting) dispatch(setNextPage());
+  }, [entry]);
 
   return (
     <FilterContext.Provider value={{ state: filterState, dispatch }}>
@@ -43,8 +84,9 @@ const ProductList: FC = () => {
         <RightSection>
           <CategoryIdentifier />
           <SearchBox />
-          <ProductItemContainer products={DUMMY_DATA} />
+          <ProductItemContainer products={products} ref={listFooterRef} />
         </RightSection>
+        <ScrollToTop isVisible={isScrollPoint} />
       </ProductListWrapper>
     </FilterContext.Provider>
   );
@@ -52,89 +94,20 @@ const ProductList: FC = () => {
 
 export default ProductList;
 
-const DUMMY_DATA: ProductData[] = [
-  {
-    idx: 0,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 1,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 2,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 3,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 4,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 5,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 6,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 7,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 8,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 9,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 10,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-  {
-    idx: 11,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: '때수건. 다 때가 있다',
-    price: 2000,
-  },
-];
+// API
+const fetchProducts = async (
+  filterState: ProductsGetRequestQuery,
+  setProducts: React.Dispatch<React.SetStateAction<ProductsGetResponseBody[]>>,
+) => {
+  try {
+    const { data: products } = await productsAPI.getProducts(filterState);
+    const isNextPageRequest = filterState.page !== 1;
+
+    if (!isNextPageRequest) setProducts(products);
+    else setProducts((prev) => [...prev, ...products]);
+  } catch (error) {
+    // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
+    // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
+    throw new Error(error);
+  }
+};

@@ -1,6 +1,5 @@
-import React, { FC, createContext } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter, Switch, Route } from '~/core/Router';
+import { Switch, Route } from '~/core/Router';
 import '~/styles/app.css';
 import Navigation from '~/components/base/Navigation';
 import LoginPage from '~/pages/Login';
@@ -10,6 +9,10 @@ import ConfirmModal from './components/modal/ConfirmModal';
 import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
+import CartPage from './pages/Cart';
+import ProductDetail from './pages/ProductDetail';
+import GoogleCallbackPage from './pages/GoogleCallback';
+import FacebookCallbackPage from './pages/FacebookCallback';
 
 const Main = styled.main`
   position: relative;
@@ -20,31 +23,41 @@ const Main = styled.main`
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Navigation />
-        <Main>
-          <Switch>
-            <Route exact path="/">
-              <MainPage />
-            </Route>
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
-            <Route exact path="/signup">
-              <SignUpPage />
-            </Route>
-            <Route path="/hello/:name/:number">
-              <div>임시 Route</div>
-            </Route>
-            <Route exact path="/products">
-              <ProductList />
-            </Route>
-            <Route exact path="/me">
-              <MyPage />
-            </Route>
-          </Switch>
-        </Main>
-      </BrowserRouter>
+      <Navigation />
+      <Main>
+        <Switch>
+          <Route exact path="/">
+            <MainPage />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
+          <Route exact path="/signup">
+            <SignUpPage />
+          </Route>
+          <Route path="/hello/:name/:number">
+            <div>임시 Route</div>
+          </Route>
+          <Route exact path="/products">
+            <ProductList />
+          </Route>
+          <Route path="/products/:id">
+            <ProductDetail />
+          </Route>
+          <Route exact path="/me">
+            <MyPage />
+          </Route>
+          <Route exact path="/cart">
+            <CartPage />
+          </Route>
+          <Route exact path="/oauth/google/callback">
+            <GoogleCallbackPage />
+          </Route>
+          <Route exact path="/oauth/facebook/callback">
+            <FacebookCallbackPage />
+          </Route>
+        </Switch>
+      </Main>
       <AlertModal />
       <ConfirmModal />
     </>

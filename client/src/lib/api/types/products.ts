@@ -1,7 +1,7 @@
 export interface ProductsGetRequestQuery {
   category?: number;
   search?: string;
-  order?: 'recent' | 'low-price' | 'high-price';
+  order?: 'recent' | 'price-low' | 'price-high';
   page: number;
   limit: number;
 }

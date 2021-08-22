@@ -21,6 +21,10 @@ import signUpWithGoogleSVG from './signUpWithGoogle.svg';
 import signUpWithOwnSVG from './signUpWithOwn.svg';
 import stainSVG from './stain.svg';
 import logoSVG from './logo.svg';
+import modifySVG from './modify-pencil.svg';
+import cancleSVG from './cancle.svg';
+import underlineShortSVG from './underline-baemin-short.svg';
+import underbaeminSVG from './underline-baemin-color.svg';
 
 const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
@@ -67,6 +71,15 @@ const UnderlineBaeminColorSVG = `${S3_PREFIX}/product/underline-baemin-color.svg
 const SearchBoxUnderlineSVG = `${S3_PREFIX}/product/search-box-underline.svg`;
 const VerticalDividerSVG = `${S3_PREFIX}/product/vertical-divider.svg`;
 const XSVG = `${S3_PREFIX}/product/x.svg`;
+
+// Product Detail Icons (상품 상세 페이지)
+const BackArrowSVG = `${S3_PREFIX}/product-detail/back-arrow.svg`;
+const BelowArrowSVG = `${S3_PREFIX}/product-detail/below-arrow.svg`;
+const FilledHeartSVG = `${S3_PREFIX}/product-detail/filled-heart.svg`;
+const UnfilledHeartSVG = `${S3_PREFIX}/product-detail/unfilled-heart.svg`;
+const ProductPageLayoutDividerSVG = `${S3_PREFIX}/product-detail/layout-divider.svg`;
+const ProductInfoDividerSVG = `${S3_PREFIX}/product-detail/product-info-divider.svg`;
+const ProductInfoSubDividerSVG = `${S3_PREFIX}/product-detail/product-info-sub-divider.svg`;
 
 export {
   LogoSVG,
@@ -128,4 +141,15 @@ export {
   SearchBoxUnderlineSVG,
   VerticalDividerSVG,
   XSVG,
+  cancleSVG,
+  modifySVG,
+  underlineShortSVG,
+  underbaeminSVG,
+  BackArrowSVG,
+  BelowArrowSVG,
+  FilledHeartSVG,
+  UnfilledHeartSVG,
+  ProductPageLayoutDividerSVG,
+  ProductInfoDividerSVG,
+  ProductInfoSubDividerSVG,
 };

@@ -3,6 +3,11 @@ import ProductEntity from '@/entity/product';
 
 @EntityRepository(ProductEntity)
 class ProductRepository extends Repository<ProductEntity> {
+  async findByIdx(idx: number) {
+    const product = await this.findOne({ where: { idx } });
+    return product;
+  }
+
   async findProductsByFilter(querys: {
     search?: string;
     category?: string;

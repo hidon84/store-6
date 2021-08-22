@@ -12,8 +12,8 @@ import OrderItem from '../OrderItem';
 
 const orders = [
   { order: 'recent', content: '최신순' },
-  { order: 'low-price', content: '낮은가격순' },
-  { order: 'high-price', content: '높은가격순' },
+  { order: 'price-low', content: '낮은가격순' },
+  { order: 'price-high', content: '높은가격순' },
 ];
 
 const OrderFilter: React.FC = () => {

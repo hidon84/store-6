@@ -7,6 +7,8 @@ import {
   HeaderRightSection,
   CartWrapper,
   BadgeWrapper,
+  UselessDoodle,
+  Logo,
 } from './index.style';
 
 import {
@@ -25,8 +27,12 @@ const Navigation: FC = () => {
   return (
     <NavigationWrapper>
       <Content>
-        <img src={DoodleUselessSVG} alt="useless" />
-        <img src={LogoSVG} alt="logo" />
+        <UselessDoodle>
+          <img src={DoodleUselessSVG} alt="useless" />
+        </UselessDoodle>
+        <Logo>
+          <img src={LogoSVG} alt="logo" />
+        </Logo>
         <HeaderRightSection>
           <CartWrapper>
             <img src={CartSVG} alt="cart" />

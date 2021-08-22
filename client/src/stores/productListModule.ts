@@ -18,7 +18,7 @@ export interface ActionType {
 }
 
 const DEFAULT_PAGE_NUMBER = 1;
-const DEFAULT_PRODUCTS_AMOUNT = 20;
+const DEFAULT_PRODUCTS_AMOUNT = 9;
 
 // Actions
 const SET_CATEGORY = 'SET_CATEGORY';
@@ -64,23 +64,23 @@ const filterReducer = (
   switch (action.type) {
     case SET_CATEGORY: {
       if (!('category' in state) || state.category !== action.payload)
-        return { ...state, category: action.payload.category };
+        return { ...state, category: action.payload.category, page: 1 };
       const { category, ...rest } = state;
-      return { ...rest };
+      return { ...rest, page: 1 };
     }
     case SET_ORDER:
-      return { ...state, order: action.payload.order };
+      return { ...state, order: action.payload.order, page: 1 };
     case SET_SEARCH_VALUE:
-      return { ...state, search: action.payload.search };
+      return { ...state, search: action.payload.search, page: 1 };
     case REMOVE_SEARCH_VALUE: {
       const { search, ...rest } = state;
-      return { ...rest };
+      return { ...rest, page: 1 };
     }
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
     case RESET_CATEGORY: {
       const { category, ...rest } = state;
-      return { ...rest };
+      return { ...rest, page: 1 };
     }
     default:
       return { ...state };
