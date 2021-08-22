@@ -9,21 +9,17 @@ import {
   PrevPageButton,
 } from './index.style';
 
-const ProductDetail: FC = () => {
-  return (
-    <>
-      <ProductDetailWrapper>
-        <PrevPageButton>
-          <img src={BackArrowSVG} alt="back" />
-        </PrevPageButton>
-        <LeftSection />
-        <LayoutDivider aria-hidden="true">
-          <img src={ProductPageLayoutDividerSVG} alt="divider" />
-        </LayoutDivider>
-        <RightSection />
-      </ProductDetailWrapper>
-    </>
-  );
-};
+const ProductDetail: FC = () => (
+  <ProductDetailWrapper>
+    <PrevPageButton>
+      <img src={BackArrowSVG} alt="back" />
+    </PrevPageButton>
+    <LeftSection />
+    <LayoutDivider aria-hidden="true">
+      <img src={ProductPageLayoutDividerSVG} alt="divider" />
+    </LayoutDivider>
+    <RightSection />
+  </ProductDetailWrapper>
+);
 
 export default ProductDetail;
