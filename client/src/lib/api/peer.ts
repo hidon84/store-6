@@ -1,7 +1,8 @@
 import Peer from 'peerjs';
 
 const peer = new Peer(undefined, {
-  host: 'localhost',
+  host: '/',
+  path: '/p2p',
   port: 9000,
 });
 

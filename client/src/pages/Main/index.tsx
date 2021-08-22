@@ -51,6 +51,7 @@ class Main extends Component<{ u?: string }, MainState> {
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
           });
+          console.log('peer: ', call.peer);
         });
 
         socket.on('user-connected', (userId) => {

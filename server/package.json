@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "env-cmd -f .env.dev nodemon --exec ts-node -r tsconfig-paths/register ./src/bin/www.ts --watch ./src -e ts",
     "start": "env-cmd ts-node -r tsconfig-paths/register ./src/bin/www.ts",
+    "p2p": "npx peer --port 9000 --key peerjs --path /p2p",
     "lint:fix": "eslint --fix .",
     "prettier:write": "prettier --write .",
     "precommit": "yarn lint:fix && yarn prettier:write",
