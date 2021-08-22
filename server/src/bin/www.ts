@@ -20,6 +20,15 @@ createApp().then(app => {
       console.log('move', data);
       io.emit('update-moves', data);
     });
+    socket.on('join-room', userId => {
+      // socket.join('gate');
+      // socket.to('gate').emit('user-connected', userId);
+      socket.broadcast.emit('user-connected', userId);
+      console.log('user-connected! id: ', userId);
+      socket.on('disconnect', () => {
+        socket.broadcast.emit('user-disconnected', userId);
+      });
+    });
   });
 
   /**
