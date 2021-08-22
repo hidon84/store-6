@@ -14,26 +14,31 @@ export const Content = styled.div`
   width: 920px;
 `;
 
+const uselessDoodleHeight = '16px';
 export const UselessDoodle = styled.div`
   position: absolute;
-  top: calc(50% - 8px);
+  top: calc(50% - ${uselessDoodleHeight} / 2);
   left: 0;
-  height: 16px;
+  height: ${uselessDoodleHeight};
 `;
 
+const logoHeight = '71px';
+const logoWidth = '203px';
+const logoOffset = '10px';
 export const Logo = styled.div`
   position: absolute;
-  top: calc(50% - 36.5px);
-  left: calc(50% - 116px);
-  width: 203px;
-  height: 71px;
+  top: calc(50% - ${logoHeight} / 2);
+  left: calc(50% - ${logoWidth} / 2 - ${logoOffset});
+  width: ${logoWidth};
+  height: ${logoHeight};
 `;
 
+const headerRightSectionHeight = '34px';
 export const HeaderRightSection = styled.div`
   position: absolute;
-  top: calc(50% - 17px);
+  top: calc(50% - ${headerRightSectionHeight} / 2);
+  height: fit-content;
   right: 0;
-  /* height: 34px; */
   display: flex;
   gap: 35px;
 `;
