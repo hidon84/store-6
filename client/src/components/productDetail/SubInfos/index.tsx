@@ -13,7 +13,7 @@ import {
 
 interface SubInfoProps {
   title: string;
-  infos: unknown;
+  infos: Record<string, string>;
   lastSubInfo?: boolean;
 }
 const SubInfos: FC<SubInfoProps> = ({ title, infos, lastSubInfo }) => {
