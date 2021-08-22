@@ -68,13 +68,12 @@ class ProductService {
         throw new ErrorResponse(commonError.notFound);
       }
 
-      const productImages =
-        await this.productImageRepository.findUrlsByProductIdx(productIdx);
-      const viewCnt = await this.viewRepository.getCntByProductIdx(productIdx);
-      const reviewCnt = await this.reviewRepository.getCntByProductIdx(
-        productIdx,
-      );
-      const likeCnt = await this.likeRepository.getCntByProductIdx(productIdx);
+      const [productImages, viewCnt, reviewCnt, likeCnt] = await Promise.all([
+        this.productImageRepository.findUrlsByProductIdx(productIdx), 
+        this.viewRepository.getCntByProductIdx(productIdx), 
+        this.reviewRepository.getCntByProductIdx(productIdx), 
+        this.likeRepository.getCntByProductIdx(productIdx)
+      ]);
 
       const result = {
         ...product,
