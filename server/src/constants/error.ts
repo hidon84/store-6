@@ -125,6 +125,13 @@ export const ProductDetailError = {
   },
 };
 
+export const ProductViewError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Add View Count',
+  },
+};
+
 export const CartError = {
   unable: {
     statusCode: 500,
