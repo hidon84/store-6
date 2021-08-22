@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import LoginEntity from '@/entity/login';
+import LoginEntity, { LoginType } from '@/entity/login';
 
 export interface LoginInfo {
   id: string;
@@ -9,8 +9,8 @@ export interface LoginInfo {
 
 @EntityRepository(LoginEntity)
 class LoginRepository extends Repository<LoginEntity> {
-  async findById(id: string) {
-    const account = await this.findOne({ where: { id } });
+  async findById(id: string, type: LoginType = LoginType.Own) {
+    const account = await this.findOne({ where: { id, type } });
     return account;
   }
 
