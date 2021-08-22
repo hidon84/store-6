@@ -51,10 +51,10 @@ const decodeToken = (subject: Token, token: string) => {
 };
 
 export const decodeAccessToken = (token: string) => {
-  return decodeToken(Token.Access, token) as RefreshJwtPayload;
+  return decodeToken(Token.Access, token) as AccessJwtPayload;
 };
 export const decodeRefreshToken = (token: string) => {
-  return decodeToken(Token.Refresh, token) as AccessJwtPayload;
+  return decodeToken(Token.Refresh, token) as RefreshJwtPayload;
 };
 
 export const getRefreshExpiresInMs = () => {

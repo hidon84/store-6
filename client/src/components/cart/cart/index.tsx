@@ -36,20 +36,24 @@ const Cart: FC = () => {
     alert('결제기능은 준비되지 않았습니다.');
   };
 
-  const changAmount = (price: number, type: string) => {
-    if (type === 'up') {
-      setAmount(amount + price);
-    }
+  const changeAmount = (price: number, type: string) => {
+    const offset = type === 'down' ? price * -1 : price;
 
-    if (type === 'down') {
-      setAmount(amount - price);
-    }
+    setAmount(amount + offset);
   };
 
-  const removeCartItem = async (cartIdx: number) => {
+  const removeCartItem = async (
+    cartIdx: number,
+    count: number,
+    price: number,
+  ) => {
     const response = await deleteCartItem(cartIdx);
+
     if (response.statusCode === 200) {
-      fetchCart();
+      const filtered = cartItems.filter((item) => item.idx !== cartIdx);
+
+      setCartItems(filtered);
+      changeAmount(count * price, 'down');
     }
   };
 
@@ -69,7 +73,7 @@ const Cart: FC = () => {
               <CartItem
                 cartIdx={item.idx}
                 product={item.product}
-                changAmount={changAmount}
+                changeAmount={changeAmount}
                 removeCartItem={removeCartItem}
               />
               <Divider width="950px" direction="horizontal" />
