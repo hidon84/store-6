@@ -37,7 +37,7 @@ export const OriginPrice = styled.span`
 
 export const MainSectionDivider = styled.img.attrs({
   src: ProductInfoDividerSVG,
-  alt: 'main-divider',
+  alt: 'main divider',
 })`
   all: unset;
 `;
@@ -55,7 +55,7 @@ interface LikeButtonProps {
 // https://github.com/styled-components/styled-components/issues/1959
 export const LikeButton = styled.img.attrs<LikeButtonProps>(({ isLike }) => ({
   src: isLike ? FilledHeartSVG : UnfilledHeartSVG,
-  alt: 'like-button',
+  alt: 'like button',
 }))<LikeButtonProps>`
   margin-left: 30.5px;
 `;

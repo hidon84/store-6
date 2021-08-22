@@ -39,5 +39,5 @@ export const PrevPageButton = styled.div`
 
 export const PrevPageArrow = styled.img.attrs({
   src: BackArrowSVG,
-  alt: 'prev-page',
+  alt: 'prev page',
 })``;

@@ -27,7 +27,7 @@ export const Title = styled.span`
 
 export const DownArrow = styled.img.attrs({
   src: BelowArrowSVG,
-  alt: 'below-arrow',
+  alt: 'below arrow',
 })<{ isOpened: boolean }>`
   transition: transform 0.4s ease-out;
   transform: ${({ isOpened }) => (isOpened ? 'rotate(180deg)' : 'none')};
@@ -35,7 +35,7 @@ export const DownArrow = styled.img.attrs({
 
 export const SubSectionDivider = styled.img.attrs({
   src: ProductInfoSubDividerSVG,
-  alt: 'sub-section-divider',
+  alt: 'sub section divider',
 })<{ isUpperDivider?: boolean }>`
   margin-top: ${({ isUpperDivider }) => (isUpperDivider ? '14px' : '0px')};
 `;
