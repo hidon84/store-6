@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { cancleSVG } from '~/assets';
 import { confirm } from '~/utils/modal';
 import {
   CartCancle,
@@ -21,7 +22,7 @@ interface Props {
     price: number;
   };
   changeAmount: (price: number, type: string) => void;
-  removeCartItem: (cartIdx: number, count:number, price:number) => void;
+  removeCartItem: (cartIdx: number, count: number, price: number) => void;
 }
 
 const CartItem: FC<Props> = ({
@@ -65,7 +66,9 @@ const CartItem: FC<Props> = ({
         <Count>{count}개</Count>
         <CountBtn onClick={handleDownBtnClick}>&darr;</CountBtn>
       </CartCounter>
-      <CartCancle onClick={handleRemoveBtnClick}>x</CartCancle>
+      <CartCancle onClick={handleRemoveBtnClick}>
+        <img src={cancleSVG} alt="cancle" />
+      </CartCancle>
     </CartItemWrapper>
   );
 };
