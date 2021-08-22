@@ -1,5 +1,9 @@
 import io from 'socket.io-client';
 
-const socket = io('https://store.woowa.link');
+const devServer = 'http://localhost:5000';
+const prodServer = 'https://store.woowa.link';
+const socket = io(
+  process.env.NODE_ENV === 'development' ? devServer : prodServer,
+);
 
 export default socket;

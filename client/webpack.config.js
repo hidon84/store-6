@@ -57,6 +57,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new ForkTsCheckerWebpackPlugin({ typescript: true }),
   ],
