@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
   DownArrow,
   SubSectionDivider,
   TitleSection,
   Title,
+  SubInfosWrapper,
 } from './index.style';
 
 interface SubInfoProps {
@@ -13,16 +14,18 @@ interface SubInfoProps {
 }
 
 const SubInfos: FC<SubInfoProps> = ({ title, infos, lastSubInfo }) => {
+  const [isOpened, setIsOpened] = useState(false);
+
   return (
-    <div>
+    <SubInfosWrapper lastSubInfo={lastSubInfo}>
       <TitleSection>
         <Title>{title}</Title>
         <DownArrow />
       </TitleSection>
-      <SubSectionDivider />
+      {isOpened && <SubSectionDivider />}
       {/* infos */}
-      {!lastSubInfo && <SubSectionDivider />}
-    </div>
+      {isOpened && !lastSubInfo && <SubSectionDivider />}
+    </SubInfosWrapper>
   );
 };
 
