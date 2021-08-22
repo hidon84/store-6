@@ -11,6 +11,7 @@ const prodOption = {
   host: '/',
   path: '/p2p',
   debug: 0,
+  port: 5001,
   secure: true,
 };
 
