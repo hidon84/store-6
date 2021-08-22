@@ -90,13 +90,13 @@ class ProductService {
         return result;
       }
 
-      const user = await this.userRepository.findByLoginIdx(loginIdx);
-      if (!user) {
+      const userIdx = await this.userRepository.findIdxByLoginIdx(loginIdx);
+      if (!userIdx) {
         return result;
       }
 
       const like = await this.likeRepository.findByIdxOfProductAndUser(
-        user.idx,
+        userIdx,
         productIdx,
       );
       if (like) {
@@ -104,7 +104,7 @@ class ProductService {
       }
 
       const cartItem = await this.cartRepository.findByIdxOfProductAndUser(
-        user.idx,
+        userIdx,
         productIdx,
       );
       if (cartItem) {
