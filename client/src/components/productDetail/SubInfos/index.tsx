@@ -1,10 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
+import styled from 'styled-components';
 import {
   DownArrow,
   SubSectionDivider,
   TitleSection,
   Title,
   SubInfosWrapper,
+  InfoList,
+  InfoTerms,
+  InfoDescription,
 } from './index.style';
 
 interface SubInfoProps {
@@ -12,19 +16,29 @@ interface SubInfoProps {
   infos: unknown;
   lastSubInfo?: boolean;
 }
-
 const SubInfos: FC<SubInfoProps> = ({ title, infos, lastSubInfo }) => {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <SubInfosWrapper lastSubInfo={lastSubInfo}>
+    <SubInfosWrapper
+      lastSubInfo={lastSubInfo}
+      onClick={() => setIsOpened((prev) => !prev)}
+    >
       <TitleSection>
         <Title>{title}</Title>
-        <DownArrow />
+        <DownArrow isOpened={isOpened} />
       </TitleSection>
-      {isOpened && <SubSectionDivider />}
-      {/* infos */}
-      {isOpened && !lastSubInfo && <SubSectionDivider />}
+
+      <InfoList isOpened={isOpened}>
+        <SubSectionDivider isUpperDivider />
+        {Object.entries(infos).map(([key, val]) => (
+          <div key={key}>
+            <InfoTerms>{key}</InfoTerms>
+            <InfoDescription>{val}</InfoDescription>
+          </div>
+        ))}
+        {!lastSubInfo && <SubSectionDivider />}
+      </InfoList>
     </SubInfosWrapper>
   );
 };
