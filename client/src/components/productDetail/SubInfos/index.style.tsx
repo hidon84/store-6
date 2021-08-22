@@ -41,7 +41,6 @@ export const SubSectionDivider = styled.img.attrs({
 `;
 
 export const InfoList = styled.dl<{ isOpened: boolean }>`
-  /* visibility: ${({ isOpened }) => (isOpened ? 'visible' : 'hidden')}; */
   overflow-y: hidden;
   max-height: ${({ isOpened }) => (isOpened ? '290px' : '0')};
   transition: max-height 0.4s ease-out;
