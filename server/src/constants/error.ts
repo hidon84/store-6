@@ -27,6 +27,10 @@ export const commonError = {
     statusCode: 400,
     message: 'Invalid query parameters',
   },
+  invalidPathParams: {
+    statusCode: 400,
+    message: 'Invalid path parameters',
+  },
   invalidState: {
     statusCode: 422,
     message: 'Invalid state',
@@ -111,6 +115,13 @@ export const ProductError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get Products',
+  },
+};
+
+export const ProductDetailError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get Product Detail Information',
   },
 };
 
