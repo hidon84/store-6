@@ -11,12 +11,14 @@ export const authUrl = {
   refresh: `${authBaseUrl}/refresh`,
 };
 
-const setAuthorizationHeader = (response: AxiosResponse<AuthResponseBody>) => {
+export const setAuthorizationHeader = (
+  response: AxiosResponse<AuthResponseBody>,
+) => {
   const { access } = response.data;
   client.defaults.headers.common.Authorization = `Bearer ${access}`;
 };
 
-const clearAuthorizationHeader = () => {
+export const clearAuthorizationHeader = () => {
   client.defaults.headers.common.Authorization = '';
 };
 

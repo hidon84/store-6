@@ -1,6 +1,7 @@
 export * from './common';
 export * from './error';
 export * from './auth';
+export * from './oauth';
 export * from './users';
 export * from './products';
 export * from './categories';
