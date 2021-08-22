@@ -37,22 +37,25 @@ const Cart: FC = () => {
   };
 
   const changeAmount = (price: number, type: string) => {
-
     const offset = type === 'down' ? price * -1 : price;
 
     setAmount(amount + offset);
   };
 
-  const removeCartItem = async (cartIdx: number , count: number, price:number) => {
+  const removeCartItem = async (
+    cartIdx: number,
+    count: number,
+    price: number,
+  ) => {
     const response = await deleteCartItem(cartIdx);
 
     if (response.statusCode === 200) {
-      const filtered = cartItems.filter(item => { 
-          return item.idx !== cartIdx
-      })
+      const filtered = cartItems.filter((item) => {
+        return item.idx !== cartIdx;
+      });
 
-      setCartItems(filtered)
-      changeAmount(count * price, 'down')
+      setCartItems(filtered);
+      changeAmount(count * price, 'down');
     }
   };
 
