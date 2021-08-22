@@ -39,11 +39,8 @@ const Categorys = [
 ];
 
 const CategoryFilter: React.FC = () => {
-  const { dispatch, ...currentState } = useContext(FilterContext);
-
-  const handleResetBtnClick = () => {
-    dispatch(resetCategory());
-  };
+  const { dispatch } = useContext(FilterContext);
+  const handleResetBtnClick = () => dispatch(resetCategory());
 
   return (
     <CategoryFilterWrapper>
