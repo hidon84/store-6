@@ -14,11 +14,17 @@ class ShippingEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
-  @Column({ length: 45 })
+  @Column({ length: 200 })
   name: string;
 
-  @Column({ length: 200 })
+  @Column('text')
   address: string;
+
+  @Column('text')
+  detailAddress: string;
+  
+  @Column({ length: 45 })
+  code: string;
 
   @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
     nullable: false,
