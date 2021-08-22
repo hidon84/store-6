@@ -52,7 +52,10 @@ const ShipItem: FC<Props> = ({
         <div>{shipItem.name}</div>
         <div>{shipItem.phone}</div>
       </ShipUser>
-      <ShipAddress>{shipItem.address}</ShipAddress>
+      <ShipAddress>
+        <div>{shipItem.address}</div>
+        <div>{shipItem.detailAddress}</div>
+      </ShipAddress>
       <ShipControlWrapper>
         <ShipHover>
           <ShipControl onClick={handleModifyBtnClick}>

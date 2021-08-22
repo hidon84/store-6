@@ -25,7 +25,7 @@ export const ShipUser = styled.div`
 
 export const ShipAddress = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction:column;
   width: 370px;
   line-height: 1.4;
   white-space: pre-wrap;
