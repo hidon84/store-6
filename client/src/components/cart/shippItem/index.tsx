@@ -1,92 +1,74 @@
-import React, { FC, useState } from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
 import { cancleSVG, modifySVG, underlineShortSVG } from '~/assets';
 import Checkbox from '~/components/common/Checkbox';
+import { confirm } from '~/utils/modal';
+import { ShipType } from '~/components/cart/shipping';
+
+import {
+  ShipItemWrapper,
+  CheckboxWrapper,
+  ShipUser,
+  ShipAddress,
+  ShipControlWrapper,
+  ShipControl,
+  ShipHover,
+} from './index.style';
 
 interface Props {
-    shipIdx: number,
-    user: {
-        name: string,
-        phone: string,
-    },
-    address: string,
-    selected: number
+  shipItem: ShipType;
+  selected: boolean;
+  changeSelectedBtn: (shipIdx: number) => void;
+  removeShippingItem: (shipIdx: number) => void;
+  modifyBtnClick: (shipIdx: number) => void;
 }
 
+const ShipItem: FC<Props> = ({
+  shipItem,
+  selected,
+  changeSelectedBtn,
+  removeShippingItem,
+  modifyBtnClick,
+}) => {
+  const handleSelectBtnClick = () => {
+    changeSelectedBtn(shipItem.idx);
+  };
 
-const ShipItemWrapper = styled.div`
-    padding: 41px 10px;
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    > * {
-    margin-left: 70px;
-}
-`
+  const handleRemoveBtnClick = () => {
+    confirm('정말 삭제하시겠어요?', () => {
+      removeShippingItem(shipItem.idx);
+    });
+  };
 
-const CheckboxWrapper = styled.div`
-    width: 20px;
-`
-
-const ShipUser = styled.div`
-    line-height: 1.4;
-    width: 150px;
-
-    div:last-child{
-        color #999999;
-    }
-`
-
-const ShipAddress = styled.div`
-    display: flex;
-    align-items: center;
-    width: 370px;
-    line-height: 1.4;
-    white-space:pre-wrap;
-`
-
-const ShipControllWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-`
-
-
-const ShipControll = styled.div`
-    display: flex;
-`
-
-
-const ShipItem: FC<Props> = ({ shipIdx, user, address, selected }) => {
+  const handleModifyBtnClick = () => {
+    modifyBtnClick(shipItem.idx);
+  };
 
   return (
     <ShipItemWrapper>
-        <CheckboxWrapper>
-            <Checkbox checked={true} />
-        </CheckboxWrapper>
-        <ShipUser>
-              <div>{user.name}</div>
-              <div>{user.phone}</div>
-        </ShipUser>
-        <ShipAddress>
-            {address}
-        </ShipAddress>
-        <ShipControllWrapper>
-          <div>
-            <ShipControll>
-              <img src={modifySVG}/>
-              <div>수정</div>
-            </ShipControll>
-            <img src={underlineShortSVG} />
-            </div>
-          <div>
-            <ShipControll> 
-              <img src={cancleSVG}/>
-              <div>삭제</div>
-            </ShipControll>
-            <img src={underlineShortSVG} />
-          </div>
-        </ShipControllWrapper>
+      <CheckboxWrapper onClick={handleSelectBtnClick}>
+        <Checkbox checked={selected} />
+      </CheckboxWrapper>
+      <ShipUser>
+        <div>{shipItem.name}</div>
+        <div>{shipItem.phone}</div>
+      </ShipUser>
+      <ShipAddress>{shipItem.address}</ShipAddress>
+      <ShipControlWrapper>
+        <ShipHover>
+          <ShipControl onClick={handleModifyBtnClick}>
+            <img src={modifySVG} alt="modify" />
+            <div>수정</div>
+          </ShipControl>
+          <img src={underlineShortSVG} alt="underline" />
+        </ShipHover>
+        <ShipHover>
+          <ShipControl onClick={handleRemoveBtnClick}>
+            <img src={cancleSVG} alt="cancle" />
+            <div>삭제</div>
+          </ShipControl>
+          <img src={underlineShortSVG} alt="underline" />
+        </ShipHover>
+      </ShipControlWrapper>
     </ShipItemWrapper>
   );
 };
