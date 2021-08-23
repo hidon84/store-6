@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 /* eslint-disable react/no-unused-state */
@@ -128,7 +129,10 @@ class Main extends Component<{ u?: string }, MainState> {
       const { peerCalls } = this.state;
       peerCalls[userId]?.close();
       delete peerCalls[userId];
-      this.setState({ peerCalls, users: this.state.users.filter((user) => user.id !== userId ) });
+      this.setState({
+        peerCalls,
+        users: this.state.users.filter((user) => user.id !== userId),
+      });
       this.removeConnections(userId);
     });
 
