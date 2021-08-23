@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 import ProductItem from '~/components/product/ProductItem';
-        
+
 import { useHistory } from '~/core/Router';
 import { FetchContext, ProductData } from '~/pages/ProductList';
 

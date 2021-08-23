@@ -12,6 +12,7 @@
     "build": "env-cmd -f .env.prod webpack --progress",
     "lint": "yarn eslint --ext .tsx --ext .ts src",
     "lint:fix": "yarn eslint --ext .tsx --ext .ts src --fix",
+    "prettier:write": "yarn prettier --write src",
     "precommit": "yarn lint-staged",
     "test": "jest",
     "test:watch": "jest --watchAll",
