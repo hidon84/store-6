@@ -12,7 +12,9 @@ import ProductItem from '~/components/ProductItem';
 import { useHistory } from '~/core/Router';
 import { FetchContext, ProductData } from '~/pages/ProductList';
 
-const ProductItemContainerWrapper = styled.ul`
+const ProductItemContainerWrapper = styled.ul<{ isFetching: boolean }>`
+  opacity: ${({ isFetching }) => (isFetching ? 0 : 1)};
+  transition: opacity 0.5s ease-in-out;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 31px;
@@ -33,7 +35,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   { products },
   ref,
 ) => {
-  const { state } = useContext(FetchContext);
+  const { state: fetchState } = useContext(FetchContext);
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
     (idx: number) => push(`/products/${idx}`),
@@ -42,7 +44,10 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
 
   return (
     <>
-      <ProductItemContainerWrapper>
+      {console.log(fetchState)}
+      <ProductItemContainerWrapper
+        isFetching={fetchState.state === 'START_FETCH'}
+      >
         {products.map(({ idx, thumbnail, price, title }) => (
           <ProductItem
             key={idx}

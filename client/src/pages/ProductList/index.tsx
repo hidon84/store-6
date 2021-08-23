@@ -93,7 +93,7 @@ const ProductList: FC = () => {
       if (!isNextPageRequest) setProducts(data);
       else setProducts((prev) => [...prev, ...data]);
 
-      fetchDispatch(finishFetch());
+      setTimeout(() => fetchDispatch(finishFetch()), 500);
     } catch (error) {
       // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
       // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
@@ -102,7 +102,10 @@ const ProductList: FC = () => {
   };
 
   useEffect(() => {
-    if (fetchState.state === 'START_FETCH') fetchProducts();
+    // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
+    if (fetchState.state === 'START_FETCH') {
+      setTimeout(() => fetchProducts(), 500);
+    }
   }, [filterState, fetchState.state]);
 
   useEffect(() => {
