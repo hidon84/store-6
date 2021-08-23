@@ -166,3 +166,10 @@ export const ShippingDeleteError = {
   },
 };
 
+
+export const ShippingSelectError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Select ShippingItem',
+  },
+};
