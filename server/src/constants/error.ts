@@ -115,7 +115,6 @@ export const userUpdateError = {
     statusCode: 400,
     message: 'invalid phone',
   },
-
 };
 
 export const userDeleteError = {
