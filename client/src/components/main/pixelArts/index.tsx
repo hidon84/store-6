@@ -2,6 +2,8 @@ import { FC } from 'react';
 import Coord from './coord';
 import './cat/cat.css';
 import './chicken/chicken.css';
+import './hen/hen.css';
+import './rooster/rooster.css';
 import './flower/flower.css';
 import './ladybug/ladybug.css';
 import './sonic/sonic.css';
