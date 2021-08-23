@@ -105,7 +105,7 @@ export const handleDeleteShipping = async (
       shippingIdx,
     });
 
-    return res.json();
+    return res.status(204).end();
   } catch (e) {
     return next(e);
   }

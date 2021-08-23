@@ -33,9 +33,9 @@ export const handleDeleteCartItem = async (
       throw new ErrorResponse(commonError.invalidPathParams);
     }
 
-    await cartServiceInstance.deleteCartItem(cartIdx);
+    await cartServiceInstance.deleteCartItem(cartIdx, req.currentUser);
 
-    return res.json();
+    return res.status(204).end();
   } catch (e) {
     return next(e);
   }

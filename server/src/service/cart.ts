@@ -1,7 +1,12 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
-import { CartCreateError, CartError, commonError } from '@/constants/error';
+import {
+  CartCreateError,
+  CartDeleteError,
+  CartError,
+  commonError,
+} from '@/constants/error';
 import CartRepository from '@/repository/cart';
 import UserEntity from '@/entity/user';
 import ProductRepository from '@/repository/product';
@@ -68,11 +73,23 @@ class CartService {
     }
   }
 
-  async deleteCartItem(cartIdx: number) {
+  // 검증
+  // 1. 해당 id가 카트 DB에 존재하는 아이템인가?
+  // 2. 해당
+  async deleteCartItem(cartIdx: number, currentUser: UserEntity) {
     try {
+      const product = await this.cartRepository.findByIdxOfCartIdxAndUser(
+        cartIdx,
+        currentUser.idx,
+      );
+
+      if (!product) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
       await this.cartRepository.deleteItem(cartIdx);
     } catch {
-      throw new ErrorResponse(CartError.unable);
+      throw new ErrorResponse(CartDeleteError.unable);
     }
   }
 }

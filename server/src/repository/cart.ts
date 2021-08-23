@@ -15,6 +15,16 @@ class CartRepository extends Repository<CartEntity> {
     return cartItem;
   }
 
+  async findByIdxOfCartIdxAndUser(cartIdx: number, userIdx: number) {
+    const cartItem = await this.findOne({
+      where: {
+        idx: cartIdx,
+        user: { idx: userIdx },
+      },
+    });
+    return cartItem;
+  }
+
   async getCartAmountOfUser(userIdx: number) {
     const amount = await this.count({
       where: {
