@@ -37,7 +37,8 @@ const dummyProductInfo = {
 };
 
 const failedToAddToCart = '장바구니에 추가하는 데 실패했습니다.';
-const successToAddToCart = '장바구니에 추가하였습니다. 장바구니 페이지로 이동하시겠습니까?';
+const successToAddToCart =
+  '장바구니에 추가하였습니다. 장바구니 페이지로 이동하시겠습니까?';
 const failedToLike = '좋아요 설정을 하는 데 실패했습니다.';
 const successToLike = '이 상품에 좋아요 설정을 합니다.';
 const successToUnLike = '이 상품에 대해 좋아요 설정을 해제합니다.';
@@ -50,36 +51,42 @@ const ProductDetail: FC = () => {
 
   if (Number.isNaN(idx) || idx <= 0) {
     history.push('/404');
-    return;
+    return <></>;
   }
 
   useEffect(() => {
-    productsApi.getProductDetail(idx)
-      .then(result => setProduct(result.data))
+    productsApi
+      .getProductDetail(idx)
+      .then((result) => setProduct(result.data))
       .catch(() => history.push('/404'));
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
-    productsApi.postProductToCart(idx)
+    productsApi
+      .postProductToCart(idx)
       .then(() => {
-        setProduct({...product, isCart: true});
+        setProduct({ ...product, isCart: true });
         confirm(successToAddToCart, () => history.push('/cart'));
       })
-      .catch(() => alert(failedToAddToCart));
+      .catch(() => {
+        alert(failedToAddToCart);
+      });
   }, [idx, product]);
 
   const onClickLike = useCallback(() => {
     if (product?.isLike) {
-      productsApi.deleteProductFromLike(idx)
+      productsApi
+        .deleteProductFromLike(idx)
         .then(() => {
-          setProduct({...product, isLike: false});
+          setProduct({ ...product, isLike: false });
           alert(successToUnLike);
         })
         .catch(() => alert(failedToLike));
     } else {
-      productsApi.postProductToLike(idx)
+      productsApi
+        .postProductToLike(idx)
         .then(() => {
-          setProduct({...product, isLike: true});
+          setProduct({ ...product, isLike: true });
           alert(successToLike);
         })
         .catch((e: ErrorResponse) => {
@@ -103,8 +110,8 @@ const ProductDetail: FC = () => {
       </LayoutDivider>
       <RightSection>
         {/* @TODO dummyProductInfo 대신 product 사용해야 함 */}
-        <ProductDetailContainer 
-          product={dummyProductInfo} 
+        <ProductDetailContainer
+          product={dummyProductInfo}
           onClickAddToCart={onClickAddToCart}
           onClickLike={onClickLike}
         />
