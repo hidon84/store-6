@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 /* eslint-disable react/no-unused-state */
 import { Component, createRef, RefObject } from 'react';
@@ -16,7 +17,10 @@ import {
   Stain,
   Logo,
 } from '~/components/main/IconButtons';
-import PixelArt from '~/components/main/pixelArts';
+import PixelArt, {
+  Minimi,
+  genRandomPixelArt,
+} from '~/components/main/pixelArts';
 import { MainContainer } from './index.style';
 import socket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
@@ -28,9 +32,19 @@ interface MainState {
   users?: { id: string; y: number; x: number }[];
   peerCalls: Record<string, MediaConnection>;
   connections: Record<string, DataConnection>;
+  minimi: Minimi;
   y: number;
   x: number;
+  others: { minimi: Minimi; y: number; x: number }[];
 }
+
+type MinimiUpdateMessage = {
+  y: number;
+  x: number;
+  minimi: Minimi;
+  from: string;
+  message: 'updateMinimi';
+};
 
 const [DY, DX] = [2, 2];
 
@@ -42,12 +56,15 @@ class Main extends Component<{ u?: string }, MainState> {
 
   constructor(props) {
     super(props);
+    const { minimi, y, x } = genRandomPixelArt();
     this.state = {
       peerCalls: {},
       connections: {},
       myId: '',
-      x: 5,
-      y: 5,
+      minimi,
+      y,
+      x,
+      others: [],
     };
     this.myId = uuidv4();
     this.peer = createPeer(this.myId);
@@ -55,6 +72,9 @@ class Main extends Component<{ u?: string }, MainState> {
       socket.emit('join-room', id);
     });
     this.audioGridRef = createRef<HTMLDivElement>();
+    this.setupConnections = this.setupConnections.bind(this);
+    this.addConnections = this.addConnections.bind(this);
+    this.addAudioStream = this.addAudioStream.bind(this);
     this.setupConnections();
   }
 
@@ -80,11 +100,10 @@ class Main extends Component<{ u?: string }, MainState> {
 
     this.peer.on('connection', (con) => {
       con.on('data', (data) => {
+        if (data.message === 'updateMinimi') {
+          const { y, x, from, minimi } = data as MinimiUpdateMessage;
+        }
         window.console.log('received data: ', data);
-        // const { connections } = this.state;
-        // const conn =
-        con.send({ message: 'reply!!!' });
-        // this.addConnections(data.from, con);
       });
     });
 
@@ -157,20 +176,34 @@ class Main extends Component<{ u?: string }, MainState> {
       });
   };
 
+  broadCastMove = () => {
+    const { connections, y, x } = this.state;
+    Object.keys(connections).forEach((targetId) => {
+      const conn = connections[targetId];
+      const minimiUpdateMessage: MinimiUpdateMessage = {
+        y,
+        x,
+        from: this.myId,
+        message: 'updateMinimi',
+      };
+      conn.send(minimiUpdateMessage);
+    });
+  };
+
   onKeyDown = (event: globalThis.KeyboardEvent) => {
     const { y, x } = this.state;
     switch (event.code) {
       case 'ArrowUp':
-        this.setState({ y: Math.max(0, y - DY) });
+        this.setState({ y: Math.max(0, y - DY) }, this.broadCastMove);
         break;
       case 'ArrowDown':
-        this.setState({ y: Math.min(90, y + DY) });
+        this.setState({ y: Math.min(90, y + DY) }, this.broadCastMove);
         break;
       case 'ArrowLeft':
-        this.setState({ x: Math.max(0, x - DX) });
+        this.setState({ x: Math.max(0, x - DX) }, this.broadCastMove);
         break;
       case 'ArrowRight':
-        this.setState({ x: Math.min(90, x + DX) });
+        this.setState({ x: Math.min(90, x + DX) }, this.broadCastMove);
         break;
       default:
         break;
@@ -178,13 +211,13 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   render() {
-    const { y, x } = this.state;
+    const { minimi, y, x } = this.state;
     return (
       <MainContainer>
         <div className="audio-grid" ref={this.audioGridRef} />
         <PixelArt className="cat" />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
-        <PixelArt className="chicken" coord={{ left: `${x}%`, top: `${y}%` }} />
+        <PixelArt className={minimi} coord={{ left: `${x}%`, top: `${y}%` }} />
         <PixelArt className="flower" coord={{ right: '10%' }} />
         <PixelArt className="ladybug" coord={{ bottom: '20%' }} />
         <PixelArt

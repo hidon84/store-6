@@ -6,10 +6,14 @@ import './flower/flower.css';
 import './ladybug/ladybug.css';
 import './sonic/sonic.css';
 import './hedgehog/hedgehog.css';
+import { randBetween } from '~/utils/random';
+
+type Minimi = 'cat' | 'chicken' | 'sonic' | 'flower' | 'ladybug' | 'hedgehog';
+const minimiMap = ['cat', 'chicken', 'sonic', 'flower', 'ladybug', 'hedgehog'];
 
 const PixelArt: FC<{
   coord?: Coord;
-  className: 'cat' | 'chicken' | 'sonic' | 'flower' | 'ladybug' | 'hedgehog';
+  className: Minimi;
 }> = ({ coord, className }) => {
   return (
     <div style={{ ...coord }} className={className}>
@@ -17,5 +21,16 @@ const PixelArt: FC<{
     </div>
   );
 };
+
+const genRandomPixelArt = () => {
+  const randM = randBetween(0, minimiMap.length - 1);
+  const minimi = minimiMap[randM] as Minimi;
+  const y = randBetween(5, 95);
+  const x = randBetween(5, 95);
+
+  return { minimi, y, x };
+};
+
+export { genRandomPixelArt, Minimi };
 
 export default PixelArt;
