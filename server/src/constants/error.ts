@@ -138,3 +138,11 @@ export const ShippingError = {
     message: 'Unable to Get ShippingItems',
   },
 }
+
+
+export const ShippingPostError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Post ShippingItem',
+  },
+};
