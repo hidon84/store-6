@@ -151,5 +151,18 @@ export const ShippingPostError = {
   },
 };
 
+export const ShippingPutError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Update ShippingItem',
+  },
+};
 
+
+export const ShippingDeleteError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Delete ShippingItem',
+  },
+};
 
