@@ -25,7 +25,6 @@ import PixelArt, {
 import { MainContainer } from './index.style';
 import socket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
-// import { delay } from '~/utils/protocol';
 import { alert } from '~/utils/modal';
 
 interface MainState {
@@ -76,7 +75,6 @@ class Main extends Component<{ u?: string }, MainState> {
     this.addAudioStream = this.addAudioStream.bind(this);
     this.updateMinimi = this.updateMinimi.bind(this);
     this.setupConnections();
-    console.log('constructor');
   }
 
   componentWillUnmount() {
@@ -178,45 +176,39 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   setupAudioStream = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        audio: true,
-      })
-      .then((myStream) => {
-        console.log('got myStream');
+    /* When Someone tries to call me */
+    this.peer.on('call', (call) => {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((myStream) => {
         this.myStream = myStream;
-        /**
-         * When Someone tries to call me
-         */
-        this.peer.on('call', (call) => {
-          call.answer(myStream);
-          const newAudio = document.createElement('audio');
-          this.audioGridRef.current.appendChild(newAudio);
-          call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
-          });
-          window.console.log('peer: ', call.peer);
+        call.answer(myStream);
+        const newAudio = document.createElement('audio');
+        this.audioGridRef.current.appendChild(newAudio);
+        call.on('stream', (otherUserStream) => {
+          this.addAudioStream(newAudio, otherUserStream);
         });
-
-        socket.on('user-connected', async (userId) => {
-          console.log('call to new user: ', userId);
-          const call = this.peer.call(userId, myStream);
-          const newAudio = document.createElement('audio');
-          this.audioGridRef.current?.appendChild(newAudio);
-          call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
-          });
-          call.on('close', () => {
-            newAudio.remove();
-          });
-          const { peerCalls } = this.state;
-          const nextPeers = {
-            ...peerCalls,
-            [userId]: call,
-          };
-          this.setState({ peerCalls: nextPeers });
-        });
+        window.console.log('peer: ', call.peer);
       });
+    });
+    socket.on('user-connected', async (userId) => {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((myStream) => {
+        this.myStream = myStream;
+        const call = this.peer.call(userId, myStream);
+        const newAudio = document.createElement('audio');
+        this.audioGridRef.current?.appendChild(newAudio);
+        call.on('stream', (otherUserStream) => {
+          this.addAudioStream(newAudio, otherUserStream);
+        });
+        call.on('close', () => {
+          newAudio.remove();
+        });
+        const { peerCalls } = this.state;
+        const nextPeers = {
+          ...peerCalls,
+          [userId]: call,
+        };
+        this.setState({ peerCalls: nextPeers });
+      });
+    });
   };
 
   broadCastMove = () => {
@@ -263,15 +255,12 @@ class Main extends Component<{ u?: string }, MainState> {
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
         <PixelArt className={minimi} coord={{ left: `${x}%`, top: `${y}%` }} />
-        <PixelArt className="flower" coord={{ right: '10%' }} />
-        <PixelArt className="ladybug" coord={{ bottom: '20%' }} />
-        <PixelArt
-          className="hedgehog"
-          coord={{ bottom: '20%', right: '40%' }}
-        />
+        <PixelArt className="flower" coord={{ left: '90%' }} />
+        <PixelArt className="ladybug" coord={{ top: '80%' }} />
+        <PixelArt className="hedgehog" coord={{ top: '80%', right: '40%' }} />
         {users.map((user) => (
           <PixelArt
-            key={`${user.id}_${user.y}_${user.x}`}
+            key={`${user.id}`}
             className={user.minimi}
             coord={{ left: `${user.x}%`, top: `${user.y}%` }}
           />
