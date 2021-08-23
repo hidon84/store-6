@@ -13,6 +13,7 @@ import CartPage from './pages/Cart';
 import ProductDetail from './pages/ProductDetail';
 import GoogleCallbackPage from './pages/GoogleCallback';
 import FacebookCallbackPage from './pages/FacebookCallback';
+import LikeListPage from './pages/LikeList';
 
 const Main = styled.main`
   position: relative;
@@ -49,6 +50,9 @@ const App = () => {
           </Route>
           <Route exact path="/cart">
             <CartPage />
+          </Route>
+          <Route exact path="/like">
+            <LikeListPage />
           </Route>
           <Route exact path="/oauth/google/callback">
             <GoogleCallbackPage />
