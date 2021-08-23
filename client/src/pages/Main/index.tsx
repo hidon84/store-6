@@ -21,6 +21,7 @@ import { MainContainer } from './index.style';
 import socket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { delay } from '~/utils/protocol';
+import { alert } from '~/utils/modal';
 
 interface MainState {
   myId: string;
@@ -37,6 +38,7 @@ class Main extends Component<{ u?: string }, MainState> {
   audioGridRef: RefObject<HTMLDivElement>;
   peer: Peer;
   myId: string;
+  myStream?: MediaStream;
 
   constructor(props) {
     super(props);
@@ -49,30 +51,40 @@ class Main extends Component<{ u?: string }, MainState> {
     };
     this.myId = uuidv4();
     this.peer = createPeer(this.myId);
-    this.audioGridRef = createRef<HTMLDivElement>();
-  }
-
-  componentDidMount() {
-    this.setupAudioStream();
     this.peer.on('open', (id) => {
       socket.emit('join-room', id);
     });
+    this.audioGridRef = createRef<HTMLDivElement>();
+    this.setupConnections();
+  }
+
+  componentWillUnmount() {
+    window.console.log('componentWillUnmount');
+    this.myStream?.getTracks().forEach((mediaTrack) => {
+      mediaTrack.stop();
+    });
+    document.body.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  setupConnections() {
+    this.setupAudioStream();
 
     socket.on('user-connected', async (userId: string) => {
-      window.console.log('user-connected! ID: ', userId);
+      alert(`user-connected! ${userId}`);
       const conn = this.peer.connect(userId, { reliable: true });
-      // const { myId } = this.state;
 
-      await delay(2000);
+      await delay(1000);
       conn.send({ message: 'hello', from: this.myId });
+      this.addConnections(userId, conn);
     });
 
     this.peer.on('connection', (con) => {
       con.on('data', (data) => {
         window.console.log('received data: ', data);
-        this.addConnections(data.from, con);
-
+        // const { connections } = this.state;
+        // const conn =
         con.send({ message: 'reply!!!' });
+        // this.addConnections(data.from, con);
       });
     });
 
@@ -83,10 +95,6 @@ class Main extends Component<{ u?: string }, MainState> {
     });
 
     document.body.addEventListener('keydown', this.onKeyDown);
-  }
-
-  componentWillUnmount() {
-    document.body.removeEventListener('keydown', this.onKeyDown);
   }
 
   addConnections = (id: string, connection: DataConnection) => {
@@ -115,6 +123,7 @@ class Main extends Component<{ u?: string }, MainState> {
         audio: true,
       })
       .then((myStream) => {
+        this.myStream = myStream;
         /**
          * When Someone tries to call me
          */
