@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { FC } from 'react';
-
+import { FC, useEffect, useState, useCallback } from 'react';
 import ProductDetailContainer from '~/components/productDetail/ProductDetailContainer';
-
+import { useHistory, useParams } from '~/core/Router';
+import { ErrorResponse, ProductDetailGetResponseBody } from '~/lib/api/types';
+import * as productsApi from '~/lib/api/products';
 import {
   ProductDetailWrapper,
   PrevPageArrow,
@@ -12,8 +12,9 @@ import {
   LayoutDivider,
   PrevPageButton,
 } from './index.style';
+import { alert, confirm } from '~/utils/modal';
 
-const DUMMY_PRODUCT_INFO = {
+const dummyProductInfo = {
   name: '요모포켓X배달이친구들 엉클배달이 포켓',
   originPrice: 99000,
   discountedPrice: 64000,
@@ -35,7 +36,62 @@ const DUMMY_PRODUCT_INFO = {
   isCart: false,
 };
 
+const failedToAddToCart = '장바구니에 추가하는 데 실패했습니다.';
+const successToAddToCart = '장바구니에 추가하였습니다. 장바구니 페이지로 이동하시겠습니까?';
+const failedToLike = '좋아요 설정을 하는 데 실패했습니다.';
+const successToLike = '이 상품에 좋아요 설정을 합니다.';
+const successToUnLike = '이 상품에 대해 좋아요 설정을 해제합니다.';
+const statusCodeAlreadyAdded = 409;
+
 const ProductDetail: FC = () => {
+  const idx = Number(useParams().id);
+  const history = useHistory();
+  const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
+
+  if (Number.isNaN(idx) || idx <= 0) {
+    history.push('/404');
+    return;
+  }
+
+  useEffect(() => {
+    productsApi.getProductDetail(idx)
+      .then(result => setProduct(result.data))
+      .catch(() => history.push('/404'));
+  }, [idx]);
+
+  const onClickAddToCart = useCallback(() => {
+    productsApi.postProductToCart(idx)
+      .then(() => {
+        setProduct({...product, isCart: true});
+        confirm(successToAddToCart, () => history.push('/cart'));
+      })
+      .catch(() => alert(failedToAddToCart));
+  }, [idx, product]);
+
+  const onClickLike = useCallback(() => {
+    if (product?.isLike) {
+      productsApi.deleteProductFromLike(idx)
+        .then(() => {
+          setProduct({...product, isLike: false});
+          alert(successToUnLike);
+        })
+        .catch(() => alert(failedToLike));
+    } else {
+      productsApi.postProductToLike(idx)
+        .then(() => {
+          setProduct({...product, isLike: true});
+          alert(successToLike);
+        })
+        .catch((e: ErrorResponse) => {
+          if (e.statusCode === statusCodeAlreadyAdded) {
+            alert(successToLike);
+            return;
+          }
+          alert(failedToLike);
+        });
+    }
+  }, [idx, product]);
+
   return (
     <ProductDetailWrapper>
       <PrevPageButton>
@@ -46,7 +102,12 @@ const ProductDetail: FC = () => {
         <DivideLine />
       </LayoutDivider>
       <RightSection>
-        <ProductDetailContainer product={DUMMY_PRODUCT_INFO} />
+        {/* @TODO dummyProductInfo 대신 product 사용해야 함 */}
+        <ProductDetailContainer 
+          product={dummyProductInfo} 
+          onClickAddToCart={onClickAddToCart}
+          onClickLike={onClickLike}
+        />
       </RightSection>
     </ProductDetailWrapper>
   );

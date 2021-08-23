@@ -27,13 +27,13 @@ interface Props {
     isCart: boolean;
   };
   onClickAddToCart?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onClickAddToLike?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickLike?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ProductDetailContainer: FC<Props> = ({
   product,
   onClickAddToCart,
-  onClickAddToLike,
+  onClickLike,
 }) => {
   // @TODO API 명세 타입 변경 시 해당 부분 변경 필요
   const {
@@ -61,7 +61,7 @@ const ProductDetailContainer: FC<Props> = ({
           장바구니에 추가
         </Button>
         <LikeButtonWrapper>
-          <ProductLikeButton isLike={isLike} onClick={onClickAddToLike} />
+          <ProductLikeButton isLike={isLike} onClick={onClickLike} />
         </LikeButtonWrapper>
       </UserInteractArea>
     </ProductDetailContainerWrapper>
