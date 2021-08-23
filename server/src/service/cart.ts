@@ -73,9 +73,6 @@ class CartService {
     }
   }
 
-  // 검증
-  // 1. 해당 id가 카트 DB에 존재하는 아이템인가?
-  // 2. 해당
   async deleteCartItem(cartIdx: number, currentUser: UserEntity) {
     try {
       const product = await this.cartRepository.findByIdxOfCartIdxAndUser(
@@ -83,11 +80,15 @@ class CartService {
         currentUser.idx,
       );
 
-      if (!product) {
-        throw new ErrorResponse(commonError.notFound);
-      }
+      if (!product) throw new ErrorResponse(commonError.notFound);
 
       await this.cartRepository.deleteItem(cartIdx);
+
+      const amount = await this.cartRepository.getCartAmountOfUser(
+        currentUser.idx,
+      );
+
+      return { amount };
     } catch {
       throw new ErrorResponse(CartDeleteError.unable);
     }
