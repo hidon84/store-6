@@ -23,7 +23,7 @@ class CartService {
     }
   }
 
-  async deleteCartItem(cartIdx:number) {
+  async deleteCartItem(cartIdx: number) {
     try {
       await this.cartRepository.deleteItem(cartIdx);
     } catch {

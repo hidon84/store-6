@@ -3,41 +3,38 @@ import ShippingEntity from '@/entity/shipping';
 
 @EntityRepository(ShippingEntity)
 class ShippingRepository extends Repository<ShippingEntity> {
-
   async findByUserIdx(userIdx: number) {
     const shippings = await this.find({
       where: {
-        user : userIdx
+        user: userIdx,
       },
       order: {
-        updatedAt: 'DESC'
-      }
-    })
+        updatedAt: 'DESC',
+      },
+    });
     return shippings;
   }
 
-  async saveItem(item: ShippingEntity) { 
-    const savedShipping = await this.save(item)
+  async saveItem(item: ShippingEntity) {
+    const savedShipping = await this.save(item);
     return { savedShipping };
   }
 
-  
   async findByIdx(idx: number) {
-    const shipping= await this.findOne({
+    const shipping = await this.findOne({
       where: { idx },
-      relations: ['user']
+      relations: ['user'],
     });
     return shipping;
   }
 
-  async deleteItem(item: ShippingEntity) { 
-    await this.remove(item)
+  async deleteItem(item: ShippingEntity) {
+    await this.remove(item);
   }
 
-
-  async findSelectedByUser(userIdx: number) { 
-    const shipping= await this.findOne({
-      where: { user: userIdx , selected: true},
+  async findSelectedByUser(userIdx: number) {
+    const shipping = await this.findOne({
+      where: { user: userIdx, selected: true },
     });
     return shipping;
   }

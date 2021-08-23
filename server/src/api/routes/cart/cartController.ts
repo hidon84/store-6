@@ -18,7 +18,6 @@ export const handleGetCartItems = async (
   }
 };
 
-
 export const handleDeleteCartItem = async (
   req: Request,
   res: Response,
@@ -27,7 +26,7 @@ export const handleDeleteCartItem = async (
   try {
     const cartServiceInstance = Container.get(CartService);
 
-    const cartIdx = Number(req.params.id)
+    const cartIdx = Number(req.params.id);
 
     await cartServiceInstance.deleteCartItem(cartIdx);
 

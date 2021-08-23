@@ -69,10 +69,10 @@ class ProductService {
       }
 
       const [productImages, viewCnt, reviewCnt, likeCnt] = await Promise.all([
-        this.productImageRepository.findUrlsByProductIdx(productIdx), 
-        this.viewRepository.getCntByProductIdx(productIdx), 
-        this.reviewRepository.getCntByProductIdx(productIdx), 
-        this.likeRepository.getCntByProductIdx(productIdx)
+        this.productImageRepository.findUrlsByProductIdx(productIdx),
+        this.viewRepository.getCntByProductIdx(productIdx),
+        this.reviewRepository.getCntByProductIdx(productIdx),
+        this.likeRepository.getCntByProductIdx(productIdx),
       ]);
 
       const result = {

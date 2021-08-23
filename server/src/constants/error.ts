@@ -141,8 +141,7 @@ export const ShippingError = {
     statusCode: 500,
     message: 'Unable to Get ShippingItems',
   },
-}
-
+};
 
 export const ShippingPostError = {
   unable: {
@@ -158,14 +157,12 @@ export const ShippingPutError = {
   },
 };
 
-
 export const ShippingDeleteError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Delete ShippingItem',
   },
 };
-
 
 export const ShippingSelectError = {
   unable: {

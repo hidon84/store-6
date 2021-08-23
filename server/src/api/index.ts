@@ -17,6 +17,6 @@ export default () => {
   users(router);
   cart(router);
   shipping(router);
-  
+
   return router;
 };

@@ -25,11 +25,11 @@ class ShippingEntity {
 
   @Column('text')
   detailAddress: string;
-  
+
   @Column({ length: 45 })
   code: string;
 
-  @Column({default: false})
+  @Column({ default: false })
   selected: boolean;
 
   @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {

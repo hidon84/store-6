@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import middlewares from '@/api/middlewares';
-import { handleGetCartItems,handleDeleteCartItem } from './cartController';
+import { handleGetCartItems, handleDeleteCartItem } from './cartController';
 
 const cartRouter = Router();
 

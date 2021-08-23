@@ -1,12 +1,18 @@
 import { Router } from 'express';
 import middlewares from '@/api/middlewares';
-import {handleGetShippings, handlePostShipping, handlePutShipping, handleDeleteShipping, handleSelectShipping} from './shippingController';
+import {
+  handleGetShippings,
+  handlePostShipping,
+  handlePutShipping,
+  handleDeleteShipping,
+  handleSelectShipping,
+} from './shippingController';
 
 const shippingRouter = Router();
 
 export default (router: Router) => {
   router.use('/shipping', shippingRouter);
-    
+
   shippingRouter.get(
     '/',
     middlewares.isAuth,
@@ -30,8 +36,7 @@ export default (router: Router) => {
     middlewares.attachCurrentUser,
     handlePutShipping,
   );
-   
-    
+
   shippingRouter.delete(
     '/:id',
     middlewares.isAuth,
@@ -39,7 +44,7 @@ export default (router: Router) => {
     middlewares.attachCurrentUser,
     handleDeleteShipping,
   );
-    
+
   shippingRouter.post(
     '/:id/select',
     middlewares.isAuth,
@@ -47,6 +52,6 @@ export default (router: Router) => {
     middlewares.attachCurrentUser,
     handleSelectShipping,
   );
-  
+
   return router;
 };
