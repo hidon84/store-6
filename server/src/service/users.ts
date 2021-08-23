@@ -109,7 +109,13 @@ class UsersService {
         login.password = hashedPassword;
       }
       user.email = email ?? user.email;
+
       user.phone = phone ?? user.phone;
+
+      if (phone && !validationHelper.phoneValidator(phone)) {
+        throw new ErrorResponse(userUpdateError.invalidPhone);
+      }
+
       user.profile = profile ?? user.profile;
 
       const { updatedUser } =
