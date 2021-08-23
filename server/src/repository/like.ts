@@ -21,6 +21,10 @@ class LikeRepository extends Repository<LikeEntity> {
     });
     return likeCnt;
   }
+
+  async findByIdxOfUser(userIdx: number) { 
+    console.log('도착~~~~~~');
+  }
 }
 
 export default LikeRepository;

@@ -177,3 +177,10 @@ export const ShippingSelectError = {
     message: 'Unable to Select ShippingItem',
   },
 };
+
+export const LikeGetError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get LikeItems',
+  },
+};
