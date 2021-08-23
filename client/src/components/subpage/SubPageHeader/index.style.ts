@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SubPageUnderlineSVG } from '~/assets';
 
 export const StyledSubPageHeader = styled.div<{ width?: string }>`
   font-size: 25px;
@@ -15,7 +16,10 @@ export const LineWrapper = styled.div`
   position: relative;
 `;
 
-export const Line = styled.img`
+export const Line = styled.img.attrs({
+  src: SubPageUnderlineSVG,
+  alt: 'line to divide',
+})`
   height: 4px;
   all: unset;
   margin: 0;

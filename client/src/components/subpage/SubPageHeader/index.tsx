@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { SubPageUnderlineSVG } from '~/assets';
 import {
   Line,
   LineWrapper,
@@ -18,7 +17,7 @@ const SubPageHeader: FC<Props> = ({ children, width }) => {
       <StyledSubPageHeaderInner>
         <SubPageHeaderWrap>{children}</SubPageHeaderWrap>
         <LineWrapper>
-          <Line src={SubPageUnderlineSVG} alt="line to divide" />
+          <Line />
         </LineWrapper>
       </StyledSubPageHeaderInner>
     </StyledSubPageHeader>
