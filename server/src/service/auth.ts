@@ -3,12 +3,14 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import * as hashHelper from '@/helper/hash';
 import * as jwtHelper from '@/helper/jwt';
 import * as authHelper from '@/helper/auth';
+import * as validationHelper from '@/helper/validation';
 import ErrorResponse from '@/utils/errorResponse';
 import {
   commonError,
   loginError,
   logoutError,
   refreshError,
+  userCreateError,
 } from '@/constants/error';
 import LoginRepository from '@/repository/login';
 
@@ -24,6 +26,13 @@ class AuthService {
 
   async Login(id: string, password: string) {
     try {
+      if (
+        !validationHelper.idValidator(id) ||
+        !validationHelper.pwValidator(password)
+      ) {
+        throw new ErrorResponse(userCreateError.invalidIdOrPw);
+      }
+
       const login = await this.loginRepository.findById(id);
 
       if (!login) {
