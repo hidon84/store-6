@@ -37,7 +37,8 @@ export interface ProductData {
   idx: number;
   title: string;
   thumbnail: string;
-  price: number;
+  originPrice: number;
+  discountedPrice: number;
 }
 
 interface FilterContextState {

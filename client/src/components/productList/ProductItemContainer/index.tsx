@@ -35,11 +35,11 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   return (
     <>
       <ProductItemContainerWrapper>
-        {products.map(({ idx, thumbnail, price, title }) => (
+        {products.map(({ idx, thumbnail, discountedPrice, title }) => (
           <ProductItem
             key={idx}
             thumbnail={thumbnail}
-            price={price}
+            price={discountedPrice}
             title={title}
             onClick={() => pushToProductDetailPage(idx)}
           />
