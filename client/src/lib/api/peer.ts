@@ -3,7 +3,7 @@ import Peer from 'peerjs';
 const devOption = {
   host: '/',
   path: '/p2p',
-  debug: 3,
+  debug: 2,
   port: 5001,
 };
 
@@ -15,9 +15,17 @@ const prodOption = {
   secure: true,
 };
 
-const peer = new Peer(
-  undefined,
-  process.env.NODE_ENV === 'development' ? devOption : prodOption,
-);
+// const peer = new Peer(
+//   undefined,
+//   process.env.NODE_ENV === 'development' ? devOption : prodOption,
+// );
 
-export default peer;
+const createPeer = (uuid?: string) => {
+  const peer = new Peer(
+    uuid,
+    process.env.NODE_ENV === 'development' ? devOption : prodOption,
+  );
+  return peer;
+};
+
+export default createPeer;
