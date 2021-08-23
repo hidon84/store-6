@@ -1,12 +1,26 @@
 import { FC } from 'react';
-import Divider from '~/components/common/Divider';
-import { StyledSubPageHeader, SubPageHeaderWrap } from './index.style';
+import { SubPageUnderlineSVG } from '~/assets';
+import {
+  Line,
+  LineWrapper,
+  StyledSubPageHeader,
+  StyledSubPageHeaderInner,
+  SubPageHeaderWrap,
+} from './index.style';
 
-const SubPageHeader: FC = ({ children }) => {
+interface Props {
+  width?: string;
+}
+
+const SubPageHeader: FC<Props> = ({ children, width }) => {
   return (
-    <StyledSubPageHeader>
-      <SubPageHeaderWrap>{children}</SubPageHeaderWrap>
-      <Divider width="770px" direction="horizontal" thick />
+    <StyledSubPageHeader width={width}>
+      <StyledSubPageHeaderInner>
+        <SubPageHeaderWrap>{children}</SubPageHeaderWrap>
+        <LineWrapper>
+          <Line src={SubPageUnderlineSVG} alt="line to divide" />
+        </LineWrapper>
+      </StyledSubPageHeaderInner>
     </StyledSubPageHeader>
   );
 };
