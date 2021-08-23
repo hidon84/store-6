@@ -46,6 +46,8 @@ type MinimiUpdateMessage = {
 
 const [DY, DX] = [2, 2];
 const delayMS = 250;
+const pleaseAlloweRecord =
+  '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
 
 class Main extends Component<{ u?: string }, MainState> {
   audioGridRef: RefObject<HTMLDivElement>;
@@ -94,7 +96,7 @@ class Main extends Component<{ u?: string }, MainState> {
 
       setTimeout(() => {
         const { minimi, y, x } = this.state;
-        const minimiMessage: MinimiUpdateMessage = {
+        const firstMinimiNotifyMessage: MinimiUpdateMessage = {
           y,
           x,
           from: this.myId,
@@ -103,7 +105,7 @@ class Main extends Component<{ u?: string }, MainState> {
         };
         conn.send({ message: 'hello', from: this.myId });
         this.addConnections(userId, conn);
-        conn.send(minimiMessage);
+        conn.send(firstMinimiNotifyMessage);
       }, delayMS);
     });
 
@@ -178,36 +180,46 @@ class Main extends Component<{ u?: string }, MainState> {
   setupAudioStream = () => {
     /* When Someone tries to call me */
     this.peer.on('call', (call) => {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((myStream) => {
-        this.myStream = myStream;
-        call.answer(myStream);
-        const newAudio = document.createElement('audio');
-        this.audioGridRef.current.appendChild(newAudio);
-        call.on('stream', (otherUserStream) => {
-          this.addAudioStream(newAudio, otherUserStream);
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((myStream) => {
+          this.myStream = myStream;
+          call.answer(myStream);
+          const newAudio = document.createElement('audio');
+          this.audioGridRef.current.appendChild(newAudio);
+          call.on('stream', (otherUserStream) => {
+            this.addAudioStream(newAudio, otherUserStream);
+          });
+          window.console.log('peer: ', call.peer);
+        })
+        .catch((_) => {
+          alert(pleaseAlloweRecord, 3000);
         });
-        window.console.log('peer: ', call.peer);
-      });
     });
     socket.on('user-connected', async (userId) => {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((myStream) => {
-        this.myStream = myStream;
-        const call = this.peer.call(userId, myStream);
-        const newAudio = document.createElement('audio');
-        this.audioGridRef.current?.appendChild(newAudio);
-        call.on('stream', (otherUserStream) => {
-          this.addAudioStream(newAudio, otherUserStream);
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((myStream) => {
+          this.myStream = myStream;
+          const call = this.peer.call(userId, myStream);
+          const newAudio = document.createElement('audio');
+          this.audioGridRef.current?.appendChild(newAudio);
+          call.on('stream', (otherUserStream) => {
+            this.addAudioStream(newAudio, otherUserStream);
+          });
+          call.on('close', () => {
+            newAudio.remove();
+          });
+          const { peerCalls } = this.state;
+          const nextPeers = {
+            ...peerCalls,
+            [userId]: call,
+          };
+          this.setState({ peerCalls: nextPeers });
+        })
+        .catch((_) => {
+          alert(pleaseAlloweRecord, 3000);
         });
-        call.on('close', () => {
-          newAudio.remove();
-        });
-        const { peerCalls } = this.state;
-        const nextPeers = {
-          ...peerCalls,
-          [userId]: call,
-        };
-        this.setState({ peerCalls: nextPeers });
-      });
     });
   };
 
