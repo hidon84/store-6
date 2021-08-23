@@ -24,7 +24,6 @@ const ProductDetailContainer: FC = () => {
     mandatoryInfo,
     deliveryInfo,
     isLike,
-    isCart,
   } = DUMMY_PRODUCT_INFO;
 
   return (

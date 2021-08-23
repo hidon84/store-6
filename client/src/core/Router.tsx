@@ -29,7 +29,7 @@ const RouterContext = createContext<RouterContextType>({
     hash: '#howdy',
     search: '?some=search-string',
   },
-  push: (location: Partial<RouterLocation>) => {},
+  push: () => {},
   goBack: () => window.history.back(),
 });
 

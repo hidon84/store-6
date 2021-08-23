@@ -37,7 +37,6 @@ import fetchModule, {
   finishFetch,
   initFetch,
   INIT_FETCH,
-  startFetch,
   START_FETCH,
 } from '~/stores/fetchModule';
 

@@ -1,32 +1,24 @@
 import React, { useState, useRef, RefObject, useEffect } from 'react';
 import Divider from '~/components/common/Divider';
-import { getMe, putMe } from '~/lib/api/users';
-import { login } from '~/lib/api/auth';
-import {
-  UsersGetResponseBody,
-  UsersPutResponseBody,
-} from '~/lib/api/types/users';
-import {
-  REG_EMAIL,
-  WARNING_EMAIL,
-  REG_IMAGE,
-  REG_PHONE,
-} from '~/utils/validation';
+import { putMe } from '~/lib/api/users';
+import { REG_EMAIL, REG_IMAGE, REG_PHONE } from '~/utils/validation';
 import { alert } from '~/utils/modal';
 import UserInfoInput from '~/components/my/UserInfoInput';
 import PhoneInput from '~/components/my/PhoneInput';
 import EmailInput from '~/components/my/EmailInput';
 import {
-  StyledMyPage,
-  Title,
   RowWrapper,
   RowTitle,
   PhotoWrapper,
   ImagePreview,
   ImageDesc,
   ImageInput,
+  MyPageContent,
 } from './index.style';
 import useUser from '~/lib/hooks/useUser';
+import SubPageWrapper from '~/components/subpage/SubPageWrapper';
+import SubPageHeader from '~/components/subpage/SubPageHeader';
+import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
 
 const message = {
   EMAIL_UPDATE_SUCCESS: '이메일이 수정되었습니다.',
@@ -104,12 +96,11 @@ const MyPage: React.FC = () => {
   }, [userInfo]);
 
   return (
-    <StyledMyPage>
-      <div>
-        <Title>마이페이지</Title>
-        <Divider width="700px" direction="horizontal" thick />
-      </div>
-      <div>
+    <SubPageWrapper width="700px">
+      <SubPageHeader>
+        <SubPageHeaderItem>마이페이지</SubPageHeaderItem>
+      </SubPageHeader>
+      <MyPageContent>
         <RowWrapper>
           <RowTitle>사진</RowTitle>
           <PhotoWrapper>
@@ -148,8 +139,8 @@ const MyPage: React.FC = () => {
           inputComponent={PhoneInput}
           validator={phoneValidator}
         />
-      </div>
-    </StyledMyPage>
+      </MyPageContent>
+    </SubPageWrapper>
   );
 };
 

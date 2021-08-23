@@ -1,14 +1,7 @@
 import React, { FC } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
-import {
-  idValidator,
-  pwValidator,
-  REG_ID,
-  REG_PW,
-  WARNING_ID,
-  WARNING_PW,
-} from '~/utils/validation';
+import { idValidator, pwValidator } from '~/utils/validation';
 import { alert } from '~/utils/modal';
 import { login } from '~/lib/api/auth';
 
