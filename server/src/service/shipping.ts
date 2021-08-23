@@ -12,6 +12,7 @@ import {
 import ShippingRepository from '@/repository/shipping';
 import ShippingEntity from '@/entity/shipping';
 import UserEntity from '@/entity/user';
+import * as validationHelper from '@/helper/validation';
 
 interface ShipppingInfo {
   currentUser: UserEntity;
@@ -63,6 +64,10 @@ class CartService {
       shipping.address = address;
       shipping.detailAddress = detailAddress;
 
+      if (phone && !validationHelper.phoneValidator(phone)) {
+        throw new ErrorResponse(ShippingPostError.invalidPhone);
+      }
+
       const { savedShipping } = await this.shippingRepository.saveItem(
         shipping,
       );
@@ -101,6 +106,10 @@ class CartService {
       shipping.code = code ?? shipping.code;
       shipping.address = address ?? shipping.address;
       shipping.detailAddress = detailAddress ?? shipping.detailAddress;
+
+      if (phone && !validationHelper.phoneValidator(phone)) {
+        throw new ErrorResponse(ShippingPostError.invalidPhone);
+      }
 
       const { savedShipping } = await this.shippingRepository.saveItem(
         shipping,
