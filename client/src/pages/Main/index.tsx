@@ -45,6 +45,7 @@ type MinimiUpdateMessage = {
 };
 
 const [DY, DX] = [2, 2];
+const delayMS = 250;
 
 class Main extends Component<{ u?: string }, MainState> {
   audioGridRef: RefObject<HTMLDivElement>;
@@ -104,7 +105,7 @@ class Main extends Component<{ u?: string }, MainState> {
         conn.send({ message: 'hello', from: this.myId });
         this.addConnections(userId, conn);
         conn.send(minimiMessage);
-      }, 100);
+      }, delayMS);
     });
 
     this.peer.on('connection', (con) => {
@@ -117,7 +118,7 @@ class Main extends Component<{ u?: string }, MainState> {
           setTimeout(() => {
             conn.send({ message: 'hello2', from: this.myId });
             this.addConnections(con.peer, conn);
-          }, 100);
+          }, delayMS);
         }
       });
     });
@@ -127,7 +128,7 @@ class Main extends Component<{ u?: string }, MainState> {
       const { peerCalls } = this.state;
       peerCalls[userId]?.close();
       delete peerCalls[userId];
-      this.setState({ peerCalls });
+      this.setState({ peerCalls, users: this.state.users.filter((user) => user.id !== userId ) });
       this.removeConnections(userId);
     });
 
