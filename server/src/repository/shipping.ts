@@ -33,6 +33,14 @@ class ShippingRepository extends Repository<ShippingEntity> {
   async deleteItem(item: ShippingEntity) { 
     await this.remove(item)
   }
+
+
+  async findSelectedByUser(userIdx: number) { 
+    const shipping= await this.findOne({
+      where: { user: userIdx , selected: true},
+    });
+    return shipping;
+  }
 }
 
 export default ShippingRepository;

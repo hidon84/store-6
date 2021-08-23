@@ -6,7 +6,8 @@ import {
   ShippingPostError,
   ShippingError,
   ShippingPutError,
-  ShippingDeleteError
+  ShippingDeleteError,
+  ShippingSelectError
 } from '@/constants/error';
 import ShippingRepository from '@/repository/shipping';
 import ShippingEntity from '@/entity/shipping';
@@ -84,7 +85,7 @@ class CartService {
     }:Partial<ShipppingInfo>&Required<Pick<ShipppingInfo,'currentUser' | 'shippingIdx'>>) {
         try {
 
-            const shipping = await this.shippingRepository.findByIdx(shippingIdx!);
+            const shipping = await this.shippingRepository.findByIdx(shippingIdx);
 
             if (!shipping) { 
               throw new ErrorResponse(commonError.notFound);
@@ -121,7 +122,7 @@ class CartService {
 
         try {
 
-          const shipping = await this.shippingRepository.findByIdx(shippingIdx!);
+          const shipping = await this.shippingRepository.findByIdx(shippingIdx);
 
           if (!shipping) { 
             throw new ErrorResponse(commonError.notFound);
@@ -138,6 +139,43 @@ class CartService {
               throw e;
           }
           throw new ErrorResponse(ShippingDeleteError.unable);
+      }
+    }
+  
+  
+  
+    async selectShipping({ 
+      currentUser,
+      shippingIdx,
+    }: Partial<ShipppingInfo> & Required<Pick<ShipppingInfo, 'currentUser' | 'shippingIdx'>>) { 
+
+        try {
+
+          const shipping = await this.shippingRepository.findByIdx(shippingIdx);
+
+          if (!shipping) { 
+            throw new ErrorResponse(commonError.notFound);
+          }
+
+          if (currentUser.idx !== shipping.user.idx) { 
+            throw new ErrorResponse(commonError.forbidden);
+          }
+
+          const selectedShipping = await this.shippingRepository.findSelectedByUser(currentUser.idx);
+
+          if (selectedShipping) { 
+            selectedShipping.selected = false;
+            await this.shippingRepository.saveItem(selectedShipping);
+          }
+          
+          shipping.selected = true;
+          await this.shippingRepository.saveItem(shipping);
+          
+      } catch(e) { 
+          if (e?.isOperational) {
+              throw e;
+          }
+          throw new ErrorResponse(ShippingSelectError.unable);
       }
     }
 }

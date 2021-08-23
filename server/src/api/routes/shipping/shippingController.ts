@@ -128,10 +128,23 @@ export const handleSelectShipping = async (
     res: Response,
     next: NextFunction,
   ) => {
-    try {
-
+  try {
+      
+      const currentUser = req.currentUser;
   
-      return res.status(200).json();
+      const shippingIdx = Number(req.params.id);
+      if (Number.isNaN(shippingIdx) || shippingIdx <= 0) {
+        throw new ErrorResponse(commonError.invalidPathParams);
+      }
+      
+
+      const ShippingServiceInstance = Container.get(ShippingService);
+  
+      await ShippingServiceInstance.selectShipping({
+        currentUser,shippingIdx
+      });
+    
+      return res.json();
     } catch (e) {
       return next(e);
     }
