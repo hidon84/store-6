@@ -40,7 +40,7 @@ export default (router: Router) => {
     handleDeleteShipping,
   );
     
-  shippingRouter.delete(
+  shippingRouter.post(
     '/:id/select',
     middlewares.isAuth,
     middlewares.isAccessToken,

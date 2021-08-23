@@ -30,6 +30,9 @@ class ShippingRepository extends Repository<ShippingEntity> {
     return shipping;
   }
 
+  async deleteItem(item: ShippingEntity) { 
+    await this.remove(item)
+  }
 }
 
 export default ShippingRepository;

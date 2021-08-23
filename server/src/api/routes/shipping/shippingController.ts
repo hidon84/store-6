@@ -112,7 +112,9 @@ export const handleDeleteShipping = async (
 
     const ShippingServiceInstance = Container.get(ShippingService);
 
-    await ShippingServiceInstance.deleteShipping();
+      await ShippingServiceInstance.deleteShipping({
+        currentUser,shippingIdx
+      });
   
     return res.json();
   } catch (e) {

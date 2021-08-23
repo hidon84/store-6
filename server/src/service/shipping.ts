@@ -5,7 +5,8 @@ import {
   commonError,
   ShippingPostError,
   ShippingError,
-  ShippingPutError
+  ShippingPutError,
+  ShippingDeleteError
 } from '@/constants/error';
 import ShippingRepository from '@/repository/shipping';
 import ShippingEntity from '@/entity/shipping';
@@ -110,6 +111,34 @@ class CartService {
             }
             throw new ErrorResponse(ShippingPutError.unable);
         }
+    }
+  
+  
+    async deleteShipping({ 
+      currentUser,
+      shippingIdx,
+    }: Partial<ShipppingInfo> & Required<Pick<ShipppingInfo, 'currentUser' | 'shippingIdx'>>) { 
+
+        try {
+
+          const shipping = await this.shippingRepository.findByIdx(shippingIdx!);
+
+          if (!shipping) { 
+            throw new ErrorResponse(commonError.notFound);
+          }
+
+          if (currentUser.idx !== shipping.user.idx) { 
+            throw new ErrorResponse(commonError.forbidden);
+          }
+
+          await this.shippingRepository.deleteItem(shipping);
+          
+      } catch(e) { 
+          if (e?.isOperational) {
+              throw e;
+          }
+          throw new ErrorResponse(ShippingDeleteError.unable);
+      }
     }
 }
 
