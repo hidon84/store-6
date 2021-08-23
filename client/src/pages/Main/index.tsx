@@ -87,31 +87,47 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   setupConnections() {
-    // this.setupAudioStream();
+    this.setupAudioStream();
 
     socket.on('user-connected', async (userId: string) => {
       alert(`user-connected! ${userId}`);
-      const conn = this.peer.connect(userId, { reliable: true });
+      const conn = this.peer.connect(userId);
 
       setTimeout(() => {
+        const { minimi, y, x } = this.state;
+        const minimiMessage: MinimiUpdateMessage = {
+          y,
+          x,
+          from: this.myId,
+          minimi,
+          message: 'updateMinimi',
+        };
         conn.send({ message: 'hello', from: this.myId });
         this.addConnections(userId, conn);
-      }, 1000);
+        conn.send(minimiMessage);
+      }, 100);
     });
 
     this.peer.on('connection', (con) => {
       con.on('data', (data) => {
-        console.log('received data: ', data);
         if (data.message === 'updateMinimi') {
           this.updateMinimi(data);
+        } else if (data.message === 'hello') {
+          alert(`new user?: ${con.peer}`);
+          const conn = this.peer.connect(con.peer);
+          setTimeout(() => {
+            conn.send({ message: 'hello2', from: this.myId });
+            this.addConnections(con.peer, conn);
+          }, 100);
         }
       });
     });
 
     socket.on('user-disconnected', (userId) => {
-      window.console.log('user-disconnected: ', userId);
+      alert(`user-disconnected: , ${userId}`);
       const { peerCalls } = this.state;
       peerCalls[userId]?.close();
+      this.removeConnections(userId);
     });
 
     document.body.addEventListener('keydown', this.onKeyDown);
@@ -134,6 +150,16 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setState({ connections: nextConnections }, () => {
       window.console.log('myId', this.myId);
       window.console.log(this.state);
+    });
+  };
+
+  removeConnections = (id: string) => {
+    const { connections } = this.state;
+    delete connections[id];
+    // const nextConnections = connections
+    this.setState({ connections }, () => {
+      window.console.log('deleted id', id);
+      window.console.log(this.state.connections);
     });
   };
 
@@ -226,6 +252,7 @@ class Main extends Component<{ u?: string }, MainState> {
       <MainContainer>
         <div className="audio-grid" ref={this.audioGridRef} />
         <PixelArt className="cat" />
+        <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
         <PixelArt className={minimi} coord={{ left: `${x}%`, top: `${y}%` }} />
         <PixelArt className="flower" coord={{ right: '10%' }} />
