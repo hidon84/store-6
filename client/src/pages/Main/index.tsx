@@ -18,10 +18,7 @@ import {
   Stain,
   Logo,
 } from '~/components/main/IconButtons';
-import PixelArt, {
-  Minimi,
-  genRandomPixelArt,
-} from '~/components/main/pixelArts';
+import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { MainContainer } from './index.style';
 import socket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
