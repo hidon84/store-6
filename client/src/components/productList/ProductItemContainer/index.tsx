@@ -1,7 +1,7 @@
 import { FC, forwardRef, ForwardRefRenderFunction, useCallback } from 'react';
 
 import styled from 'styled-components';
-import ProductItem from '~/components/ProductItem';
+import ProductItem from '~/components/product/ProductItem';
 import { useHistory } from '~/core/Router';
 import { ProductData } from '~/pages/ProductList';
 
@@ -38,6 +38,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
         {products.map(({ idx, thumbnail, price, title }) => (
           <ProductItem
             key={idx}
+            idx={idx}
             thumbnail={thumbnail}
             price={price}
             title={title}
