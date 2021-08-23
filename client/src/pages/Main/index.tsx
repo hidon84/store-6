@@ -126,6 +126,8 @@ class Main extends Component<{ u?: string }, MainState> {
       alert(`user-disconnected: , ${userId}`);
       const { peerCalls } = this.state;
       peerCalls[userId]?.close();
+      delete peerCalls[userId];
+      this.setState({ peerCalls });
       this.removeConnections(userId);
     });
 
@@ -191,20 +193,20 @@ class Main extends Component<{ u?: string }, MainState> {
           window.console.log('peer: ', call.peer);
         });
 
-        socket.on('user-connected', (userId) => {
+        socket.on('user-connected', async (userId) => {
           console.log('call to new user: ', userId);
           const call = this.peer.call(userId, myStream);
           const newAudio = document.createElement('audio');
-          this.audioGridRef.current.appendChild(newAudio);
+          this.audioGridRef.current?.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
           });
           call.on('close', () => {
             newAudio.remove();
           });
-          const { peerCalls: peers } = this.state;
+          const { peerCalls } = this.state;
           const nextPeers = {
-            ...peers,
+            ...peerCalls,
             [userId]: call,
           };
           this.setState({ peerCalls: nextPeers });
