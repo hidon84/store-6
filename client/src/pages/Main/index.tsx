@@ -34,6 +34,8 @@ interface MainState {
   x: number;
 }
 
+const [DY, DX] = [2, 2];
+
 class Main extends Component<{ u?: string }, MainState> {
   audioGridRef: RefObject<HTMLDivElement>;
 
@@ -115,16 +117,16 @@ class Main extends Component<{ u?: string }, MainState> {
     const { y, x } = this.state;
     switch (event.code) {
       case 'ArrowUp':
-        this.setState({ y: Math.max(0, y - 1) });
+        this.setState({ y: Math.max(0, y - DY) });
         break;
       case 'ArrowDown':
-        this.setState({ y: Math.min(90, y + 1) });
+        this.setState({ y: Math.min(90, y + DY) });
         break;
       case 'ArrowLeft':
-        this.setState({ x: Math.max(0, x - 1) });
+        this.setState({ x: Math.max(0, x - DX) });
         break;
       case 'ArrowRight':
-        this.setState({ x: Math.min(90, x + 1) });
+        this.setState({ x: Math.min(90, x + DX) });
         break;
       default:
         break;
