@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
-import { FilterContext } from '~/pages/ProductList';
+import { FetchContext, FilterContext } from '~/pages/ProductList';
+import { startFetch } from '~/stores/fetchModule';
 import { removeSearchValue, setSearchValue } from '~/stores/productListModule';
 import {
   getValueOnLocalStorage,
@@ -13,6 +14,7 @@ const useSearchTerm = (
   searchTermRef: React.MutableRefObject<HTMLInputElement>,
 ) => {
   const { dispatch } = useContext(FilterContext);
+  const { dispatch: fetchDispatch } = useContext(FetchContext);
 
   const [termList, setTermList] = useState<string[]>(
     getValueOnLocalStorage('recentlySearchTerm'),
@@ -54,10 +56,15 @@ const useSearchTerm = (
     e.preventDefault();
 
     const term = searchTermRef.current.value;
-    if (term === '') return dispatch(removeSearchValue());
+    if (term === '') {
+      dispatch(removeSearchValue());
+      fetchDispatch(startFetch());
+      return;
+    }
 
     addTermOnList(term);
     dispatch(setSearchValue(term));
+    fetchDispatch(startFetch());
   };
 
   return { termList, handleSearchTrigger, removeTermOnList };
