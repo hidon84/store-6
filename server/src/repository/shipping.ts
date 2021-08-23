@@ -15,6 +15,13 @@ class ShippingRepository extends Repository<ShippingEntity> {
     })
     return shippings;
   }
+
+  async createItem(item: ShippingEntity) { 
+    const createdShipping = await this.save(item)
+    
+    return { createdShipping };
+  }
+
 }
 
 export default ShippingRepository;

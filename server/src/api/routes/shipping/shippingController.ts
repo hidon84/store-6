@@ -1,3 +1,4 @@
+import { Name } from './../../../../../client/src/components/cart/shippingModal/index.style';
 import { getTokenFromHeader } from '@/api/middlewares/isAuth';
 import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
@@ -20,7 +21,6 @@ export const handleGetShippingItems = async (
   }
 };
 
-
 export const handlePostShippingItem = async (
     req: Request,
     res: Response,
@@ -28,10 +28,30 @@ export const handlePostShippingItem = async (
   ) => {
     try {
 
-  
-      return res.status(200).json();
-    } catch (e) {
-      return next(e);
+      const {
+        name,
+        phone,
+        code,
+        address,
+        detailAddress,
+      } = req.body;
+
+      const ShippingServiceInstance = Container.get(ShippingService);
+      
+      const currentUser = req.currentUser;
+
+      const {idx, createdAt, updatedAt} = await ShippingServiceInstance.postShippingItem({
+        currentUser,
+        name,
+        phone,
+        code,
+        address,
+        detailAddress,
+      });
+    
+      return res.json({idx, createdAt, updatedAt});
+      } catch (e) {
+        return next(e);
     }
 };
 
