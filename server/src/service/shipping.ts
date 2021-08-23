@@ -11,7 +11,6 @@ import {
 } from '@/constants/error';
 import ShippingRepository from '@/repository/shipping';
 import ShippingEntity from '@/entity/shipping';
-import UserRepository from '@/repository/user';
 import UserEntity  from '@/entity/user';
 
 
@@ -28,14 +27,11 @@ interface ShipppingInfo{
 @Service()
 class CartService {
     private shippingRepository: ShippingRepository;
-    private userRepository : UserRepository
     constructor(
       @InjectRepository(ShippingRepository) shippingRepository: ShippingRepository,
-      @InjectRepository(UserRepository) userRepository: UserRepository,
 
     ) {
         this.shippingRepository = shippingRepository;
-        this.userRepository = userRepository;
     }
   
 
