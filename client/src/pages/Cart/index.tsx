@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import Cart from '~/components/cart/cart';
 import Shipping from '~/components/cart/shipping';
-import Divider from '~/components/common/Divider';
-
-import { CartPageWrapper, Header, HeaderItem } from './index.style';
+import SubPageHeader from '~/components/subpage/SubPageHeader';
+import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
+import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 
 const CartPage: FC = () => {
   const [isCartComponent, setIsCartComponent] = useState<boolean>(false);
@@ -13,24 +13,23 @@ const CartPage: FC = () => {
   };
 
   return (
-    <CartPageWrapper>
-      <Header>
-        <HeaderItem
+    <SubPageWrapper width="1006px">
+      <SubPageHeader>
+        <SubPageHeaderItem
           onClick={() => handleSetIsCartComponent(true)}
-          className={isCartComponent && 'selected'}
+          isSelected={isCartComponent}
         >
           장바구니
-        </HeaderItem>
-        <HeaderItem
+        </SubPageHeaderItem>
+        <SubPageHeaderItem
           onClick={() => handleSetIsCartComponent(false)}
-          className={!isCartComponent && 'selected'}
+          isSelected={!isCartComponent}
         >
           배송주소지 관리
-        </HeaderItem>
-      </Header>
-      <Divider width="770px" direction="horizontal" thick />
+        </SubPageHeaderItem>
+      </SubPageHeader>
       {isCartComponent ? <Cart /> : <Shipping />}
-    </CartPageWrapper>
+    </SubPageWrapper>
   );
 };
 
