@@ -30,7 +30,7 @@ class ShippingEntity {
   code: string;
 
   @Column({ default: false })
-  selected: boolean;
+  defaultShipping: boolean;
 
   @ManyToOne(() => UserEntity, userEntity => userEntity.idx, {
     nullable: false,

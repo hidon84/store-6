@@ -34,7 +34,7 @@ class ShippingRepository extends Repository<ShippingEntity> {
 
   async findSelectedByUser(userIdx: number) {
     const shipping = await this.findOne({
-      where: { user: userIdx, selected: true },
+      where: { user: userIdx, defaultShipping: true },
     });
     return shipping;
   }
