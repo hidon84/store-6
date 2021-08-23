@@ -23,12 +23,39 @@ class LikeService {
       try {
         
     const likes = await this.likeRepository.findByIdxOfUser(userIdx);
-          console.log(likes)    
       return likes;
     } catch {
       throw new ErrorResponse(LikeGetError.unable);
     }
   }
+    
+    
+    
+    async deleteLike(userIdx: number, likeIdx: number) {
+        try {
+          
+
+            const like = await this.likeRepository.findByIdx(likeIdx);
+
+            if (!like) {
+              throw new ErrorResponse(commonError.notFound);
+            }
+            
+    
+            if (userIdx !== like.user.idx) {
+              throw new ErrorResponse(commonError.forbidden);
+            }
+
+            await this.likeRepository.deleteItem(like);
+
+
+      } catch (e) {
+        if (e?.isOperational) {
+          throw e;
+        }
+        throw new ErrorResponse(LikeGetError.unable);
+      }
+    }
 }
 
 export default LikeService;

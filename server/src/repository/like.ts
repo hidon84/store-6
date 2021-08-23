@@ -29,8 +29,23 @@ class LikeRepository extends Repository<LikeEntity> {
       },
       relations: ['product']
     })
+
+    return likes
+  }
+
+  async findByIdx(likeIdx: number) { 
+    const likes = await this.findOne({
+      where: {
+        idx: likeIdx 
+      },
+      relations: ['user']
+    })
     
     return likes
+  }
+
+  async deleteItem(item: LikeEntity) { 
+    await this.remove(item);
   }
 }
 

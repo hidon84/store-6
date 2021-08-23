@@ -1,6 +1,8 @@
+import  ErrorResponse  from '@/utils/errorResponse';
 import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
 import LikeService from '@/service/like';
+import { commonError } from '@/constants/error';
 
 export const handleGetLikes = async (
   req: Request,
@@ -25,10 +27,17 @@ export const handleDeleteLike = async (
     next: NextFunction,
   ) => {
     try {
+
+        const likeIdx = Number(req.params.id);
+        if (Number.isNaN(likeIdx) || likeIdx <= 0) {
+            throw new ErrorResponse(commonError.invalidPathParams);
+        }
+        const { currentUser } = req;
+
       const likeServiceInstance = Container.get(LikeService);
-      const { currentUser } = req;
-      const likes = await likeServiceInstance.getLikes(
-        currentUser.idx,
+      const likes = await likeServiceInstance.deleteLike(
+          currentUser.idx,
+          likeIdx
       );
       return res.json(likes);
     } catch (e) {
