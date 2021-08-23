@@ -40,7 +40,6 @@ const Categorys = [
 
 const CategoryFilter: React.FC = () => {
   const { dispatch } = useContext(FilterContext);
-  const handleResetBtnClick = () => dispatch(resetCategory());
 
   return (
     <CategoryFilterWrapper>
