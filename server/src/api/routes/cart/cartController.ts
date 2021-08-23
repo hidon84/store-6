@@ -1,6 +1,8 @@
+import  ErrorResponse  from '@/utils/errorResponse';
 import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
 import CartService from '@/service/cart';
+import { commonError } from '@/constants/error';
 
 export const handleGetCartItems = async (
   req: Request,
@@ -27,6 +29,10 @@ export const handleDeleteCartItem = async (
     const cartServiceInstance = Container.get(CartService);
 
     const cartIdx = Number(req.params.id);
+    if (Number.isNaN(cartIdx) || cartIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
+    }
+
 
     await cartServiceInstance.deleteCartItem(cartIdx);
 
