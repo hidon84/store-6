@@ -43,3 +43,18 @@ export const handleDeleteCartItem = async (
     return next(e);
   }
 };
+
+export const handleCartAmount = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const cartServiceInstance = Container.get(CartService);
+
+    const amount = await cartServiceInstance.getCartAmount(req.currentUser);
+    return res.json({ amount });
+  } catch (e) {
+    return next(e);
+  }
+};

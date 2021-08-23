@@ -33,6 +33,18 @@ class CartService {
     }
   }
 
+  async getCartAmount(currentUser: { idx: number }) {
+    try {
+      const amount = await this.cartRepository.getCartAmountOfUser(
+        currentUser.idx,
+      );
+
+      return amount;
+    } catch {
+      throw new ErrorResponse(CartError.unable);
+    }
+  }
+
   /**
    * 장바구니에 추가 전 검증을 합니다.
    * 1. 존재하는 상품인가?
