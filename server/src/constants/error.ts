@@ -3,6 +3,10 @@ export const commonError = {
     statusCode: 404,
     message: 'Not Found',
   },
+  forbidden: {
+    statusCode: 403,
+    message: 'Forbidden',
+  },
   wrong: {
     statusCode: 500,
     message: 'Something went very wrong!!!',
@@ -146,3 +150,6 @@ export const ShippingPostError = {
     message: 'Unable to Post ShippingItem',
   },
 };
+
+
+
