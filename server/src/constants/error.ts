@@ -115,6 +115,11 @@ export const userUpdateError = {
     statusCode: 400,
     message: 'invalid phone',
   },
+
+  invalidEmail: {
+    statusCode: 400,
+    message: 'invalid email',
+  },
 };
 
 export const userDeleteError = {

@@ -112,6 +112,10 @@ class UsersService {
 
       user.phone = phone ?? user.phone;
 
+      if (email && !validationHelper.emailValidator(email)) {
+        throw new ErrorResponse(userUpdateError.invalidEmail);
+      }
+
       if (phone && !validationHelper.phoneValidator(phone)) {
         throw new ErrorResponse(userUpdateError.invalidPhone);
       }
