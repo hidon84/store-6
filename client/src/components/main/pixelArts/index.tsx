@@ -12,6 +12,7 @@ type Minimi =
   | 'cat'
   | 'chicken'
   | 'rooster'
+  | 'hen'
   | 'sonic'
   | 'flower'
   | 'ladybug'
@@ -20,6 +21,7 @@ const minimiMap = [
   'cat',
   'chicken',
   'rooster',
+  'hen',
   'sonic',
   'flower',
   'ladybug',
