@@ -140,11 +140,11 @@ export const handleSelectShipping = async (
 
       const ShippingServiceInstance = Container.get(ShippingService);
   
-      await ShippingServiceInstance.selectShipping({
+      const {idx, createdAt, updatedAt} = await ShippingServiceInstance.selectShipping({
         currentUser,shippingIdx
       });
     
-      return res.json();
+      return res.json({idx, createdAt, updatedAt});
     } catch (e) {
       return next(e);
     }

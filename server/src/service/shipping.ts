@@ -169,7 +169,12 @@ class CartService {
           }
           
           shipping.selected = true;
-          await this.shippingRepository.saveItem(shipping);
+          
+          const { savedShipping } = await this.shippingRepository.saveItem(shipping);
+
+          const { idx, createdAt, updatedAt } = savedShipping;
+          
+          return { idx, createdAt, updatedAt };
           
       } catch(e) { 
           if (e?.isOperational) {
