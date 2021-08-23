@@ -17,6 +17,9 @@ class ShippingEntity {
   @Column({ length: 200 })
   name: string;
 
+  @Column({ length: 20 })
+  phone: string;
+
   @Column('text')
   address: string;
 
