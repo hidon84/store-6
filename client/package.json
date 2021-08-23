@@ -11,7 +11,7 @@
     "prebuild": "rimraf dist",
     "build": "env-cmd -f .env.prod webpack --progress",
     "lint": "npx eslint --ext .tsx --ext .ts src",
-    "precommit": "eslint --fix --ext .tsx --ext .ts src && prettier --write src",
+    "precommit": "yarn lint-staged",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage"
@@ -61,6 +61,7 @@
     "jest": "^27.0.4",
     "jest-styled-components": "^7.0.5",
     "jest-transform-stub": "^2.0.0",
+    "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "rimraf": "^3.0.2",
     "style-loader": "^3.2.1",
