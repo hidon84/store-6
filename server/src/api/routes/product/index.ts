@@ -4,6 +4,7 @@ import {
   handleGetProducts,
   handleGetProductDetail,
   handleAddView,
+  handleAddLike,
 } from './productController';
 
 const productRouter = Router();
@@ -21,5 +22,12 @@ export default (router: Router) => {
     handleAddView,
   );
 
+  productRouter.post(
+    '/:id/like',
+    middlewares.isAuth,
+    middlewares.isAccessToken,
+    middlewares.attachCurrentUser,
+    handleAddLike,
+  );
   return router;
 };

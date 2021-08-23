@@ -6,6 +6,7 @@ import {
   ProductDetailError,
   ProductError,
   ProductViewError,
+  ProductLikeError
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -149,6 +150,41 @@ class ProductService {
       throw new ErrorResponse(ProductDetailError.unable);
     }
   }
+
+
+  async addLike(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+  
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+      
+      const existingLike = await this.likeRepository.findByProductAndUser(
+        product,
+        user,
+      );
+
+      if (existingLike) { 
+        throw new ErrorResponse(commonError.conflict);
+      }
+
+      const newLike = await this.likeRepository.addItem(user, product);
+
+      const { idx, updatedAt, createdAt } = newLike;
+      return { idx, updatedAt, createdAt };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(ProductLikeError.unable);
+    }
+  }
 }
+
+
+
+
 
 export default ProductService;

@@ -86,3 +86,27 @@ export const handleAddView = async (
     next(e);
   }
 };
+
+
+export const handleAddLike= async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const productServiceInstance = Container.get(ProductService);
+
+    const productIdx = Number(req.params.id);
+    if (Number.isNaN(productIdx) || productIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
+    }
+
+    const { idx, createdAt, updatedAt } = await productServiceInstance.addLike(
+      productIdx,
+      req.currentUser.idx,
+    );
+    res.json({ idx, createdAt, updatedAt });
+  } catch (e) {
+    next(e);
+  }
+};
