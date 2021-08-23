@@ -1,9 +1,8 @@
-import React, { FC, useEffect, useState, useCallback } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
 import ShipItem from '../shippItem';
-import useUser from '~/lib/hooks/useUser';
 import ShippingModal from '../shippingModal';
 import { ButtonWrapper, ShipHeader } from './index.style';
 
@@ -123,7 +122,7 @@ const Shipping: FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleWriteShipping = (info: ShipType) => {
+  const handleWriteShipping = (_info: ShipType) => {
     alert('배송지가 등록되었습니다.');
     handleModalClose();
     /**
@@ -135,7 +134,7 @@ const Shipping: FC = () => {
      */
   };
 
-  const handleUpdateShipping = (info: ShipType) => {
+  const handleUpdateShipping = (_info: ShipType) => {
     alert('배송지가 수정되었습니다.');
     handleModalClose();
     /**

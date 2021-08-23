@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { LineSVG } from '~/assets';
-
 /*
  * 수직적으로 공백을 줄 때 사용합니다.
  * @example

@@ -1,5 +1,4 @@
-import { FC, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { FC, useState } from 'react';
 import {
   DownArrow,
   SubSectionDivider,

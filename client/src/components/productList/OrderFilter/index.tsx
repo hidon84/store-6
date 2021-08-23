@@ -17,7 +17,8 @@ const orders = [
 ];
 
 const OrderFilter: React.FC = () => {
-  const { dispatch, ...currentState } = useContext(FilterContext);
+  // const { dispatch, ...currentState } = useContext(FilterContext);
+  const { dispatch } = useContext(FilterContext);
 
   const handleResetBtnClick = () => {
     dispatch(setOrder('recent'));

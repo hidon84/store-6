@@ -1,24 +1,23 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import ShippingModal from './index';
 
-type ShipType = {
-  idx?: number;
-  name: string;
-  phone: string;
-  code: string;
-  address: string;
-  detailAddress: string;
-  selected?: number;
-};
+// type ShipType = {
+//   idx?: number;
+//   name: string;
+//   phone: string;
+//   code: string;
+//   address: string;
+//   detailAddress: string;
+//   selected?: number;
+// };
 
 describe('<ShippingModal />', () => {
   it('should render same with snapshot', () => {
     const handleModalClose = () => {};
-    const handleWriteShipping = (info: ShipType) => {};
-    const handleUpdateShipping = (info: ShipType) => {};
+    const handleWriteShipping = () => {};
+    const handleUpdateShipping = () => {};
     const isWrite = true;
     const modifyItem = {
       idx: 1,

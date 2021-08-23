@@ -1,4 +1,4 @@
-import { FC, forwardRef, ForwardRefRenderFunction, useCallback } from 'react';
+import { forwardRef, ForwardRefRenderFunction, useCallback } from 'react';
 
 import styled from 'styled-components';
 import ProductItem from '~/components/product/ProductItem';

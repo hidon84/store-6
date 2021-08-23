@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
@@ -13,8 +12,8 @@ describe('<CartItem />', () => {
       title: 'test',
       price: 2,
     };
-    const changeAmount = (price: number, type: string) => {};
-    const removeCartItem = (cartId: number) => {};
+    const changeAmount = () => {};
+    const removeCartItem = () => {};
     const { container } = render(
       <CartItem
         cartIdx={cartIdx}
