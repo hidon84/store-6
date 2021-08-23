@@ -13,7 +13,9 @@ export const handleGetShippings = async (
   try {
   const ShippingServiceInstance = Container.get(ShippingService);
     
-  const shippings = await ShippingServiceInstance.getShippings(req.currentUser.idx);
+  const currentUser = req.currentUser;
+    
+    const shippings = await ShippingServiceInstance.getShippings({ currentUser });
 
   return res.json(shippings);
   } catch (e) {

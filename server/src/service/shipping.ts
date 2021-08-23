@@ -30,15 +30,20 @@ class CartService {
     private shippingRepository: ShippingRepository;
     private userRepository : UserRepository
     constructor(
-        @InjectRepository(ShippingRepository) shippingRepository: ShippingRepository,
+      @InjectRepository(ShippingRepository) shippingRepository: ShippingRepository,
+      @InjectRepository(UserRepository) userRepository: UserRepository,
+
     ) {
         this.shippingRepository = shippingRepository;
-        this.userRepository = this.userRepository;
+        this.userRepository = userRepository;
     }
-    
+  
 
-    async getShippings(userIdx: number) {
-        try {
+    async getShippings({ 
+      currentUser
+    }:Partial<ShipppingInfo>&Required<Pick<ShipppingInfo,'currentUser'>>) {
+      try {
+      const userIdx = currentUser.idx;
             const shippings = await this.shippingRepository.findByUserIdx(userIdx);
             return shippings;
         } catch {
