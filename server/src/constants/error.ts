@@ -7,6 +7,10 @@ export const commonError = {
     statusCode: 403,
     message: 'Forbidden',
   },
+  conflict: {
+    statusCode: 409,
+    message: 'Conflict',
+  },
   wrong: {
     statusCode: 500,
     message: 'Something went very wrong!!!',
@@ -133,6 +137,13 @@ export const ProductViewError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Add View Count',
+  },
+};
+
+export const ProductLikeError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Add Like List',
   },
 };
 
