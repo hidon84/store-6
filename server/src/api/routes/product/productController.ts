@@ -64,7 +64,6 @@ export const handleGetProductDetail = async (
   }
 };
 
-
 export const handleAddView = async (
   req: Request,
   res: Response,

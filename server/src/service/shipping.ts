@@ -148,7 +148,6 @@ class CartService {
   }: Partial<ShipppingInfo> &
     Required<Pick<ShipppingInfo, 'currentUser' | 'shippingIdx'>>) {
     try {
-
       const shipping = await this.shippingRepository.findByIdx(shippingIdx);
 
       if (!shipping) {
@@ -167,7 +166,6 @@ class CartService {
         selectedShipping.defaultShipping = false;
         await this.shippingRepository.saveItem(selectedShipping);
       }
-
 
       shipping.defaultShipping = true;
 
