@@ -36,7 +36,9 @@ import fetchModule, {
   FetchModuleAction,
   finishFetch,
   initFetch,
+  INIT_FETCH,
   startFetch,
+  START_FETCH,
 } from '~/stores/fetchModule';
 
 // Interface
@@ -106,17 +108,17 @@ const ProductList: FC = () => {
   };
 
   useEffect(() => {
-    if (fetchState.state === 'INIT_FETCH') fetchProducts();
+    if (fetchState.state === INIT_FETCH) fetchProducts();
 
     // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
-    if (fetchState.state === 'START_FETCH') {
+    if (fetchState.state === START_FETCH) {
       setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
     }
   }, [filterState, fetchState.state]);
 
   useEffect(() => {
     if (
-      fetchState.state !== 'INIT_FETCH' && //
+      fetchState.state !== INIT_FETCH && //
       entry?.isIntersecting
     ) {
       dispatch(setNextPage());

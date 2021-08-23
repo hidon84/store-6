@@ -11,9 +11,9 @@ export interface FetchModuleAction {
 }
 
 // Action
-const START_FETCH = 'START_FETCH';
-const FINISH_FETCH = 'FINISH_FETCH';
-const INIT_FETCH = 'INIT_FETCH';
+export const START_FETCH = 'START_FETCH';
+export const FINISH_FETCH = 'FINISH_FETCH';
+export const INIT_FETCH = 'INIT_FETCH';
 
 // Action Creator
 export const startFetch = () => ({ type: START_FETCH });
