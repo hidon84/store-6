@@ -23,7 +23,14 @@ class LikeRepository extends Repository<LikeEntity> {
   }
 
   async findByIdxOfUser(userIdx: number) { 
-    console.log('도착~~~~~~');
+    const likes = await this.find({
+      where: {
+        user: userIdx 
+      },
+      relations: ['product']
+    })
+    
+    return likes
   }
 }
 

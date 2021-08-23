@@ -22,7 +22,8 @@ class LikeService {
   async getLikes(userIdx: number) {
       try {
         
-      const likes = await this.likeRepository.findByIdxOfUser(userIdx);
+    const likes = await this.likeRepository.findByIdxOfUser(userIdx);
+          console.log(likes)    
       return likes;
     } catch {
       throw new ErrorResponse(LikeGetError.unable);
