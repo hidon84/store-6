@@ -1,11 +1,11 @@
-import { Name } from './../../../../../client/src/components/cart/shippingModal/index.style';
-import { getTokenFromHeader } from '@/api/middlewares/isAuth';
+import ErrorResponse from '@/utils/errorResponse';
+import { commonError } from '@/constants/error';
 import { NextFunction, Request, Response } from 'express';
 import Container from 'typedi';
 import ShippingService from '@/service/shipping';
 
 
-export const handleGetShippingItems = async (
+export const handleGetShippings = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -13,15 +13,16 @@ export const handleGetShippingItems = async (
   try {
   const ShippingServiceInstance = Container.get(ShippingService);
     
-  const shippingItems = await ShippingServiceInstance.getShippingItems(req.currentUser.idx);
+  const shippings = await ShippingServiceInstance.getShippings(req.currentUser.idx);
 
-  return res.json(shippingItems);
+  return res.json(shippings);
   } catch (e) {
     return next(e);
   }
 };
 
-export const handlePostShippingItem = async (
+
+export const handlePostShipping = async (
     req: Request,
     res: Response,
     next: NextFunction,
@@ -40,7 +41,7 @@ export const handlePostShippingItem = async (
       
       const currentUser = req.currentUser;
 
-      const {idx, createdAt, updatedAt} = await ShippingServiceInstance.postShippingItem({
+      const {idx, createdAt, updatedAt} = await ShippingServiceInstance.postShipping({
         currentUser,
         name,
         phone,
@@ -56,37 +57,71 @@ export const handlePostShippingItem = async (
 };
 
 
-export const handlePutShippingItem = async (
+export const handlePutShipping = async (
     req: Request,
     res: Response,
     next: NextFunction,
   ) => {
     try {
+        const currentUser = req.currentUser;
+        const {
+        name,
+        phone,
+        code,
+        address,
+        detailAddress,
+      } = req.body;
 
-  
-      return res.status(200).json();
+      const shippingIdx = Number(req.params.id);
+      if (Number.isNaN(shippingIdx) || shippingIdx <= 0) {
+        throw new ErrorResponse(commonError.invalidPathParams);
+      }
+
+      const ShippingServiceInstance = Container.get(ShippingService);
+
+      const {idx, createdAt, updatedAt} = await ShippingServiceInstance.putShipping({
+        currentUser,
+        shippingIdx,
+        name,
+        phone,
+        code,
+        address,
+        detailAddress,
+      });
+    
+      return res.json({idx, createdAt, updatedAt});
     } catch (e) {
       return next(e);
     }
 };
 
 
-export const handleDeleteShippingItem = async (
+export const handleDeleteShipping = async (
     req: Request,
     res: Response,
     next: NextFunction,
   ) => {
     try {
 
-  
-      return res.status(200).json();
-    } catch (e) {
-      return next(e);
+    const currentUser = req.currentUser;
+
+    const shippingIdx = Number(req.params.id);
+    if (Number.isNaN(shippingIdx) || shippingIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
     }
+
+    const ShippingServiceInstance = Container.get(ShippingService);
+
+    await ShippingServiceInstance.deleteShipping();
+  
+    return res.json();
+  } catch (e) {
+    return next(e);
+  }
 };
 
 
-export const handleSelectShippingItem = async (
+export const handleSelectShipping = async (
     req: Request,
     res: Response,
     next: NextFunction,

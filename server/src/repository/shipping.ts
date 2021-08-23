@@ -16,10 +16,18 @@ class ShippingRepository extends Repository<ShippingEntity> {
     return shippings;
   }
 
-  async createItem(item: ShippingEntity) { 
-    const createdShipping = await this.save(item)
-    
-    return { createdShipping };
+  async saveItem(item: ShippingEntity) { 
+    const savedShipping = await this.save(item)
+    return { savedShipping };
+  }
+
+  
+  async findByIdx(idx: number) {
+    const shipping= await this.findOne({
+      where: { idx },
+      relations: ['user']
+    });
+    return shipping;
   }
 
 }
