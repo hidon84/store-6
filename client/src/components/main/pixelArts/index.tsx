@@ -18,6 +18,7 @@ const PixelArt: FC<{
   return (
     <div style={{ ...coord }} className={className}>
       {' '}
+      {coord?.left ?? ''}
     </div>
   );
 };
