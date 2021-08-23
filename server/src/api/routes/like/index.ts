@@ -14,8 +14,7 @@ export default (router: Router) => {
     middlewares.attachCurrentUser,
     handleGetLikes,
   );
-    
-    
+
   likeRouter.delete(
     '/:id',
     middlewares.isAuth,

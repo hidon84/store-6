@@ -87,8 +87,7 @@ export const handleAddView = async (
   }
 };
 
-
-export const handleAddLike= async (
+export const handleAddLike = async (
   req: Request,
   res: Response,
   next: NextFunction,

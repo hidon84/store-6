@@ -6,7 +6,7 @@ import {
   ProductDetailError,
   ProductError,
   ProductViewError,
-  ProductLikeError
+  ProductLikeError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -151,22 +151,21 @@ class ProductService {
     }
   }
 
-
   async addLike(productIdx: number, userIdx: number) {
     try {
       const product = await this.productRepository.findByIdx(productIdx);
       const user = await this.userRepository.findByIdx(userIdx);
-  
+
       if (!product || !user) {
         throw new ErrorResponse(commonError.notFound);
       }
-      
+
       const existingLike = await this.likeRepository.findByProductAndUser(
         product,
         user,
       );
 
-      if (existingLike) { 
+      if (existingLike) {
         throw new ErrorResponse(commonError.conflict);
       }
 
@@ -182,9 +181,5 @@ class ProductService {
     }
   }
 }
-
-
-
-
 
 export default ProductService;

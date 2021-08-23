@@ -1,6 +1,6 @@
-import  ProductEntity  from '@/entity/product';
-import  UserEntity  from '@/entity/user';
 import { EntityRepository, Repository } from 'typeorm';
+import ProductEntity from '@/entity/product';
+import UserEntity from '@/entity/user';
 import LikeEntity from '@/entity/like';
 
 @EntityRepository(LikeEntity)
@@ -24,33 +24,33 @@ class LikeRepository extends Repository<LikeEntity> {
     return likeCnt;
   }
 
-  async findByIdxOfUser(userIdx: number) { 
+  async findByIdxOfUser(userIdx: number) {
     const likes = await this.find({
       where: {
-        user: userIdx 
+        user: userIdx,
       },
-      relations: ['product']
-    })
+      relations: ['product'],
+    });
 
-    return likes
+    return likes;
   }
 
-  async findByIdx(likeIdx: number) { 
+  async findByIdx(likeIdx: number) {
     const likes = await this.findOne({
       where: {
-        idx: likeIdx 
+        idx: likeIdx,
       },
-      relations: ['user']
-    })
-    
-    return likes
+      relations: ['user'],
+    });
+
+    return likes;
   }
 
-  async deleteItem(item: LikeEntity) { 
+  async deleteItem(item: LikeEntity) {
     await this.remove(item);
   }
 
-  async addItem(user: UserEntity, product: ProductEntity) { 
+  async addItem(user: UserEntity, product: ProductEntity) {
     const like = new LikeEntity();
     like.user = user;
     like.product = product;
@@ -59,15 +59,14 @@ class LikeRepository extends Repository<LikeEntity> {
     return savedView;
   }
 
-  async findByProductAndUser(product: ProductEntity, user: UserEntity) { 
-
+  async findByProductAndUser(product: ProductEntity, user: UserEntity) {
     const like = await this.findOne({
       where: {
         user,
-        product
-      }
-    })
-    
+        product,
+      },
+    });
+
     return like;
   }
 }
