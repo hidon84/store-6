@@ -5,6 +5,7 @@ import {
   commonError,
   ProductDetailError,
   ProductError,
+  ProductViewError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -57,6 +58,36 @@ class ProductService {
       return products;
     } catch {
       throw new ErrorResponse(ProductError.unable);
+    }
+  }
+
+  async addView(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const existingView = await this.viewRepository.findByIdxOfProductAndUser(
+        productIdx,
+        userIdx,
+      );
+      if (existingView) {
+        const { idx, updatedAt, createdAt } = existingView;
+        return { idx, updatedAt, createdAt };
+      }
+
+      const newView = await this.viewRepository.addView(user, product);
+
+      const { idx, updatedAt, createdAt } = newView;
+      return { idx, updatedAt, createdAt };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(ProductViewError.unable);
     }
   }
 

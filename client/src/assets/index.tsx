@@ -79,6 +79,7 @@ const FilledHeartSVG = `${S3_PREFIX}/product-detail/filled-heart.svg`;
 const UnfilledHeartSVG = `${S3_PREFIX}/product-detail/unfilled-heart.svg`;
 const ProductPageLayoutDividerSVG = `${S3_PREFIX}/product-detail/layout-divider.svg`;
 const ProductInfoDividerSVG = `${S3_PREFIX}/product-detail/product-info-divider.svg`;
+const ProductInfoSubDividerSVG = `${S3_PREFIX}/product-detail/product-info-sub-divider.svg`;
 
 export {
   LogoSVG,
@@ -150,4 +151,5 @@ export {
   UnfilledHeartSVG,
   ProductPageLayoutDividerSVG,
   ProductInfoDividerSVG,
+  ProductInfoSubDividerSVG,
 };

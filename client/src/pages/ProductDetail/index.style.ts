@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BackArrowSVG, ProductPageLayoutDividerSVG } from '~/assets';
 
 export const ProductDetailWrapper = styled.main`
   display: flex;
@@ -11,16 +12,23 @@ export const ProductDetailWrapper = styled.main`
 
 export const LeftSection = styled.section`
   width: 400px;
-  background-color: lightcoral;
 `;
 
 export const RightSection = styled(LeftSection)`
-  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
 `;
 
 export const LayoutDivider = styled.div`
   width: fit-content;
 `;
+
+export const DivideLine = styled.img.attrs({
+  src: ProductPageLayoutDividerSVG,
+  alt: 'divider',
+})``;
 
 export const PrevPageButton = styled.div`
   position: absolute;
@@ -28,3 +36,8 @@ export const PrevPageButton = styled.div`
   left: 0;
   width: 40px;
 `;
+
+export const PrevPageArrow = styled.img.attrs({
+  src: BackArrowSVG,
+  alt: 'prev page',
+})``;

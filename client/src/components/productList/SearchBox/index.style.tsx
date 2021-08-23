@@ -21,15 +21,27 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const SearchIcon = styled.img`
+export const SearchButton = styled.button`
+  all: unset;
   position: absolute;
   left: 23px;
   bottom: 12px;
   width: 30px;
+  cursor: pointer;
 `;
 
 export const SearchLine = styled.img`
   height: 4px;
   all: unset;
   margin: 0;
+`;
+
+export const ValueRemoveButton = styled.button<{ isEmpty: boolean }>`
+  all: unset;
+  opacity: ${({ isEmpty }) => (isEmpty ? 0 : 1)};
+  position: absolute;
+  right: 23px;
+  bottom: 12px;
+  width: 30px;
+  cursor: pointer;
 `;
