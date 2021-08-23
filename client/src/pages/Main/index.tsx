@@ -251,7 +251,7 @@ class Main extends Component<{ u?: string }, MainState> {
         this.setState({ x: Math.max(0, x - DX) }, this.broadCastMove);
         break;
       case 'ArrowRight':
-        this.setState({ x: Math.min(90, x + DX) }, this.broadCastMove);
+        this.setState({ x: Math.min(100, x + DX) }, this.broadCastMove);
         break;
       default:
         break;
