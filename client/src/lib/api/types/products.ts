@@ -10,7 +10,8 @@ export interface ProductsGetResponseBody {
   idx: number;
   title: string;
   thumbnail: string;
-  price: number;
+  originPrice: number;
+  discountedPrice: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -18,11 +19,12 @@ export interface ProductsGetResponseBody {
 export interface ProductDetailGetResponseBody {
   idx: number;
   name: string;
-  price: number;
+  originPrice: number;
+  discountedPrice: number;
   images: string[];
   description: string;
-  shipSummary: string;
-  shipDetail: string;
+  mandatoryInfo: Record<string, string>;
+  shipInfo: Record<string, string>;
   policy: string;
   viewCnt: number;
   reviewCnt: number;
