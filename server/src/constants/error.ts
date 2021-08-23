@@ -9,7 +9,7 @@ export const commonError = {
   },
   conflict: {
     statusCode: 409,
-    message: 'Conflict',
+    message: 'already exist',
   },
   wrong: {
     statusCode: 500,
@@ -110,6 +110,12 @@ export const userUpdateError = {
     statusCode: 500,
     message: 'Unable to Update User',
   },
+
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
+
 };
 
 export const userDeleteError = {
@@ -166,12 +172,22 @@ export const ShippingPostError = {
     statusCode: 500,
     message: 'Unable to Post ShippingItem',
   },
+
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
 };
 
 export const ShippingPutError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Update ShippingItem',
+  },
+
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
   },
 };
 
