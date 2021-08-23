@@ -9,6 +9,7 @@ import {
 
 import * as productsAPI from '~/lib/api/products';
 import {
+  ErrorResponse,
   ProductsGetRequestQuery,
   ProductsGetResponseBody,
 } from '~/lib/api/types';
@@ -32,9 +33,10 @@ import {
 import useIntersection from '~/lib/hooks/useIntersection';
 import ScrollToTop from '~/components/productList/ScrollToTop';
 import fetchModule, {
-  FetchAction,
-  FetchState,
+  FetchModuleAction,
   finishFetch,
+  initFetch,
+  startFetch,
 } from '~/stores/fetchModule';
 
 // Interface
@@ -53,8 +55,9 @@ interface FilterContextState {
 interface FetchContextState {
   state: {
     state: string;
+    forcedDelayTime: number;
   };
-  dispatch: (action: FetchAction) => void;
+  dispatch: (action: FetchModuleAction) => void;
 }
 
 // Context
@@ -78,38 +81,47 @@ const ProductList: FC = () => {
   const listFooterRef = useRef<HTMLDivElement>();
 
   const { filterState, dispatch } = productListModule();
-  const { fetchState, fetchDispatch } = fetchModule();
+  const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
   const entry = useIntersection(listFooterRef, {});
 
   const TARGET_POINT = 700;
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
-  // API
-  const fetchProducts = async () => {
-    try {
-      const { data } = await productsAPI.getProducts(filterState);
-      const isNextPageRequest = filterState.page !== 1;
+  const fetchProducts = () => {
+    const isNextPageRequest = filterState.page !== 1;
+    productsAPI
+      .getProducts(filterState)
+      .then(({ data }) => {
+        if (!isNextPageRequest) setProducts(data);
+        else setProducts((prev) => [...prev, ...data]);
 
-      if (!isNextPageRequest) setProducts(data);
-      else setProducts((prev) => [...prev, ...data]);
-
-      setTimeout(() => fetchDispatch(finishFetch()), 500);
-    } catch (error) {
-      // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
-      // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
-      throw new Error(error);
-    }
+        setTimeout(
+          () => fetchDispatch(finishFetch()),
+          fetchState.forcedDelayTime,
+        );
+      })
+      .catch((error: ErrorResponse) => {
+        throw new Error(error.data.message);
+      });
   };
 
   useEffect(() => {
+    if (fetchState.state === 'INIT_FETCH') fetchProducts();
+
     // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
     if (fetchState.state === 'START_FETCH') {
-      setTimeout(() => fetchProducts(), 500);
+      setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
     }
   }, [filterState, fetchState.state]);
 
   useEffect(() => {
-    if (entry?.isIntersecting) dispatch(setNextPage());
+    if (
+      fetchState.state !== 'INIT_FETCH' && //
+      entry?.isIntersecting
+    ) {
+      dispatch(setNextPage());
+      fetchDispatch(initFetch());
+    }
   }, [entry]);
 
   return (

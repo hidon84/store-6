@@ -10,7 +10,6 @@ import {
 import ProductItem from '~/components/ProductItem';
 import { useHistory } from '~/core/Router';
 import { FetchContext, ProductData } from '~/pages/ProductList';
-import LoadingText from '../LoadingText';
 
 import {
   ProductItemContainerWrapper,
@@ -36,8 +35,10 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
 
   return (
     <ProductItemContainerWrapper>
-      <LoadingText isFetching={fetchState.state === 'START_FETCH'} />
-      <ItemList isFetching={fetchState.state === 'START_FETCH'}>
+      <ItemList
+        isFetching={fetchState.state === 'START_FETCH'}
+        delayedTime={fetchState.forcedDelayTime / 1000}
+      >
         {products.map(({ idx, thumbnail, price, title }) => (
           <ProductItem
             key={idx}
