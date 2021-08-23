@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 
 import React, { useContext } from 'react';
-import { FilterContext } from '~/pages/ProductList';
+import { FetchContext, FilterContext } from '~/pages/ProductList';
 import { resetCategory } from '~/stores/productListModule';
 import {
   CategoryFilterWrapper,
@@ -25,6 +25,7 @@ import {
 } from '~/assets';
 
 import CategoryItem from '../CategoryItem';
+import { startFetch } from '~/stores/fetchModule';
 
 const Categorys = [
   SmallBookSVG,
@@ -40,6 +41,11 @@ const Categorys = [
 
 const CategoryFilter: React.FC = () => {
   const { dispatch } = useContext(FilterContext);
+  const { dispatch: fetchDispatch } = useContext(FetchContext);
+  const handleResetBtnClick = () => {
+    dispatch(resetCategory());
+    fetchDispatch(startFetch());
+  };
 
   return (
     <CategoryFilterWrapper>

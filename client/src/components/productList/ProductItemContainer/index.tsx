@@ -1,9 +1,16 @@
-import { FC, forwardRef, ForwardRefRenderFunction, useCallback } from 'react';
+import {
+  FC,
+  forwardRef,
+  ForwardRefRenderFunction,
+  useCallback,
+  useContext,
+  useMemo,
+} from 'react';
 
 import styled from 'styled-components';
 import ProductItem from '~/components/ProductItem';
 import { useHistory } from '~/core/Router';
-import { ProductData } from '~/pages/ProductList';
+import { FetchContext, ProductData } from '~/pages/ProductList';
 
 const ProductItemContainerWrapper = styled.ul`
   display: grid;
@@ -26,6 +33,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   { products },
   ref,
 ) => {
+  const { state } = useContext(FetchContext);
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
     (idx: number) => push(`/products/${idx}`),

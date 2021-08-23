@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   FC,
   createContext,
@@ -32,7 +31,13 @@ import {
 } from './index.style';
 import useIntersection from '~/lib/hooks/useIntersection';
 import ScrollToTop from '~/components/productList/ScrollToTop';
+import fetchModule, {
+  FetchAction,
+  FetchState,
+  finishFetch,
+} from '~/stores/fetchModule';
 
+// Interface
 export interface ProductData {
   idx: number;
   title: string;
@@ -45,8 +50,18 @@ interface FilterContextState {
   dispatch: (action: ActionType) => void;
 }
 
-export const FilterContext = createContext<FilterContextState>(null);
+interface FetchContextState {
+  state: {
+    state: string;
+  };
+  dispatch: (action: FetchAction) => void;
+}
 
+// Context
+export const FilterContext = createContext<FilterContextState>(null);
+export const FetchContext = createContext<FetchContextState>(null);
+
+// Hook (only use in here)
 const useScrollPoint = (targetPoint: number): boolean => {
   const [isScrollPoint, setIsScrollPoint] = useState(false);
 
@@ -57,57 +72,64 @@ const useScrollPoint = (targetPoint: number): boolean => {
   return isScrollPoint;
 };
 
+// Component
 const ProductList: FC = () => {
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
   const listFooterRef = useRef<HTMLDivElement>();
-  const entry = useIntersection(listFooterRef, {});
+
   const { filterState, dispatch } = productListModule();
+  const { fetchState, fetchDispatch } = fetchModule();
+  const entry = useIntersection(listFooterRef, {});
+
   const TARGET_POINT = 700;
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
+  // API
+  const fetchProducts = async () => {
+    try {
+      const { data } = await productsAPI.getProducts(filterState);
+      const isNextPageRequest = filterState.page !== 1;
+
+      if (!isNextPageRequest) setProducts(data);
+      else setProducts((prev) => [...prev, ...data]);
+
+      fetchDispatch(finishFetch());
+    } catch (error) {
+      // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
+      // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
+      throw new Error(error);
+    }
+  };
+
   useEffect(() => {
-    fetchProducts(filterState, setProducts);
-  }, [filterState]);
+    if (fetchState.state === 'START_FETCH') fetchProducts();
+  }, [filterState, fetchState.state]);
 
   useEffect(() => {
     if (entry?.isIntersecting) dispatch(setNextPage());
   }, [entry]);
 
   return (
-    <FilterContext.Provider value={{ state: filterState, dispatch }}>
-      <ProductListWrapper>
-        <LeftSection>
-          <CategoryFilter />
-          <OrderFilter />
-        </LeftSection>
-        <VerticalDivider />
-        <RightSection>
-          <CategoryIdentifier />
-          <SearchBox />
-          <ProductItemContainer products={products} ref={listFooterRef} />
-        </RightSection>
-        <ScrollToTop isVisible={isScrollPoint} />
-      </ProductListWrapper>
-    </FilterContext.Provider>
+    <FetchContext.Provider
+      value={{ state: fetchState, dispatch: fetchDispatch }}
+    >
+      <FilterContext.Provider value={{ state: filterState, dispatch }}>
+        <ProductListWrapper>
+          <LeftSection>
+            <CategoryFilter />
+            <OrderFilter />
+          </LeftSection>
+          <VerticalDivider />
+          <RightSection>
+            <CategoryIdentifier />
+            <SearchBox />
+            <ProductItemContainer products={products} ref={listFooterRef} />
+          </RightSection>
+          <ScrollToTop isVisible={isScrollPoint} />
+        </ProductListWrapper>
+      </FilterContext.Provider>
+    </FetchContext.Provider>
   );
 };
 
 export default ProductList;
-
-// API
-const fetchProducts = async (
-  filterState: ProductsGetRequestQuery,
-  setProducts: React.Dispatch<React.SetStateAction<ProductsGetResponseBody[]>>,
-) => {
-  try {
-    const { data: products } = await productsAPI.getProducts(filterState);
-    const isNextPageRequest = filterState.page !== 1;
-
-    if (!isNextPageRequest) setProducts(products);
-    else setProducts((prev) => [...prev, ...products]);
-  } catch (error) {
-    // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
-    // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
-    throw new Error(error);
-  }
-};
