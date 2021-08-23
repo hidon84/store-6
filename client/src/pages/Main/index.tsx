@@ -24,11 +24,10 @@ import PixelArt, {
 import { MainContainer } from './index.style';
 import socket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
-import { delay } from '~/utils/protocol';
+// import { delay } from '~/utils/protocol';
 import { alert } from '~/utils/modal';
 
 interface MainState {
-  myId: string;
   users: { id: string; y: number; x: number; minimi: Minimi }[];
   peerCalls: Record<string, MediaConnection>;
   connections: Record<string, DataConnection>;
@@ -59,7 +58,6 @@ class Main extends Component<{ u?: string }, MainState> {
     this.state = {
       peerCalls: {},
       connections: {},
-      myId: '',
       minimi,
       y,
       x,
@@ -76,6 +74,7 @@ class Main extends Component<{ u?: string }, MainState> {
     this.addAudioStream = this.addAudioStream.bind(this);
     this.updateMinimi = this.updateMinimi.bind(this);
     this.setupConnections();
+    console.log('constructor');
   }
 
   componentWillUnmount() {
@@ -177,6 +176,7 @@ class Main extends Component<{ u?: string }, MainState> {
         audio: true,
       })
       .then((myStream) => {
+        console.log('got myStream');
         this.myStream = myStream;
         /**
          * When Someone tries to call me
@@ -192,6 +192,7 @@ class Main extends Component<{ u?: string }, MainState> {
         });
 
         socket.on('user-connected', (userId) => {
+          console.log('call to new user: ', userId);
           const call = this.peer.call(userId, myStream);
           const newAudio = document.createElement('audio');
           this.audioGridRef.current.appendChild(newAudio);
