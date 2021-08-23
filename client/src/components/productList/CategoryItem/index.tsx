@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { FilterContext } from '~/pages/ProductList';
+import { FetchContext, FilterContext } from '~/pages/ProductList';
+import { startFetch } from '~/stores/fetchModule';
 import { setCategory } from '~/stores/productListModule';
 import { ImageContainer } from './index.style';
 
@@ -9,10 +10,13 @@ interface Props {
 }
 
 const CategoryItem: React.FC<Props> = ({ idx, image }) => {
-  const { dispatch, ...currentState } = useContext(FilterContext);
+  const { dispatch: filterDispatch, ...currentState } =
+    useContext(FilterContext);
+  const { dispatch: fetchDispatch } = useContext(FetchContext);
 
   const handleImgClick = () => {
-    dispatch(setCategory(idx));
+    filterDispatch(setCategory(idx));
+    fetchDispatch(startFetch());
   };
 
   const ImagContainer = useRef();

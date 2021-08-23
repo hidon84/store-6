@@ -3,6 +3,14 @@ export const commonError = {
     statusCode: 404,
     message: 'Not Found',
   },
+  forbidden: {
+    statusCode: 403,
+    message: 'Forbidden',
+  },
+  conflict: {
+    statusCode: 409,
+    message: 'already exist',
+  },
   wrong: {
     statusCode: 500,
     message: 'Something went very wrong!!!',
@@ -102,6 +110,11 @@ export const userUpdateError = {
     statusCode: 500,
     message: 'Unable to Update User',
   },
+
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
 };
 
 export const userDeleteError = {
@@ -132,9 +145,68 @@ export const ProductViewError = {
   },
 };
 
+export const ProductLikeError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Add Like List',
+  },
+};
+
 export const CartError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get CartItems',
+  },
+};
+
+export const ShippingError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get ShippingItems',
+  },
+};
+
+export const ShippingPostError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Post ShippingItem',
+  },
+
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
+};
+
+export const ShippingPutError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Update ShippingItem',
+  },
+
+  invalidPhone: {
+    statusCode: 400,
+    message: 'invalid phone',
+  },
+};
+
+export const ShippingDeleteError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Delete ShippingItem',
+  },
+};
+
+export const ShippingSelectError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Select ShippingItem',
+  },
+};
+
+export const LikeGetError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Get LikeItems',
   },
 };

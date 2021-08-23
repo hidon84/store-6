@@ -1,26 +1,26 @@
 import { Router } from 'express';
 import middlewares from '@/api/middlewares';
-import { handleGetCartItems, handleDeleteCartItem } from './cartController';
+import { handleGetLikes, handleDeleteLike } from './likeController';
 
-const cartRouter = Router();
+const likeRouter = Router();
 
 export default (router: Router) => {
-  router.use('/cart', cartRouter);
+  router.use('/like', likeRouter);
 
-  cartRouter.get(
+  likeRouter.get(
     '/',
     middlewares.isAuth,
     middlewares.isAccessToken,
     middlewares.attachCurrentUser,
-    handleGetCartItems,
+    handleGetLikes,
   );
 
-  cartRouter.delete(
+  likeRouter.delete(
     '/:id',
     middlewares.isAuth,
     middlewares.isAccessToken,
     middlewares.attachCurrentUser,
-    handleDeleteCartItem,
+    handleDeleteLike,
   );
   return router;
 };

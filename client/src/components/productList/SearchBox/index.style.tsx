@@ -38,7 +38,9 @@ export const SearchLine = styled.img`
 
 export const ValueRemoveButton = styled.button<{ isEmpty: boolean }>`
   all: unset;
+  transition: opacity 0.2s ease-in-out;
   opacity: ${({ isEmpty }) => (isEmpty ? 0 : 1)};
+  z-index: ${({ isEmpty }) => (isEmpty ? -1 : 1)};
   position: absolute;
   right: 23px;
   bottom: 12px;
