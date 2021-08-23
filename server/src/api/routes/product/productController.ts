@@ -5,6 +5,7 @@ import { getTokenFromHeader } from '@/api/middlewares/isAuth';
 import * as jwtHelper from '@/helper/jwt';
 import ErrorResponse from '@/utils/errorResponse';
 import { commonError } from '@/constants/error';
+import CartService from '@/service/cart';
 
 export const handleGetProducts = async (
   req: Request,
@@ -105,6 +106,27 @@ export const handleAddLike = async (
       req.currentUser.idx,
     );
     res.json({ idx, createdAt, updatedAt });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const handleAddCart = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const cartServiceInstance = Container.get(CartService);
+
+    const productIdx = Number(req.params.id);
+    if (Number.isNaN(productIdx) || productIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
+    }
+
+    const { idx, createdAt, updatedAt, amount } =
+      await cartServiceInstance.addCartItem(productIdx, req.currentUser);
+    res.json({ idx, createdAt, updatedAt, amount });
   } catch (e) {
     next(e);
   }

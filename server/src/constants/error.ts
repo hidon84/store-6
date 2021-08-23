@@ -159,6 +159,13 @@ export const CartError = {
   },
 };
 
+export const CartCreateError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Create CartItem',
+  },
+};
+
 export const ShippingError = {
   unable: {
     statusCode: 500,
