@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 
-export const StyledMyPage = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 70px;
-  margin-top: 90px;
-`;
-
-export const Title = styled.div`
-  font-size: 25px;
-  padding: 6px 40px 20px 30px;
-`;
-
 export const RowWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -73,4 +58,9 @@ export const ImageDesc = styled.div`
 
 export const ImageInput = styled.input`
   display: none;
+`;
+
+export const MyPageContent = styled.div`
+  margin: 0 auto;
+  padding-top: 70px;
 `;
