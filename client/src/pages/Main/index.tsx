@@ -80,7 +80,6 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   componentWillUnmount() {
-    window.console.log('componentWillUnmount');
     this.myStream?.getTracks().forEach((mediaTrack) => {
       mediaTrack.stop();
     });
@@ -153,20 +152,13 @@ class Main extends Component<{ u?: string }, MainState> {
       ...connections,
       [id]: connection,
     };
-    this.setState({ connections: nextConnections }, () => {
-      window.console.log('myId', this.myId);
-      window.console.log(this.state);
-    });
+    this.setState({ connections: nextConnections });
   };
 
   removeConnections = (id: string) => {
     const { connections } = this.state;
     delete connections[id];
-    // const nextConnections = connections
-    this.setState({ connections }, () => {
-      window.console.log('deleted id', id);
-      window.console.log(this.state.connections);
-    });
+    this.setState({ connections });
   };
 
   addAudioStream = (video: HTMLAudioElement, stream: MediaStream) => {
@@ -190,7 +182,6 @@ class Main extends Component<{ u?: string }, MainState> {
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
           });
-          window.console.log('peer: ', call.peer);
         })
         .catch((_) => {
           alert(pleaseAlloweRecord, 3000);
