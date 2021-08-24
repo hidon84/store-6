@@ -74,7 +74,7 @@ const LikeListPage: FC = () => {
       </SubPageHeader>
       <ProductLikeItemWrapper>
         {/* @TODO LikesGetResponseBody 타입이 변경되면 수정해야 할 부분!! */}
-        {itemList?.map(({ idx, name, price, thumbnail }) => (
+        {/* {itemList?.map(({ idx, name, price, thumbnail }) => (
           <ProductItem
             key={idx}
             idx={idx}
@@ -86,7 +86,7 @@ const LikeListPage: FC = () => {
             onClick={onClickItem}
             onClickLike={onClickLikeHandler}
           />
-        ))}
+        ))} */}
       </ProductLikeItemWrapper>
     </SubPageWrapper>
   );
