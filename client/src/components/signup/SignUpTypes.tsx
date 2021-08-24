@@ -7,6 +7,8 @@ import {
 } from '~/assets';
 import Space from '~/components/common/Space';
 import HeaderTitle from '~/components/signup/HeaderTitle';
+import { useHistory } from '~/core/Router';
+import { oauthUrl } from '~/lib/api/oauth';
 
 const SignUpTypesWrapper = styled.div`
   display: flex;
@@ -29,13 +31,30 @@ const SignUpTypeButton = styled.img`
 `;
 
 const SignUpTypes: FC = () => {
+  const { push } = useHistory();
   return (
     <SignUpTypesWrapper>
       <HeaderTitle />
       <SignUpTypeButtons>
-        <SignUpTypeButton src={signUpWithOwnSVG} alt="own" />
-        <SignUpTypeButton src={signUpWithFacebookSVG} alt="facebook" />
-        <SignUpTypeButton src={signUpWithGoogleSVG} alt="google" />
+        <SignUpTypeButton
+          onClick={() => push('/signup/own')}
+          src={signUpWithOwnSVG}
+          alt="own"
+        />
+        <SignUpTypeButton
+          onClick={() => {
+            window.location.href = oauthUrl.facebook.facebook;
+          }}
+          src={signUpWithFacebookSVG}
+          alt="facebook"
+        />
+        <SignUpTypeButton
+          onClick={() => {
+            window.location.href = oauthUrl.google.google;
+          }}
+          src={signUpWithGoogleSVG}
+          alt="google"
+        />
         <Space height="120px" />
       </SignUpTypeButtons>
     </SignUpTypesWrapper>

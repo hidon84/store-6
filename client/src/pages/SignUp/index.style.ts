@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { phoneUnderLineSVG, underlineSVG } from '~/assets';
 
-const StyledLoginPage = styled.div`
+const StyledSignUpPage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -139,7 +139,7 @@ export {
   Policy,
   RightDoodleWrapper,
   SignUpFormWrapper,
-  StyledLoginPage,
+  StyledSignUpPage,
   WarningMessage,
   PhoneInputWrapper,
   PhoneInput,
