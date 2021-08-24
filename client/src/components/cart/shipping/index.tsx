@@ -73,7 +73,7 @@ const Shipping: FC = () => {
   // }, [user]);
 
   useEffect(() => {
-    fetchShipping();
+    fetchShipping().catch(() => {});
   }, []);
 
   const handleNewBtnClick = () => {
