@@ -10,6 +10,7 @@ export const NoResourceWrapper = styled.div`
 
 export const NoResourceImage = styled.img.attrs({
   src: NoResourceSVG,
+  alt: 'no resource',
 })`
   width: 200px;
   height: 200px;
