@@ -5,7 +5,6 @@ export const ButtonWrapper = styled.div`
   height: 80px;
   align-items: center;
   justify-content: flex-end;
-  margin-right: 150px;
   &:last-child {
     margin-top: 40px;
   }

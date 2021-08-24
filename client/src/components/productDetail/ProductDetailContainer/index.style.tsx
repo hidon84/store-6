@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  FilledHeartSVG,
-  ProductInfoDividerSVG,
-  UnfilledHeartSVG,
-} from '~/assets';
+import { ProductInfoDividerSVG } from '~/assets';
 
 export const ProductDetailContainerWrapper = styled.div`
   width: 300px;
@@ -49,13 +45,6 @@ export const UserInteractArea = styled.div`
   margin-top: 25px;
 `;
 
-interface LikeButtonProps {
-  isLike: boolean;
-}
-// https://github.com/styled-components/styled-components/issues/1959
-export const LikeButton = styled.img.attrs<LikeButtonProps>(({ isLike }) => ({
-  src: isLike ? FilledHeartSVG : UnfilledHeartSVG,
-  alt: 'like button',
-}))<LikeButtonProps>`
+export const LikeButtonWrapper = styled.div`
   margin-left: 30.5px;
 `;

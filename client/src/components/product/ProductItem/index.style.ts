@@ -1,43 +1,32 @@
 import styled from 'styled-components';
 
-export const ProductItemContainer = styled.div`
-  position: relative;
-  height: 300px;
-  width: 230px;
-  transition: all 300ms;
-`;
-
-export const ProductImage = styled.img`
-  height: 300px;
-  width: 230px;
-  border-radius: 10px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(2px 2px 12px rgba(0, 0, 0, 0.15));
-  transition: all 300ms;
-  ${ProductItemContainer}:hover & {
-    filter: brightness(60%);
-    transform: scale(1.08);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
-      2px 2px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-export const ProductInfoConatiner = styled.div`
+export const ProductLikeButtonWrapper = styled.div`
   position: absolute;
-  left: 0.5rem;
-  bottom: 0.7rem;
+  right: 14px;
+  top: 14px;
+  display: inline-flex;
 `;
 
-export const ProductTitle = styled.div`
-  width: 204px;
-  height: 32px;
-  font-size: 24px;
-  color: #ffffff;
+export const ProductInfoWrapper = styled.div<{ isHovered: boolean }>`
+  position: absolute;
+  left: 15px;
+  bottom: 20px;
+  transition: opacity 300ms ease-in-out;
+  opacity: ${({ isHovered }) => (isHovered ? '1' : '0')};
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.65);
+  color: #fff;
 `;
 
-export const ProductPrice = styled.div`
+export const ProductTitle = styled.span`
+  display: block;
+  width: 169px;
+  font-family: 'BM Hanna' !important;
+  font-size: 20px;
+  margin-bottom: 10px;
+`;
+
+export const ProductPrice = styled.span`
   width: 179px;
-  height: 18px;
-  font-size: 18px;
-  color: #ffffff;
+  font-family: 'BM Hanna' !important;
+  font-size: 16px;
 `;

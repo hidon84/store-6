@@ -27,6 +27,8 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   transform: none;
   background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
   background-size: cover;
+  position: relative;
+  right: 10px;
 }
 
 .c5 {
@@ -37,6 +39,8 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   transform: none;
   background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
   background-size: cover;
+  position: relative;
+  right: 10px;
 }
 
 .c11 {
@@ -47,6 +51,8 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   transform: none;
   background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
   background-size: cover;
+  position: relative;
+  right: 10px;
 }
 
 .c13 {
@@ -57,6 +63,8 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   transform: none;
   background: url(https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/line.svg) bottom left no-repeat;
   background-size: cover;
+  position: relative;
+  right: 10px;
 }
 
 .c0 {

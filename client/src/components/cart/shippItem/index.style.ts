@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ShipItemWrapper = styled.div`
-  padding: 41px 10px;
+  padding: 41px 0;
   display: flex;
   align-items: center;
   font-size: 15px;

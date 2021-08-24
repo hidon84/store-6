@@ -42,7 +42,7 @@ const SignUpForm: FC = () => {
   const { push } = useHistory();
   const [id, idWarning, handleId] = useInputValidator('', idValidator);
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
-  const [pwRe, pwReWarning, handlePWRe] = useInputValidator(
+  const [, pwReWarning, handlePWRe] = useInputValidator(
     '',
     (pwReIn) => {
       if (pwReIn === pw) return '';
@@ -104,7 +104,7 @@ const SignUpForm: FC = () => {
     /**
      * @todo: postUser의 response 다듬기
      */
-    const res = await postUser({
+    await postUser({
       id,
       password: pw,
       phone: `${ph0}-${ph1}-${ph2}`,

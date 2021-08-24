@@ -1,6 +1,7 @@
 import { FC, useContext } from 'react';
 import { XSVG } from '~/assets';
-import { FilterContext } from '~/pages/ProductList';
+import { FetchContext, FilterContext } from '~/pages/ProductList';
+import { startFetch } from '~/stores/fetchModule';
 import { setSearchValue } from '~/stores/productListModule';
 
 import { SearchTermWrapper, Term, X } from './index.style';
@@ -12,9 +13,16 @@ interface Props {
 
 const SearchTerm: FC<Props> = ({ term, removeTermOnList }) => {
   const { dispatch } = useContext(FilterContext);
+  const { dispatch: fetchDispatch } = useContext(FetchContext);
+
+  const handleClickTerm = () => {
+    dispatch(setSearchValue(term));
+    fetchDispatch(startFetch());
+  };
+
   return (
     <SearchTermWrapper>
-      <Term onClick={() => dispatch(setSearchValue(term))}>{term}</Term>
+      <Term onClick={handleClickTerm}>{term}</Term>
       <X src={XSVG} alt="x" onClick={() => removeTermOnList(term)} />
     </SearchTermWrapper>
   );

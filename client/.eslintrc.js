@@ -27,7 +27,11 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
     'no-restricted-syntax': 'off',
     'no-continue': 'off',
     'react/react-in-jsx-scope': 'off',

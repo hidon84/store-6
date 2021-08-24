@@ -5,6 +5,7 @@ import {
   handleGetProductDetail,
   handleAddView,
   handleAddLike,
+  handleAddCart,
 } from './productController';
 
 const productRouter = Router();
@@ -28,6 +29,14 @@ export default (router: Router) => {
     middlewares.isAccessToken,
     middlewares.attachCurrentUser,
     handleAddLike,
+  );
+
+  productRouter.post(
+    '/:id/cart',
+    middlewares.isAuth,
+    middlewares.isAccessToken,
+    middlewares.attachCurrentUser,
+    handleAddCart,
   );
   return router;
 };

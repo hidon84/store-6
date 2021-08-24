@@ -33,9 +33,27 @@ export const handleDeleteCartItem = async (
       throw new ErrorResponse(commonError.invalidPathParams);
     }
 
-    await cartServiceInstance.deleteCartItem(cartIdx);
+    const { amount } = await cartServiceInstance.deleteCartItem(
+      cartIdx,
+      req.currentUser,
+    );
 
-    return res.json();
+    return res.json({ amount });
+  } catch (e) {
+    return next(e);
+  }
+};
+
+export const handleCartAmount = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const cartServiceInstance = Container.get(CartService);
+
+    const amount = await cartServiceInstance.getCartAmount(req.currentUser);
+    return res.json({ amount });
   } catch (e) {
     return next(e);
   }

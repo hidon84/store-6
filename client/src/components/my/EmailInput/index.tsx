@@ -1,6 +1,5 @@
 import React from 'react';
 import Input from '~/components/common/Input';
-import { EmailWrapper } from './index.style';
 
 interface Props {
   onChange?: (email: string) => void;

@@ -37,6 +37,7 @@ const HeartSVG = `${S3_PREFIX}/header/heart.svg`;
 const MypageSVG = `${S3_PREFIX}/header/mypage.svg`;
 const CartSVG = `${S3_PREFIX}/header/shop.svg`;
 const BadgeSVG = `${S3_PREFIX}/header/badge.svg`;
+const SubPageUnderlineSVG = `${S3_PREFIX}/product/search-box-underline.svg`;
 
 // Small Icons (상품 목록 페이지)
 const SmallBaedalSVG = `${S3_PREFIX}/common/small-icon/baedal.svg`;
@@ -90,6 +91,7 @@ export {
   CartSVG,
   LineSVG,
   BadgeSVG,
+  SubPageUnderlineSVG,
   buttonSVG,
   checkCircleSVG,
   checkSVG,

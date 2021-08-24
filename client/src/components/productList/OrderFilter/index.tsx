@@ -2,13 +2,14 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 import React, { useContext } from 'react';
-import { FilterContext } from '~/pages/ProductList';
+import { FetchContext, FilterContext } from '~/pages/ProductList';
 import { setOrder } from '~/stores/productListModule';
 import { OrderFilterWrapper, OrderHeder, OrderContainer } from './index.style';
 
 import { RefreshSVG } from '~/assets';
 
 import OrderItem from '../OrderItem';
+import { startFetch } from '~/stores/fetchModule';
 
 const orders = [
   { order: 'recent', content: '최신순' },
@@ -17,10 +18,12 @@ const orders = [
 ];
 
 const OrderFilter: React.FC = () => {
-  const { dispatch, ...currentState } = useContext(FilterContext);
+  const { dispatch } = useContext(FilterContext);
+  const { dispatch: fetchDispatch } = useContext(FetchContext);
 
   const handleResetBtnClick = () => {
     dispatch(setOrder('recent'));
+    fetchDispatch(startFetch());
   };
 
   return (
