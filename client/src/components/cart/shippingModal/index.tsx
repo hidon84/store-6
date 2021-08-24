@@ -106,10 +106,16 @@ const ShippingModal: FC<Props> = ({
   };
 
   const emptyEssage = '빈 항목이 있습니다.';
+  const phoneInvalid = '올바른 전화번호 형식이 아닙니다.';
 
   const validationCheck = () => {
-    if (!name || !ph0 || !ph1 || !ph2 || !code || !address || !detailAddress) {
+    if (!name || !ph0 || !ph1 || !ph2 || !code || !address) {
       alert(emptyEssage);
+      return;
+    }
+
+    if (ph0Validator(ph0) || ph1Validator(ph1) || ph2Validator(ph2)) {
+      alert(phoneInvalid);
       return;
     }
 
@@ -147,7 +153,12 @@ const ShippingModal: FC<Props> = ({
       <Name>
         <div>받으시는 분 이름</div>
         <NameInputWrapper>
-          <input type="text" value={name} onChange={handleChangeName} />
+          <input
+            type="text"
+            placeholder="이름  입력"
+            value={name}
+            onChange={handleChangeName}
+          />
           <Divider width="400px" direction="horizontal" />
         </NameInputWrapper>
       </Name>
@@ -161,6 +172,7 @@ const ShippingModal: FC<Props> = ({
             value={ph0}
             placeholder="010"
             onChange={handlePh0}
+            maxLength={3}
           />
           <img src={hyphenSVG} alt="hyphen" />
           <PhoneInput
@@ -169,6 +181,7 @@ const ShippingModal: FC<Props> = ({
             value={ph1}
             placeholder="0000"
             onChange={handlePh1}
+            maxLength={4}
           />
           <img src={hyphenSVG} alt="hyphen" />
           <PhoneInput
@@ -177,6 +190,7 @@ const ShippingModal: FC<Props> = ({
             value={ph2}
             placeholder="0000"
             onChange={handlePh2}
+            maxLength={4}
           />
         </PhoneInputWrapper>
       </Phone>
@@ -205,6 +219,7 @@ const ShippingModal: FC<Props> = ({
               style={{ width: '410px' }}
               type="text"
               value={detailAddress}
+              placeholder="상세주소 입력"
               onChange={handleChangeDetailAddress}
             />
             <Divider width="410px" direction="horizontal" />
