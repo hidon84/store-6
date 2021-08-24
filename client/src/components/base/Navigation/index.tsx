@@ -17,11 +17,12 @@ import {
   DoodleUselessIcon,
   MyPageIcon,
 } from './index.style';
+import urls from '~/lib/constants/urls';
 
 const Navigation: FC = () => {
   const [user] = useUser();
   const { pathname } = useLocation();
-  if (['/', '/login', '/signup'].includes(pathname)) return null;
+  if ([urls.main, urls.login, urls.signup].includes(pathname)) return null;
 
   return (
     <NavigationWrapper>
@@ -36,14 +37,14 @@ const Navigation: FC = () => {
         </Link>
         <HeaderRightSection>
           <CartWrapper>
-            <CartIcon />
+            <CartIcon activate={pathname === urls.cart} />
             <Badge badgeContent="15" />
           </CartWrapper>
-          <ProductLikeButton isLike={false} />
+          <ProductLikeButton isLike={pathname === urls.likeList} />
           {user?.profile ? (
             <ProfileImage src={user.profile} size="30px" />
           ) : (
-            <MyPageIcon />
+            <MyPageIcon activate={pathname === urls.myPage} />
           )}
         </HeaderRightSection>
       </Content>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { CartSVG, DoodleUselessSVG, MypageSVG } from '~/assets';
 
 export const NavigationWrapper = styled.nav`
@@ -68,17 +68,28 @@ export const Badge = styled.div<{ badgeContent: string }>`
   }
 `;
 
+export const IconActivateCSS = css`
+  filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
+    brightness(95%) contrast(87%);
+`;
+
 export const CartIcon = styled.img.attrs({
   src: CartSVG,
   alt: 'cart',
-})``;
+})<{ activate?: boolean }>`
+  ${({ activate = false }) => activate && IconActivateCSS}
+`;
 
 export const DoodleUselessIcon = styled.img.attrs({
   src: DoodleUselessSVG,
   alt: 'useless doodle',
-})``;
+})<{ activate?: boolean }>`
+  ${({ activate = false }) => activate && IconActivateCSS}
+`;
 
 export const MyPageIcon = styled.img.attrs({
   src: MypageSVG,
   alt: 'user',
-})``;
+})<{ activate?: boolean }>`
+  ${({ activate = false }) => activate && IconActivateCSS}
+`;
