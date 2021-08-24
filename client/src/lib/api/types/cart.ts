@@ -20,3 +20,7 @@ export interface CartGetResponseBody {
 export interface CartDeleteResponseBody { 
   amount: number;
 }
+
+export interface CartGetAmountResponseBody { 
+  amount: number;
+}
