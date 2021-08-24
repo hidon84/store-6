@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useLocation } from '~/core/Router';
-
 import {
   NavigationWrapper,
   Content,
@@ -10,7 +9,6 @@ import {
   UselessDoodle,
   Logo,
 } from './index.style';
-
 import {
   LogoSVG,
   DoodleUselessSVG,
@@ -19,8 +17,11 @@ import {
   CartSVG,
 } from '~/assets';
 import Divider from '~/components/common/Divider';
+import useUser from '~/lib/hooks/useUser';
+import ProfileImage from '~/components/common/ProfileImage';
 
 const Navigation: FC = () => {
+  const [user] = useUser();
   const { pathname } = useLocation();
   if (['/', '/login', '/signup'].includes(pathname)) return null;
 
@@ -41,7 +42,11 @@ const Navigation: FC = () => {
             </BadgeWrapper>
           </CartWrapper>
           <img src={HeartSVG} alt="heart" />
-          <img src={MypageSVG} alt="mypage" />
+          {user?.profile ? (
+            <ProfileImage src={user.profile} size="30px" />
+          ) : (
+            <img src={MypageSVG} alt="mypage" />
+          )}
         </HeaderRightSection>
       </Content>
       <Divider />
