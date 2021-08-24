@@ -45,10 +45,12 @@ const Shipping: FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchShipping();
-    }
-  }, [user]);
+  //   if (user) {
+  //     fetchShipping();
+  //   }
+  // }, [user]);
+    fetchShipping().catch(() => {});
+  }, []);
 
   const handleNewBtnClick = useCallback(async () => {
     setIsModalOpen(true);
