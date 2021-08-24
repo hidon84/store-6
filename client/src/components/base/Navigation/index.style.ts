@@ -31,6 +31,9 @@ export const Logo = styled.div`
   left: calc(50% - ${logoWidth} / 2 - ${logoOffset});
   width: ${logoWidth};
   height: ${logoHeight};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const headerRightSectionHeight = '34px';
