@@ -159,6 +159,20 @@ export const CartError = {
   },
 };
 
+export const CartCreateError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Create Cart Database',
+  },
+};
+
+export const CartDeleteError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Delete Cart Database',
+  },
+};
+
 export const ShippingError = {
   unable: {
     statusCode: 500,
