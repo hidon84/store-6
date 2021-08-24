@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Link, useLocation } from '~/core/Router';
-import { DoodleUselessSVG, MypageSVG } from '~/assets';
 import Divider from '~/components/common/Divider';
 import useUser from '~/lib/hooks/useUser';
 import ProfileImage from '~/components/common/ProfileImage';
@@ -15,6 +14,8 @@ import {
   UselessDoodle,
   Logo,
   CartIcon,
+  DoodleUselessIcon,
+  MyPageIcon,
 } from './index.style';
 
 const Navigation: FC = () => {
@@ -26,7 +27,7 @@ const Navigation: FC = () => {
     <NavigationWrapper>
       <Content>
         <UselessDoodle>
-          <img src={DoodleUselessSVG} alt="useless" />
+          <DoodleUselessIcon />
         </UselessDoodle>
         <Link to="/">
           <Logo>
@@ -42,7 +43,7 @@ const Navigation: FC = () => {
           {user?.profile ? (
             <ProfileImage src={user.profile} size="30px" />
           ) : (
-            <img src={MypageSVG} alt="mypage" />
+            <MyPageIcon />
           )}
         </HeaderRightSection>
       </Content>

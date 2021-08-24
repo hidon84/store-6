@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CartSVG } from '~/assets';
+import { CartSVG, DoodleUselessSVG, MypageSVG } from '~/assets';
 
 export const NavigationWrapper = styled.nav`
   width: 100%;
@@ -71,4 +71,14 @@ export const Badge = styled.div<{ badgeContent: string }>`
 export const CartIcon = styled.img.attrs({
   src: CartSVG,
   alt: 'cart',
+})``;
+
+export const DoodleUselessIcon = styled.img.attrs({
+  src: DoodleUselessSVG,
+  alt: 'useless doodle',
+})``;
+
+export const MyPageIcon = styled.img.attrs({
+  src: MypageSVG,
+  alt: 'user',
 })``;
