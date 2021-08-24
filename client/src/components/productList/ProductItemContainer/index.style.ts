@@ -21,6 +21,7 @@ export const ItemList = styled.ul<{
 `;
 
 export const NoResourceWrapper = styled.div`
+  z-index: -1;
   position: absolute;
   top: 0;
   left: 0;
