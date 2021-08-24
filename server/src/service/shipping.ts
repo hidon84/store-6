@@ -3,11 +3,11 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
 import {
   commonError,
-  ShippingPostError,
-  ShippingError,
-  ShippingPutError,
-  ShippingDeleteError,
-  ShippingSelectError,
+  shippingPostError,
+  shippingError,
+  shippingPutError,
+  shippingDeleteError,
+  shippingSelectError,
 } from '@/constants/error';
 import ShippingRepository from '@/repository/shipping';
 import ShippingEntity from '@/entity/shipping';
@@ -43,7 +43,7 @@ class CartService {
       const shippings = await this.shippingRepository.findByUserIdx(userIdx);
       return shippings;
     } catch {
-      throw new ErrorResponse(ShippingError.unable);
+      throw new ErrorResponse(shippingError.unable);
     }
   }
 
@@ -65,7 +65,7 @@ class CartService {
       shipping.detailAddress = detailAddress;
 
       if (phone && !validationHelper.phoneValidator(phone)) {
-        throw new ErrorResponse(ShippingPostError.invalidPhone);
+        throw new ErrorResponse(shippingPostError.invalidPhone);
       }
 
       const { savedShipping } = await this.shippingRepository.saveItem(
@@ -76,7 +76,7 @@ class CartService {
 
       return { idx, createdAt, updatedAt };
     } catch {
-      throw new ErrorResponse(ShippingPostError.unable);
+      throw new ErrorResponse(shippingPostError.unable);
     }
   }
 
@@ -108,7 +108,7 @@ class CartService {
       shipping.detailAddress = detailAddress ?? shipping.detailAddress;
 
       if (phone && !validationHelper.phoneValidator(phone)) {
-        throw new ErrorResponse(ShippingPostError.invalidPhone);
+        throw new ErrorResponse(shippingPostError.invalidPhone);
       }
 
       const { savedShipping } = await this.shippingRepository.saveItem(
@@ -122,7 +122,7 @@ class CartService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(ShippingPutError.unable);
+      throw new ErrorResponse(shippingPutError.unable);
     }
   }
 
@@ -147,7 +147,7 @@ class CartService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(ShippingDeleteError.unable);
+      throw new ErrorResponse(shippingDeleteError.unable);
     }
   }
 
@@ -189,7 +189,7 @@ class CartService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(ShippingSelectError.unable);
+      throw new ErrorResponse(shippingSelectError.unable);
     }
   }
 }

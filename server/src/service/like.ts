@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
-import { commonError, LikeGetError } from '@/constants/error';
+import { commonError, likeGetError, likeDeleteError } from '@/constants/error';
 import LikeRepository from '@/repository/like';
 
 @Service()
@@ -20,7 +20,7 @@ class LikeService {
       const likes = await this.likeRepository.findByIdxOfUser(userIdx);
       return likes;
     } catch {
-      throw new ErrorResponse(LikeGetError.unable);
+      throw new ErrorResponse(likeGetError.unable);
     }
   }
 
@@ -41,7 +41,7 @@ class LikeService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(LikeGetError.unable);
+      throw new ErrorResponse(likeDeleteError.unable);
     }
   }
 }

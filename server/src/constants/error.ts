@@ -129,63 +129,63 @@ export const userDeleteError = {
   },
 };
 
-export const ProductError = {
+export const productError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get Products',
   },
 };
 
-export const ProductDetailError = {
+export const productDetailError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get Product Detail Information',
   },
 };
 
-export const ProductViewError = {
+export const productViewError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Add View Count',
   },
 };
 
-export const ProductLikeError = {
+export const productLikeError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Add Like List',
   },
 };
 
-export const CartError = {
+export const cartError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get CartItems',
   },
 };
 
-export const CartCreateError = {
+export const cartCreateError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Create Cart Database',
   },
 };
 
-export const CartDeleteError = {
+export const cartDeleteError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Delete Cart Database',
   },
 };
 
-export const ShippingError = {
+export const shippingError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get ShippingItems',
   },
 };
 
-export const ShippingPostError = {
+export const shippingPostError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Post ShippingItem',
@@ -197,7 +197,7 @@ export const ShippingPostError = {
   },
 };
 
-export const ShippingPutError = {
+export const shippingPutError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Update ShippingItem',
@@ -209,23 +209,30 @@ export const ShippingPutError = {
   },
 };
 
-export const ShippingDeleteError = {
+export const shippingDeleteError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Delete ShippingItem',
   },
 };
 
-export const ShippingSelectError = {
+export const shippingSelectError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Select ShippingItem',
   },
 };
 
-export const LikeGetError = {
+export const likeGetError = {
   unable: {
     statusCode: 500,
     message: 'Unable to Get LikeItems',
+  },
+};
+
+export const likeDeleteError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Delete LikeItem',
   },
 };
