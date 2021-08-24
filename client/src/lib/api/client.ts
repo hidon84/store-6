@@ -4,6 +4,10 @@ const client = axios.create({
   validateStatus: () => true,
 });
 
-client.defaults.baseURL = process.env.API_URL ?? '/';
+export const apiBaseURL =
+  process.env.NODE_ENV === 'development'
+    ? `${process.env.API_URL}/`
+    : process.env.API_URL;
+client.defaults.baseURL = apiBaseURL;
 
 export default client;

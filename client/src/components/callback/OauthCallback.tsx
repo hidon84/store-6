@@ -40,15 +40,15 @@ const OauthCallback: FC<Props> = ({ oauthLoginCallback, oauthCallback }) => {
       state: state.toString(),
     };
 
-    if (parsedState.is_login_request) {
+    if (parsedState.is_login_request === 'true') {
       oauthLoginCallback(requestQuery)
         .then(() => {
           // @TODO use replace instead of push
-          push('/');
+          // push('/');
         })
         .catch((e: ErrorResponse) => {
           alert(e.message);
-          push('/');
+          // push('/');
         });
       return;
     }
@@ -58,11 +58,12 @@ const OauthCallback: FC<Props> = ({ oauthLoginCallback, oauthCallback }) => {
         const { id, email, picture } = response.data;
         setUser({ ...user, id, email, profile: picture });
         // @TODO use replace instead of push
-        push('/');
+        console.log('redirect to /signup/google');
+        push('/signup/google');
       })
       .catch((e: ErrorResponse) => {
         alert(e.message);
-        push('/');
+        // push('/qwer');
       });
   }, []);
 

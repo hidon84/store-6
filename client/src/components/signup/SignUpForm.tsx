@@ -37,9 +37,11 @@ import { useHistory } from '~/core/Router';
 import { postUser } from '~/lib/api/users';
 import HeaderTitle from './HeaderTitle';
 import { ErrorResponse } from '~/lib/api/types';
+import useUser from '~/lib/hooks/useUser';
 
 const SignUpForm: FC = () => {
   const { push } = useHistory();
+  const [user, setUser] = useUser();
   const [id, idWarning, handleId] = useInputValidator('', idValidator);
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
   const [, pwReWarning, handlePWRe] = useInputValidator(
@@ -50,6 +52,7 @@ const SignUpForm: FC = () => {
     },
     [pw],
   );
+  console.log(user);
 
   const [email, emailWarning, handleEmail] = useInputValidator(
     '',

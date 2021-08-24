@@ -8,6 +8,7 @@ import {
 import Space from '~/components/common/Space';
 import HeaderTitle from '~/components/signup/HeaderTitle';
 import { useHistory } from '~/core/Router';
+import { oauthUrl } from '~/lib/api/oauth';
 
 const SignUpTypesWrapper = styled.div`
   display: flex;
@@ -41,12 +42,16 @@ const SignUpTypes: FC = () => {
           alt="own"
         />
         <SignUpTypeButton
-          onClick={() => push('/oauth/google/callback')}
+          onClick={() => {
+            window.location.href = oauthUrl.facebook.facebook;
+          }}
           src={signUpWithFacebookSVG}
           alt="facebook"
         />
         <SignUpTypeButton
-          onClick={() => push('/oauth/facebook/callback')}
+          onClick={() => {
+            window.location.href = oauthUrl.google.google;
+          }}
           src={signUpWithGoogleSVG}
           alt="google"
         />

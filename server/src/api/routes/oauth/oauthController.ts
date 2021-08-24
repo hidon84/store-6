@@ -62,7 +62,6 @@ export const handleOauthGoogleCallback = async (
     const { id, email, picture } = await oauthServiceInstance.getGoogleUserInfo(
       oauthAccessToken,
     );
-
     if (decodedState?.is_login_request !== 'true') {
       res.json({ id, email, picture });
       return;
