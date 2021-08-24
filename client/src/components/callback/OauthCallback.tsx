@@ -21,9 +21,14 @@ interface Props {
   oauthCallback: (
     query: OauthCallbackGetRequestQuery,
   ) => Promise<ApiResponse<OauthCallbackGetResponseBody>>;
+  social: 'facebook' | 'google';
 }
 
-const OauthCallback: FC<Props> = ({ oauthLoginCallback, oauthCallback }) => {
+const OauthCallback: FC<Props> = ({
+  oauthLoginCallback,
+  oauthCallback,
+  social,
+}) => {
   const [user, setUser] = useUser();
   const location = useLocation();
   const { push } = useHistory();
@@ -57,7 +62,7 @@ const OauthCallback: FC<Props> = ({ oauthLoginCallback, oauthCallback }) => {
       .then((response) => {
         const { id, email, picture } = response.data;
         setUser({ ...user, id, email, profile: picture });
-        push('/signup/google');
+        push(`/signup/${social}`);
       })
       .catch((e: ErrorResponse) => {
         alert(e.message);
