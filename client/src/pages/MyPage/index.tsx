@@ -104,7 +104,7 @@ const MyPage: React.FC = () => {
           <RowTitle>사진</RowTitle>
           <PhotoWrapper>
             <div>
-              <ImagePreview src={profile} size="60px" />
+              <ImagePreview image={profile} size="60px" />
               <ImageInput onChange={handleImageInput} id="img" type="file" />
             </div>
             <ImageDesc>

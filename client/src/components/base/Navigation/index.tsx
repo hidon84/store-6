@@ -49,7 +49,7 @@ const Navigation: FC = () => {
             />
           </Link>
           {user?.profile ? (
-            <ProfileImage src={user.profile} size="30px" />
+            <ProfileImage image={user.profile} size="30px" />
           ) : (
             <Link to="/login">
               <MyPageIcon activate={pathname === urls.login} />
