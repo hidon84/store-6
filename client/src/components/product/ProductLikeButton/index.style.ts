@@ -34,4 +34,6 @@ export const LikeButtonContent = styled.img.attrs<LikeButtonContentProps>(
 export const LikeButton = styled.button`
   cursor: pointer;
   display: inline-flex;
+  jusify-content: center;
+  align-items: center;
 `;
