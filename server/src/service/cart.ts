@@ -14,6 +14,7 @@ import ProductRepository from '@/repository/product';
 @Service()
 class CartService {
   private cartRepository: CartRepository;
+
   private productRepository: ProductRepository;
 
   constructor(
