@@ -14,8 +14,8 @@ export interface ShippingsPostRequestBody {
   name: string;
   phone: string;
   address: string;
-  detailAddress: string;
-  code?: string;
+  detailAddress?: string;
+  code: string;
 }
 
 export interface ShippingsPostResponseBody {
