@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const createSocket = (uuid?: string) => {
+const createSocket = () => {
   const socket = io(process.env.SOCKET_URI);
   return socket;
 };
