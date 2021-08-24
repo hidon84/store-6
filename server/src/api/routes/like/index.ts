@@ -5,7 +5,7 @@ import { handleGetLikes, handleDeleteLike } from './likeController';
 const likeRouter = Router();
 
 export default (router: Router) => {
-  router.use('/like', likeRouter);
+  router.use('/likes', likeRouter);
 
   likeRouter.get(
     '/',

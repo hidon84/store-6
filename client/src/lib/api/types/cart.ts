@@ -4,14 +4,23 @@ export interface CartGetResponseBody {
     idx: number;
     title: string;
     thumbnail: string;
-    price: number;
+    originPrice: number;
+    discountedPrice: string;
+    mandatoryInfo: Record<string, string>;
     description: string;
-    shipSummary: string;
-    shipDetail: string;
+    shipInfo: Record<string, string>;
     policy: string;
     createdAt: string;
     updatedAt: string;
   };
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CartDeleteResponseBody {
+  amount: number;
+}
+
+export interface CartGetAmountResponseBody {
+  amount: number;
 }

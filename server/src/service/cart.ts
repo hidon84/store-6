@@ -102,7 +102,10 @@ class CartService {
       );
 
       return { amount };
-    } catch {
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
       throw new ErrorResponse(cartDeleteError.unable);
     }
   }
