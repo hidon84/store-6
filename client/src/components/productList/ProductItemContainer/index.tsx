@@ -33,13 +33,12 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   );
 
   return (
-
     <ProductItemContainerWrapper>
       <ItemList
         isFetching={fetchState.state === 'START_FETCH'}
         delayedTime={fetchState.forcedDelayTime / 1000}
       >
-        {products.map(({ idx, thumbnail, price, title }) => (
+        {products.map(({ idx, thumbnail, discountedPrice, title }) => (
           <ProductItem
             key={idx}
             idx={idx}
