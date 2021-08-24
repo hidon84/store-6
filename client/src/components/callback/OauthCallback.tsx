@@ -44,11 +44,11 @@ const OauthCallback: FC<Props> = ({ oauthLoginCallback, oauthCallback }) => {
       oauthLoginCallback(requestQuery)
         .then(() => {
           // @TODO use replace instead of push
-          // push('/');
+          push('/');
         })
         .catch((e: ErrorResponse) => {
           alert(e.message);
-          // push('/');
+          push('/login');
         });
       return;
     }
@@ -57,13 +57,11 @@ const OauthCallback: FC<Props> = ({ oauthLoginCallback, oauthCallback }) => {
       .then((response) => {
         const { id, email, picture } = response.data;
         setUser({ ...user, id, email, profile: picture });
-        // @TODO use replace instead of push
-        console.log('redirect to /signup/google');
         push('/signup/google');
       })
       .catch((e: ErrorResponse) => {
         alert(e.message);
-        // push('/qwer');
+        push('/signup/select');
       });
   }, []);
 

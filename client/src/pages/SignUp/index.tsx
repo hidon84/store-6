@@ -18,7 +18,8 @@ const SignUpPage: FC = () => {
       <LeftDoodles />
       {stage === 'select' ? <SignUpTypes /> : null}
       {stage === 'own' ? <SignUpForm /> : null}
-      {stage === 'google' ? <SignUpForm /> : null}
+      {stage === 'google' ? <SignUpForm social="GOOGLE" /> : null}
+      {stage === 'facebook' ? <SignUpForm social="FACEBOOK" /> : null}
       <RightDoodles />
     </StyledSignUpPage>
   );
