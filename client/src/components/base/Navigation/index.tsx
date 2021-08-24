@@ -36,15 +36,24 @@ const Navigation: FC = () => {
           </Logo>
         </Link>
         <HeaderRightSection>
-          <CartWrapper>
-            <CartIcon activate={pathname === urls.cart} />
-            <Badge badgeContent="15" />
-          </CartWrapper>
-          <ProductLikeButton isLike={pathname === urls.likeList} />
+          <Link to="/cart">
+            <CartWrapper activate={pathname === urls.cart}>
+              <CartIcon activate={pathname === urls.cart} />
+              <Badge badgeContent="15" />
+            </CartWrapper>
+          </Link>
+          <Link to="/like">
+            <ProductLikeButton
+              isLike={pathname === urls.likeList}
+              fillLineWhenHover
+            />
+          </Link>
           {user?.profile ? (
             <ProfileImage src={user.profile} size="30px" />
           ) : (
-            <MyPageIcon activate={pathname === urls.myPage} />
+            <Link to="/login">
+              <MyPageIcon activate={pathname === urls.login} />
+            </Link>
           )}
         </HeaderRightSection>
       </Content>

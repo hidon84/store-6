@@ -1,6 +1,41 @@
 import styled, { css } from 'styled-components';
 import { CartSVG, DoodleUselessSVG, MypageSVG } from '~/assets';
 
+export const IconActivateCSS = css`
+  filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
+    brightness(95%) contrast(87%);
+`;
+
+export const IconActivateHoverCSS = css`
+  filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
+    brightness(70%) contrast(87%);
+`;
+
+export const DoodleUselessIcon = styled.img.attrs({
+  src: DoodleUselessSVG,
+  alt: 'useless doodle',
+})``;
+
+export const CartIcon = styled.img.attrs({
+  src: CartSVG,
+  alt: 'cart',
+})<{ activate?: boolean }>`
+  transition: 0.3s filter;
+  ${({ activate = false }) => activate && IconActivateCSS}
+`;
+
+export const MyPageIcon = styled.img.attrs({
+  src: MypageSVG,
+  alt: 'user',
+})<{ activate?: boolean }>`
+  transition: 0.3s filter;
+  &:hover {
+    ${({ activate = false }) =>
+      activate ? IconActivateHoverCSS : IconActivateCSS}
+  }
+  ${({ activate = false }) => activate && IconActivateCSS}
+`;
+
 export const NavigationWrapper = styled.nav`
   width: 100%;
   height: 100px;
@@ -46,10 +81,6 @@ export const HeaderRightSection = styled.div`
   gap: 35px;
 `;
 
-export const CartWrapper = styled.div`
-  position: relative;
-`;
-
 export const Badge = styled.div<{ badgeContent: string }>`
   position: absolute;
   bottom: 0px;
@@ -68,28 +99,13 @@ export const Badge = styled.div<{ badgeContent: string }>`
   }
 `;
 
-export const IconActivateCSS = css`
-  filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
-    brightness(95%) contrast(87%);
-`;
+export const CartWrapper = styled.div<{ activate?: boolean }>`
+  position: relative;
 
-export const CartIcon = styled.img.attrs({
-  src: CartSVG,
-  alt: 'cart',
-})<{ activate?: boolean }>`
-  ${({ activate = false }) => activate && IconActivateCSS}
-`;
-
-export const DoodleUselessIcon = styled.img.attrs({
-  src: DoodleUselessSVG,
-  alt: 'useless doodle',
-})<{ activate?: boolean }>`
-  ${({ activate = false }) => activate && IconActivateCSS}
-`;
-
-export const MyPageIcon = styled.img.attrs({
-  src: MypageSVG,
-  alt: 'user',
-})<{ activate?: boolean }>`
-  ${({ activate = false }) => activate && IconActivateCSS}
+  &:hover {
+    ${CartIcon} {
+      ${({ activate = false }) =>
+        activate ? IconActivateHoverCSS : IconActivateCSS}
+    }
+  }
 `;
