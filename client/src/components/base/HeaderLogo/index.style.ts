@@ -17,7 +17,7 @@ export const LogoTitle = styled.h1`
 
 export const LogoIcon = styled.img.attrs({
   src: doodleRobotSVG,
-  alt: 'robot for logo'
+  alt: 'robot for logo',
 })`
   width: 45px;
   margin-right: 7px;
