@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link, useLocation } from '~/core/Router';
-import { DoodleUselessSVG, MypageSVG, CartSVG } from '~/assets';
+import { DoodleUselessSVG, MypageSVG } from '~/assets';
 import Divider from '~/components/common/Divider';
 import useUser from '~/lib/hooks/useUser';
 import ProfileImage from '~/components/common/ProfileImage';
@@ -11,9 +11,10 @@ import {
   Content,
   HeaderRightSection,
   CartWrapper,
-  BadgeWrapper,
+  Badge,
   UselessDoodle,
   Logo,
+  CartIcon,
 } from './index.style';
 
 const Navigation: FC = () => {
@@ -34,10 +35,8 @@ const Navigation: FC = () => {
         </Link>
         <HeaderRightSection>
           <CartWrapper>
-            <img src={CartSVG} alt="cart" />
-            <BadgeWrapper>
-              <span>15</span>
-            </BadgeWrapper>
+            <CartIcon />
+            <Badge badgeContent="15" />
           </CartWrapper>
           <ProductLikeButton isLike={false} />
           {user?.profile ? (

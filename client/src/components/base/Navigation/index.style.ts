@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BadgeSVG } from '~/assets';
+import { CartSVG } from '~/assets';
 
 export const NavigationWrapper = styled.nav`
   width: 100%;
@@ -50,15 +50,25 @@ export const CartWrapper = styled.div`
   position: relative;
 `;
 
-export const BadgeWrapper = styled.div`
+export const Badge = styled.div<{ badgeContent: string }>`
   position: absolute;
   bottom: 0px;
   right: -8px;
   text-align: center;
-  line-height: 20px;
-  height: 20px;
-  width: 20px;
-  background: url(${BadgeSVG}) no-repeat center center;
+  line-height: 18px;
+  height: 18px;
+  width: 18px;
   color: #fff;
+  background-color: #2ac1bc;
+  border-radius: 50%;
   font-size: 12px;
+
+  &:after {
+    content: '${({ badgeContent }) => badgeContent ?? ''}';
+  }
 `;
+
+export const CartIcon = styled.img.attrs({
+  src: CartSVG,
+  alt: 'cart',
+})``;
