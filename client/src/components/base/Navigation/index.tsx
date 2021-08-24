@@ -9,16 +9,11 @@ import {
   UselessDoodle,
   Logo,
 } from './index.style';
-import {
-  LogoSVG,
-  DoodleUselessSVG,
-  HeartSVG,
-  MypageSVG,
-  CartSVG,
-} from '~/assets';
+import { LogoSVG, DoodleUselessSVG, MypageSVG, CartSVG } from '~/assets';
 import Divider from '~/components/common/Divider';
 import useUser from '~/lib/hooks/useUser';
 import ProfileImage from '~/components/common/ProfileImage';
+import ProductLikeButton from '~/components/product/ProductLikeButton';
 
 const Navigation: FC = () => {
   const [user] = useUser();
@@ -41,7 +36,7 @@ const Navigation: FC = () => {
               <span>15</span>
             </BadgeWrapper>
           </CartWrapper>
-          <img src={HeartSVG} alt="heart" />
+          <ProductLikeButton isLike={false} />
           {user?.profile ? (
             <ProfileImage src={user.profile} size="30px" />
           ) : (
