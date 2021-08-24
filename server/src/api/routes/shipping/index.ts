@@ -11,7 +11,7 @@ import {
 const shippingRouter = Router();
 
 export default (router: Router) => {
-  router.use('/shipping', shippingRouter);
+  router.use('/shippings', shippingRouter);
 
   shippingRouter.get(
     '/',
