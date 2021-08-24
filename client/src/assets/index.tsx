@@ -32,6 +32,7 @@ const LogoSVG = `${S3_PREFIX}/common/logo.svg`;
 const LineSVG = `${S3_PREFIX}/common/line.svg`;
 const VertLineSVG = `${S3_PREFIX}/common/vertical-line.svg`;
 const NoResourceSVG = `${S3_PREFIX}/common/no-resource.svg`;
+const NoRouteGIF = `${S3_PREFIX}/common/no-resource.gif`;
 
 const DoodleUselessSVG = `${S3_PREFIX}/header/doodle-useless.svg`;
 const HeartSVG = `${S3_PREFIX}/header/heart.svg`;
@@ -88,6 +89,7 @@ export {
   VertLineSVG,
   DoodleUselessSVG,
   NoResourceSVG,
+  NoRouteGIF,
   HeartSVG,
   MypageSVG,
   CartSVG,
