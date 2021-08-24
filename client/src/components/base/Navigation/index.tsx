@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useLocation } from '~/core/Router';
 import Divider from '~/components/common/Divider';
 import useUser from '~/lib/hooks/useUser';
@@ -18,10 +18,27 @@ import {
   MyPageIcon,
 } from './index.style';
 import urls from '~/lib/constants/urls';
+import * as cartApi from '~/lib/api/cart';
+import { alert } from '~/utils/modal';
+
+const message = {
+  failedToGetCartAmount: '장바구니 개수를 가져오는 데 실패했습니다.',
+};
 
 const Navigation: FC = () => {
   const [user] = useUser();
+  const [cartAmount, setCartAmount] = useState(0);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (user) {
+      cartApi
+        .getCartAmount()
+        .then((result) => setCartAmount(result.data.amount))
+        .catch(() => alert(message.failedToGetCartAmount));
+    }
+  }, [user, pathname]);
+
   if ([urls.main, urls.login, urls.signup].includes(pathname)) return null;
 
   return (
@@ -39,7 +56,7 @@ const Navigation: FC = () => {
           <Link to="/cart">
             <CartWrapper activate={pathname === urls.cart}>
               <CartIcon activate={pathname === urls.cart} />
-              <Badge badgeContent="15" />
+              <Badge badgeContent={cartAmount.toString()} />
             </CartWrapper>
           </Link>
           <Link to="/like">
