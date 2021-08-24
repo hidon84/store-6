@@ -1,21 +1,23 @@
-import { FC, forwardRef, ForwardRefRenderFunction, useCallback } from 'react';
+import {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useCallback,
+  useContext,
+} from 'react';
+import NoResource from '~/components/common/NoResource';
 
-import styled from 'styled-components';
-import ProductItem from '~/components/ProductItem';
+import ProductItem from '~/components/product/ProductItem';
+
 import { useHistory } from '~/core/Router';
-import { ProductData } from '~/pages/ProductList';
+import { FetchContext, ProductData } from '~/pages/ProductList';
+import { INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
 
-const ProductItemContainerWrapper = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 31px;
-  padding-left: 7px;
-`;
-
-const ListFooter = styled.div`
-  width: 100%;
-  height: 20px;
-`;
+import {
+  ProductItemContainerWrapper,
+  ListFooter,
+  ItemList,
+  NoResourceWrapper,
+} from './index.style';
 
 interface Props {
   products: ProductData[];
@@ -26,6 +28,8 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   { products },
   ref,
 ) => {
+  const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
+  const { state: fetchState } = useContext(FetchContext);
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
     (idx: number) => push(`/products/${idx}`),
@@ -33,21 +37,31 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   );
 
   return (
-    <>
-      <ProductItemContainerWrapper>
-        {products.map(({ idx, thumbnail, price, title }) => (
-          <ProductItem
-            key={idx}
-            thumbnail={thumbnail}
-            price={price}
-            title={title}
-            onClick={() => pushToProductDetailPage(idx)}
-          />
-        ))}
-      </ProductItemContainerWrapper>
+    <ProductItemContainerWrapper>
+      <ItemList
+        isFetching={fetchState.state === START_FETCH}
+        delayedTime={fetchState.forcedDelayTime / 1000}
+      >
+        {products.length !== 0 &&
+          products.map(({ idx, thumbnail, discountedPrice, title }) => (
+            <ProductItem
+              key={idx}
+              idx={idx}
+              thumbnail={thumbnail}
+              price={discountedPrice}
+              title={title}
+              onClick={() => pushToProductDetailPage(idx)}
+            />
+          ))}
+        <NoResourceWrapper>
+          {products.length === 0 && fetchState.state !== INIT_FETCH && (
+            <NoResource content={NO_RESOURCE_CONTENT} />
+          )}
+        </NoResourceWrapper>
+      </ItemList>
       {/* TODO: 원활한 UX를 위하여 추후에 로딩 스피너 또는 lazy loading 로직을 추가해야 합니다. */}
       <ListFooter ref={ref} />
-    </>
+    </ProductItemContainerWrapper>
   );
 };
 

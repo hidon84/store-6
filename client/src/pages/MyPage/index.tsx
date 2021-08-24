@@ -1,32 +1,24 @@
-import React, { useState, useRef, RefObject, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Divider from '~/components/common/Divider';
-import { getMe, putMe } from '~/lib/api/users';
-import { login } from '~/lib/api/auth';
-import {
-  UsersGetResponseBody,
-  UsersPutResponseBody,
-} from '~/lib/api/types/users';
-import {
-  REG_EMAIL,
-  WARNING_EMAIL,
-  REG_IMAGE,
-  REG_PHONE,
-} from '~/utils/validation';
+import { putMe } from '~/lib/api/users';
+import { REG_EMAIL, REG_IMAGE, REG_PHONE } from '~/utils/validation';
 import { alert } from '~/utils/modal';
 import UserInfoInput from '~/components/my/UserInfoInput';
 import PhoneInput from '~/components/my/PhoneInput';
 import EmailInput from '~/components/my/EmailInput';
+import useUser from '~/lib/hooks/useUser';
+import SubPageWrapper from '~/components/subpage/SubPageWrapper';
+import SubPageHeader from '~/components/subpage/SubPageHeader';
+import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
 import {
-  StyledMyPage,
-  Title,
   RowWrapper,
   RowTitle,
   PhotoWrapper,
   ImagePreview,
   ImageDesc,
   ImageInput,
+  MyPageContent,
 } from './index.style';
-import useUser from '~/lib/hooks/useUser';
 
 const message = {
   EMAIL_UPDATE_SUCCESS: '이메일이 수정되었습니다.',
@@ -35,6 +27,7 @@ const message = {
   NOT_CORRECT_IMAGE: '올바른 이미지파일 형식이 아닙니다.',
   EMAIL_UPDATE_FAIL: '이메일 수정에 실패했습니다.',
   PHONE_UPDATE_FAIL: '연락처 수정에 실패했습니다.',
+  PHOTO_UPDATE_FAIL: '사진 수정에 실패했습니다',
 };
 
 const MyPage: React.FC = () => {
@@ -43,37 +36,39 @@ const MyPage: React.FC = () => {
   );
 
   const [userInfo, setUserInfo] = useUser();
-  const imagePreviewRef: RefObject<HTMLLabelElement> = useRef();
 
-  const handleSubmitEmail = async (value: string) => {
-    const response = await putMe({ email: value });
-    if (response.statusCode === 200) {
-      setUserInfo({ ...userInfo, email: value });
-      alert(message.EMAIL_UPDATE_SUCCESS);
-    }
+  const handleSubmitEmail = (value: string) => {
+    return putMe({ email: value })
+      .then(() => {
+        alert(message.EMAIL_UPDATE_SUCCESS);
+        setUserInfo({ ...userInfo, email: value });
+      })
+      .catch(() => alert(message.EMAIL_UPDATE_FAIL));
   };
 
-  const handleSubmitPhone = async (value: string) => {
-    const response = await putMe({ phone: value });
-    if (response.statusCode === 200) {
-      alert(message.PHONE_UPDATE_SUCCESS);
-      setUserInfo({ ...userInfo, phone: value });
-    }
+  const handleSubmitPhone = (value: string) => {
+    return putMe({ phone: value })
+      .then(() => {
+        alert(message.PHONE_UPDATE_SUCCESS);
+        setUserInfo({ ...userInfo, phone: value });
+      })
+      .catch(() => alert(message.PHONE_UPDATE_FAIL));
   };
 
-  const handleSubmitProfile = async (file, fileToString) => {
-    const response = await putMe({
-      profile: file,
-    });
-
-    if (response.statusCode === 200) {
-      setProfile(fileToString);
-      alert(message.PHOTO_UPDATE_SUCCESS);
-    }
+  const handleSubmitProfile = (file: File, fileToString: string) => {
+    return putMe({ profile: file })
+      .then(() => {
+        setProfile(fileToString);
+        alert(message.PHOTO_UPDATE_SUCCESS);
+      })
+      .catch(() => alert(message.PHOTO_UPDATE_FAIL));
   };
 
   const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
     if (!file.type.match(REG_IMAGE)) {
       e.target.value = '';
       alert(message.NOT_CORRECT_IMAGE);
@@ -94,27 +89,22 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
-    imagePreviewRef.current.style.backgroundImage = `url(${profile})`;
-  }, [imagePreviewRef, profile]);
-
-  useEffect(() => {
     if (userInfo?.profile) {
       setProfile(userInfo.profile);
     }
   }, [userInfo]);
 
   return (
-    <StyledMyPage>
-      <div>
-        <Title>마이페이지</Title>
-        <Divider width="700px" direction="horizontal" thick />
-      </div>
-      <div>
+    <SubPageWrapper width="700px">
+      <SubPageHeader>
+        <SubPageHeaderItem>마이페이지</SubPageHeaderItem>
+      </SubPageHeader>
+      <MyPageContent>
         <RowWrapper>
           <RowTitle>사진</RowTitle>
           <PhotoWrapper>
             <div>
-              <ImagePreview htmlFor="img" ref={imagePreviewRef} />
+              <ImagePreview image={profile} size="60px" />
               <ImageInput onChange={handleImageInput} id="img" type="file" />
             </div>
             <ImageDesc>
@@ -148,8 +138,8 @@ const MyPage: React.FC = () => {
           inputComponent={PhoneInput}
           validator={phoneValidator}
         />
-      </div>
-    </StyledMyPage>
+      </MyPageContent>
+    </SubPageWrapper>
   );
 };
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   FC,
   createContext,
@@ -10,6 +9,7 @@ import {
 
 import * as productsAPI from '~/lib/api/products';
 import {
+  ErrorResponse,
   ProductsGetRequestQuery,
   ProductsGetResponseBody,
 } from '~/lib/api/types';
@@ -32,12 +32,21 @@ import {
 } from './index.style';
 import useIntersection from '~/lib/hooks/useIntersection';
 import ScrollToTop from '~/components/productList/ScrollToTop';
+import fetchModule, {
+  FetchModuleAction,
+  finishFetch,
+  initFetch,
+  INIT_FETCH,
+  START_FETCH,
+} from '~/stores/fetchModule';
 
+// Interface
 export interface ProductData {
   idx: number;
   title: string;
   thumbnail: string;
-  price: number;
+  originPrice: number;
+  discountedPrice: number;
 }
 
 interface FilterContextState {
@@ -45,8 +54,19 @@ interface FilterContextState {
   dispatch: (action: ActionType) => void;
 }
 
-export const FilterContext = createContext<FilterContextState>(null);
+interface FetchContextState {
+  state: {
+    state: string;
+    forcedDelayTime: number;
+  };
+  dispatch: (action: FetchModuleAction) => void;
+}
 
+// Context
+export const FilterContext = createContext<FilterContextState>(null);
+export const FetchContext = createContext<FetchContextState>(null);
+
+// Hook (only use in here)
 const useScrollPoint = (targetPoint: number): boolean => {
   const [isScrollPoint, setIsScrollPoint] = useState(false);
 
@@ -57,57 +77,76 @@ const useScrollPoint = (targetPoint: number): boolean => {
   return isScrollPoint;
 };
 
+// Component
 const ProductList: FC = () => {
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
   const listFooterRef = useRef<HTMLDivElement>();
-  const entry = useIntersection(listFooterRef, {});
+
   const { filterState, dispatch } = productListModule();
+  const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
+  const entry = useIntersection(listFooterRef, {});
+
   const TARGET_POINT = 700;
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
-  useEffect(() => {
-    fetchProducts(filterState, setProducts);
-  }, [filterState]);
+  const fetchProducts = () => {
+    const isNextPageRequest = filterState.page !== 1;
+    productsAPI
+      .getProducts(filterState)
+      .then(({ data }) => {
+        if (!isNextPageRequest) setProducts(data);
+        else setProducts((prev) => [...prev, ...data]);
+
+        setTimeout(
+          () => fetchDispatch(finishFetch()),
+          fetchState.forcedDelayTime,
+        );
+      })
+      .catch((error: ErrorResponse) => {
+        throw new Error(error.data.message);
+      });
+  };
 
   useEffect(() => {
-    if (entry?.isIntersecting) dispatch(setNextPage());
+    if (fetchState.state === INIT_FETCH) fetchProducts();
+
+    // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
+    if (fetchState.state === START_FETCH) {
+      setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
+    }
+  }, [filterState, fetchState.state]);
+
+  useEffect(() => {
+    if (
+      fetchState.state !== INIT_FETCH && //
+      entry?.isIntersecting
+    ) {
+      dispatch(setNextPage());
+      fetchDispatch(initFetch());
+    }
   }, [entry]);
 
   return (
-    <FilterContext.Provider value={{ state: filterState, dispatch }}>
-      <ProductListWrapper>
-        <LeftSection>
-          <CategoryFilter />
-          <OrderFilter />
-        </LeftSection>
-        <VerticalDivider />
-        <RightSection>
-          <CategoryIdentifier />
-          <SearchBox />
-          <ProductItemContainer products={products} ref={listFooterRef} />
-        </RightSection>
-        <ScrollToTop isVisible={isScrollPoint} />
-      </ProductListWrapper>
-    </FilterContext.Provider>
+    <FetchContext.Provider
+      value={{ state: fetchState, dispatch: fetchDispatch }}
+    >
+      <FilterContext.Provider value={{ state: filterState, dispatch }}>
+        <ProductListWrapper>
+          <LeftSection>
+            <CategoryFilter />
+            <OrderFilter />
+          </LeftSection>
+          <VerticalDivider />
+          <RightSection>
+            <CategoryIdentifier />
+            <SearchBox />
+            <ProductItemContainer products={products} ref={listFooterRef} />
+          </RightSection>
+          <ScrollToTop isVisible={isScrollPoint} />
+        </ProductListWrapper>
+      </FilterContext.Provider>
+    </FetchContext.Provider>
   );
 };
 
 export default ProductList;
-
-// API
-const fetchProducts = async (
-  filterState: ProductsGetRequestQuery,
-  setProducts: React.Dispatch<React.SetStateAction<ProductsGetResponseBody[]>>,
-) => {
-  try {
-    const { data: products } = await productsAPI.getProducts(filterState);
-    const isNextPageRequest = filterState.page !== 1;
-
-    if (!isNextPageRequest) setProducts(products);
-    else setProducts((prev) => [...prev, ...products]);
-  } catch (error) {
-    // TODO: Error가 날 경우 alert 모달 등으로 사용자에게 에러 메시지를 보여줘야 합니다.
-    // TODO: 현재 error 에 넘어오는 타입이 try 에서 나오는 에러와 혼재되어 있습니다. 이를 구분하거나, then catch를 사용해야 합니다.
-    throw new Error(error);
-  }
-};

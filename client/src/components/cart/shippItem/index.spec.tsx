@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
@@ -6,9 +5,9 @@ import ShippingItem from './index';
 
 describe('<ShippingItem />', () => {
   it('should render same with snapshot', () => {
-    const changeSelectedBtn = (shipIdx: number) => {};
-    const removeShippingItem = (shipIdx: number) => {};
-    const modifyBtnClick = (shipIdx: number) => {};
+    const changeSelectedBtn = () => {};
+    const removeShippingItem = () => {};
+    const modifyBtnClick = () => {};
     const selected = true;
     const shipItem = {
       idx: 1,

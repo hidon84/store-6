@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import DaumPostcode from 'react-daum-postcode';
+import DaumPostcode, { AddressData } from 'react-daum-postcode';
 import { cancleSVG, hyphenSVG } from '~/assets';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
@@ -44,15 +44,15 @@ const ShippingModal: FC<Props> = ({
   });
 
   const [name, setName] = useState<string>(isWrite ? '' : modifyItem.name);
-  const [ph0, ph0Warning, handlePh0] = useInputValidator(
+  const [ph0, , handlePh0] = useInputValidator(
     isWrite ? '' : modifyItem.phone.split('-')[0],
     ph0Validator,
   );
-  const [ph1, ph1Warning, handlePh1] = useInputValidator(
+  const [ph1, , handlePh1] = useInputValidator(
     isWrite ? '' : modifyItem.phone.split('-')[1],
     ph1Validator,
   );
-  const [ph2, ph2Warning, handlePh2] = useInputValidator(
+  const [ph2, , handlePh2] = useInputValidator(
     isWrite ? '' : modifyItem.phone.split('-')[2],
     ph2Validator,
   );
@@ -65,7 +65,7 @@ const ShippingModal: FC<Props> = ({
     isWrite ? '' : modifyItem.detailAddress,
   );
 
-  const handleChangeName = (e) => {
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
@@ -77,11 +77,13 @@ const ShippingModal: FC<Props> = ({
     setIsPostModalOpen(false);
   };
 
-  const handleChangeDetailAddress = (e) => {
+  const handleChangeDetailAddress = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setDetailAddress(e.target.value);
   };
 
-  const handleComplete = (data) => {
+  const handleComplete = (data: AddressData) => {
     let fullAddress = data.address;
     let extraAddress = '';
     /**

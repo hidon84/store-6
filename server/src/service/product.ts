@@ -3,9 +3,10 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
 import {
   commonError,
-  ProductDetailError,
-  ProductError,
-  ProductViewError,
+  productDetailError,
+  productError,
+  productViewError,
+  productLikeError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -57,7 +58,7 @@ class ProductService {
       );
       return products;
     } catch {
-      throw new ErrorResponse(ProductError.unable);
+      throw new ErrorResponse(productError.unable);
     }
   }
 
@@ -87,7 +88,7 @@ class ProductService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(ProductViewError.unable);
+      throw new ErrorResponse(productViewError.unable);
     }
   }
 
@@ -146,7 +147,37 @@ class ProductService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(ProductDetailError.unable);
+      throw new ErrorResponse(productDetailError.unable);
+    }
+  }
+
+  async addLike(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const existingLike = await this.likeRepository.findByProductAndUser(
+        product,
+        user,
+      );
+
+      if (existingLike) {
+        throw new ErrorResponse(commonError.conflict);
+      }
+
+      const newLike = await this.likeRepository.addItem(user, product);
+
+      const { idx, updatedAt, createdAt } = newLike;
+      return { idx, updatedAt, createdAt };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(productLikeError.unable);
     }
   }
 }

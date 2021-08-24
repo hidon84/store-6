@@ -37,12 +37,16 @@ import { useHistory } from '~/core/Router';
 import { postUser } from '~/lib/api/users';
 import HeaderTitle from './HeaderTitle';
 import { ErrorResponse } from '~/lib/api/types';
+import useUser from '~/lib/hooks/useUser';
 
-const SignUpForm: FC = () => {
+const SignUpForm: FC<{
+  social?: 'GOOGLE' | 'FACEBOOK';
+}> = ({ social }) => {
   const { push } = useHistory();
+  const [user] = useUser();
   const [id, idWarning, handleId] = useInputValidator('', idValidator);
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
-  const [pwRe, pwReWarning, handlePWRe] = useInputValidator(
+  const [, pwReWarning, handlePWRe] = useInputValidator(
     '',
     (pwReIn) => {
       if (pwReIn === pw) return '';
@@ -52,7 +56,7 @@ const SignUpForm: FC = () => {
   );
 
   const [email, emailWarning, handleEmail] = useInputValidator(
-    '',
+    user?.email ?? '',
     emailValidator,
   );
 
@@ -84,7 +88,7 @@ const SignUpForm: FC = () => {
       alert('약관을 동의해주세요');
       return;
     }
-    const warning =
+    let warning =
       idWarning ||
       pwWarning ||
       pwReWarning ||
@@ -92,7 +96,7 @@ const SignUpForm: FC = () => {
       ph0Warning ||
       ph1Warning ||
       ph2Warning;
-    if (warning) {
+    if (warning && social === undefined) {
       if (warning === ' ') {
         alert('빈 항목이 있습니다.');
         return;
@@ -101,19 +105,28 @@ const SignUpForm: FC = () => {
       alert(warning);
     }
 
+    warning = ph0Warning || ph1Warning || ph2Warning;
+    if (social && warning) {
+      if (warning === ' ') {
+        alert('빈 항목이 있습니다.');
+        return;
+      }
+      alert(warning);
+    }
     /**
      * @todo: postUser의 response 다듬기
      */
-    const res = await postUser({
-      id,
+    await postUser({
+      id: social ? user.id : id,
       password: pw,
       phone: `${ph0}-${ph1}-${ph2}`,
       email,
       privacyTermsAndConditions: check1,
       serviceTermsAndConditions: check2,
+      type: social ?? 'OWN',
     })
       .then(() => {
-        push('/login', { id, from: '/signup' });
+        push('/login', { id: social ? user.id : id, from: '/signup' });
       })
       .catch((e: ErrorResponse) => {
         alert(e.message);
@@ -139,33 +152,43 @@ const SignUpForm: FC = () => {
   return (
     <SignUpFormWrapper onSubmit={(e) => e.preventDefault()}>
       <HeaderTitle />
-      <InputWrapper>
-        <LabelRow>
-          <Label>아이디</Label>
-          <WarningMessage>{idWarning}</WarningMessage>
-        </LabelRow>
-        <Input autoComplete="off" type="text" onChange={handleId} />
-      </InputWrapper>
-      <InputWrapper>
-        <LabelRow>
-          <Label>비밀번호</Label>
-          <WarningMessage>{pwWarning}</WarningMessage>
-        </LabelRow>
-        <Input autoComplete="off" type="password" onChange={handlePW} />
-      </InputWrapper>
-      <InputWrapper>
-        <LabelRow>
-          <Label>비밀번호 확인</Label>
-          <WarningMessage>{pwReWarning}</WarningMessage>
-        </LabelRow>
-        <Input autoComplete="off" type="password" onChange={handlePWRe} />
-      </InputWrapper>
+      {social ? null : (
+        <>
+          <InputWrapper>
+            <LabelRow>
+              <Label>아이디</Label>
+              <WarningMessage>{idWarning}</WarningMessage>
+            </LabelRow>
+            <Input autoComplete="off" type="text" onChange={handleId} />
+          </InputWrapper>
+          <InputWrapper>
+            <LabelRow>
+              <Label>비밀번호</Label>
+              <WarningMessage>{pwWarning}</WarningMessage>
+            </LabelRow>
+            <Input autoComplete="off" type="password" onChange={handlePW} />
+          </InputWrapper>
+          <InputWrapper>
+            <LabelRow>
+              <Label>비밀번호 확인</Label>
+              <WarningMessage>{pwReWarning}</WarningMessage>
+            </LabelRow>
+            <Input autoComplete="off" type="password" onChange={handlePWRe} />
+          </InputWrapper>
+        </>
+      )}
+
       <InputWrapper>
         <LabelRow>
           <Label>이메일</Label>
           <WarningMessage>{emailWarning}</WarningMessage>
         </LabelRow>
-        <Input autoComplete="off" type="text" onChange={handleEmail} />
+        <Input
+          autoComplete="off"
+          type="text"
+          value={email}
+          onChange={handleEmail}
+        />
       </InputWrapper>
       <InputWrapper>
         <LabelRow>
@@ -179,6 +202,7 @@ const SignUpForm: FC = () => {
             autoComplete="off"
             type="text"
             placeholder="010"
+            autoFocus={social !== undefined}
             onChange={handlePh0}
           />
           <img src={hyphenSVG} alt="hyphen" />

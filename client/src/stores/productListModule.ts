@@ -65,7 +65,8 @@ const filterReducer = (
     case SET_CATEGORY: {
       if (!('category' in state) || state.category !== action.payload)
         return { ...state, category: action.payload.category, page: 1 };
-      const { category, ...rest } = state;
+      const rest = { ...state };
+      delete rest.category;
       return { ...rest, page: 1 };
     }
     case SET_ORDER:
@@ -73,13 +74,15 @@ const filterReducer = (
     case SET_SEARCH_VALUE:
       return { ...state, search: action.payload.search, page: 1 };
     case REMOVE_SEARCH_VALUE: {
-      const { search, ...rest } = state;
+      const rest = { ...state };
+      delete rest.search;
       return { ...rest, page: 1 };
     }
     case SET_NEXT_PAGE:
       return { ...state, page: state.page + 1 };
     case RESET_CATEGORY: {
-      const { category, ...rest } = state;
+      const rest = { ...state };
+      delete rest.category;
       return { ...rest, page: 1 };
     }
     default:

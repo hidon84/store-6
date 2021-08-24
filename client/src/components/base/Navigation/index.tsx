@@ -1,47 +1,61 @@
-import React, { FC } from 'react';
-import { useLocation } from '~/core/Router';
-
+import { FC } from 'react';
+import { Link, useLocation } from '~/core/Router';
+import Divider from '~/components/common/Divider';
+import useUser from '~/lib/hooks/useUser';
+import ProfileImage from '~/components/common/ProfileImage';
+import ProductLikeButton from '~/components/product/ProductLikeButton';
+import HeaderLogo from '../HeaderLogo';
 import {
   NavigationWrapper,
   Content,
   HeaderRightSection,
   CartWrapper,
-  BadgeWrapper,
+  Badge,
   UselessDoodle,
   Logo,
+  CartIcon,
+  DoodleUselessIcon,
+  MyPageIcon,
 } from './index.style';
-
-import {
-  LogoSVG,
-  DoodleUselessSVG,
-  HeartSVG,
-  MypageSVG,
-  CartSVG,
-} from '~/assets';
-import Divider from '~/components/common/Divider';
+import urls from '~/lib/constants/urls';
 
 const Navigation: FC = () => {
+  const [user] = useUser();
   const { pathname } = useLocation();
-  if (['/', '/login', '/signup'].includes(pathname)) return null;
+  if ([urls.main, urls.login].includes(pathname)) return null;
+  if (pathname.includes(urls.signup)) return null;
 
   return (
     <NavigationWrapper>
       <Content>
         <UselessDoodle>
-          <img src={DoodleUselessSVG} alt="useless" />
+          <DoodleUselessIcon />
         </UselessDoodle>
-        <Logo>
-          <img src={LogoSVG} alt="logo" />
-        </Logo>
+        <Link to="/">
+          <Logo>
+            <HeaderLogo />
+          </Logo>
+        </Link>
         <HeaderRightSection>
-          <CartWrapper>
-            <img src={CartSVG} alt="cart" />
-            <BadgeWrapper>
-              <span>15</span>
-            </BadgeWrapper>
-          </CartWrapper>
-          <img src={HeartSVG} alt="heart" />
-          <img src={MypageSVG} alt="mypage" />
+          <Link to="/cart">
+            <CartWrapper activate={pathname === urls.cart}>
+              <CartIcon activate={pathname === urls.cart} />
+              <Badge badgeContent="15" />
+            </CartWrapper>
+          </Link>
+          <Link to="/like">
+            <ProductLikeButton
+              isLike={pathname === urls.likeList}
+              fillLineWhenHover
+            />
+          </Link>
+          {user?.profile ? (
+            <ProfileImage image={user.profile} size="30px" />
+          ) : (
+            <Link to="/login">
+              <MyPageIcon activate={pathname === urls.login} />
+            </Link>
+          )}
         </HeaderRightSection>
       </Content>
       <Divider />

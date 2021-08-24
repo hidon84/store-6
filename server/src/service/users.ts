@@ -11,7 +11,7 @@ import {
   userUpdateError,
 } from '@/constants/error';
 import UserEntity from '@/entity/user';
-import LoginEntity from '@/entity/login';
+import LoginEntity, { LoginType } from '@/entity/login';
 import * as validationHelper from '@/helper/validation';
 
 interface EditableUser extends EditableUserInfo {
@@ -47,9 +47,11 @@ class UsersService {
     serviceTermsAndConditions,
   }: CreatableUserInfo) {
     try {
+      const loginType = type ?? LoginType.Own;
       if (
-        !validationHelper.idValidator(id) ||
-        !validationHelper.pwValidator(password)
+        loginType === LoginType.Own &&
+        (!validationHelper.idValidator(id) ||
+          !validationHelper.pwValidator(password))
       ) {
         throw new ErrorResponse(userCreateError.invalidIdOrPw);
       }
@@ -64,7 +66,7 @@ class UsersService {
       }
 
       const alreadyCreatedLogin = await this.loginRepository.findById(id);
-      if (alreadyCreatedLogin) {
+      if (alreadyCreatedLogin && alreadyCreatedLogin.type === loginType) {
         throw new ErrorResponse(userCreateError.alreadyExists);
       }
 
@@ -104,12 +106,27 @@ class UsersService {
       if (!user || !login) {
         throw new ErrorResponse(commonError.unauthorized);
       }
+
+      if (password && !validationHelper.pwValidator(password!)) {
+        throw new ErrorResponse(userUpdateError.invalidPw);
+      }
+
       if (password) {
         const hashedPassword = hashHelper.generateHash(password);
         login.password = hashedPassword;
       }
       user.email = email ?? user.email;
+
       user.phone = phone ?? user.phone;
+
+      if (email && !validationHelper.emailValidator(email)) {
+        throw new ErrorResponse(userUpdateError.invalidEmail);
+      }
+
+      if (phone && !validationHelper.phoneValidator(phone)) {
+        throw new ErrorResponse(userUpdateError.invalidPhone);
+      }
+
       user.profile = profile ?? user.profile;
 
       const { updatedUser } =

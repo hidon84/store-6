@@ -1,19 +1,5 @@
 import styled from 'styled-components';
-
-export const StyledMyPage = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 70px;
-  margin-top: 90px;
-`;
-
-export const Title = styled.div`
-  font-size: 25px;
-  padding: 6px 40px 20px 30px;
-`;
+import ProfileImage from '~/components/common/ProfileImage';
 
 export const RowWrapper = styled.div`
   display: flex;
@@ -39,21 +25,17 @@ export const Button = styled.div`
   font-size: 15px;
 `;
 
-export const ImagePreview = styled.label`
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  transition: ease-in-out 750ms;
+export const ImagePreview = styled(ProfileImage).attrs({
+  as: 'label',
+  htmlFor: 'img',
+})`
   margin-right: 40px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  cursor: pointer;
+`;
+
+export const ImageInput = styled.input.attrs({
+  name: 'img',
+})`
+  display: none;
 `;
 
 export const EmailWrapper = styled.div`
@@ -71,6 +53,7 @@ export const ImageDesc = styled.div`
   }
 `;
 
-export const ImageInput = styled.input`
-  display: none;
+export const MyPageContent = styled.div`
+  margin: 0 auto;
+  padding-top: 70px;
 `;

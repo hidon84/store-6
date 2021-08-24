@@ -1,8 +1,18 @@
 export interface LikesGetResponseBody {
   idx: number;
-  name: string;
-  thumbnail: string;
-  price: number;
+  product: {
+    idx: number;
+    title: string;
+    thumbnail: string;
+    originPrice: number;
+    discountedPrice: string;
+    mandatoryInfo: Record<string, string>;
+    description: string;
+    shipInfo: Record<string, string>;
+    policy: string;
+    createdAt: string;
+    updatedAt: string;
+  };
   createdAt: string;
   updatedAt: string;
 }

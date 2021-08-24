@@ -18,6 +18,8 @@ const Divider = styled.div<{
     direction === 'vertical' ? 'rotate(90deg)' : 'none'};
   background: url(${LineSVG}) bottom left no-repeat;
   background-size: cover;
+  position: relative;
+  right: 10px;
 `;
 
 export default Divider;

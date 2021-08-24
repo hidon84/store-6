@@ -31,12 +31,15 @@ const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 const LogoSVG = `${S3_PREFIX}/common/logo.svg`;
 const LineSVG = `${S3_PREFIX}/common/line.svg`;
 const VertLineSVG = `${S3_PREFIX}/common/vertical-line.svg`;
+const NoResourceSVG = `${S3_PREFIX}/common/no-resource.svg`;
+const NoRouteGIF = `${S3_PREFIX}/common/no-resource.gif`;
 
 const DoodleUselessSVG = `${S3_PREFIX}/header/doodle-useless.svg`;
 const HeartSVG = `${S3_PREFIX}/header/heart.svg`;
 const MypageSVG = `${S3_PREFIX}/header/mypage.svg`;
 const CartSVG = `${S3_PREFIX}/header/shop.svg`;
 const BadgeSVG = `${S3_PREFIX}/header/badge.svg`;
+const SubPageUnderlineSVG = `${S3_PREFIX}/product/search-box-underline.svg`;
 
 // Small Icons (상품 목록 페이지)
 const SmallBaedalSVG = `${S3_PREFIX}/common/small-icon/baedal.svg`;
@@ -85,11 +88,14 @@ export {
   LogoSVG,
   VertLineSVG,
   DoodleUselessSVG,
+  NoResourceSVG,
+  NoRouteGIF,
   HeartSVG,
   MypageSVG,
   CartSVG,
   LineSVG,
   BadgeSVG,
+  SubPageUnderlineSVG,
   buttonSVG,
   checkCircleSVG,
   checkSVG,

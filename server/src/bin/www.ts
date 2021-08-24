@@ -1,4 +1,5 @@
 import http from 'http';
+import { Server, Socket } from 'socket.io';
 import createApp from '@/app';
 import config from '@/config';
 
@@ -7,6 +8,23 @@ const { port } = config;
 createApp().then(app => {
   app.set('port', port);
   const server = http.createServer(app);
+  const io = new Server(server, {
+    cors: {
+      origin: '*',
+    },
+  });
+
+  io.on('connection', (socket: Socket) => {
+    socket.on('join-room', userId => {
+      // socket.join('gate');
+      // socket.to('gate').emit('user-connected', userId);
+      console.log('user-connected! id: ', userId);
+      socket.broadcast.emit('user-connected', userId);
+      socket.on('disconnect', () => {
+        socket.broadcast.emit('user-disconnected', userId);
+      });
+    });
+  });
 
   /**
    * Event listener for HTTP server "error" event.

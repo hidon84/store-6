@@ -1,4 +1,5 @@
 import { setAuthorizationHeader } from './auth';
+import { apiBaseURL } from './client';
 import request from './request';
 import {
   AuthResponseBody,
@@ -6,18 +7,19 @@ import {
   OauthCallbackGetResponseBody,
 } from './types';
 
-export const oauthBaseUrl = '/api/oauth';
+export const oauthBaseUrl = `api/oauth`;
 
+// apiBaseURL = '/' or 'localhost:5000/'
 export const oauthUrl = {
   google: {
-    google: `${oauthBaseUrl}/google`,
-    login: `${oauthBaseUrl}/google/login`,
-    callback: `${oauthBaseUrl}/google/callback`,
+    google: `${apiBaseURL}${oauthBaseUrl}/google`,
+    login: `${apiBaseURL}${oauthBaseUrl}/google/login`,
+    callback: `/${oauthBaseUrl}/google/callback`,
   },
   facebook: {
-    facebook: `${oauthBaseUrl}/facebook`,
-    login: `${oauthBaseUrl}/facebook/login`,
-    callback: `${oauthBaseUrl}/facebook/callback`,
+    facebook: `${apiBaseURL}${oauthBaseUrl}/facebook`,
+    login: `${apiBaseURL}${oauthBaseUrl}/facebook/login`,
+    callback: `/${oauthBaseUrl}/facebook/callback`,
   },
 };
 

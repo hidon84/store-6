@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import middlewares from '@/api/middlewares';
-import { handleGetCartItems,handleDeleteCartItem } from './cartController';
+import {
+  handleGetCartItems,
+  handleDeleteCartItem,
+  handleCartAmount,
+} from './cartController';
 
 const cartRouter = Router();
 
@@ -22,5 +26,14 @@ export default (router: Router) => {
     middlewares.attachCurrentUser,
     handleDeleteCartItem,
   );
+
+  cartRouter.get(
+    '/amount',
+    middlewares.isAuth,
+    middlewares.isAccessToken,
+    middlewares.attachCurrentUser,
+    handleCartAmount,
+  );
+
   return router;
 };
