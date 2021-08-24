@@ -43,7 +43,7 @@ type MinimiUpdateMessage = {
 };
 
 const [DY, DX] = [2, 2];
-const delayMS = 250;
+const delayMS = 400;
 const pleaseAlloweRecord =
   '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
 
