@@ -12,11 +12,23 @@ export const ItemList = styled.ul<{
   delayedTime: number;
 }>`
   opacity: ${({ isFetching }) => (isFetching ? 0 : 1)};
-  transition: opacity ${({ delayedTime }) => delayedTime}s ease-in;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 31px;
   padding-left: 7px;
+  transition: opacity ${({ delayedTime }) => delayedTime}s ease-in;
+`;
+
+export const NoResourceWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ListFooter = styled.div`
