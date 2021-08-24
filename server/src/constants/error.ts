@@ -120,6 +120,11 @@ export const userUpdateError = {
     statusCode: 400,
     message: 'invalid email',
   },
+
+  invalidPw: {
+    statusCode: 400,
+    message: 'invalid pw',
+  },
 };
 
 export const userDeleteError = {

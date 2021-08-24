@@ -104,6 +104,11 @@ class UsersService {
       if (!user || !login) {
         throw new ErrorResponse(commonError.unauthorized);
       }
+
+      if (password && !validationHelper.pwValidator(password!)) {
+        throw new ErrorResponse(userUpdateError.invalidPw);
+      }
+
       if (password) {
         const hashedPassword = hashHelper.generateHash(password);
         login.password = hashedPassword;
