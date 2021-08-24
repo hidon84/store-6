@@ -4,7 +4,6 @@ export interface CartGetResponseBody {
     idx: number;
     title: string;
     thumbnail: string;
-    price: number;
     description: string;
     shipSummary: string;
     shipDetail: string;
