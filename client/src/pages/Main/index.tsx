@@ -4,6 +4,7 @@
 /* eslint-disable react/no-unused-state */
 import { Component, createRef, RefObject } from 'react';
 import Peer, { MediaConnection, DataConnection } from 'peerjs';
+import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import {
   Book,
@@ -20,7 +21,7 @@ import {
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { MainContainer } from './index.style';
-import socket from '~/lib/api/socket';
+import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 
@@ -51,6 +52,7 @@ class Main extends Component<{ u?: string }, MainState> {
   peer: Peer;
   myId: string;
   myStream?: MediaStream;
+  socket: Socket;
 
   constructor(props) {
     super(props);
@@ -63,10 +65,11 @@ class Main extends Component<{ u?: string }, MainState> {
       x,
       users: [],
     };
+    this.socket = createSocket();
     this.myId = uuidv4();
     this.peer = createPeer(this.myId);
     this.peer.on('open', (id) => {
-      socket.emit('join-room', id);
+      this.socket.emit('join-room', id);
     });
     this.audioGridRef = createRef<HTMLDivElement>();
     this.setupConnections = this.setupConnections.bind(this);
@@ -80,13 +83,15 @@ class Main extends Component<{ u?: string }, MainState> {
     this.myStream?.getTracks().forEach((mediaTrack) => {
       mediaTrack.stop();
     });
+    this.socket.disconnect();
+    this.peer.destroy();
     document.body.removeEventListener('keydown', this.onKeyDown);
   }
 
   setupConnections() {
     this.setupAudioStream();
 
-    socket.on('user-connected', async (userId: string) => {
+    this.socket.on('user-connected', async (userId: string) => {
       alert(`user-connected! ${userId}`);
       const conn = this.peer.connect(userId);
 
@@ -120,7 +125,7 @@ class Main extends Component<{ u?: string }, MainState> {
       });
     });
 
-    socket.on('user-disconnected', (userId) => {
+    this.socket.on('user-disconnected', (userId) => {
       alert(`user-disconnected: , ${userId}`);
       const { peerCalls } = this.state;
       peerCalls[userId]?.close();
@@ -184,7 +189,7 @@ class Main extends Component<{ u?: string }, MainState> {
           alert(pleaseAlloweRecord, 3000);
         });
     });
-    socket.on('user-connected', async (userId) => {
+    this.socket.on('user-connected', async (userId) => {
       navigator.mediaDevices
         .getUserMedia({ audio: true })
         .then((myStream) => {
