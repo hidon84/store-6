@@ -1,18 +1,21 @@
 import { FC } from 'react';
 
-import { StyledLoginPage } from './index.style';
+import { StyledSignUpPage } from './index.style';
 import LeftDoodles from '~/components/signup/LeftDoodles';
 import RightDoodles from '~/components/signup/RightDoodles';
+import SignUpTypes from '~/components/signup/SignUpTypes';
 import SignUpForm from '~/components/signup/SignUpForm';
-// import SignUpTypes from '~/components/signup/SignUpTypes';
+import { useParams } from '~/core/Router';
 
 const SignUpPage: FC = () => {
+  const { stage } = useParams();
   return (
-    <StyledLoginPage>
+    <StyledSignUpPage>
       <LeftDoodles />
-      <SignUpForm />
+      {stage === 'select' ? <SignUpTypes /> : null}
+      {stage === 'own' ? <SignUpForm /> : null}
       <RightDoodles />
-    </StyledLoginPage>
+    </StyledSignUpPage>
   );
 };
 
