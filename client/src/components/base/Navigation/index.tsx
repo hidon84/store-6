@@ -1,5 +1,10 @@
 import { FC } from 'react';
-import { useLocation } from '~/core/Router';
+import { Link, useLocation } from '~/core/Router';
+import { LogoSVG, DoodleUselessSVG, MypageSVG, CartSVG } from '~/assets';
+import Divider from '~/components/common/Divider';
+import useUser from '~/lib/hooks/useUser';
+import ProfileImage from '~/components/common/ProfileImage';
+import ProductLikeButton from '~/components/product/ProductLikeButton';
 import {
   NavigationWrapper,
   Content,
@@ -9,11 +14,6 @@ import {
   UselessDoodle,
   Logo,
 } from './index.style';
-import { LogoSVG, DoodleUselessSVG, MypageSVG, CartSVG } from '~/assets';
-import Divider from '~/components/common/Divider';
-import useUser from '~/lib/hooks/useUser';
-import ProfileImage from '~/components/common/ProfileImage';
-import ProductLikeButton from '~/components/product/ProductLikeButton';
 
 const Navigation: FC = () => {
   const [user] = useUser();
@@ -26,9 +26,11 @@ const Navigation: FC = () => {
         <UselessDoodle>
           <img src={DoodleUselessSVG} alt="useless" />
         </UselessDoodle>
-        <Logo>
-          <img src={LogoSVG} alt="logo" />
-        </Logo>
+        <Link to="/">
+          <Logo>
+            <img src={LogoSVG} alt="logo" />
+          </Logo>
+        </Link>
         <HeaderRightSection>
           <CartWrapper>
             <img src={CartSVG} alt="cart" />
