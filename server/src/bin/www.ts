@@ -15,16 +15,11 @@ createApp().then(app => {
   });
 
   io.on('connection', (socket: Socket) => {
-    console.log('a user connected');
-    socket.on('move', (data: any) => {
-      console.log('move', data);
-      io.emit('update-moves', data);
-    });
     socket.on('join-room', userId => {
       // socket.join('gate');
       // socket.to('gate').emit('user-connected', userId);
-      socket.broadcast.emit('user-connected', userId);
       console.log('user-connected! id: ', userId);
+      socket.broadcast.emit('user-connected', userId);
       socket.on('disconnect', () => {
         socket.broadcast.emit('user-disconnected', userId);
       });
