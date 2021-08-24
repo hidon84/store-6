@@ -66,7 +66,7 @@ const PhoneInput: React.FC<Props> = ({
           <Fragment key={phoneNumberInfo.key}>
             <StyledPhoneInput
               type="text"
-              value={phoneValue[i]?.slice(0, phoneNumberInfo.max) || undefined}
+              value={phoneValue[i]?.slice(0, phoneNumberInfo.max) ?? ''}
               onChange={setPhoneNumbers[i]}
               maxLength={phoneNumberInfo.max}
               disabled={disabled}
