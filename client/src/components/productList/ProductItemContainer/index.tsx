@@ -4,16 +4,19 @@ import {
   useCallback,
   useContext,
 } from 'react';
+import NoResource from '~/components/common/NoResource';
 
 import ProductItem from '~/components/product/ProductItem';
 
 import { useHistory } from '~/core/Router';
 import { FetchContext, ProductData } from '~/pages/ProductList';
+import { INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
 
 import {
   ProductItemContainerWrapper,
   ListFooter,
   ItemList,
+  NoResourceWrapper,
 } from './index.style';
 
 interface Props {
@@ -25,6 +28,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   { products },
   ref,
 ) => {
+  const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
   const { state: fetchState } = useContext(FetchContext);
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
@@ -35,19 +39,25 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   return (
     <ProductItemContainerWrapper>
       <ItemList
-        isFetching={fetchState.state === 'START_FETCH'}
+        isFetching={fetchState.state === START_FETCH}
         delayedTime={fetchState.forcedDelayTime / 1000}
       >
-        {products.map(({ idx, thumbnail, discountedPrice, title }) => (
-          <ProductItem
-            key={idx}
-            idx={idx}
-            thumbnail={thumbnail}
-            price={discountedPrice}
-            title={title}
-            onClick={() => pushToProductDetailPage(idx)}
-          />
-        ))}
+        {products.length !== 0 &&
+          products.map(({ idx, thumbnail, discountedPrice, title }) => (
+            <ProductItem
+              key={idx}
+              idx={idx}
+              thumbnail={thumbnail}
+              price={discountedPrice}
+              title={title}
+              onClick={() => pushToProductDetailPage(idx)}
+            />
+          ))}
+        <NoResourceWrapper>
+          {products.length === 0 && fetchState.state !== INIT_FETCH && (
+            <NoResource content={NO_RESOURCE_CONTENT} />
+          )}
+        </NoResourceWrapper>
       </ItemList>
       {/* TODO: 원활한 UX를 위하여 추후에 로딩 스피너 또는 lazy loading 로직을 추가해야 합니다. */}
       <ListFooter ref={ref} />
