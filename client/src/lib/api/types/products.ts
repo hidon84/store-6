@@ -18,31 +18,20 @@ export interface ProductsGetResponseBody {
 
 export interface ProductDetailGetResponseBody {
   idx: number;
-  name: string;
+  title: string;
+  thumbnail: string;
   originPrice: number;
   discountedPrice: number;
-  images: string[];
-  description: string;
   mandatoryInfo: Record<string, string>;
   shipInfo: Record<string, string>;
+  description: string;
   policy: string;
+  images: string[];
   viewCnt: number;
   reviewCnt: number;
   likeCnt: number;
   isLike?: boolean;
   isCart?: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ProductReviewsGetResponseBody {
-  idx: number;
-  title: string;
-  user: {
-    idx: number;
-    id: string;
-  };
-  rate: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -73,6 +62,18 @@ export interface ProductReviewPostRequestBody {
 
 export interface ProductReviewPostResponseBody {
   idx: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProductReviewsGetResponseBody {
+  idx: number;
+  title: string;
+  user: {
+    idx: number;
+    id: string;
+  };
+  rate: number;
   createdAt: string;
   updatedAt: string;
 }
