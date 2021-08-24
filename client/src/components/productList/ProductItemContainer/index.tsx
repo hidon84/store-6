@@ -38,12 +38,12 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
         isFetching={fetchState.state === 'START_FETCH'}
         delayedTime={fetchState.forcedDelayTime / 1000}
       >
-        {products.map(({ idx, thumbnail, price, title }) => (
+        {products.map(({ idx, thumbnail, discountedPrice, title }) => (
           <ProductItem
             key={idx}
             idx={idx}
             thumbnail={thumbnail}
-            price={price}
+            price={discountedPrice}
             title={title}
             onClick={() => pushToProductDetailPage(idx)}
           />

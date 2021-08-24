@@ -23,7 +23,7 @@ class ProductRepository extends Repository<ProductEntity> {
     } = {};
 
     const subOrder: {
-      price?: 'ASC' | 'DESC';
+      discountedPrice?: 'ASC' | 'DESC';
       createdAt?: 'ASC' | 'DESC';
     } = {};
 
@@ -43,11 +43,11 @@ class ProductRepository extends Repository<ProductEntity> {
 
     if (querys.order) {
       if (querys.order === 'price-low') {
-        subOrder.price = 'ASC';
+        subOrder.discountedPrice = 'ASC';
       }
 
       if (querys.order === 'price-high') {
-        subOrder.price = 'DESC';
+        subOrder.discountedPrice = 'DESC';
       }
 
       if (querys.order === 'recent') {
@@ -56,7 +56,15 @@ class ProductRepository extends Repository<ProductEntity> {
     }
 
     const products = await this.find({
-      select: ['idx', 'thumbnail', 'title', 'price', 'createdAt', 'updatedAt'],
+      select: [
+        'idx',
+        'thumbnail',
+        'title',
+        'discountedPrice',
+        'originPrice',
+        'createdAt',
+        'updatedAt',
+      ],
       where: subWhere,
       order: subOrder,
       skip: subOffset,

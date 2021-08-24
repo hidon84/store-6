@@ -21,16 +21,19 @@ class ProductEntity {
   thumbnail: string;
 
   @Column('int')
-  price: number;
+  originPrice: number;
+
+  @Column('int')
+  discountedPrice: number;
+
+  @Column('simple-json')
+  mandatoryInfo: { key: string; value: string };
 
   @Column('longtext')
   description: string;
 
-  @Column('text')
-  shipSummary: string;
-
-  @Column('text')
-  shipDetail: string;
+  @Column('simple-json')
+  shipInfo: { key: string; value: string };
 
   @Column('text')
   policy: string;

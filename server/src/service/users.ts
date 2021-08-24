@@ -104,6 +104,11 @@ class UsersService {
       if (!user || !login) {
         throw new ErrorResponse(commonError.unauthorized);
       }
+
+      if (password && !validationHelper.pwValidator(password!)) {
+        throw new ErrorResponse(userUpdateError.invalidPw);
+      }
+
       if (password) {
         const hashedPassword = hashHelper.generateHash(password);
         login.password = hashedPassword;
@@ -111,6 +116,10 @@ class UsersService {
       user.email = email ?? user.email;
 
       user.phone = phone ?? user.phone;
+
+      if (email && !validationHelper.emailValidator(email)) {
+        throw new ErrorResponse(userUpdateError.invalidEmail);
+      }
 
       if (phone && !validationHelper.phoneValidator(phone)) {
         throw new ErrorResponse(userUpdateError.invalidPhone);

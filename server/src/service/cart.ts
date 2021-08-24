@@ -2,9 +2,9 @@ import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
 import {
-  CartCreateError,
-  CartDeleteError,
-  CartError,
+  cartCreateError,
+  cartDeleteError,
+  cartError,
   commonError,
 } from '@/constants/error';
 import CartRepository from '@/repository/cart';
@@ -14,6 +14,7 @@ import ProductRepository from '@/repository/product';
 @Service()
 class CartService {
   private cartRepository: CartRepository;
+
   private productRepository: ProductRepository;
 
   constructor(
@@ -29,7 +30,7 @@ class CartService {
       const cartItems = await this.cartRepository.getItems(currentUser.idx);
       return cartItems;
     } catch {
-      throw new ErrorResponse(CartError.unable);
+      throw new ErrorResponse(cartError.unable);
     }
   }
 
@@ -41,7 +42,7 @@ class CartService {
 
       return amount;
     } catch {
-      throw new ErrorResponse(CartError.unable);
+      throw new ErrorResponse(cartError.unable);
     }
   }
 
@@ -81,7 +82,7 @@ class CartService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(CartCreateError.unable);
+      throw new ErrorResponse(cartCreateError.unable);
     }
   }
 
@@ -102,7 +103,7 @@ class CartService {
 
       return { amount };
     } catch {
-      throw new ErrorResponse(CartDeleteError.unable);
+      throw new ErrorResponse(cartDeleteError.unable);
     }
   }
 }
