@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { FC, useCallback, useEffect, useState } from 'react';
 import ProductItem from '~/components/product/ProductItem';
 import SubPageHeader from '~/components/subpage/SubPageHeader';

@@ -102,7 +102,7 @@ class CartService {
       );
 
       return { amount };
-    } catch(e) {
+    } catch (e) {
       if (e?.isOperational) {
         throw e;
       }

@@ -6,9 +6,9 @@ export interface LikesGetResponseBody {
     thumbnail: string;
     originPrice: number;
     discountedPrice: string;
-    mandatoryInfo: object;
+    mandatoryInfo: Record<string, string>;
     description: string;
-    shipInfo: object;
+    shipInfo: Record<string, string>;
     policy: string;
     createdAt: string;
     updatedAt: string;

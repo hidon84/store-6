@@ -38,7 +38,6 @@ export interface ShippingPutResponseBody {
   upstringdAt: string;
 }
 
-
 export interface ShippingSelectResponseBody {
   idx: number;
   createdAt: string;

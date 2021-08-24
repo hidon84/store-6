@@ -6,9 +6,9 @@ export interface CartGetResponseBody {
     thumbnail: string;
     originPrice: number;
     discountedPrice: string;
-    mandatoryInfo: object;
+    mandatoryInfo: Record<string, string>;
     description: string;
-    shipInfo: object;
+    shipInfo: Record<string, string>;
     policy: string;
     createdAt: string;
     updatedAt: string;
@@ -17,10 +17,10 @@ export interface CartGetResponseBody {
   updatedAt: string;
 }
 
-export interface CartDeleteResponseBody { 
+export interface CartDeleteResponseBody {
   amount: number;
 }
 
-export interface CartGetAmountResponseBody { 
+export interface CartGetAmountResponseBody {
   amount: number;
 }

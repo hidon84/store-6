@@ -7,7 +7,7 @@ import {
   ShippingsPostResponseBody,
   ShippingPutRequsetBody,
   ShippingPutResponseBody,
-  ShippingSelectResponseBody
+  ShippingSelectResponseBody,
 } from './types';
 
 export const shippingBaseUrl = '/api/shippings';
@@ -15,9 +15,9 @@ export const shippingBaseUrl = '/api/shippings';
 export const shippingsUrl = {
   shippings: () => shippingBaseUrl,
   shippingPost: () => shippingBaseUrl,
-  shippingPut:(id: number) => `${shippingBaseUrl}/${id}`, 
-  shippingDelete:(id: number) => `${shippingBaseUrl}/${id}`, 
-  shippingSelect:(id: number) => `${shippingBaseUrl}/${id}/select`, 
+  shippingPut: (id: number) => `${shippingBaseUrl}/${id}`,
+  shippingDelete: (id: number) => `${shippingBaseUrl}/${id}`,
+  shippingSelect: (id: number) => `${shippingBaseUrl}/${id}/select`,
 };
 
 export const getShippings = () =>
@@ -29,10 +29,9 @@ export const postShpping = (reqData: ShippingsPostRequestBody) =>
     shippingsUrl.shippingPost(),
     reqData,
   );
-  
-  export const selectShipping = (id: number) =>
-  request<ShippingSelectResponseBody>('POST', shippingsUrl.shippingSelect(id));
 
+export const selectShipping = (id: number) =>
+  request<ShippingSelectResponseBody>('POST', shippingsUrl.shippingSelect(id));
 
 export const putShipping = (id: number, reqData: ShippingPutRequsetBody) =>
   request<ShippingPutResponseBody, ShippingPutRequsetBody>(
@@ -40,9 +39,6 @@ export const putShipping = (id: number, reqData: ShippingPutRequsetBody) =>
     shippingsUrl.shippingPut(id),
     reqData,
   );
-  
+
 export const deleteShipping = (id: number) =>
   request('DELETE', shippingsUrl.shippingDelete(id));
-
-
-

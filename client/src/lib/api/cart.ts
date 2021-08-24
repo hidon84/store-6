@@ -1,5 +1,9 @@
 import request from './request';
-import { CartGetResponseBody, CartDeleteResponseBody, CartGetAmountResponseBody } from './types/cart';
+import {
+  CartGetResponseBody,
+  CartDeleteResponseBody,
+  CartGetAmountResponseBody,
+} from './types/cart';
 
 export const cartBaseUrl = '/api/cart';
 
