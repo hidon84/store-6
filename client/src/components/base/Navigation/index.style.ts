@@ -90,7 +90,7 @@ export const Badge = styled.div<{ badgeContent: string }>`
   height: 18px;
   width: 18px;
   color: #fff;
-  background-color: #2ac1bc;
+  background-color: var(--baemin100);
   border-radius: 50%;
   font-size: 12px;
 
