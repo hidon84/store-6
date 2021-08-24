@@ -1,5 +1,5 @@
 import request from './request';
-import { CartGetResponseBody } from './types/cart';
+import { CartGetResponseBody, CartDeleteResponseBody } from './types/cart';
 
 export const cartBaseUrl = '/api/cart';
 
@@ -12,4 +12,4 @@ export const getCartItems = () =>
   request<CartGetResponseBody[]>('GET', cartUrl.cart);
 
 export const deleteCartItem = (id: number) =>
-  request('DELETE', cartUrl.cartDetail(id));
+  request<CartDeleteResponseBody>('DELETE', cartUrl.cartDetail(id));
