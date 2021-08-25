@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
@@ -9,6 +11,7 @@ import {
   productLikeError,
   cartDeleteError,
   likeDeleteError,
+  ProductSaveError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -17,6 +20,7 @@ import LikeRepository from '@/repository/like';
 import CartRepository from '@/repository/cart';
 import ProductImageRepository from '@/repository/productImage';
 import UserRepository from '@/repository/user';
+import CategoryRepository from '@/repository/category';
 
 @Service()
 class ProductService {
@@ -34,6 +38,8 @@ class ProductService {
 
   private cartRepository: CartRepository;
 
+  private categoryRepository: CategoryRepository;
+
   constructor(
     @InjectRepository(UserRepository) userRepository: UserRepository,
     @InjectRepository(ProductRepository) productRepository: ProductRepository,
@@ -43,6 +49,8 @@ class ProductService {
     @InjectRepository(ReviewRepository) reviewRepository: ReviewRepository,
     @InjectRepository(LikeRepository) likeRepository: LikeRepository,
     @InjectRepository(CartRepository) cartRepository: CartRepository,
+    @InjectRepository(CategoryRepository)
+    categoryRepository: CategoryRepository,
   ) {
     this.userRepository = userRepository;
     this.productRepository = productRepository;
@@ -51,6 +59,7 @@ class ProductService {
     this.reviewRepository = reviewRepository;
     this.likeRepository = likeRepository;
     this.cartRepository = cartRepository;
+    this.categoryRepository = categoryRepository;
   }
 
   async getProducts(querys: object) {
@@ -238,6 +247,50 @@ class ProductService {
         throw e;
       }
       throw new ErrorResponse(likeDeleteError.unable);
+    }
+  }
+
+  async addProduct(
+    policy: string,
+    category: string,
+    title: string,
+    thumbnail: string,
+    originPrice: number,
+    discountedPrice: number,
+    rank: number,
+    images: string[],
+    mandatoryInfo: { key: string; value: string },
+    shipInfo: { key: string; value: string },
+  ) {
+    try {
+      const currentCategory = await this.categoryRepository.findByName(
+        category,
+      );
+
+      const newProduct = await this.productRepository.saveItem(
+        policy,
+        currentCategory!,
+        title,
+        thumbnail,
+        originPrice,
+        discountedPrice,
+        rank,
+        mandatoryInfo,
+        shipInfo,
+      );
+
+      for await (const image of images) {
+        await this.productImageRepository.saveItem(newProduct, image);
+      }
+
+      const { idx, updatedAt, createdAt } = newProduct;
+
+      return { idx, updatedAt, createdAt };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(ProductSaveError.unable);
     }
   }
 }

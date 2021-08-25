@@ -8,6 +8,7 @@ import {
   handleAddCart,
   handleRemoveCart,
   handleRemoveLike,
+  handleAddProduct,
 } from './productController';
 
 const productRouter = Router();
@@ -56,5 +57,7 @@ export default (router: Router) => {
     middlewares.attachCurrentUser,
     handleRemoveLike,
   );
+
+  productRouter.post('/', handleAddProduct);
   return router;
 };
