@@ -67,6 +67,7 @@ const ProductItem: React.FC<Props> = ({
       <ProductImage
         src={thumbnail}
         autoHover={false}
+        referrerPolicy="no-referrer"
         isHovered={isLikeItem ? false : isHovered}
       />
       {isLikeItem && (
