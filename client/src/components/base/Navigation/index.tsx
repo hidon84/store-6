@@ -1,10 +1,15 @@
 import { FC } from 'react';
 import { Link, useLocation } from '~/core/Router';
+
+import HeaderLogo from '~/components/base/HeaderLogo';
+import ProfileIcon from '~/components/base/ProfileIcon';
 import Divider from '~/components/common/Divider';
-import useUser from '~/lib/hooks/useUser';
-import ProfileImage from '~/components/common/ProfileImage';
 import ProductLikeButton from '~/components/product/ProductLikeButton';
-import HeaderLogo from '../HeaderLogo';
+
+import urls from '~/lib/constants/urls';
+import useCartAmount from '~/lib/hooks/useCartAmount';
+import useUser from '~/lib/hooks/useUser';
+
 import {
   NavigationWrapper,
   Content,
@@ -16,11 +21,7 @@ import {
   CartIcon,
   DoodleUselessIcon,
   MyPageIcon,
-  UserInteractDropdown,
-  InteractSpan,
 } from './index.style';
-import urls from '~/lib/constants/urls';
-import useCartAmount from '~/lib/hooks/useCartAmount';
 
 const Navigation: FC = () => {
   const [user] = useUser();
@@ -54,13 +55,7 @@ const Navigation: FC = () => {
             />
           </Link>
           {user ? (
-            <>
-              <ProfileImage image={user.profile} size="30px" />
-              <UserInteractDropdown>
-                <InteractSpan>마이페이지</InteractSpan>
-                <InteractSpan>로그아웃</InteractSpan>
-              </UserInteractDropdown>
-            </>
+            <ProfileIcon pathname={pathname} user={user} />
           ) : (
             <Link to="/login">
               <MyPageIcon activate={pathname === urls.login} />
