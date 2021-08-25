@@ -15,6 +15,7 @@ import {
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import { detail1PNG, detail2PNG, detail3PNG, detail4PNG } from '~/assets';
+import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -34,6 +35,7 @@ const ProductDetail: FC = () => {
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
+  const [recommend, setRecommend] = useState([]);
 
   useEffect(() => {
     if (!isIdxValid) {
@@ -58,6 +60,29 @@ const ProductDetail: FC = () => {
         thumbnail: detail1PNG,
         images: [detail2PNG, detail3PNG, detail4PNG],
       });
+
+      setRecommend([
+        {
+          idx: 1,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+        {
+          idx: 2,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+        {
+          idx: 3,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+        {
+          idx: 4,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+      ]);
     }, 400);
     // productsApi
     //   .getProductDetail(idx)
@@ -128,6 +153,7 @@ const ProductDetail: FC = () => {
           onClickAddToCart={onClickAddToCart}
           onClickLike={onClickLike}
         />
+        <ProductRecommendContainer products={recommend} />
       </RightSection>
     </ProductDetailWrapper>
   );
