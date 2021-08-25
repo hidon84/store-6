@@ -24,13 +24,12 @@ export type ShipType = {
   defaultShipping?: boolean;
 };
 
-
 const message = {
   SET_DEFAULT: '기본 배송지가 설정되었습니다.',
   DELETE_INFO: '배송정보가 삭제되었습니다.',
   SET_INFO: '배송정보가 등록되었습니다.',
-  MODIFY_INFO: '배송정보가 수정되었습니다.'
-}
+  MODIFY_INFO: '배송정보가 수정되었습니다.',
+};
 
 const Shipping: FC = () => {
   const [user] = useUser();
