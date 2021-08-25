@@ -3,7 +3,6 @@ import Button from '~/components/common/Button';
 import ProductLikeButton from '~/components/product/ProductLikeButton';
 import { ProductDetailGetResponseBody } from '~/lib/api/types';
 import { formatPrice } from '~/utils/fotmatPrice';
-import ProductRecommendContainer from '../ProductRecommend';
 import SubInfos from '../SubInfos';
 import {
   ProductDetailContainerWrapper,

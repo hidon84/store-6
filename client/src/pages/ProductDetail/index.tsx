@@ -35,26 +35,9 @@ const ProductDetail: FC = () => {
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
-  const [recommend, setRecommend] = useState([
-    {
-      idx: 1,
-      thumbnail: 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg'
-    },
-    {
-      idx: 2,
-      thumbnail: 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg'
-    },
-    {
-      idx: 3,
-      thumbnail: 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg'
-    },
-    {
-      idx: 4,
-      thumbnail: 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg'
-    },
-  ]);
+  const [recommend, setRecommend] = useState([]);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (!isIdxValid) {
       alert(message.failedToGetProductDetail);
       return;
@@ -77,6 +60,29 @@ const ProductDetail: FC = () => {
         thumbnail: detail1PNG,
         images: [detail2PNG, detail3PNG, detail4PNG],
       });
+
+      setRecommend([
+        {
+          idx: 1,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+        {
+          idx: 2,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+        {
+          idx: 3,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+        {
+          idx: 4,
+          thumbnail:
+            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
+        },
+      ]);
     }, 400);
     // productsApi
     //   .getProductDetail(idx)
@@ -147,7 +153,7 @@ const ProductDetail: FC = () => {
           onClickAddToCart={onClickAddToCart}
           onClickLike={onClickLike}
         />
-        <ProductRecommendContainer products={recommend}/>
+        <ProductRecommendContainer products={recommend} />
       </RightSection>
     </ProductDetailWrapper>
   );
