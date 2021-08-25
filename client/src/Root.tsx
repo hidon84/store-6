@@ -6,6 +6,7 @@ import SetCartAmountContext from './lib/contexts/setCartAmountContext';
 import UserContext from './lib/contexts/userContext';
 import useAutoLogin from './lib/hooks/useAutoLogin';
 import * as cartApi from '~/lib/api/cart';
+import { alert } from './utils/modal';
 
 const message = {
   failedToGetCartAmount: '장바구니 개수를 가져오는 데 실패했습니다.',
