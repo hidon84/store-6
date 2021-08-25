@@ -13,6 +13,7 @@ import {
   PrevPageButton,
 } from './index.style';
 import { alert, confirm } from '~/utils/modal';
+import { detail1PNG, detail2PNG, detail3PNG, detail4PNG } from '~/assets';
 
 const dummyProductInfo = {
   name: '요모포켓X배달이친구들 엉클배달이 포켓',
@@ -55,10 +56,29 @@ const ProductDetail: FC = () => {
   }
 
   useEffect(() => {
-    productsApi
-      .getProductDetail(idx)
-      .then((result) => setProduct(result.data))
-      .catch(() => history.push('/404'));
+    setTimeout(() => {
+      setProduct({
+        viewCnt: 2,
+        reviewCnt: 2,
+        likeCnt: 3,
+        updatedAt: '2018-05-05',
+        originPrice: 1500,
+        mandatoryInfo: { asdf: 'asdf' },
+        shipInfo: { from: 'Japan' },
+        policy: 'asdf',
+        createdAt: '2018-03-18',
+        description: 'description',
+        discountedPrice: 2400,
+        idx: 0,
+        title: 'title',
+        thumbnail: detail1PNG,
+        images: [detail2PNG, detail3PNG, detail4PNG],
+      });
+    }, 400);
+    // productsApi
+    //   .getProductDetail(idx)
+    //   .then((result) => setProduct(result.data))
+    //   .catch(() => history.push('/404'));
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
@@ -98,13 +118,20 @@ const ProductDetail: FC = () => {
         });
     }
   }, [idx, product]);
+  if (product === null) return null;
 
+  const { thumbnail, images } = product;
   return (
     <ProductDetailWrapper>
       <PrevPageButton>
         <PrevPageArrow />
       </PrevPageButton>
-      <LeftSection />
+      <LeftSection>
+        <img src={thumbnail} alt="thumbnail" />
+        {images.map((image, imgIdx) => (
+          <img key={`${image}`} src={image} alt={`detail_img_${imgIdx}`} />
+        ))}
+      </LeftSection>
       <LayoutDivider aria-hidden="true">
         <DivideLine />
       </LayoutDivider>

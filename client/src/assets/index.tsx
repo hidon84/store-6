@@ -25,6 +25,10 @@ import modifySVG from './modify-pencil.svg';
 import cancleSVG from './cancle.svg';
 import underlineShortSVG from './underline-baemin-short.svg';
 import underbaeminSVG from './underline-baemin-color.svg';
+import detail1PNG from './productDatail1.png';
+import detail2PNG from './productDatail2.png';
+import detail3PNG from './productDatail3.png';
+import detail4PNG from './productDatail4.png';
 
 const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
@@ -158,4 +162,8 @@ export {
   ProductPageLayoutDividerSVG,
   ProductInfoDividerSVG,
   ProductInfoSubDividerSVG,
+  detail1PNG,
+  detail2PNG,
+  detail3PNG,
+  detail4PNG,
 };
