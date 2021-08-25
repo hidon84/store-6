@@ -5,6 +5,7 @@
  */
 const alert = (message: string, ms?: number) => {
   const alertModalDOM = document.querySelector('#portal > .alert-modal');
+  if (!alertModalDOM) return;
   alertModalDOM.classList.add('show');
   alertModalDOM.querySelector('span').innerText = message;
 

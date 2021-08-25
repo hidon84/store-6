@@ -14,6 +14,7 @@ import {
 } from './index.style';
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
+import { detail1PNG, detail2PNG, detail3PNG, detail4PNG } from '~/assets';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -39,12 +40,31 @@ const ProductDetail: FC = () => {
       alert(message.failedToGetProductDetail);
       return;
     }
-    productsApi
-      .getProductDetail(idx)
-      .then((result) => {
-        return setProduct(result.data);
-      })
-      .catch(() => alert(message.failedToGetProductDetail));
+    setTimeout(() => {
+      setProduct({
+        viewCnt: 2,
+        reviewCnt: 2,
+        likeCnt: 3,
+        updatedAt: '2018-05-05',
+        originPrice: 1500,
+        mandatoryInfo: { asdf: 'asdf' },
+        shipInfo: { from: 'Japan' },
+        policy: 'asdf',
+        createdAt: '2018-03-18',
+        description: 'description',
+        discountedPrice: 2400,
+        idx: 0,
+        title: 'title',
+        thumbnail: detail1PNG,
+        images: [detail2PNG, detail3PNG, detail4PNG],
+      });
+    }, 400);
+    // productsApi
+    //   .getProductDetail(idx)
+    //   .then((result) => {
+    //     return setProduct(result.data);
+    //   })
+    //   .catch(() => alert(message.failedToGetProductDetail));
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
@@ -85,13 +105,20 @@ const ProductDetail: FC = () => {
         });
     }
   }, [idx, product]);
+  if (product === null) return null;
 
+  const { thumbnail, images } = product;
   return (
     <ProductDetailWrapper>
       <PrevPageButton>
         <PrevPageArrow />
       </PrevPageButton>
-      <LeftSection />
+      <LeftSection>
+        <img src={thumbnail} alt="thumbnail" />
+        {images.map((image, imgIdx) => (
+          <img key={`${image}`} src={image} alt={`detail_img_${imgIdx}`} />
+        ))}
+      </LeftSection>
       <LayoutDivider aria-hidden="true">
         <DivideLine />
       </LayoutDivider>
