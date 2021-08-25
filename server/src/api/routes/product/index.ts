@@ -7,6 +7,7 @@ import {
   handleAddLike,
   handleAddCart,
   handleRemoveCart,
+  handleRemoveLike,
 } from './productController';
 
 const productRouter = Router();
@@ -48,5 +49,12 @@ export default (router: Router) => {
     handleRemoveCart,
   );
 
+  productRouter.delete(
+    '/:id/like',
+    middlewares.isAuth,
+    middlewares.isAccessToken,
+    middlewares.attachCurrentUser,
+    handleRemoveLike,
+  );
   return router;
 };

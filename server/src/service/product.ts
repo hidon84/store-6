@@ -211,6 +211,33 @@ class ProductService {
       throw new ErrorResponse(productLikeError.unable);
     }
   }
+
+  async removeLike(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const like = await this.likeRepository.findByIdxOfProductAndUser(
+        userIdx,
+        productIdx,
+      );
+
+      if (!like) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      await this.likeRepository.deleteItem(like);
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(productLikeError.unable);
+    }
+  }
 }
 
 export default ProductService;

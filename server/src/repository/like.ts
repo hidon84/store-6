@@ -42,7 +42,6 @@ class LikeRepository extends Repository<LikeEntity> {
       },
       relations: ['user'],
     });
-
     return likes;
   }
 
