@@ -78,7 +78,10 @@ export const HeaderRightSection = styled.div`
   right: 0;
   display: flex;
   align-items: center;
-  gap: 45px;
+
+  & > a:not(:last-child) {
+    margin-right: 45px;
+  }
 `;
 
 export const Badge = styled.div<{ badgeContent: string }>`
