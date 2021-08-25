@@ -51,6 +51,7 @@ exports[`<ProductItem /> should render same with snapshot 1`] = `
   >
     <img
       class="c1"
+      referrerpolicy="no-referrer"
       src="test"
     />
     <div
