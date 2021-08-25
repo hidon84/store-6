@@ -4,6 +4,7 @@ import OauthCallback from '~/components/callback/OauthCallback';
 const GoogleCallbackPage = () => {
   return (
     <OauthCallback
+      social="google"
       oauthCallback={oauthApi.googleCallback}
       oauthLoginCallback={oauthApi.googleLoginCallback}
     />

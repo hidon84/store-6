@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import styled from 'styled-components';
+import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 
 interface RouterLocation {
   pathname: string;
@@ -122,7 +123,7 @@ const Switch: React.FC<{
     }
   }
 
-  return <div>No Matching Route</div>;
+  return <NoMatchingRoute />;
 };
 
 /**
