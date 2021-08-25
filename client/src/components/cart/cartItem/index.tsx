@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { cancleSVG } from '~/assets';
 import { confirm } from '~/utils/modal';
 import {
@@ -16,10 +16,9 @@ import {
 interface Props {
   cartIdx: number;
   product: {
-    idx: number;
-    thumbnail: string;
     title: string;
-    price: number;
+    thumbnail: string;
+    discountedPrice: number;
   };
   changeAmount: (price: number, type: string) => void;
   removeCartItem: (cartIdx: number, count: number, price: number) => void;
@@ -31,35 +30,36 @@ const CartItem: FC<Props> = ({
   changeAmount,
   removeCartItem,
 }) => {
+  const { thumbnail, title, discountedPrice } = product;
   const [count, setCount] = useState(1);
-  const [orderPrice, setOrderPrice] = useState(product.price);
+  const [orderPrice, setOrderPrice] = useState(discountedPrice);
 
   const handleUpBtnClick = () => {
-    setOrderPrice(orderPrice + product.price);
+    setOrderPrice(orderPrice + discountedPrice);
     setCount(count + 1);
-    changeAmount(product.price, 'up');
+    changeAmount(discountedPrice, 'up');
   };
 
   const handleDownBtnClick = () => {
     if (count > 1) {
       setCount(count - 1);
-      setOrderPrice(orderPrice - product.price);
-      changeAmount(product.price, 'down');
+      setOrderPrice(orderPrice - discountedPrice);
+      changeAmount(discountedPrice, 'down');
     }
   };
 
   const handleRemoveBtnClick = () => {
     confirm('정말 삭제하시겠어요?', () => {
-      removeCartItem(cartIdx, count, product.price);
-      changeAmount(count * product.price, 'down');
+      removeCartItem(cartIdx, count, discountedPrice);
+      changeAmount(count * discountedPrice, 'down');
     });
   };
 
   return (
     <CartItemWrapper>
-      <CartImg src={product.thumbnail} />
-      <CartTitle>{[product.title]}</CartTitle>
-      <CartPrice>{product.price}</CartPrice>
+      <CartImg src={thumbnail} />
+      <CartTitle>{[title]}</CartTitle>
+      <CartPrice>{discountedPrice}</CartPrice>
       <CartCount>{orderPrice}</CartCount>
       <CartCounter>
         <CountBtn onClick={handleUpBtnClick}>&uarr;</CountBtn>
