@@ -7,10 +7,9 @@ describe('<CartItem />', () => {
   it('should render same with snapshot', () => {
     const cartIdx = 1;
     const product = {
-      idx: 1,
-      thumbnail: 'test',
-      title: 'test',
-      price: 2,
+      title: '',
+      thumbnail: '',
+      discountedPrice: 1,
     };
     const changeAmount = () => {};
     const removeCartItem = () => {};
