@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from '~/core/Router';
+import { Switch, Route, useHistory } from '~/core/Router';
 import '~/styles/app.css';
 import Navigation from '~/components/base/Navigation';
 import LoginPage from '~/pages/Login';
@@ -14,6 +15,7 @@ import ProductDetail from './pages/ProductDetail';
 import GoogleCallbackPage from './pages/GoogleCallback';
 import FacebookCallbackPage from './pages/FacebookCallback';
 import LikeListPage from './pages/LikeList';
+import titles from './lib/constants/titles';
 
 const Main = styled.main`
   position: relative;
@@ -22,6 +24,14 @@ const Main = styled.main`
 `;
 
 const App = () => {
+  const { location } = useHistory();
+
+  useEffect(() => {
+    Object.entries(titles).forEach(([key, val]) => {
+      if (location.pathname.includes(key)) document.title = val;
+    });
+  }, [location]);
+
   return (
     <>
       <Navigation />
@@ -33,7 +43,7 @@ const App = () => {
           <Route exact path="/login">
             <LoginPage />
           </Route>
-          <Route exact path="/signup">
+          <Route path="/signup/:stage">
             <SignUpPage />
           </Route>
           <Route path="/hello/:name/:number">

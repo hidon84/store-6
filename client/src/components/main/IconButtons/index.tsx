@@ -54,7 +54,7 @@ const Button: FC<{ category: string; onClick?: () => void }> = ({
 
 const Book: FC = () => {
   const { push } = useHistory();
-  const onClick = useCallback(() => push('/signup'), []);
+  const onClick = useCallback(() => push('/signup/select'), []);
   return <Button category="book" onClick={onClick} />;
 };
 const Hat: FC = () => {

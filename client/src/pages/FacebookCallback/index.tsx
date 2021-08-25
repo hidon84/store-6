@@ -4,6 +4,7 @@ import OauthCallback from '~/components/callback/OauthCallback';
 const FacebookCallbackPage = () => {
   return (
     <OauthCallback
+      social="facebook"
       oauthCallback={oauthApi.facebookCallback}
       oauthLoginCallback={oauthApi.facebookLoginCallback}
     />

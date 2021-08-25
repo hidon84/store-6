@@ -57,10 +57,6 @@ const LoginPage: FC = () => {
       return;
     }
 
-    /**
-     * @TODO response에 따라서 로그인에 실패했습니다 말고 서버응답에 따라서 다르게 표시하기.
-     * 현재 login()의 리턴값 타입추론이 이상함.
-     */
     await login({
       id,
       password: pw,

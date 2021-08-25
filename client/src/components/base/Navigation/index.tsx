@@ -24,8 +24,8 @@ const Navigation: FC = () => {
   const [user] = useUser();
   const cartAmount = useCartAmount();
   const { pathname } = useLocation();
-
-  if ([urls.main, urls.login, urls.signup].includes(pathname)) return null;
+  if ([urls.main, urls.login].includes(pathname)) return null;
+  if (pathname.includes(urls.signup)) return null;
 
   return (
     <NavigationWrapper>
