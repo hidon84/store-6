@@ -24,6 +24,14 @@ export type ShipType = {
   defaultShipping?: boolean;
 };
 
+
+const message = {
+  SET_DEFAULT: '기본 배송지가 설정되었습니다.',
+  DELETE_INFO: '배송정보가 삭제되었습니다.',
+  SET_INFO: '배송정보가 등록되었습니다.',
+  MODIFY_INFO: '배송정보가 수정되었습니다.'
+}
+
 const Shipping: FC = () => {
   const [user] = useUser();
   const [shipItems, setShipItems] = useState<ShipType[]>([]);
@@ -45,12 +53,10 @@ const Shipping: FC = () => {
   };
 
   useEffect(() => {
-  //   if (user) {
-  //     fetchShipping();
-  //   }
-  // }, [user]);
-    fetchShipping().catch(() => {});
-  }, []);
+    if (user) {
+      fetchShipping();
+    }
+  }, [user]);
 
   const handleNewBtnClick = useCallback(async () => {
     setIsModalOpen(true);
@@ -59,7 +65,7 @@ const Shipping: FC = () => {
   const handleUseThisAddress = useCallback(async () => {
     const response = await selectShipping(selectedShipIdx);
     if (response.statusCode === 200) {
-      alert('기본배송지가 설정되었습니다.');
+      alert(message.SET_DEFAULT);
     }
   }, [selectedShipIdx]);
 
@@ -70,7 +76,7 @@ const Shipping: FC = () => {
   const removeShippingItem = useCallback(async (shipIdx: number) => {
     const response = await deleteShipping(shipIdx);
     if (response.statusCode === 204) {
-      alert('배송지가 삭제되었습니다.');
+      alert(message.DELETE_INFO);
       fetchShipping();
     }
   }, []);
@@ -94,7 +100,7 @@ const Shipping: FC = () => {
   const handleWriteShipping = useCallback(async (_info: ShipType) => {
     const response = await postShpping(_info);
     if (response.statusCode === 200) {
-      alert('배송지가 등록되었습니다.');
+      alert(message.SET_INFO);
       handleModalClose();
       fetchShipping();
     }
@@ -104,7 +110,7 @@ const Shipping: FC = () => {
     async (_info: ShipType) => {
       const response = await putShipping(modifyItem.idx, _info);
       if (response.statusCode === 200) {
-        alert('배송정보가 수정되었습니다.');
+        alert(message.MODIFY_INFO);
         handleModalClose();
         fetchShipping();
       }
