@@ -9,7 +9,7 @@ class ShippingRepository extends Repository<ShippingEntity> {
         user: userIdx,
       },
       order: {
-        updatedAt: 'DESC',
+        createdAt: 'DESC',
       },
     });
     return shippings;

@@ -6,7 +6,7 @@ import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 
 const CartPage: FC = () => {
-  const [isCartComponent, setIsCartComponent] = useState<boolean>(false);
+  const [isCartComponent, setIsCartComponent] = useState<boolean>(true);
 
   const handleSetIsCartComponent = (state: boolean) => {
     setIsCartComponent(state);
