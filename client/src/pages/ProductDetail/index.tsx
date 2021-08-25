@@ -30,12 +30,15 @@ const statusCodeAlreadyAdded = 409;
 const ProductDetail: FC = () => {
   const setCartAmount = useSetCartAmount();
   const idx = Number(useParams().id);
-  const isIdxValid = Number.isNaN(idx) || idx <= 0;
+  const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
 
   useEffect(() => {
-    if (!isIdxValid) return;
+    if (!isIdxValid) {
+      alert(message.failedToGetProductDetail);
+      return;
+    }
     productsApi
       .getProductDetail(idx)
       .then((result) => {
@@ -82,10 +85,6 @@ const ProductDetail: FC = () => {
         });
     }
   }, [idx, product]);
-
-  if (!isIdxValid) {
-    alert(message.failedToGetProductDetail);
-  }
 
   return (
     <ProductDetailWrapper>
