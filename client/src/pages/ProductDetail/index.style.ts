@@ -23,6 +23,9 @@ export const RightSection = styled(LeftSection)`
   justify-content: center;
   align-items: center;
   height: 80%;
+  position: absolute;
+  right: 200px;
+  width: 300px;
 `;
 
 export const LayoutDivider = styled.div`
