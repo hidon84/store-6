@@ -9,6 +9,7 @@ import {
   ProductLikePostResponseBody,
   ProductReviewPostRequestBody,
   ProductReviewPostResponseBody,
+  ProductCartDeleteResponseBody,
 } from './types';
 
 export const productsBaseUrl = '/api/products';
@@ -60,7 +61,7 @@ export const postReviewToProduct = (
   );
 
 export const deleteProductFromCart = (id: number) =>
-  request('DELETE', productsUrl.productCart(id));
+  request<ProductCartDeleteResponseBody>('DELETE', productsUrl.productCart(id));
 
 export const deleteProductFromLike = (id: number) =>
   request('DELETE', productsUrl.productLike(id));

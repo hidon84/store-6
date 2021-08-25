@@ -6,6 +6,8 @@ import {
   handleAddView,
   handleAddLike,
   handleAddCart,
+  handleRemoveCart,
+  handleRemoveLike,
 } from './productController';
 
 const productRouter = Router();
@@ -37,6 +39,22 @@ export default (router: Router) => {
     middlewares.isAccessToken,
     middlewares.attachCurrentUser,
     handleAddCart,
+  );
+
+  productRouter.delete(
+    '/:id/cart',
+    middlewares.isAuth,
+    middlewares.isAccessToken,
+    middlewares.attachCurrentUser,
+    handleRemoveCart,
+  );
+
+  productRouter.delete(
+    '/:id/like',
+    middlewares.isAuth,
+    middlewares.isAccessToken,
+    middlewares.attachCurrentUser,
+    handleRemoveLike,
   );
   return router;
 };

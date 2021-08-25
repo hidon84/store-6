@@ -7,6 +7,8 @@ import {
   productError,
   productViewError,
   productLikeError,
+  cartDeleteError,
+  likeDeleteError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -178,6 +180,64 @@ class ProductService {
         throw e;
       }
       throw new ErrorResponse(productLikeError.unable);
+    }
+  }
+
+  async removeCart(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const cart = await this.cartRepository.findByIdxOfProductAndUser(
+        userIdx,
+        productIdx,
+      );
+
+      if (!cart) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      await this.cartRepository.deleteItem(cart.idx);
+
+      const amount = await this.cartRepository.getCartAmountOfUser(userIdx);
+
+      return { amount };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(cartDeleteError.unable);
+    }
+  }
+
+  async removeLike(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const like = await this.likeRepository.findByIdxOfProductAndUser(
+        userIdx,
+        productIdx,
+      );
+
+      if (!like) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      await this.likeRepository.deleteItem(like);
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(likeDeleteError.unable);
     }
   }
 }
