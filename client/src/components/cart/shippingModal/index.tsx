@@ -155,7 +155,7 @@ const ShippingModal: FC<Props> = ({
         <NameInputWrapper>
           <input
             type="text"
-            placeholder="이름  입력"
+            placeholder="이름 입력"
             value={name}
             onChange={handleChangeName}
           />

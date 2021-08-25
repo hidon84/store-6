@@ -13,6 +13,7 @@ import {
   selectShipping,
 } from '~/lib/api/shipping';
 import useUser from '~/lib/hooks/useUser';
+import { ErrorResponse } from '~/lib/api/types';
 
 export type ShipType = {
   idx?: number;
@@ -25,10 +26,10 @@ export type ShipType = {
 };
 
 const message = {
-  SET_DEFAULT: '기본 배송지가 설정되었습니다.',
-  DELETE_INFO: '배송정보가 삭제되었습니다.',
-  SET_INFO: '배송정보가 등록되었습니다.',
-  MODIFY_INFO: '배송정보가 수정되었습니다.',
+  setDefault: '기본 배송지가 설정되었습니다.',
+  deleteInfo: '배송정보가 삭제되었습니다.',
+  setInfo: '배송정보가 등록되었습니다.',
+  modifyInfo: '배송정보가 수정되었습니다.',
 };
 
 const Shipping: FC = () => {
@@ -39,16 +40,19 @@ const Shipping: FC = () => {
   const [isWriteModal, setIsWriteModal] = useState<boolean>(true);
   const [modifyItem, setModifyItem] = useState<ShipType>();
 
-  const fetchShipping = async () => {
-    const response = await getShippings();
-    if (response.statusCode === 200 && response.data.length) {
-      const shippings = response.data;
-      const selected = shippings.findIndex(
-        (item) => item.defaultShipping === true,
-      );
-      if (selected > -1) setSelectedShipIdx(shippings[selected].idx);
-      setShipItems(shippings);
-    }
+  const fetchShipping = () => {
+    getShippings()
+      .then((response) => {
+        if (response.data.length) {
+          const shippings = response.data;
+          const selected = shippings.findIndex(
+            (item) => item.defaultShipping === true,
+          );
+          if (selected > -1) setSelectedShipIdx(shippings[selected].idx);
+          setShipItems(shippings);
+        }
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
   };
 
   useEffect(() => {
@@ -57,27 +61,29 @@ const Shipping: FC = () => {
     }
   }, [user]);
 
-  const handleNewBtnClick = useCallback(async () => {
+  const handleNewBtnClick = useCallback(() => {
     setIsModalOpen(true);
   }, []);
 
-  const handleUseThisAddress = useCallback(async () => {
-    const response = await selectShipping(selectedShipIdx);
-    if (response.statusCode === 200) {
-      alert(message.SET_DEFAULT);
-    }
+  const handleUseThisAddress = useCallback(() => {
+    selectShipping(selectedShipIdx)
+      .then(() => {
+        alert(message.setDefault);
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
   }, [selectedShipIdx]);
 
   const changeSelectedBtn = useCallback((shipIdx: number) => {
     setSelectedShipIdx(shipIdx);
   }, []);
 
-  const removeShippingItem = useCallback(async (shipIdx: number) => {
-    const response = await deleteShipping(shipIdx);
-    if (response.statusCode === 204) {
-      alert(message.DELETE_INFO);
-      fetchShipping();
-    }
+  const removeShippingItem = useCallback((shipIdx: number) => {
+    deleteShipping(shipIdx)
+      .then(() => {
+        alert(message.deleteInfo);
+        fetchShipping();
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
   }, []);
 
   const handleModalClose = useCallback(() => {
@@ -96,23 +102,25 @@ const Shipping: FC = () => {
     [shipItems, selectedShipIdx],
   );
 
-  const handleWriteShipping = useCallback(async (_info: ShipType) => {
-    const response = await postShpping(_info);
-    if (response.statusCode === 200) {
-      alert(message.SET_INFO);
-      handleModalClose();
-      fetchShipping();
-    }
+  const handleWriteShipping = useCallback((_info: ShipType) => {
+    postShpping(_info)
+      .then(() => {
+        alert(message.setInfo);
+        handleModalClose();
+        fetchShipping();
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
   }, []);
 
   const handleUpdateShipping = useCallback(
-    async (_info: ShipType) => {
-      const response = await putShipping(modifyItem.idx, _info);
-      if (response.statusCode === 200) {
-        alert(message.MODIFY_INFO);
-        handleModalClose();
-        fetchShipping();
-      }
+    (_info: ShipType) => {
+      putShipping(modifyItem.idx, _info)
+        .then(() => {
+          alert(message.modifyInfo);
+          handleModalClose();
+          fetchShipping();
+        })
+        .catch((e: ErrorResponse) => alert(e.message));
     },
     [modifyItem],
   );
