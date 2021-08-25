@@ -131,3 +131,27 @@ export const handleAddCart = async (
     next(e);
   }
 };
+
+export const handleRemoveCart = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const productServiceInstance = Container.get(ProductService);
+
+    const productIdx = Number(req.params.id);
+    if (Number.isNaN(productIdx) || productIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
+    }
+
+    const { amount } = await productServiceInstance.removeCart(
+      productIdx,
+      req.currentUser.idx,
+    );
+
+    res.json({ amount });
+  } catch (e) {
+    next(e);
+  }
+};

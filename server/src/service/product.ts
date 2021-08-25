@@ -180,6 +180,37 @@ class ProductService {
       throw new ErrorResponse(productLikeError.unable);
     }
   }
+
+  async removeCart(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const cart = await this.cartRepository.findByIdxOfProductAndUser(
+        userIdx,
+        productIdx,
+      );
+
+      if (!cart) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      await this.cartRepository.deleteItem(cart.idx);
+
+      const amount = await this.cartRepository.getCartAmountOfUser(userIdx);
+
+      return { amount };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(productLikeError.unable);
+    }
+  }
 }
 
 export default ProductService;
