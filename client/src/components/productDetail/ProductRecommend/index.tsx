@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useHistory } from '~/core/Router';
 import { ImageWrapper, ProductRecommendContainerWrapper } from './index.style';
 
@@ -15,9 +15,9 @@ interface Props {
 const ProductRecommendContainer: FC<Props> = ({ products }) => {
   const { push } = useHistory();
 
-  const handleImgClick = (idx: number) => {
+  const handleImgClick = useCallback((idx: number) => {
     push(`/products/${idx}`);
-  };
+  }, []);
 
   return (
     <ProductRecommendContainerWrapper>
@@ -26,7 +26,9 @@ const ProductRecommendContainer: FC<Props> = ({ products }) => {
         {products.map((product) => (
           <img
             key={product.idx}
-            onClick={() => handleImgClick(product.idx)}
+            onClick={() => {
+              handleImgClick(product.idx);
+            }}
             src={product.thumbnail}
             alt="recommend"
           />
