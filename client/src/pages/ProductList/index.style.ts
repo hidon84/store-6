@@ -23,7 +23,7 @@ export const RightSection = styled.section`
 export const VerticalDivider = styled.div`
   width: 1px;
   margin: 0 45px;
-  min-height: 1000px;
+  min-height: 100%;
   background: url(${VertLineSVG}) bottom left no-repeat;
   background-size: cover;
 `;
