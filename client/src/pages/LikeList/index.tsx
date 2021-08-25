@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FC, useCallback, useEffect, useState } from 'react';
 import ProductItem from '~/components/product/ProductItem';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
@@ -13,34 +10,21 @@ import { LikesGetResponseBody } from '~/lib/api/types/likes';
 import { alert } from '~/utils/modal';
 import { ErrorResponse } from '~/lib/api/types';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
-
-// @TODO Delete dummies
-const dummies = [];
-
-for (let i = 0; i < 100; i += 1) {
-  dummies.push({
-    idx: i + 1,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: `test${i}`,
-    price: 3000,
-    createdAt: '',
-    updatedAt: '',
-  });
-}
+import useUser from '~/lib/hooks/useUser';
 
 const LikeListPage: FC = () => {
+  const [user] = useUser();
   const history = useHistory();
   const [itemList, setItemList] = useState<LikesGetResponseBody[]>(null);
 
   useEffect(() => {
-    // @TODO Delete dummies
-    setItemList(dummies);
-    likesApi
-      .getLikeItems()
-      .then((result) => setItemList(result.data))
-      .catch((e: ErrorResponse) => alert(e.message));
-  }, []);
+    if (user) {
+      likesApi
+        .getLikeItems()
+        .then((result) => setItemList(result.data))
+        .catch((e: ErrorResponse) => alert(e.message));
+    }
+  }, [user]);
 
   const onClickItem = useCallback(
     (idx: number) => {
@@ -51,12 +35,6 @@ const LikeListPage: FC = () => {
 
   const onClickLikeHandler = useCallback(
     (idx: number) => {
-      // @TODO API 테스트 이후 삭제해야 함
-      // const nextItemList = [...itemList];
-      // const indexToDelete = nextItemList.findIndex((v) => v.idx === idx);
-      // if (indexToDelete <= -1) return;
-      // nextItemList.splice(indexToDelete, 1);
-      // setItemList(nextItemList);
       productsApi
         .deleteProductFromLike(idx)
         .then(() => {
@@ -76,20 +54,19 @@ const LikeListPage: FC = () => {
         <SubPageHeaderItem>좋아요 리스트</SubPageHeaderItem>
       </SubPageHeader>
       <ProductLikeItemWrapper>
-        {/* @TODO LikesGetResponseBody 타입이 변경되면 수정해야 할 부분!! */}
-        {/* {itemList?.map(({ idx, name, price, thumbnail }) => (
+        {itemList?.map(({ idx, product }) => (
           <ProductItem
             key={idx}
             idx={idx}
-            title={name}
-            price={price}
-            thumbnail={thumbnail}
+            title={product.title}
+            price={product.discountedPrice}
+            thumbnail={product.thumbnail}
             isLikeItem
             isLike
             onClick={onClickItem}
             onClickLike={onClickLikeHandler}
           />
-        ))} */}
+        ))}
       </ProductLikeItemWrapper>
     </SubPageWrapper>
   );

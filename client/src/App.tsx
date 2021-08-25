@@ -19,7 +19,7 @@ import titles from './lib/constants/titles';
 
 const Main = styled.main`
   position: relative;
-  height: 100%;
+  height: calc(100% - 104px);
   width: 1156px;
 `;
 

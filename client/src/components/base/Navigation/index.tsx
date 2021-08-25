@@ -18,9 +18,11 @@ import {
   MyPageIcon,
 } from './index.style';
 import urls from '~/lib/constants/urls';
+import useCartAmount from '~/lib/hooks/useCartAmount';
 
 const Navigation: FC = () => {
   const [user] = useUser();
+  const cartAmount = useCartAmount();
   const { pathname } = useLocation();
   if ([urls.main, urls.login].includes(pathname)) return null;
   if (pathname.includes(urls.signup)) return null;
@@ -40,7 +42,7 @@ const Navigation: FC = () => {
           <Link to="/cart">
             <CartWrapper activate={pathname === urls.cart}>
               <CartIcon activate={pathname === urls.cart} />
-              <Badge badgeContent="15" />
+              <Badge badgeContent={cartAmount.toString()} />
             </CartWrapper>
           </Link>
           <Link to="/like">
@@ -49,7 +51,7 @@ const Navigation: FC = () => {
               fillLineWhenHover
             />
           </Link>
-          {user?.profile ? (
+          {user ? (
             <ProfileImage image={user.profile} size="30px" />
           ) : (
             <Link to="/login">
