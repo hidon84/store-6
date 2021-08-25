@@ -186,7 +186,6 @@ export const handleAddProduct = async (
     const productServiceInstance = Container.get(ProductService);
 
     const {
-      policy,
       category,
       title,
       thumbnail,
@@ -200,7 +199,6 @@ export const handleAddProduct = async (
 
     const { idx, updatedAt, createdAt } =
       await productServiceInstance.addProduct(
-        policy,
         category,
         title,
         thumbnail,

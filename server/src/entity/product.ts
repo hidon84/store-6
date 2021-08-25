@@ -38,7 +38,7 @@ class ProductEntity {
   @Column('simple-json')
   shipInfo: { key: string; value: string };
 
-  @Column('text')
+  @Column('text', { nullable: true })
   policy: string;
 
   @ManyToOne(() => CategoryEntity, categoryEntity => categoryEntity.idx, {

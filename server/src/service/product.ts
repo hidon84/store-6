@@ -251,7 +251,6 @@ class ProductService {
   }
 
   async addProduct(
-    policy: string,
     category: string,
     title: string,
     thumbnail: string,
@@ -268,7 +267,6 @@ class ProductService {
       );
 
       const newProduct = await this.productRepository.saveItem(
-        policy,
         currentCategory!,
         title,
         thumbnail,

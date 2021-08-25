@@ -76,7 +76,6 @@ class ProductRepository extends Repository<ProductEntity> {
   }
 
   async saveItem(
-    policy: string,
     currentCategory: CategoryEntity,
     title: string,
     thumbnail: string,
@@ -87,7 +86,6 @@ class ProductRepository extends Repository<ProductEntity> {
     shipInfo: { key: string; value: string },
   ) {
     const product = new ProductEntity();
-    product.policy = policy;
     product.category = currentCategory;
     product.title = title;
     product.thumbnail = thumbnail;
