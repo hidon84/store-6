@@ -207,6 +207,7 @@ const useHistory = () => {
 };
 
 const StyledLink = styled.a`
+  all: unset;
   cursor: pointer;
 `;
 
