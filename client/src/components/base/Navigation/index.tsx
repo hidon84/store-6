@@ -51,7 +51,7 @@ const Navigation: FC = () => {
               fillLineWhenHover
             />
           </Link>
-          {user?.profile ? (
+          {user ? (
             <ProfileImage image={user.profile} size="30px" />
           ) : (
             <Link to="/login">
