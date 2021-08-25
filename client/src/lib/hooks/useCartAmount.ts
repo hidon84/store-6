@@ -2,7 +2,13 @@ import { useContext } from 'react';
 import CartAmountContext from '../contexts/cartAmountContext';
 
 const useCartAmount = () => {
-  const { cartAmount } = useContext(CartAmountContext);
+  const cartAmountContext = useContext(CartAmountContext);
+
+  if (!cartAmountContext) {
+    return null;
+  }
+
+  const { cartAmount } = cartAmountContext;
   return cartAmount;
 };
 
