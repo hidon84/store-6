@@ -176,3 +176,42 @@ export const handleRemoveLike = async (
     next(e);
   }
 };
+
+export const handleAddProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const productServiceInstance = Container.get(ProductService);
+
+    const {
+      category,
+      title,
+      thumbnail,
+      originPrice,
+      discountedPrice,
+      rank,
+      images,
+      mandatoryInfo,
+      shipInfo,
+    } = req.body;
+
+    const { idx, updatedAt, createdAt } =
+      await productServiceInstance.addProduct(
+        category,
+        title,
+        thumbnail,
+        originPrice,
+        discountedPrice,
+        rank,
+        images,
+        mandatoryInfo,
+        shipInfo,
+      );
+
+    res.json({ idx, updatedAt, createdAt });
+  } catch (e) {
+    next(e);
+  }
+};
