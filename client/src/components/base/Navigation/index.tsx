@@ -16,6 +16,8 @@ import {
   CartIcon,
   DoodleUselessIcon,
   MyPageIcon,
+  UserInteractDropdown,
+  InteractSpan,
 } from './index.style';
 import urls from '~/lib/constants/urls';
 import useCartAmount from '~/lib/hooks/useCartAmount';
@@ -52,7 +54,13 @@ const Navigation: FC = () => {
             />
           </Link>
           {user ? (
-            <ProfileImage image={user.profile} size="30px" />
+            <>
+              <ProfileImage image={user.profile} size="30px" />
+              <UserInteractDropdown>
+                <InteractSpan>마이페이지</InteractSpan>
+                <InteractSpan>로그아웃</InteractSpan>
+              </UserInteractDropdown>
+            </>
           ) : (
             <Link to="/login">
               <MyPageIcon activate={pathname === urls.login} />
