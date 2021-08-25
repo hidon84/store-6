@@ -46,6 +46,7 @@ export interface ProductCartPostResponseBody {
   idx: number;
   createdAt: string;
   updatedAt: string;
+  amount: number;
 }
 
 export interface ProductLikePostResponseBody {
