@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const UserInteractDropdown = styled.div`
-  z-index: 1;
-  opacity: 1;
+export const UserInteractDropdown = styled.div<{ isDropdownOpened: boolean }>`
+  z-index: ${({ isDropdownOpened }) => (isDropdownOpened ? 1 : -1)};
+  opacity: ${({ isDropdownOpened }) => (isDropdownOpened ? 1 : 0)};
   position: absolute;
   display: flex;
   align-items: center;
