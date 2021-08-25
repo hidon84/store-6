@@ -24,12 +24,15 @@ class ProductEntity {
   originPrice: number;
 
   @Column('int')
+  rank: number;
+
+  @Column('int')
   discountedPrice: number;
 
   @Column('simple-json')
   mandatoryInfo: { key: string; value: string };
 
-  @Column('longtext')
+  @Column('longtext', { nullable: true })
   description: string;
 
   @Column('simple-json')
