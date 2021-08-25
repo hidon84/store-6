@@ -1,5 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
-import useDebounce from '~/lib/hooks/useDebounce';
+import React, { useCallback, useState } from 'react';
 import { formatPrice } from '~/utils/formatPrice';
 import ProductItemWrapper from '~/components/product/ProductItemWrapper';
 import {
