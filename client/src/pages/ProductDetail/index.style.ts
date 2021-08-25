@@ -7,10 +7,14 @@ export const ProductDetailWrapper = styled.main`
   margin: 0 auto;
   padding-top: 50px;
   width: 900px;
-  height: 100%;
+  margin-top: 4px;
+  height: calc(100% - 54px);
+  overflow-y: scroll;
 `;
 
 export const LeftSection = styled.section`
+  display: flex;
+  flex-direction: column;
   width: 400px;
 `;
 
@@ -18,17 +22,22 @@ export const RightSection = styled(LeftSection)`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 900px;
+  height: 80%;
 `;
 
 export const LayoutDivider = styled.div`
   width: fit-content;
+  position: absolute;
+  left: 50%;
+  top: 0%;
 `;
 
 export const DivideLine = styled.img.attrs({
   src: ProductPageLayoutDividerSVG,
   alt: 'divider',
-})``;
+})`
+  position: relative;
+`;
 
 export const PrevPageButton = styled.div`
   position: absolute;
