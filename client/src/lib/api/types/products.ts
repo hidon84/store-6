@@ -78,3 +78,7 @@ export interface ProductReviewsGetResponseBody {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ProductCartDeleteResponseBody {
+  amount: number;
+}

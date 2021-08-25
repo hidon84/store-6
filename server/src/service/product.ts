@@ -7,6 +7,8 @@ import {
   productError,
   productViewError,
   productLikeError,
+  cartDeleteError,
+  likeDeleteError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -208,7 +210,7 @@ class ProductService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(productLikeError.unable);
+      throw new ErrorResponse(cartDeleteError.unable);
     }
   }
 
@@ -235,7 +237,7 @@ class ProductService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(productLikeError.unable);
+      throw new ErrorResponse(likeDeleteError.unable);
     }
   }
 }
