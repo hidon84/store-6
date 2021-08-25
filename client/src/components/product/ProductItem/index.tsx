@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import useDebounce from '~/lib/hooks/useDebounce';
 import { formatPrice } from '~/utils/formatPrice';
 import ProductItemWrapper from '~/components/product/ProductItemWrapper';
@@ -10,6 +10,7 @@ import {
 } from './index.style';
 import ProductImage from '../ProductImage';
 import ProductLikeButton from '../ProductLikeButton';
+import debounce from '~/utils/debounce';
 
 interface Props {
   idx: number;
@@ -34,39 +35,40 @@ const ProductItem: React.FC<Props> = ({
 }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const DELAYED_TIME = 80;
-  const delayedIsHovered = useDebounce(isHovered, DELAYED_TIME);
+  const DELAYED_TIME = 100;
+  const delayMouseEnter = useCallback(
+    debounce(() => setIsHovered(true), DELAYED_TIME),
+    [],
+  );
 
-  const handleOnMouseEnter = (): void => setIsHovered(true);
-  const handleOnMouseLeave = (): void => setIsHovered(false);
+  const delayMouseLeave = useCallback(
+    debounce(() => setIsHovered(false), DELAYED_TIME),
+    [],
+  );
 
   const onClickHandler = useCallback(() => {
-    if (onClick) {
-      onClick(idx);
-    }
+    if (onClick) onClick(idx);
   }, [onClick, idx]);
 
   const onClickLikeHandler = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
-      if (onClickLike) {
-        onClickLike(idx);
-      }
+      if (onClickLike) onClickLike(idx);
     },
     [onClickLike, idx],
   );
 
   return (
     <ProductItemWrapper
-      onMouseEnter={handleOnMouseEnter}
-      onMouseLeave={handleOnMouseLeave}
+      onMouseEnter={delayMouseEnter}
+      onMouseLeave={delayMouseLeave}
       onClick={onClickHandler}
     >
       <ProductImage
         src={thumbnail}
         autoHover={false}
-        isHovered={isLikeItem ? false : delayedIsHovered}
+        isHovered={isLikeItem ? false : isHovered}
       />
       {isLikeItem && (
         <ProductLikeButtonWrapper>
@@ -77,7 +79,7 @@ const ProductItem: React.FC<Props> = ({
           />
         </ProductLikeButtonWrapper>
       )}
-      <ProductInfoWrapper isHovered={delayedIsHovered}>
+      <ProductInfoWrapper isHovered={isHovered}>
         <ProductTitle>{title}</ProductTitle>
         <ProductPrice>{formatPrice(price)}</ProductPrice>
       </ProductInfoWrapper>
