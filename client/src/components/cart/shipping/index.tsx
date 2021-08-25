@@ -1,40 +1,19 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useCallback } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
 import ShipItem from '../shippItem';
 import ShippingModal from '../shippingModal';
 import { ButtonWrapper, ShipHeader } from './index.style';
-
-const mockData = [
-  {
-    idx: 5,
-    name: '황병현',
-    phone: '010-5022-2332',
-    code: '123213',
-    address: '서울 영등포구 선유로 200가길 39',
-    detailAddress: '우형빌딩200호',
-    selected: 0,
-  },
-  {
-    idx: 10,
-    name: '황병현2',
-    phone: '010-5022-2332',
-    code: '123213',
-    address: '서울 영등포구 선유로 200가길 39',
-    detailAddress: '우형빌딩200호',
-    selected: 0,
-  },
-  {
-    idx: 100,
-    name: '황병현3',
-    phone: '010-5022-2332',
-    code: '123213',
-    address: '서울 영등포구 선유로 200가길 39',
-    detailAddress: '우형빌딩200호',
-    selected: 1,
-  },
-];
+import {
+  deleteShipping,
+  getShippings,
+  postShpping,
+  putShipping,
+  selectShipping,
+} from '~/lib/api/shipping';
+import useUser from '~/lib/hooks/useUser';
+import { ErrorResponse } from '~/lib/api/types';
 
 export type ShipType = {
   idx?: number;
@@ -43,108 +22,108 @@ export type ShipType = {
   code: string;
   address: string;
   detailAddress: string;
-  selected?: number;
+  defaultShipping?: boolean;
+};
+
+const message = {
+  setDefault: '기본 배송지가 설정되었습니다.',
+  deleteInfo: '배송정보가 삭제되었습니다.',
+  setInfo: '배송정보가 등록되었습니다.',
+  modifyInfo: '배송정보가 수정되었습니다.',
 };
 
 const Shipping: FC = () => {
-  // const [user] = useUser();
+  const [user] = useUser();
   const [shipItems, setShipItems] = useState<ShipType[]>([]);
   const [selectedShipIdx, setSelectedShipIdx] = useState<number>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isWriteModal, setIsWriteModal] = useState<boolean>(true);
   const [modifyItem, setModifyItem] = useState<ShipType>();
 
-  const fetchShipping = async () => {
-    /**
-     * 주소지 가져오기 api 호출
-     * const response = await getShippingItems();
-     * if (response.statusCode === 200) {
-     *  setShipItems(response.data);
-     * }
-     */
-    setShipItems(mockData);
-    const selectedIdx = mockData.findIndex((item) => item.selected === 1);
-    setSelectedShipIdx(mockData[selectedIdx].idx);
-    alert(`기본 설정 idx는 ${mockData[selectedIdx].idx}`);
+  const fetchShipping = () => {
+    getShippings()
+      .then((response) => {
+        if (response.data.length) {
+          const shippings = response.data;
+          const selected = shippings.findIndex(
+            (item) => item.defaultShipping === true,
+          );
+          if (selected > -1) setSelectedShipIdx(shippings[selected].idx);
+          setShipItems(shippings);
+        }
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
   };
-
-  // useEffect(() => {
-  //   if (user) { fetchShipping();}
-  // }, [user]);
 
   useEffect(() => {
-    fetchShipping().catch(() => {});
+    if (user) {
+      fetchShipping();
+    }
+  }, [user]);
+
+  const handleNewBtnClick = useCallback(() => {
+    setIsModalOpen(true);
   }, []);
 
-  const handleNewBtnClick = () => {
-    alert('모달 오픈');
-    setIsModalOpen(true);
-  };
+  const handleUseThisAddress = useCallback(() => {
+    selectShipping(selectedShipIdx)
+      .then(() => {
+        alert(message.setDefault);
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
+  }, [selectedShipIdx]);
 
-  const handleUseThisAddress = () => {
-    alert(`기본배송지가 ${selectedShipIdx}로 설정`);
-    /**
-     * 주소지 선택 api 호출
-     * const response = await putShippingItem(selectedShipIdx);
-     * if (response.statusCode === 200) {
-     *  alert('수정이 완료되었습니다.)
-     * }
-     */
-  };
-
-  const changeSelectedBtn = (shipIdx: number) => {
-    alert(`${shipIdx}선택`);
+  const changeSelectedBtn = useCallback((shipIdx: number) => {
     setSelectedShipIdx(shipIdx);
-  };
+  }, []);
 
-  const removeShippingItem = (shipIdx: number) => {
-    alert(`${shipIdx}삭제`);
-    /**
-     * 삭제 api 호출
-     * const await deleteShippingItem();
-     * if (response.statusCode === 200) {
-     *  fetchShipping()
-     * }
-     */
-  };
+  const removeShippingItem = useCallback((shipIdx: number) => {
+    deleteShipping(shipIdx)
+      .then(() => {
+        alert(message.deleteInfo);
+        fetchShipping();
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
+  }, []);
 
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setIsModalOpen(false);
     setIsWriteModal(true);
     setModifyItem(null);
-  };
+  }, []);
 
-  const modifyBtnClick = (shipIdx: number) => {
-    alert(`${shipIdx}에 대한 수정 모달`);
-    const selectedIdx = mockData.findIndex((item) => item.idx === shipIdx);
-    setIsWriteModal(false);
-    setModifyItem(mockData[selectedIdx]);
-    setIsModalOpen(true);
-  };
+  const modifyBtnClick = useCallback(
+    (shipIdx: number) => {
+      const selectedIdx = shipItems.findIndex((item) => item.idx === shipIdx);
+      setModifyItem(shipItems[selectedIdx]);
+      setIsWriteModal(false);
+      setIsModalOpen(true);
+    },
+    [shipItems, selectedShipIdx],
+  );
 
-  const handleWriteShipping = (_info: ShipType) => {
-    alert('배송지가 등록되었습니다.');
-    handleModalClose();
-    /**
-     * 등록 api 호출
-     * const await postShippingItem();
-     * if (response.statusCode === 200) {
-     *  fetchShipping()
-     * }
-     */
-  };
+  const handleWriteShipping = useCallback((_info: ShipType) => {
+    postShpping(_info)
+      .then(() => {
+        alert(message.setInfo);
+        handleModalClose();
+        fetchShipping();
+      })
+      .catch((e: ErrorResponse) => alert(e.message));
+  }, []);
 
-  const handleUpdateShipping = (_info: ShipType) => {
-    alert('배송지가 수정되었습니다.');
-    handleModalClose();
-    /**
-     * 수정 api 호출
-     * const await putShippingItem();
-     * if (response.statusCode === 200) {
-     *  fetchShipping()
-     * }
-     */
-  };
+  const handleUpdateShipping = useCallback(
+    (_info: ShipType) => {
+      putShipping(modifyItem.idx, _info)
+        .then(() => {
+          alert(message.modifyInfo);
+          handleModalClose();
+          fetchShipping();
+        })
+        .catch((e: ErrorResponse) => alert(e.message));
+    },
+    [modifyItem],
+  );
 
   return (
     <>
@@ -166,7 +145,7 @@ const Shipping: FC = () => {
         <div>수령인 정보</div>
         <div>주소지 정보</div>
       </ShipHeader>
-      <Divider width="950px" direction="horizontal" />
+      <Divider width="1015px" direction="horizontal" />
       <div>
         {shipItems &&
           shipItems.map((item) => (
@@ -178,7 +157,7 @@ const Shipping: FC = () => {
                 removeShippingItem={removeShippingItem}
                 modifyBtnClick={modifyBtnClick}
               />
-              <Divider width="950px" direction="horizontal" />
+              <Divider width="1015px" direction="horizontal" />
             </div>
           ))}
       </div>
