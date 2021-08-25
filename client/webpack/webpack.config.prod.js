@@ -1,5 +1,4 @@
 const os = require('os');
-const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -46,7 +45,6 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
-    // new webpack.optimize.ModuleConcatenationPlugin(),
   ],
   optimization: {
     minimize: true,
@@ -57,38 +55,14 @@ module.exports = {
       }),
     ],
     splitChunks: {
-      chunks: 'all',
-      minSize: 0,
-      minRemainingSize: 0,
-      maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 30,
-      maxInitialRequests: 20,
-      enforceSizeThreshold: 50000,
       cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'js/vendor/vendor',
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        default: {
-          minChunks: 2,
-          priority: -10,
-          reuseExistingChunk: true,
+        vendors: {
+          test: /[\\/]node_modules[\\/]/, ///< put all used node_modules modules in this chunk
+          name: "js/vendor", ///< name of bundle
+          chunks: "all" ///< type of code to put in this bundle
         },
       },
     },
-
-    // splitChunks: {
-    //   cacheGroups: {
-    //     vendors: {
-    //       test: /[\\/]node_modules[\\/]/, ///< put all used node_modules modules in this chunk
-    //       name: "js/vendor", ///< name of bundle
-    //       chunks: "all" ///< type of code to put in this bundle
-    //     },
-    //   },
-    // },
   },
   devServer: {
     contentBase: path.join(__dirname, '../dist'),
