@@ -20,16 +20,16 @@ const ALERT_MESSAGE =
   '아직 구현되지 않았습니다. 배달이를 눌러서 일단 로그인 페이지로 가시죠.';
 const AlertNotAvailable = () => alert(ALERT_MESSAGE);
 
-const BUTTON_INFOS = {
-  book: ['20%', '110px', BigBookSVG],
-  hat: ['10%', '580px', BigHatSVG],
-  baedal: ['30%', '330px', BigBaedalSVG],
-  gift: ['0%', '280px', BigGiftSVG],
-  house: ['70%', '240px', BigHouseSVG],
-  kk: ['75%', '100px', BigKKSVG],
-  tree: ['65%', '550px', BigTreeSVG],
-  pencil: ['100%', '330px', BigPencilSVG],
-  colab: ['90%', '550px', BigColabSVG],
+export const BUTTON_INFOS = {
+  book: ['23%', '15%', BigBookSVG],
+  hat: ['14%', '62%', BigHatSVG],
+  baedal: ['30%', '43%', BigBaedalSVG],
+  gift: ['5%', '34%', BigGiftSVG],
+  house: ['51%', '26%', BigHouseSVG],
+  kk: ['72%', '18%', BigKKSVG],
+  tree: ['38%', '76%', BigTreeSVG],
+  pencil: ['80%', '43%', BigPencilSVG],
+  colab: ['66%', '72%', BigColabSVG],
 };
 
 const ButtonWrapper = styled.button<{ category: string }>`
@@ -89,8 +89,8 @@ const Stain: FC = () => (
     type="button"
     style={{
       position: 'absolute',
-      left: '20%',
-      top: '100px',
+      left: '22%',
+      top: '16%',
       zIndex: -1,
     }}
     onClick={AlertNotAvailable}
