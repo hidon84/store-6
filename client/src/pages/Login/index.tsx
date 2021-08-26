@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext } from 'react';
+import React, { FC, useCallback, useContext, useEffect } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import { idValidator, pwValidator } from '~/utils/validation';
@@ -46,12 +46,17 @@ import * as usersApi from '~/lib/api/users';
 const LoginPage: FC = () => {
   const { state } = useLocation();
   const { goBack, push } = useHistory();
-  const { userDispatch } = useContext(UserContext);
   const [id, idWarning, handleId] = useInputValidator(
     (state as { id: string; from: string })?.id ?? '',
     idValidator,
   );
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
+  const { user: userState, userDispatch } = useContext(UserContext);
+
+  useEffect(() => {
+    if (userState.isLoggedIn)
+      push('/', { from: '/login', error: 'accessWithToken' });
+  }, [userState.isLoggedIn]);
 
   const onSubmit = async () => {
     if (idWarning.length > 2 || id.length < 4) {

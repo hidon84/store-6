@@ -107,8 +107,8 @@ const Switch: React.FC<{
 
   for (const route of children) {
     const { exact, path } = route.props;
-    if (exact && route.props.path === routerCtx.location.pathname) return route;
-    if (exact && route.props.path !== routerCtx.location.pathname) continue;
+    if (exact && path === routerCtx.location.pathname) return route;
+    if (exact && path !== routerCtx.location.pathname) continue;
 
     const { regex, keys } = compilePath(path);
     const match = routerCtx.location.pathname.match(regex);

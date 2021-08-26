@@ -88,6 +88,13 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setupConnections();
   }
 
+  componentDidMount() {
+    const { from, error } = window.history.state;
+    if (error === 'accessWithToken') {
+      alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
+    }
+  }
+
   componentWillUnmount() {
     this.myStream?.getTracks().forEach((mediaTrack) => {
       mediaTrack.stop();
