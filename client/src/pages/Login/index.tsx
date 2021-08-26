@@ -43,7 +43,7 @@ import { oauthUrl } from '~/lib/api/oauth';
 
 const LoginPage: FC = () => {
   const { state } = useLocation();
-  const { push } = useHistory();
+  const { goBack, push } = useHistory();
   const [id, idWarning, handleId] = useInputValidator(
     (state as { id: string; from: string })?.id ?? '',
     idValidator,
@@ -64,9 +64,7 @@ const LoginPage: FC = () => {
       id,
       password: pw,
     })
-      .then(() => {
-        push('/');
-      })
+      .then(() => goBack())
       .catch((err: ErrorResponse) => {
         alert(err.message);
       });
