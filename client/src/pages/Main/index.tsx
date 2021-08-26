@@ -7,20 +7,12 @@ import Peer, { MediaConnection, DataConnection } from 'peerjs';
 import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import {
-  Book,
-  Baedal,
-  Hat,
-  Gift,
-  House,
-  Kk,
-  Tree,
-  Pencil,
-  Colab,
   Stain,
   Logo,
   TypeCategoryIcon,
   DoodleAnnouncement1,
   DoodleAnnouncement2,
+  Button,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { MainContainer } from './index.style';
@@ -300,7 +292,7 @@ class Main extends Component<{ u?: string }, MainState> {
     );
     if (enteredCategory) {
       this.setState({ entered: enteredCategory }, () => {
-        alert(`엔터 버튼을 눌러서 ${enteredCategory}로 이동해요`);
+        alert(`엔터 버튼을 눌러서 ${enteredCategory} 카테고리로 이동해요`);
       });
     } else {
       this.setState({ entered: undefined });
@@ -363,15 +355,15 @@ class Main extends Component<{ u?: string }, MainState> {
         ))}
         <DoodleAnnouncement1 />
         <DoodleAnnouncement2 />
-        <Book entered={entered} />
-        <Baedal entered={entered} />
-        <Hat entered={entered} />
-        <Gift entered={entered} />
-        <House entered={entered} />
-        <Kk entered={entered} />
-        <Tree entered={entered} />
-        <Pencil entered={entered} />
-        <Colab entered={entered} />
+        <Button category="book" entered={entered === 'book'} />
+        <Button category="baedal" entered={entered === 'baedal'} />
+        <Button category="hat" entered={entered === 'hat'} />
+        <Button category="gift" entered={entered === 'gift'} />
+        <Button category="house" entered={entered === 'house'} />
+        <Button category="kk" entered={entered === 'kk'} />
+        <Button category="tree" entered={entered === 'tree'} />
+        <Button category="pencil" entered={entered === 'pencil'} />
+        <Button category="colab" entered={entered === 'colab'} />
         <Stain />
         <Logo />
       </MainContainer>

@@ -40,7 +40,6 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
-import { alert } from '~/utils/modal';
 
 // Constants
 const CATEGORY_TO_IDX = {
@@ -124,7 +123,6 @@ const ProductList: FC = () => {
 
   useEffect(() => {
     const { state } = window.history;
-    alert(JSON.stringify(state));
     if (state.from === '/') {
       dispatch(setCategory(CATEGORY_TO_IDX[state.category]));
 
