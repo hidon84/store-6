@@ -14,14 +14,14 @@ export interface UserModuleAction {
 }
 
 // Action
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
+export const SET_LOGIN = 'SET_LOGIN';
+export const SET_LOGOUT = 'SET_LOGOUT';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_USER_INFO = 'SET_USER_INFO';
 
 // Action Creator
-export const login = (payload) => ({ type: LOGIN, payload });
-export const logout = () => ({ type: LOGOUT });
+export const setLogin = (payload) => ({ type: SET_LOGIN, payload });
+export const setLogout = () => ({ type: SET_LOGOUT });
 export const setError = (payload) => ({ type: SET_ERROR, payload });
 export const setUserInfo = (payload) => ({ type: SET_USER_INFO, payload });
 
@@ -38,14 +38,14 @@ const userReducer = (
   action: UserModuleAction,
 ): UserModuleState => {
   switch (action.type) {
-    case LOGIN:
+    case SET_LOGIN:
       return {
         ...UserModuleState,
         isLoggedIn: true,
-        user: action.payload.user,
+        user: action.payload,
         requestError: null,
       };
-    case LOGOUT:
+    case SET_LOGOUT:
       return { ...INITIAL_STATE };
     case SET_ERROR:
       return { ...UserModuleState, requestError: action.payload.error };

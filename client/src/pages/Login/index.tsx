@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useContext } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import { idValidator, pwValidator } from '~/utils/validation';
@@ -38,10 +38,15 @@ import {
 import { useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
 import { oauthUrl } from '~/lib/api/oauth';
+import UserContext from '~/lib/contexts/userContext';
+import { setLogin } from '~/stores/userModule';
+
+import * as usersApi from '~/lib/api/users';
 
 const LoginPage: FC = () => {
   const { state } = useLocation();
   const { goBack, push } = useHistory();
+  const { userDispatch } = useContext(UserContext);
   const [id, idWarning, handleId] = useInputValidator(
     (state as { id: string; from: string })?.id ?? '',
     idValidator,
@@ -62,6 +67,8 @@ const LoginPage: FC = () => {
       id,
       password: pw,
     })
+      .then(() => usersApi.getMe())
+      .then((res) => userDispatch(setLogin(res.data)))
       .then(() => goBack())
       .catch((err: ErrorResponse) => {
         alert(err.message);
