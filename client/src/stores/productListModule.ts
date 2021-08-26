@@ -31,7 +31,6 @@ const REMOVE_SEARCH_VALUE = 'REMOVE_SEARCH_VALUE';
 
 // Action Creator
 export const setCategory = (payload: CategoryType) => {
-  console.log(payload);
   return {
     type: SET_CATEGORY,
     payload: { category: payload },
