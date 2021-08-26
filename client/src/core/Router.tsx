@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
-import { alert } from '~/utils/modal';
 
 interface RouterLocation {
   pathname: string;
@@ -49,7 +48,6 @@ const BrowserRouter: React.FC<{
     location: windowLocation,
     push: (newLocation: Partial<RouterLocation>) => {
       const { state, pathname } = newLocation;
-      alert(`${pathname}`);
       window.history.pushState(state, '', pathname);
       setWindowLocation({ ...windowLocation, ...newLocation });
     },
