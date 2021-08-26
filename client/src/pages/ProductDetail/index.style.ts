@@ -16,6 +16,7 @@ export const LeftSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 400px;
+  position: relative;
 `;
 
 export const RightSection = styled(LeftSection)`
