@@ -339,13 +339,13 @@ class Main extends Component<{ u?: string }, MainState> {
     return (
       <MainContainer>
         <div className="audio-grid" ref={this.audioGridRef} />
-        {/* <PixelArt className="cat" />
+        <PixelArt className="cat" coord={{ left: '25%', top: '5%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
-        <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} /> */}
+        <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
         <PixelArt className={minimi} coord={{ left: `${x}%`, top: `${y}%` }} />
-        {/* <PixelArt className="flower" coord={{ left: '90%' }} />
-        <PixelArt className="ladybug" coord={{ top: '80%' }} />
-        <PixelArt className="hedgehog" coord={{ top: '80%', right: '40%' }} /> */}
+        <PixelArt className="flower" coord={{ top: '8%', left: '80%' }} />
+        <PixelArt className="ladybug" coord={{ top: '70%' }} />
+        <PixelArt className="hedgehog" coord={{ top: '80%', right: '40%' }} />
         {users.map((user) => (
           <PixelArt
             key={`${user.id}`}
