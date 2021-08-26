@@ -16,6 +16,7 @@ import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
 import ProductDetailImages from '~/components/productDetail/ProductDetailImages';
+import useUser from '~/lib/hooks/useUser';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -23,6 +24,7 @@ const message = {
   successToAddToCart:
     '장바구니에 추가하였습니다. 장바구니 페이지로 이동하시겠습니까?',
   failedToLike: '좋아요 설정을 하는 데 실패했습니다.',
+  needLogin: '로그인이 필요합니다',
   successToLike: '이 상품에 좋아요 설정을 합니다.',
   successToUnLike: '이 상품에 대해 좋아요 설정을 해제합니다.',
 };
@@ -30,6 +32,7 @@ const message = {
 const statusCodeAlreadyAdded = 409;
 
 const ProductDetail: FC = () => {
+  const [user] = useUser();
   const setCartAmount = useSetCartAmount();
   const idx = Number(useParams().id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
@@ -53,6 +56,10 @@ const ProductDetail: FC = () => {
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
+    if (!user) {
+      alert(message.needLogin);
+      return;
+    }
     productsApi
       .postProductToCart(idx)
       .then((result) => {
@@ -66,6 +73,10 @@ const ProductDetail: FC = () => {
   }, [idx, product, setCartAmount]);
 
   const onClickLike = useCallback(() => {
+    if (!user) {
+      alert(message.needLogin);
+      return;
+    }
     if (product?.isLike) {
       productsApi
         .deleteProductFromLike(idx)
