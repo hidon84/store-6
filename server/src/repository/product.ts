@@ -1,4 +1,4 @@
-import { EntityRepository, Repository, Like, FindOperator } from 'typeorm';
+import { EntityRepository, Repository, Like, FindOperator, Not } from 'typeorm';
 import ProductEntity from '@/entity/product';
 import CategoryEntity from '@/entity/category';
 
@@ -97,6 +97,29 @@ class ProductRepository extends Repository<ProductEntity> {
 
     const newProduct = await this.save(product);
     return newProduct;
+  }
+
+  async findCategoryByIdx(idx: number) {
+    const product = await this.findOne({
+      where: { idx },
+      relations: ['category'],
+    });
+    return product;
+  }
+
+  async findTopRankByCategory(categoryIdx: number, productIdx: number) {
+    const recommend = await this.find({
+      select: ['idx', 'thumbnail'],
+      where: {
+        category: categoryIdx,
+        idx: Not(productIdx),
+      },
+      order: {
+        rank: 'ASC',
+      },
+      take: 4,
+    });
+    return recommend;
   }
 }
 
