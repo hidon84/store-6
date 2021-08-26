@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import { idValidator, pwValidator } from '~/utils/validation';
@@ -39,6 +39,7 @@ import {
 } from './index.style';
 import { useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
+import { oauthUrl } from '~/lib/api/oauth';
 
 const LoginPage: FC = () => {
   const { state } = useLocation();
@@ -71,9 +72,13 @@ const LoginPage: FC = () => {
       });
   };
 
-  const onSocialLogin = () => {
-    alert('소셜로그인은 아직 구현되지 않았습니다');
-  };
+  const onGoogleLogin = useCallback(() => {
+    window.location.href = oauthUrl.google.login;
+  }, []);
+
+  const onFacebookLogin = useCallback(() => {
+    window.location.href = oauthUrl.facebook.login;
+  }, []);
 
   return (
     <StyledLoginPage>
@@ -133,13 +138,13 @@ const LoginPage: FC = () => {
           <SocialButton
             src={socialFacebookSVG}
             alt="facebook"
-            onClick={onSocialLogin}
+            onClick={onFacebookLogin}
           />
           <img src={verticalLineSVG} alt="vertical" />
           <SocialButton
             src={socialGoogleSVG}
             alt="google"
-            onClick={onSocialLogin}
+            onClick={onGoogleLogin}
           />
         </SocialButtons>
         <Copyright>
