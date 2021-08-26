@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useCallback } from 'react';
+import React, { FC, useEffect, useState, useCallback, useRef } from 'react';
 import ProductDetailContainer from '~/components/productDetail/ProductDetailContainer';
 import { useHistory, useParams } from '~/core/Router';
 import { ErrorResponse, ProductDetailGetResponseBody } from '~/lib/api/types';
@@ -38,6 +38,20 @@ const ProductDetail: FC = () => {
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
+  const imagesContainerRef = useRef<HTMLDivElement>();
+
+  const scrollImagesWhenWheel = (e: WheelEvent) => {
+    if (!imagesContainerRef.current) return;
+    imagesContainerRef.current.scrollBy({
+      top: e.deltaY,
+      left: 0,
+    });
+  };
+
+  useEffect(() => {
+    document.addEventListener('wheel', scrollImagesWhenWheel);
+    return () => document.removeEventListener('wheel', scrollImagesWhenWheel);
+  }, []);
 
   useEffect(() => {
     if (!isIdxValid) {
@@ -113,7 +127,7 @@ const ProductDetail: FC = () => {
         <PrevPageArrow />
       </PrevPageButton>
 
-      <LeftSection>
+      <LeftSection ref={imagesContainerRef}>
         <ProductDetailImages thumbnail={thumbnail} images={images} />
       </LeftSection>
 

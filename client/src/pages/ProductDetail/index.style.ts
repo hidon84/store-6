@@ -9,14 +9,19 @@ export const ProductDetailWrapper = styled.main`
   width: 900px;
   margin-top: 4px;
   height: calc(100% - 54px);
-  overflow-y: scroll;
 `;
 
 export const LeftSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 400px;
+  height: 100%;
+  overflow-y: scroll;
   position: relative;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const RightSection = styled(LeftSection)`
@@ -25,8 +30,7 @@ export const RightSection = styled(LeftSection)`
   align-items: center;
   height: 80%;
   position: absolute;
-  right: 200px;
-  width: 300px;
+  right: 150px;
 `;
 
 export const LayoutDivider = styled.div`
