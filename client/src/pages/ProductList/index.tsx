@@ -40,6 +40,7 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
+import { useLocation } from '~/core/Router';
 
 // Constants
 const CATEGORY_TO_IDX = {
@@ -94,6 +95,7 @@ const useScrollPoint = (targetPoint: number): boolean => {
 // Component
 const ProductList: FC = () => {
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
+  const { state } = useLocation();
   const listFooterRef = useRef<HTMLDivElement>();
 
   const { filterState, dispatch } = productListModule();
@@ -122,17 +124,11 @@ const ProductList: FC = () => {
   };
 
   useEffect(() => {
-    const { state } = window.history;
+    if (!state) return;
     if (state.from === '/') {
       dispatch(setCategory(CATEGORY_TO_IDX[state.category]));
-
-      window.history.replaceState(
-        { ...state, category: undefined },
-        '',
-        '/products',
-      );
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     if (fetchState.state === INIT_FETCH) fetchProducts();

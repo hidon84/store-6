@@ -19,6 +19,7 @@ import { MainContainer } from './index.style';
 import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
+import { RouterContext } from '~/core/Router';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
@@ -44,42 +45,15 @@ const pleaseAlloweRecord =
   '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
 
 const categoryCoords = {
-  book: {
-    x: 23,
-    y: 15,
-  },
-  hat: {
-    x: 14,
-    y: 62,
-  },
-  house: {
-    x: 58,
-    y: 36,
-  },
-  kk: {
-    x: 72,
-    y: 18,
-  },
-  baedal: {
-    x: 30,
-    y: 43,
-  },
-  tree: {
-    x: 38,
-    y: 76,
-  },
-  pencil: {
-    x: 80,
-    y: 43,
-  },
-  colab: {
-    x: 66,
-    y: 72,
-  },
-  gift: {
-    x: 5,
-    y: 34,
-  },
+  book: { x: 23, y: 15 },
+  hat: { x: 14, y: 62 },
+  house: { x: 58, y: 36 },
+  kk: { x: 72, y: 18 },
+  baedal: { x: 30, y: 43 },
+  tree: { x: 38, y: 76 },
+  pencil: { x: 80, y: 43 },
+  colab: { x: 66, y: 72 },
+  gift: { x: 5, y: 34 },
 };
 
 class Main extends Component<{ u?: string }, MainState> {
@@ -322,12 +296,13 @@ class Main extends Component<{ u?: string }, MainState> {
         break;
       case 'Enter':
         if (!entered) break;
-        window.history.pushState(
-          { from: '/', category: entered },
-          '',
-          '/products',
-        );
-        window.location.href = '/products';
+        this.context.push({
+          pathname: '/products',
+          state: {
+            from: '/',
+            category: entered,
+          },
+        });
         break;
       default:
         break;
@@ -370,5 +345,7 @@ class Main extends Component<{ u?: string }, MainState> {
     );
   }
 }
+
+Main.contextType = RouterContext;
 
 export default Main;

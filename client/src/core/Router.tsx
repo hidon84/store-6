@@ -7,12 +7,14 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
+import { alert } from '~/utils/modal';
 
 interface RouterLocation {
   pathname: string;
   hash: string;
   search: string;
-  state?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state?: Record<string, any>;
 }
 
 interface RouterContextType {
@@ -24,7 +26,7 @@ interface RouterContextType {
   goBack: () => void;
 }
 
-const RouterContext = createContext<RouterContextType>({
+export const RouterContext = createContext<RouterContextType>({
   location: {
     pathname: '/somewhere',
     hash: '#howdy',
@@ -47,6 +49,7 @@ const BrowserRouter: React.FC<{
     location: windowLocation,
     push: (newLocation: Partial<RouterLocation>) => {
       const { state, pathname } = newLocation;
+      alert(`${pathname}`);
       window.history.pushState(state, '', pathname);
       setWindowLocation({ ...windowLocation, ...newLocation });
     },
