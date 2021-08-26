@@ -43,7 +43,7 @@ export const DivideLine = styled.img.attrs({
   position: relative;
 `;
 
-export const PrevPageButton = styled.div`
+export const PrevPageButton = styled.button`
   position: absolute;
   top: 90px;
   left: 0;
