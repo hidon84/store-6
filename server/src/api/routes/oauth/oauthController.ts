@@ -142,7 +142,7 @@ export const handleOauthFacebookCallback = async (
       return;
     }
 
-    const { access, refresh } = await oauthServiceInstance.googleLogin(id);
+    const { access, refresh } = await oauthServiceInstance.facebookLogin(id);
 
     res.cookie('X-Refresh-Token', refresh, {
       expires: new Date(Date.now() + jwtHelper.getRefreshExpiresInMs()),
