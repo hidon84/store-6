@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext, useEffect } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import { idValidator, pwValidator } from '~/utils/validation';
@@ -51,14 +51,19 @@ const LoginPage: FC = () => {
     idValidator,
   );
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
+  const [isPageAccessed, setIsPageAccessed] = useState(false);
   const { user: userState, userDispatch } = useContext(UserContext);
 
   useEffect(() => {
-    if (userState.isLoggedIn)
+    if (!isPageAccessed && userState.isLoggedIn) {
       push('/', { from: '/login', error: 'accessWithToken' });
-  }, [userState.isLoggedIn]);
+    }
+  }, [userState.isLoggedIn, isPageAccessed]);
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsPageAccessed(true);
+
     if (idWarning.length > 2 || id.length < 4) {
       alert(`아이디 폼에러. ${idWarning}`);
       return;
@@ -73,13 +78,16 @@ const LoginPage: FC = () => {
       password: pw,
     })
       .then(usersApi.getMe)
-      .then((res) => userDispatch(setLogin(res.data)))
-      .then(() => {
-        alert('로그인에 성공하셨습니다.');
-        goBack();
+      .then((res) => {
+        userDispatch(setLogin(res.data));
       })
+      .then(goBack)
       .catch((err: ErrorResponse) => {
-        alert(err.message);
+        if (err.message === 'Unauthorized') {
+          alert(
+            '로그인에 실패하였습니다. 아이디, 비밀번호를 다시 확인해보세요.',
+          );
+        }
       });
   };
 
@@ -101,7 +109,7 @@ const LoginPage: FC = () => {
           <img src={doodleSkeletonSVG} alt="skeleton" />
         </div>
       </LeftDoodles>
-      <LoginForm onSubmit={(e) => e.preventDefault()}>
+      <LoginForm onSubmit={onSubmit}>
         <LoginFormHeader>
           <img src={doodleRobotSVG} alt="robot" />
           <h1 className="text-baemin100">배민</h1>
@@ -124,9 +132,7 @@ const LoginPage: FC = () => {
         />
         <InputHelp>{pwWarning}</InputHelp>
         <ButtonWrapper>
-          <Button size="lg" onClick={onSubmit}>
-            로그인
-          </Button>
+          <Button size="lg">로그인</Button>
         </ButtonWrapper>
         <RegisterSection>
           <LoginDemo

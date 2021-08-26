@@ -24,7 +24,7 @@ const LikeListPage: FC = () => {
 
   useEffect(() => {
     if (!userState.isLoggedIn) {
-      history.push('/', { from: '/like', error: 'accessWithToken' });
+      history.push('/', { from: '/like', error: 'accessWithoutToken' });
       return;
     }
 
