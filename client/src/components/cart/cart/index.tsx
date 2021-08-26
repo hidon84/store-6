@@ -8,6 +8,7 @@ import useUser from '~/lib/hooks/useUser';
 import { alert } from '~/utils/modal';
 import CartItem from '../cartItem';
 import { CartFooter, CartHeader } from './index.style';
+import { formatPrice } from '~/utils/formatPrice';
 
 const message = {
   failedToGetCartItems: '장바구니 리스트를 가져오는 데 실패했습니다.',
@@ -78,9 +79,9 @@ const Cart: FC = () => {
         <div>상품명</div>
         <div>판매가</div>
         <div>주문금액</div>
-        <div>수령</div>
+        <div>수량</div>
       </CartHeader>
-      <Divider width="950px" direction="horizontal" />
+      <Divider width="980px" direction="horizontal" />
       <div>
         {cartItems &&
           cartItems.map((item) => (
@@ -91,12 +92,12 @@ const Cart: FC = () => {
                 changeAmount={changeAmount}
                 removeCartItem={removeCartItem}
               />
-              <Divider width="950px" direction="horizontal" />
+              <Divider width="980px" direction="horizontal" />
             </div>
           ))}
       </div>
       <CartFooter>
-        <div>총 {amount}원</div>
+        <div>총 {formatPrice(amount)}</div>
         <Button size="lg" onClick={onSubmit}>
           결제하기
         </Button>
