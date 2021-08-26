@@ -294,7 +294,7 @@ class Main extends Component<{ u?: string }, MainState> {
       case 'ArrowRight':
         this.setState({ x: Math.min(100, x + DX) }, this.onMinimiMove);
         break;
-      case 'Enter':
+      case 'Space':
         if (!entered) break;
         this.context.push({
           pathname: '/products',
