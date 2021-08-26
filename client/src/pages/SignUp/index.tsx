@@ -1,18 +1,27 @@
-import { FC } from 'react';
+import { FC, useContext, useEffect } from 'react';
 
 import { StyledSignUpPage } from './index.style';
 import LeftDoodles from '~/components/signup/LeftDoodles';
 import RightDoodles from '~/components/signup/RightDoodles';
 import SignUpTypes from '~/components/signup/SignUpTypes';
 import SignUpForm from '~/components/signup/SignUpForm';
-import { useParams } from '~/core/Router';
+import { useHistory, useParams } from '~/core/Router';
+import UserContext from '~/lib/contexts/userContext';
 
 /**
  * /signup/:stage
  * stage: one of ['select', 'own', 'facebook', 'google']
  */
 const SignUpPage: FC = () => {
+  const { user: userState } = useContext(UserContext);
   const { stage } = useParams();
+  const { push } = useHistory();
+
+  useEffect(() => {
+    if (userState.isLoggedIn)
+      push('/', { from: '/signup', error: 'accessWithToken' });
+  }, [userState.isLoggedIn]);
+
   return (
     <StyledSignUpPage>
       <LeftDoodles />

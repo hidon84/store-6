@@ -89,9 +89,12 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   componentDidMount() {
-    const { from, error } = window.history.state;
-    if (error === 'accessWithToken') {
-      alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
+    // if(window.history.state)
+    if (window.history.state) {
+      const { from, error } = window.history.state;
+      if (error === 'accessWithToken') {
+        alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
+      }
     }
   }
 
