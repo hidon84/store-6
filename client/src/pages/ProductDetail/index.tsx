@@ -90,12 +90,15 @@ const ProductDetail: FC = () => {
         });
     }
   }, [idx, product]);
-  if (product === null) return null;
 
+  const goPrevPage = useCallback(() => history.goBack(), [history]);
+
+  if (product === null) return null;
   const { thumbnail, images } = product;
+
   return (
     <ProductDetailWrapper>
-      <PrevPageButton>
+      <PrevPageButton onClick={goPrevPage}>
         <PrevPageArrow />
       </PrevPageButton>
 

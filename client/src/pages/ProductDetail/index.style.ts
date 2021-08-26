@@ -48,6 +48,7 @@ export const PrevPageButton = styled.button`
   top: 90px;
   left: 0;
   width: 40px;
+  cursor: pointer;
 `;
 
 export const PrevPageArrow = styled.img.attrs({
