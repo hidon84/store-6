@@ -7,7 +7,7 @@ import { login } from '~/lib/api/auth';
 
 import Input from '~/components/common/Input';
 import Button from '~/components/common/Button';
-import Checkbox from '~/components/common/Checkbox';
+// import Checkbox from '~/components/common/Checkbox';
 import Divider from '~/components/common/Divider';
 import Copyright from '~/components/base/Copyright';
 import InputHelp from '~/components/login/InputHelp';
@@ -30,10 +30,12 @@ import {
   LoginForm,
   LoginFormHeader,
   ButtonWrapper,
-  CheckboxWrapper,
+  // CheckboxWrapper,
   SocialButtons,
-  CheckboxSection,
+  RegisterSection,
   SocialButton,
+  RegisterLink,
+  LoginDemo,
 } from './index.style';
 import { useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
@@ -110,12 +112,22 @@ const LoginPage: FC = () => {
             로그인
           </Button>
         </ButtonWrapper>
-        <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
-            <span>자동로그인</span>
-          </CheckboxWrapper>
-        </CheckboxSection>
+        <RegisterSection>
+          <LoginDemo
+            onClick={() => {
+              alert('아직 시연용계정 안만들었습니다');
+            }}
+          >
+            시연용 계정 로그인
+          </LoginDemo>
+          <RegisterLink
+            onClick={() => {
+              push('/signup/select');
+            }}
+          >
+            회원가입
+          </RegisterLink>
+        </RegisterSection>
         <Divider />
         <SocialButtons>
           <SocialButton
