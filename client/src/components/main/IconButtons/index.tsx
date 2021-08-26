@@ -78,7 +78,7 @@ const Stain: FC = () => (
       zIndex: -1,
     }}
   >
-    <img src={stainSVG} alt="" />
+    <img src={stainSVG} alt="stain" />
   </button>
 );
 
@@ -91,7 +91,7 @@ const Logo: FC = () => (
       top: '10px',
     }}
   >
-    <img src={logoSVG} alt="" />
+    <img src={logoSVG} alt="logo" />
   </button>
 );
 

@@ -15,7 +15,7 @@ const Icon: FC<{ src: string }> = ({ src }) => {
   return (
     <IconWrapper onMouseLeave={() => setIsHovered(false)}>
       <img src={src} alt="icon" onMouseEnter={() => setIsHovered(true)} />
-      {!isHovered && <Circle src={SmallCircleSVG} alt="" />}
+      {!isHovered && <Circle src={SmallCircleSVG} alt="circle" />}
     </IconWrapper>
   );
 };
