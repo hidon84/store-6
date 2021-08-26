@@ -94,6 +94,12 @@ class Main extends Component<{ u?: string }, MainState> {
       const { from, error } = window.history.state;
       if (error === 'accessWithToken') {
         alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
+      } else if (error === 'accessWithoutToken') {
+        alert(
+          `로그인을 하지 않은 채로 ${from.slice(
+            1,
+          )}페이지로 이동할 수 없습니다.`,
+        );
       }
     }
   }

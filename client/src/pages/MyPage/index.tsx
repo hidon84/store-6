@@ -23,6 +23,7 @@ import {
   ImageInput,
   MyPageContent,
 } from './index.style';
+import { useHistory } from '~/core/Router';
 
 const message = {
   emailUpdateSuccess: '이메일이 수정되었습니다.',
@@ -41,6 +42,7 @@ const MyPage: React.FC = () => {
     'https://user-images.githubusercontent.com/47776356/129712816-13701b24-57cc-451e-93c6-ca7afe190af1.jpeg',
   );
 
+  const { push } = useHistory();
   const { user: userState, userDispatch } = useContext(UserContext);
 
   const handleSubmitEmail = (value: string) => {
@@ -95,8 +97,13 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!userState.isLoggedIn) {
+      push('/', { from: '/me', error: 'accessWithoutToken' });
+      return;
+    }
+
     if (userState.user?.profile) setProfile(userState.user.profile);
-  }, [userState.user]);
+  }, [userState]);
 
   return (
     <SubPageWrapper width="700px">
