@@ -89,7 +89,6 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   componentDidMount() {
-    // if(window.history.state)
     if (window.history.state) {
       const { from, error } = window.history.state;
       if (error === 'accessWithToken') {
