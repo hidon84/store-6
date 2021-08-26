@@ -13,20 +13,18 @@ const message = {
 };
 
 const Root = () => {
-  // const [user, setUser] = useAutoLogin();
-
   const { state: userState, dispatch: userDispatch } = userModule();
 
   const [cartAmount, setCartAmount] = useState(0);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     cartApi
-  //       .getCartAmount()
-  //       .then((result) => setCartAmount(result.data.amount))
-  //       .catch(() => alert(message.failedToGetCartAmount));
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (userState.isLoggedIn) {
+      cartApi
+        .getCartAmount()
+        .then((result) => setCartAmount(result.data.amount))
+        .catch(() => alert(message.failedToGetCartAmount));
+    }
+  }, [userState.isLoggedIn]);
 
   return (
     <UserContext.Provider value={{ user: userState, userDispatch }}>
