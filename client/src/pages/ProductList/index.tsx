@@ -98,7 +98,7 @@ const ProductList: FC = () => {
   const { state } = useLocation();
   const listFooterRef = useRef<HTMLDivElement>();
 
-  const { filterState, dispatch: productListDispath } = productListModule();
+  const { filterState, dispatch: productListDispatch } = productListModule();
   const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
   const entry = useIntersection(listFooterRef, { threshold: 0.95 });
 
@@ -126,7 +126,7 @@ const ProductList: FC = () => {
   useEffect(() => {
     if (!state) return;
     if (state.from === '/') {
-      productListDispath(setCategory(CATEGORY_TO_IDX[state.category]));
+      productListDispatch(setCategory(CATEGORY_TO_IDX[state.category]));
     }
   }, [state]);
 
@@ -144,7 +144,7 @@ const ProductList: FC = () => {
       fetchState.action !== INIT_FETCH && //
       entry?.isIntersecting
     ) {
-      productListDispath(setNextPage());
+      productListDispatch(setNextPage());
       fetchDispatch(initFetch());
     }
   }, [entry]);
@@ -154,7 +154,7 @@ const ProductList: FC = () => {
       value={{ state: fetchState, dispatch: fetchDispatch }}
     >
       <FilterContext.Provider
-        value={{ state: filterState, dispatch: productListDispath }}
+        value={{ state: filterState, dispatch: productListDispatch }}
       >
         <ProductListWrapper>
           <LeftSection>
