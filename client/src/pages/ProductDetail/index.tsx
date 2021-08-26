@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useCallback, useRef } from 'react';
+import { FC, useEffect, useState, useCallback, useRef } from 'react';
 import ProductDetailContainer from '~/components/productDetail/ProductDetailContainer';
 import { useHistory, useParams } from '~/core/Router';
 import { ErrorResponse, ProductDetailGetResponseBody } from '~/lib/api/types';
@@ -40,15 +40,15 @@ const ProductDetail: FC = () => {
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
   const imagesContainerRef = useRef<HTMLDivElement>();
 
-  const scrollImagesWhenWheel = (e: WheelEvent) => {
-    if (!imagesContainerRef.current) return;
-    imagesContainerRef.current.scrollBy({
-      top: e.deltaY,
-      left: 0,
-    });
-  };
-
   useEffect(() => {
+    const scrollImagesWhenWheel = (e: WheelEvent) => {
+      if (!imagesContainerRef.current) return;
+      imagesContainerRef.current.scrollBy({
+        top: e.deltaY,
+        left: 0,
+      });
+    };
+
     document.addEventListener('wheel', scrollImagesWhenWheel);
     return () => document.removeEventListener('wheel', scrollImagesWhenWheel);
   }, []);
