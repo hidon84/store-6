@@ -18,7 +18,7 @@ import { alert } from '~/utils/modal';
 import { UserInteractDropdown, InteractSpan } from './index.style';
 
 interface IProps {
-  user: UsersGetResponseBody;
+  user: Partial<UsersGetResponseBody>;
   pathname: string;
 }
 

@@ -15,7 +15,7 @@ const useAutoLogin = () => {
         userDispatch(setLogin(response.data));
       })
       .catch((error: ErrorResponse) => {
-        userDispatch(setError(error.data));
+        userDispatch(setError({ error }));
       });
   }, [userState.isLoggedIn]);
 

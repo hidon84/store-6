@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { ErrorResponseBody, UsersGetResponseBody } from '~/lib/api/types';
+import { ErrorResponse, UsersGetResponseBody } from '~/lib/api/types';
 
 // Type & Interface
 type PUser = Partial<UsersGetResponseBody>;
@@ -7,11 +7,11 @@ type PUser = Partial<UsersGetResponseBody>;
 export interface UserModuleState {
   isLoggedIn: boolean;
   user: PUser;
-  requestError: ErrorResponseBody;
+  error: ErrorResponse;
 }
 
 interface IPayload extends PUser {
-  error?: ErrorResponseBody;
+  error?: ErrorResponse;
 }
 
 export interface UserModuleAction {
@@ -26,10 +26,10 @@ export const SET_ERROR = 'SET_ERROR';
 export const SET_USER_INFO = 'SET_USER_INFO';
 
 // Action Creator
-export const setLogin = (payload: PUser) => ({ type: SET_LOGIN, payload });
+export const setLogin = (payload: IPayload) => ({ type: SET_LOGIN, payload });
 export const setLogout = () => ({ type: SET_LOGOUT });
-export const setError = (payload: PUser) => ({ type: SET_ERROR, payload });
-export const setUserInfo = (payload: PUser) => ({
+export const setError = (payload: IPayload) => ({ type: SET_ERROR, payload });
+export const setUserInfo = (payload: IPayload) => ({
   type: SET_USER_INFO,
   payload,
 });
@@ -38,7 +38,7 @@ export const setUserInfo = (payload: PUser) => ({
 const INITIAL_STATE = {
   isLoggedIn: false,
   user: null,
-  requestError: null,
+  error: null,
 };
 
 // Reducer
@@ -52,12 +52,12 @@ const userReducer = (
         ...UserModuleState,
         isLoggedIn: true,
         user: action.payload,
-        requestError: null,
+        error: null,
       };
     case SET_LOGOUT:
       return { ...INITIAL_STATE };
     case SET_ERROR:
-      return { ...UserModuleState, requestError: action.payload.error };
+      return { ...UserModuleState, ...action.payload };
     case SET_USER_INFO: {
       return {
         ...UserModuleState,
