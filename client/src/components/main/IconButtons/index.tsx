@@ -12,6 +12,8 @@ import {
   BigTreeSVG,
   logoSVG,
   stainSVG,
+  doodleAnnouncement1,
+  doodleAnnouncement2,
 } from '~/assets';
 import { useHistory } from '~/core/Router';
 import { alert } from '~/utils/modal';
@@ -25,7 +27,7 @@ export const BUTTON_INFOS = {
   hat: ['14%', '62%', BigHatSVG],
   baedal: ['30%', '43%', BigBaedalSVG],
   gift: ['5%', '34%', BigGiftSVG],
-  house: ['51%', '26%', BigHouseSVG],
+  house: ['58%', '36%', BigHouseSVG],
   kk: ['72%', '18%', BigKKSVG],
   tree: ['38%', '76%', BigTreeSVG],
   pencil: ['80%', '43%', BigPencilSVG],
@@ -87,31 +89,74 @@ const Book: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
   );
 };
 
-const Hat: FC = () => {
+const Hat: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
   const { push } = useHistory();
   const onClick = useCallback(() => push('/me'), []);
-  return <Button category="hat" onClick={onClick} />;
+  return (
+    <Button category="hat" entered={entered === 'hat'} onClick={onClick} />
+  );
 };
-const Gift: FC = () => <Button category="gift" />;
-const House: FC = () => {
+
+const Gift: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
   const { push } = useHistory();
   const onClick = useCallback(() => push('/products'), []);
-  return <Button category="house" onClick={onClick} />;
+  return (
+    <Button category="gift" entered={entered === 'gift'} onClick={onClick} />
+  );
 };
 
-const Kk: FC = () => {
+const House: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
   const { push } = useHistory();
-  const onClick = useCallback(() => push('/cart'), []);
-  return <Button category="kk" onClick={onClick} />;
+  const onClick = useCallback(() => push('/products'), []);
+  return (
+    <Button category="house" onClick={onClick} entered={entered === 'house'} />
+  );
 };
 
-const Tree: FC = () => <Button category="tree" />;
-const Pencil: FC = () => <Button category="pencil" />;
-const Colab: FC = () => <Button category="colab" />;
-const Baedal: FC = () => {
+const Kk: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
   const { push } = useHistory();
-  const onClick = useCallback(() => push('/login'), []);
-  return <Button category="baedal" onClick={onClick} />;
+  const onClick = useCallback(() => push('/products'), []);
+  return <Button category="kk" onClick={onClick} entered={entered === 'kk'} />;
+};
+
+const Tree: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/products'), []);
+  return (
+    <Button category="tree" entered={entered === 'tree'} onClick={onClick} />
+  );
+};
+
+const Pencil: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/products'), []);
+  return (
+    <Button
+      category="pencil"
+      entered={entered === 'pencil'}
+      onClick={onClick}
+    />
+  );
+};
+
+const Baedal: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/products'), []);
+  return (
+    <Button
+      category="baedal"
+      entered={entered === 'baedal'}
+      onClick={onClick}
+    />
+  );
+};
+
+const Colab: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
+  const { push } = useHistory();
+  const onClick = useCallback(() => push('/signup/select'), []);
+  return (
+    <Button category="colab" entered={entered === 'colab'} onClick={onClick} />
+  );
 };
 
 const Stain: FC = () => (
@@ -144,4 +189,42 @@ const Logo: FC = () => (
   </button>
 );
 
-export { Book, Baedal, Hat, Gift, House, Kk, Tree, Pencil, Colab, Stain, Logo };
+const DoodleAnnouncement1: FC = () => (
+  <img
+    style={{
+      position: 'absolute',
+      left: '48%',
+      top: '20%',
+    }}
+    src={doodleAnnouncement1}
+    alt="상하좌우"
+  />
+);
+
+const DoodleAnnouncement2: FC = () => (
+  <img
+    style={{
+      position: 'fixed',
+      right: '50px',
+      top: '25px',
+    }}
+    src={doodleAnnouncement2}
+    alt="음성채팅"
+  />
+);
+
+export {
+  Book,
+  Baedal,
+  Hat,
+  Gift,
+  House,
+  Kk,
+  Tree,
+  Pencil,
+  Colab,
+  Stain,
+  Logo,
+  DoodleAnnouncement1,
+  DoodleAnnouncement2,
+};

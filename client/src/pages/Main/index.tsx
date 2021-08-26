@@ -19,6 +19,8 @@ import {
   Stain,
   Logo,
   TypeCategoryIcon,
+  DoodleAnnouncement1,
+  DoodleAnnouncement2,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { MainContainer } from './index.style';
@@ -51,16 +53,16 @@ const pleaseAlloweRecord =
 
 const categoryCoords = {
   book: {
-    x: 22,
-    y: 14,
+    x: 23,
+    y: 15,
   },
   hat: {
     x: 14,
     y: 62,
   },
   house: {
-    x: 51,
-    y: 26,
+    x: 58,
+    y: 36,
   },
   kk: {
     x: 72,
@@ -349,15 +351,17 @@ class Main extends Component<{ u?: string }, MainState> {
             coord={{ left: `${user.x}%`, top: `${user.y}%` }}
           />
         ))}
+        <DoodleAnnouncement1 />
+        <DoodleAnnouncement2 />
         <Book entered={entered} />
-        <Baedal />
-        <Hat />
-        <Gift />
-        <House />
-        <Kk />
-        <Tree />
-        <Pencil />
-        <Colab />
+        <Baedal entered={entered} />
+        <Hat entered={entered} />
+        <Gift entered={entered} />
+        <House entered={entered} />
+        <Kk entered={entered} />
+        <Tree entered={entered} />
+        <Pencil entered={entered} />
+        <Colab entered={entered} />
         <Stain />
         <Logo />
       </MainContainer>

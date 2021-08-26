@@ -40,6 +40,8 @@ import BigHouseSVG from './house.svg';
 import BigKKSVG from './kk.svg';
 import BigPencilSVG from './pencil.svg';
 import BigTreeSVG from './tree.svg';
+import doodleAnnouncement1 from './doodle-announcement1.svg';
+import doodleAnnouncement2 from './doodle-announcement2.svg';
 
 const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
 
@@ -167,4 +169,6 @@ export {
   detail2PNG,
   detail3PNG,
   detail4PNG,
+  doodleAnnouncement1,
+  doodleAnnouncement2,
 };
