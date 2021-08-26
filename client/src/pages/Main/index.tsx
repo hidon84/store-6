@@ -18,6 +18,7 @@ import {
   Colab,
   Stain,
   Logo,
+  TypeCategoryIcon,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { MainContainer } from './index.style';
@@ -30,6 +31,7 @@ interface MainState {
   peerCalls: Record<string, MediaConnection>;
   connections: Record<string, DataConnection>;
   minimi: Minimi;
+  entered?: TypeCategoryIcon;
   y: number;
   x: number;
 }
@@ -46,6 +48,10 @@ const [DY, DX] = [2, 2];
 const delayMS = 400;
 const pleaseAlloweRecord =
   '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
+const bookCoord = {
+  y: 14,
+  x: 22,
+};
 
 class Main extends Component<{ u?: string }, MainState> {
   audioGridRef: RefObject<HTMLDivElement>;
@@ -231,20 +237,50 @@ class Main extends Component<{ u?: string }, MainState> {
     });
   };
 
+  boundChecker = () => {
+    const threshold = {
+      y: 14,
+      x: 12,
+    };
+    const characterOffset = {
+      y: 3,
+      x: 3,
+    };
+    const { y, x } = this.state;
+    const { y: bookY, x: bookX } = bookCoord;
+    if (
+      bookY - threshold.y < y - characterOffset.y &&
+      y - characterOffset.y < bookY + threshold.y &&
+      bookX - threshold.x < x - characterOffset.x &&
+      x - characterOffset.x < bookX + threshold.x
+    ) {
+      this.setState({ entered: 'book' }, () => {
+        alert('엔터 버튼을 눌러서 책카테고리로 이동해요');
+      });
+    } else {
+      this.setState({ entered: undefined });
+    }
+  };
+
+  onMinimiMove = () => {
+    this.boundChecker();
+    this.broadCastMove();
+  };
+
   onKeyDown = (event: globalThis.KeyboardEvent) => {
     const { y, x } = this.state;
     switch (event.code) {
       case 'ArrowUp':
-        this.setState({ y: Math.max(0, y - DY) }, this.broadCastMove);
+        this.setState({ y: Math.max(0, y - DY) }, this.onMinimiMove);
         break;
       case 'ArrowDown':
-        this.setState({ y: Math.min(90, y + DY) }, this.broadCastMove);
+        this.setState({ y: Math.min(90, y + DY) }, this.onMinimiMove);
         break;
       case 'ArrowLeft':
-        this.setState({ x: Math.max(0, x - DX) }, this.broadCastMove);
+        this.setState({ x: Math.max(0, x - DX) }, this.onMinimiMove);
         break;
       case 'ArrowRight':
-        this.setState({ x: Math.min(100, x + DX) }, this.broadCastMove);
+        this.setState({ x: Math.min(100, x + DX) }, this.onMinimiMove);
         break;
       default:
         break;
@@ -252,7 +288,7 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   render() {
-    const { minimi, y, x, users } = this.state;
+    const { minimi, y, x, users, entered } = this.state;
     return (
       <MainContainer>
         <div className="audio-grid" ref={this.audioGridRef} />
@@ -270,7 +306,7 @@ class Main extends Component<{ u?: string }, MainState> {
             coord={{ left: `${user.x}%`, top: `${user.y}%` }}
           />
         ))}
-        <Book />
+        <Book entered={entered} />
         <Baedal />
         <Hat />
         <Gift />

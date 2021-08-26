@@ -1,5 +1,5 @@
 import { FC, useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import {
   BigBaedalSVG,
   BigBookSVG,
@@ -32,31 +32,61 @@ export const BUTTON_INFOS = {
   colab: ['66%', '72%', BigColabSVG],
 };
 
-const ButtonWrapper = styled.button<{ category: string }>`
+const rotate = keyframes`
+  100% {
+    transform: rotate(1turn);
+  }
+`;
+
+const ButtonWrapper = styled.button<{ category: string; entered?: boolean }>`
   position: absolute;
   cursor: pointer;
   left: ${({ category }) => BUTTON_INFOS[category][0]};
   top: ${({ category }) => BUTTON_INFOS[category][1]};
+
+  animation: ${({ entered }) =>
+    entered
+      ? css`
+          ${rotate} .2s linear infinite
+        `
+      : ``};
+  animation-play-state: ${({ entered }) => (entered ? 'running' : 'paused')};
 `;
 
-const Button: FC<{ category: string; onClick?: () => void }> = ({
-  category,
-  onClick,
-}) => (
+export type TypeCategoryIcon =
+  | 'book'
+  | 'hat'
+  | 'house'
+  | 'kk'
+  | 'baedal'
+  | 'tree'
+  | 'pencil'
+  | 'colab'
+  | 'gift';
+
+const Button: FC<{
+  category: TypeCategoryIcon;
+  entered?: boolean;
+  onClick?: () => void;
+}> = ({ category, entered, onClick }) => (
   <ButtonWrapper
     category={category}
     type="button"
+    entered={entered}
     onClick={onClick || AlertNotAvailable}
   >
     <img src={BUTTON_INFOS[category][2]} alt="icon" />
   </ButtonWrapper>
 );
 
-const Book: FC = () => {
+const Book: FC<{ entered?: TypeCategoryIcon }> = ({ entered }) => {
   const { push } = useHistory();
   const onClick = useCallback(() => push('/signup/select'), []);
-  return <Button category="book" onClick={onClick} />;
+  return (
+    <Button category="book" entered={entered === 'book'} onClick={onClick} />
+  );
 };
+
 const Hat: FC = () => {
   const { push } = useHistory();
   const onClick = useCallback(() => push('/me'), []);
