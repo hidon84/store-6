@@ -39,7 +39,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   return (
     <ProductItemContainerWrapper>
       <ItemList
-        isFetching={fetchState.state === START_FETCH}
+        isFetching={fetchState.action === START_FETCH}
         delayedTime={fetchState.forcedDelayTime / 1000}
       >
         {products.length !== 0 &&
@@ -54,7 +54,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
             />
           ))}
         <NoResourceWrapper>
-          {products.length === 0 && fetchState.state !== INIT_FETCH && (
+          {products.length === 0 && fetchState.action !== INIT_FETCH && (
             <NoResource content={NO_RESOURCE_CONTENT} />
           )}
         </NoResourceWrapper>

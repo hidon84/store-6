@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 
 // Interface
 export interface FetchModuleState {
-  state: string;
+  action: string;
   forcedDelayTime: number;
 }
 
@@ -22,7 +22,7 @@ export const initFetch = () => ({ type: INIT_FETCH });
 
 // State
 const INITIAL_FETCH_STATE = {
-  state: 'INIT_FETCH',
+  action: 'INIT_FETCH',
   forcedDelayTime: 300,
 };
 
@@ -33,11 +33,11 @@ const fetchReducer = (
 ): FetchModuleState => {
   switch (action.type) {
     case START_FETCH:
-      return { ...fetchModuleState, state: 'START_FETCH' };
+      return { ...fetchModuleState, action: 'START_FETCH' };
     case FINISH_FETCH:
-      return { ...fetchModuleState, state: 'FINISH_FETCH' };
+      return { ...fetchModuleState, action: 'FINISH_FETCH' };
     case INIT_FETCH:
-      return { ...fetchModuleState, state: 'INIT_FETCH' };
+      return { ...fetchModuleState, action: 'INIT_FETCH' };
     default:
       return { ...fetchModuleState };
   }
