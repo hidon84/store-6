@@ -12,7 +12,8 @@ interface RouterLocation {
   pathname: string;
   hash: string;
   search: string;
-  state?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state?: Record<string, any>;
 }
 
 interface RouterContextType {
@@ -24,7 +25,7 @@ interface RouterContextType {
   goBack: () => void;
 }
 
-const RouterContext = createContext<RouterContextType>({
+export const RouterContext = createContext<RouterContextType>({
   location: {
     pathname: '/somewhere',
     hash: '#howdy',

@@ -15,6 +15,7 @@ import {
 } from '~/lib/api/types';
 import productListModule, {
   ActionType,
+  setCategory,
   setNextPage,
 } from '~/stores/productListModule';
 
@@ -39,6 +40,20 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
+import { useLocation } from '~/core/Router';
+
+// Constants
+const CATEGORY_TO_IDX = {
+  book: 1,
+  pencil: 2,
+  house: 3,
+  tree: 4,
+  baedal: 5,
+  kk: 6,
+  hat: 7,
+  gift: 8,
+  colab: 9,
+};
 
 // Interface
 export interface ProductData {
@@ -80,6 +95,7 @@ const useScrollPoint = (targetPoint: number): boolean => {
 // Component
 const ProductList: FC = () => {
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
+  const { state } = useLocation();
   const listFooterRef = useRef<HTMLDivElement>();
 
   const { filterState, dispatch } = productListModule();
@@ -106,6 +122,13 @@ const ProductList: FC = () => {
         throw new Error(error.data.message);
       });
   };
+
+  useEffect(() => {
+    if (!state) return;
+    if (state.from === '/') {
+      dispatch(setCategory(CATEGORY_TO_IDX[state.category]));
+    }
+  }, [state]);
 
   useEffect(() => {
     if (fetchState.state === INIT_FETCH) fetchProducts();
