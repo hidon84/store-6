@@ -27,10 +27,6 @@ const Root = () => {
     }
   }, [userState.isLoggedIn]);
 
-  useEffect(() => {
-    console.log(userState);
-  }, [userState]);
-
   return (
     <UserContext.Provider value={{ user: userState, userDispatch }}>
       <CartAmountContext.Provider value={{ cartAmount }}>
