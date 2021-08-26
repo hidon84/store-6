@@ -1,3 +1,5 @@
+const callBackQueue = [];
+
 /**
  * 커스텀 alert를 띄워줍니다.
  * @param message 보여줄 내용입니다
@@ -6,11 +8,18 @@
 const alert = (message: string, ms?: number) => {
   const alertModalDOM = document.querySelector('#portal > .alert-modal');
   if (!alertModalDOM) return;
+  if (callBackQueue.length > 0) callBackQueue.pop();
   alertModalDOM.classList.add('show');
   alertModalDOM.querySelector('span').innerText = message;
 
-  setTimeout(() => {
+  const cb1 = () => {
     alertModalDOM.classList.remove('show');
+  };
+  callBackQueue.push(cb1);
+  setTimeout(() => {
+    const cb2 = callBackQueue.pop();
+    if (cb1 === cb2) cb2();
+    else callBackQueue.unshift(cb2);
   }, ms ?? 2000);
 };
 
