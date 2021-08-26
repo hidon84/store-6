@@ -5,9 +5,9 @@ export const CartFooter = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  right: 110px;
-  margin-top: 30px;
-  gap: 50px;
+  left: 20px;
+  margin-top: 35px;
+  gap: 55px;
   font-size: 25px;
 `;
 
@@ -19,18 +19,18 @@ export const CartHeader = styled.div`
   width: 950px;
   text-align: center;
   > :first-child {
-    flex-grow: 2;
+    width: 400px;
   }
 
   > :nth-child(2) {
-    flex-grow: 1;
+    width: 160px;
   }
 
   > :nth-child(3) {
-    flex-grow: 1;
+    width: 160px;
   }
 
   > :last-child {
-    flex-grow: 1;
+    width: 160px;
   }
 `;
