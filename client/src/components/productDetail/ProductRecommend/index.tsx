@@ -23,16 +23,18 @@ const ProductRecommendContainer: FC<Props> = ({ products }) => {
     <ProductRecommendContainerWrapper>
       <div>추천상품</div>
       <ImageWrapper>
-        {products.map((product) => (
-          <img
-            key={product.idx}
-            onClick={() => {
-              handleImgClick(product.idx);
-            }}
-            src={product.thumbnail}
-            alt="recommend"
-          />
-        ))}
+        {products &&
+          products.map((product) => (
+            <img
+              key={product.idx}
+              onClick={() => {
+                handleImgClick(product.idx);
+              }}
+              src={product.thumbnail}
+              alt="recommend"
+              referrerPolicy="no-referrer"
+            />
+          ))}
       </ImageWrapper>
     </ProductRecommendContainerWrapper>
   );

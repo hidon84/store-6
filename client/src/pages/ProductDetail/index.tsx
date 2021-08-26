@@ -14,7 +14,6 @@ import {
 } from './index.style';
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
-import { detail1PNG, detail2PNG, detail3PNG, detail4PNG } from '~/assets';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
 
 const message = {
@@ -35,61 +34,21 @@ const ProductDetail: FC = () => {
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
-  const [recommend, setRecommend] = useState([]);
 
   useEffect(() => {
     if (!isIdxValid) {
       alert(message.failedToGetProductDetail);
       return;
     }
-    setTimeout(() => {
-      setProduct({
-        viewCnt: 2,
-        reviewCnt: 2,
-        likeCnt: 3,
-        updatedAt: '2018-05-05',
-        originPrice: 1500,
-        mandatoryInfo: { asdf: 'asdf' },
-        shipInfo: { from: 'Japan' },
-        policy: 'asdf',
-        createdAt: '2018-03-18',
-        description: 'description',
-        discountedPrice: 2400,
-        idx: 0,
-        title: 'title',
-        thumbnail: detail1PNG,
-        images: [detail2PNG, detail3PNG, detail4PNG],
-      });
 
-      setRecommend([
-        {
-          idx: 1,
-          thumbnail:
-            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
-        },
-        {
-          idx: 2,
-          thumbnail:
-            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
-        },
-        {
-          idx: 3,
-          thumbnail:
-            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
-        },
-        {
-          idx: 4,
-          thumbnail:
-            'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product-image/33/thumbnail.jpeg',
-        },
-      ]);
-    }, 400);
-    // productsApi
-    //   .getProductDetail(idx)
-    //   .then((result) => {
-    //     return setProduct(result.data);
-    //   })
-    //   .catch(() => alert(message.failedToGetProductDetail));
+    productsApi
+      .getProductDetail(idx)
+      .then((result) => {
+        setProduct(result.data);
+      })
+      .catch((e: ErrorResponse) => {
+        alert(e.message);
+      });
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
@@ -139,9 +98,14 @@ const ProductDetail: FC = () => {
         <PrevPageArrow />
       </PrevPageButton>
       <LeftSection>
-        <img src={thumbnail} alt="thumbnail" />
+        <img src={thumbnail} alt="thumbnail" referrerPolicy="no-referrer" />
         {images.map((image, imgIdx) => (
-          <img key={`${image}`} src={image} alt={`detail_img_${imgIdx}`} />
+          <img
+            key={`${image}`}
+            src={image}
+            alt={`detail_img_${imgIdx}`}
+            referrerPolicy="no-referrer"
+          />
         ))}
       </LeftSection>
       <LayoutDivider aria-hidden="true">
@@ -153,7 +117,7 @@ const ProductDetail: FC = () => {
           onClickAddToCart={onClickAddToCart}
           onClickLike={onClickLike}
         />
-        <ProductRecommendContainer products={recommend} />
+        <ProductRecommendContainer products={product.recommend} />
       </RightSection>
     </ProductDetailWrapper>
   );
