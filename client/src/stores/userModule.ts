@@ -10,7 +10,7 @@ export interface UserModuleState {
 
 export interface UserModuleAction {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 // Action
