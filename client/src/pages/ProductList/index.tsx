@@ -100,7 +100,7 @@ const ProductList: FC = () => {
 
   const { filterState, dispatch } = productListModule();
   const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
-  const entry = useIntersection(listFooterRef, {});
+  const entry = useIntersection(listFooterRef, { threshold: 0.95 });
 
   const TARGET_POINT = 700;
   const isScrollPoint = useScrollPoint(TARGET_POINT);
