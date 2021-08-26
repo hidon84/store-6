@@ -29,7 +29,7 @@ exports[`<Icon /> should render Big Icon same with snapshot 1`] = `
       alt="icon"
     />
     <img
-      alt=""
+      alt="circle"
       class="c1"
       src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/circle.svg"
     />
@@ -67,7 +67,7 @@ exports[`<Icon /> should render Small Icon same with snapshot 1`] = `
       src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/gift.svg"
     />
     <img
-      alt=""
+      alt="circle"
       class="c1"
       src="https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/small-icon/circle.svg"
     />
