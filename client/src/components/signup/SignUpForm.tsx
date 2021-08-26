@@ -128,11 +128,17 @@ const SignUpForm: FC<{
     })
       .then(() => {
         if (social === 'FACEBOOK') {
-          window.location.href = oauthUrl.facebook.login;
+          alert('회원가입 성공');
+          setTimeout(() => {
+            window.location.href = oauthUrl.facebook.login;
+          }, 500);
           return;
         }
         if (social === 'GOOGLE') {
-          window.location.href = oauthUrl.google.login;
+          alert('회원가입 성공');
+          setTimeout(() => {
+            window.location.href = oauthUrl.google.login;
+          }, 500);
           return;
         }
         push('/login', { id: social ? user.id : id, from: '/signup' });
