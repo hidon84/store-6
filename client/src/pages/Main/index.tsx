@@ -48,9 +48,44 @@ const [DY, DX] = [2, 2];
 const delayMS = 400;
 const pleaseAlloweRecord =
   '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
-const bookCoord = {
-  y: 14,
-  x: 22,
+
+const categoryCoords = {
+  book: {
+    x: 22,
+    y: 14,
+  },
+  hat: {
+    x: 14,
+    y: 62,
+  },
+  house: {
+    x: 51,
+    y: 26,
+  },
+  kk: {
+    x: 72,
+    y: 18,
+  },
+  baedal: {
+    x: 30,
+    y: 43,
+  },
+  tree: {
+    x: 38,
+    y: 76,
+  },
+  pencil: {
+    x: 80,
+    y: 43,
+  },
+  colab: {
+    x: 66,
+    y: 72,
+  },
+  gift: {
+    x: 5,
+    y: 34,
+  },
 };
 
 class Main extends Component<{ u?: string }, MainState> {
@@ -237,6 +272,7 @@ class Main extends Component<{ u?: string }, MainState> {
     });
   };
 
+  // {category : string
   boundChecker = () => {
     const threshold = {
       y: 14,
@@ -247,15 +283,22 @@ class Main extends Component<{ u?: string }, MainState> {
       x: 3,
     };
     const { y, x } = this.state;
-    const { y: bookY, x: bookX } = bookCoord;
-    if (
-      bookY - threshold.y < y - characterOffset.y &&
-      y - characterOffset.y < bookY + threshold.y &&
-      bookX - threshold.x < x - characterOffset.x &&
-      x - characterOffset.x < bookX + threshold.x
-    ) {
-      this.setState({ entered: 'book' }, () => {
-        alert('엔터 버튼을 눌러서 책카테고리로 이동해요');
+    let enteredCategory: TypeCategoryIcon;
+    Object.entries(categoryCoords).forEach(
+      ([category, { x: categoryX, y: categoryY }]) => {
+        if (
+          categoryY - threshold.y < y - characterOffset.y &&
+          y - characterOffset.y < categoryY + threshold.y &&
+          categoryX - threshold.x < x - characterOffset.x &&
+          x - characterOffset.x < categoryX + threshold.x
+        ) {
+          enteredCategory = category as TypeCategoryIcon;
+        }
+      },
+    );
+    if (enteredCategory) {
+      this.setState({ entered: enteredCategory }, () => {
+        alert(`엔터 버튼을 눌러서 ${enteredCategory}로 이동해요`);
       });
     } else {
       this.setState({ entered: undefined });
