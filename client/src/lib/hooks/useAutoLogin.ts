@@ -1,29 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as authApi from '~/lib/api/auth';
 import * as usersApi from '~/lib/api/users';
-import {
-  ErrorResponse,
-  ErrorResponseBody,
-  UsersGetResponseBody,
-} from '../api/types';
+import { ErrorResponse } from '~/lib/api/types';
+import userModule, { setError, setLogin } from '~/stores/userModule';
 
 const useAutoLogin = () => {
-  const [requestError, setRequestError] = useState<ErrorResponseBody>(null);
-  const [user, setUser] = useState<UsersGetResponseBody>(null);
+  const { state: userState, dispatch: userDispatch } = userModule();
 
   useEffect(() => {
     authApi
       .refresh()
       .then(() => usersApi.getMe())
       .then((response) => {
-        setUser(response.data);
+        userDispatch(setLogin(response.data));
       })
       .catch((error: ErrorResponse) => {
-        setRequestError(error.data);
+        userDispatch(setError(error.data));
       });
-  }, [setUser, setRequestError]);
+  }, [userState.isLoggedIn]);
 
-  return [user, setUser, requestError] as const;
+  return { userState, userDispatch };
 };
 
 export default useAutoLogin;
