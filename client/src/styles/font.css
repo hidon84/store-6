@@ -1,8 +1,7 @@
 @font-face {
   font-display: swap;
   font-family: 'Kyobo';
-  src: 
-    url('../assets/fonts/KyoboHandwriting2019.woff2') format('woff2'), 
+  src: url('../assets/fonts/KyoboHandwriting2019.woff2') format('woff2'),
     url('../assets/fonts/KyoboHandwriting2019.woff') format('woff'),
     url('../assets/fonts/KyoboHandwriting2019.otf') format('opentype');
 }
@@ -10,8 +9,7 @@
 @font-face {
   font-display: swap;
   font-family: 'BM Hanna';
-  src: 
-    url('../assets/fonts/BMHANNAPro.woff2') format('woff2'),
+  src: url('../assets/fonts/BMHANNAPro.woff2') format('woff2'),
     url('../assets/fonts/BMHANNAPro.woff') format('woff'),
     url('../assets/fonts/BMHANNAPro.otf') format('opentype');
 }
