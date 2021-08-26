@@ -15,7 +15,7 @@ import {
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
-import ImageMagnifier from '~/components/productDetail/ImageMagnifier';
+import ProductDetailImages from '~/components/productDetail/ProductDetailImages';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -98,19 +98,15 @@ const ProductDetail: FC = () => {
       <PrevPageButton>
         <PrevPageArrow />
       </PrevPageButton>
+
       <LeftSection>
-        <img src={thumbnail} alt="thumbnail" referrerPolicy="no-referrer" />
-        {images.map((image, imgIdx) => (
-          <ImageMagnifier
-            key={image}
-            imageSrc={image}
-            imageAlt={`detail image ${imgIdx}`}
-          />
-        ))}
+        <ProductDetailImages thumbnail={thumbnail} images={images} />
       </LeftSection>
+
       <LayoutDivider aria-hidden="true">
         <DivideLine />
       </LayoutDivider>
+
       <RightSection>
         <ProductDetailContainer
           product={product}
