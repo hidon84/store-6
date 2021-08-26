@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
 import Divider from '~/components/common/Divider';
-import { putMe } from '~/lib/api/users';
-import { REG_EMAIL, REG_IMAGE, REG_PHONE } from '~/utils/validation';
-import { alert } from '~/utils/modal';
 import UserInfoInput from '~/components/my/UserInfoInput';
 import PhoneInput from '~/components/my/PhoneInput';
 import EmailInput from '~/components/my/EmailInput';
-import useUser from '~/lib/hooks/useUser';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
+
+import { setUserInfo } from '~/stores/userModule';
+import { putMe } from '~/lib/api/users';
+import UserContext from '~/lib/contexts/userContext';
+import { alert } from '~/utils/modal';
+import { REG_EMAIL, REG_IMAGE, REG_PHONE } from '~/utils/validation';
+
 import {
   RowWrapper,
   RowTitle,
@@ -37,13 +41,13 @@ const MyPage: React.FC = () => {
     'https://user-images.githubusercontent.com/47776356/129712816-13701b24-57cc-451e-93c6-ca7afe190af1.jpeg',
   );
 
-  const [userInfo, setUserInfo] = useUser();
+  const { user: userState, userDispatch } = useContext(UserContext);
 
   const handleSubmitEmail = (value: string) => {
     return putMe({ email: value })
       .then(() => {
         alert(message.emailUpdateSuccess);
-        setUserInfo({ ...userInfo, email: value });
+        userDispatch(setUserInfo({ email: value }));
       })
       .catch(() => alert(message.emailUpdateFail));
   };
@@ -52,7 +56,7 @@ const MyPage: React.FC = () => {
     return putMe({ phone: value })
       .then(() => {
         alert(message.phoneUpdateSuccess);
-        setUserInfo({ ...userInfo, phone: value });
+        userDispatch(setUserInfo({ phone: value }));
       })
       .catch(() => alert(message.phoneUpdateFail));
   };
@@ -91,10 +95,8 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (userInfo?.profile) {
-      setProfile(userInfo.profile);
-    }
-  }, [userInfo]);
+    if (userState.user?.profile) setProfile(userState.user.profile);
+  }, [userState.user]);
 
   return (
     <SubPageWrapper width="700px">
@@ -122,8 +124,8 @@ const MyPage: React.FC = () => {
         <UserInfoInput
           title="이메일"
           showWarning={() => alert(message.emailInvalid)}
-          value={userInfo?.email}
-          placeholder={userInfo?.email}
+          value={userState.user?.email}
+          placeholder={userState.user?.email}
           onSubmit={handleSubmitEmail}
           inputComponent={EmailInput}
           validator={emailValidator}
@@ -134,8 +136,8 @@ const MyPage: React.FC = () => {
         <UserInfoInput
           title="연락처"
           showWarning={() => alert(message.phoneInvalid)}
-          value={userInfo?.phone}
-          placeholder={userInfo?.phone?.split('-').join(' ')}
+          value={userState.user?.phone}
+          placeholder={userState.user?.phone?.split('-').join(' ')}
           onSubmit={handleSubmitPhone}
           inputComponent={PhoneInput}
           validator={phoneValidator}

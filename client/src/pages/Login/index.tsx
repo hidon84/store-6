@@ -7,7 +7,6 @@ import { login } from '~/lib/api/auth';
 
 import Input from '~/components/common/Input';
 import Button from '~/components/common/Button';
-// import Checkbox from '~/components/common/Checkbox';
 import Divider from '~/components/common/Divider';
 import Copyright from '~/components/base/Copyright';
 import InputHelp from '~/components/login/InputHelp';
@@ -30,7 +29,6 @@ import {
   LoginForm,
   LoginFormHeader,
   ButtonWrapper,
-  // CheckboxWrapper,
   SocialButtons,
   RegisterSection,
   SocialButton,

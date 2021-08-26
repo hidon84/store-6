@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import ProductItem from '~/components/product/ProductItem';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
@@ -10,23 +10,24 @@ import { LikesGetResponseBody } from '~/lib/api/types/likes';
 import { alert } from '~/utils/modal';
 import { ErrorResponse } from '~/lib/api/types';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
-import useUser from '~/lib/hooks/useUser';
+// import useUser from '~/lib/hooks/useUser';
 import NoResource from '~/components/common/NoResource';
+import UserContext from '~/lib/contexts/userContext';
 
 const LikeListPage: FC = () => {
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
   const history = useHistory();
   const [itemList, setItemList] = useState<LikesGetResponseBody[]>(null);
   const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
 
   useEffect(() => {
-    if (user) {
+    if (userState.isLoggedIn) {
       likesApi
         .getLikeItems()
         .then((result) => setItemList(result.data))
         .catch((e: ErrorResponse) => alert(e.message));
     }
-  }, [user]);
+  }, [userState]);
 
   const onClickItem = useCallback(
     (idx: number) => {

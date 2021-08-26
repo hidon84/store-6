@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 import ProfileImage from '~/components/common/ProfileImage';
-import { Link } from '~/core/Router';
+import { Link, useHistory } from '~/core/Router';
 import * as authAPI from '~/lib/api/auth';
 import { UsersGetResponseBody, ErrorResponse } from '~/lib/api/types';
 import { alert } from '~/utils/modal';
@@ -14,8 +14,8 @@ interface IProps {
 }
 
 const ProfileIcon: FC<IProps> = ({ user, pathname }) => {
+  const { push } = useHistory();
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
-
   const profileImageRef = useRef<HTMLDivElement>();
   const profileModalRef = useRef<HTMLDivElement>();
   const handleMouseClick = useCallback(() => setIsDropdownOpened(true), []);
@@ -33,7 +33,7 @@ const ProfileIcon: FC<IProps> = ({ user, pathname }) => {
     authAPI
       .logout()
       .then(() => {
-        window.location.href = pathname;
+        if (['/me', '/like'].includes(pathname)) push('/login');
       })
       .catch((e: ErrorResponse) => alert(e.message));
   };
