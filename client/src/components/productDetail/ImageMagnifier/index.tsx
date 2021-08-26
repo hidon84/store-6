@@ -1,9 +1,6 @@
 import React, { FC, useState, useCallback, useRef } from 'react';
 import getCursorPos from '~/utils/getCursorPos';
-import {
-  StyledMagnifier,
-  StyledImageMagnifier,
-} from './index.style';
+import { StyledMagnifier, StyledImageMagnifier } from './index.style';
 
 interface IProps {
   imageSrc: string;
