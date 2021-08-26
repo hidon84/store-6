@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 
 import useInputValidator from '~/lib/hooks/useInputValidator';
 import { idValidator, pwValidator } from '~/utils/validation';
@@ -7,7 +7,7 @@ import { login } from '~/lib/api/auth';
 
 import Input from '~/components/common/Input';
 import Button from '~/components/common/Button';
-import Checkbox from '~/components/common/Checkbox';
+// import Checkbox from '~/components/common/Checkbox';
 import Divider from '~/components/common/Divider';
 import Copyright from '~/components/base/Copyright';
 import InputHelp from '~/components/login/InputHelp';
@@ -30,13 +30,16 @@ import {
   LoginForm,
   LoginFormHeader,
   ButtonWrapper,
-  CheckboxWrapper,
+  // CheckboxWrapper,
   SocialButtons,
-  CheckboxSection,
+  RegisterSection,
   SocialButton,
+  RegisterLink,
+  LoginDemo,
 } from './index.style';
 import { useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
+import { oauthUrl } from '~/lib/api/oauth';
 
 const LoginPage: FC = () => {
   const { state } = useLocation();
@@ -69,9 +72,13 @@ const LoginPage: FC = () => {
       });
   };
 
-  const onSocialLogin = () => {
-    alert('소셜로그인은 아직 구현되지 않았습니다');
-  };
+  const onGoogleLogin = useCallback(() => {
+    window.location.href = oauthUrl.google.login;
+  }, []);
+
+  const onFacebookLogin = useCallback(() => {
+    window.location.href = oauthUrl.facebook.login;
+  }, []);
 
   return (
     <StyledLoginPage>
@@ -110,24 +117,34 @@ const LoginPage: FC = () => {
             로그인
           </Button>
         </ButtonWrapper>
-        <CheckboxSection>
-          <CheckboxWrapper>
-            <Checkbox checked />
-            <span>자동로그인</span>
-          </CheckboxWrapper>
-        </CheckboxSection>
+        <RegisterSection>
+          <LoginDemo
+            onClick={() => {
+              alert('아직 시연용계정 안만들었습니다');
+            }}
+          >
+            시연용 계정 로그인
+          </LoginDemo>
+          <RegisterLink
+            onClick={() => {
+              push('/signup/select');
+            }}
+          >
+            회원가입
+          </RegisterLink>
+        </RegisterSection>
         <Divider />
         <SocialButtons>
           <SocialButton
             src={socialFacebookSVG}
             alt="facebook"
-            onClick={onSocialLogin}
+            onClick={onFacebookLogin}
           />
           <img src={verticalLineSVG} alt="vertical" />
           <SocialButton
             src={socialGoogleSVG}
             alt="google"
-            onClick={onSocialLogin}
+            onClick={onGoogleLogin}
           />
         </SocialButtons>
         <Copyright>

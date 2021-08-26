@@ -52,17 +52,26 @@ export const ButtonWrapper = styled.div`
   margin-top: 42px;
 `;
 
-export const CheckboxSection = styled.section`
+export const RegisterSection = styled.section`
+  display: flex;
   width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 32px;
 `;
 
-export const CheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: fit-content;
-  margin-top: 32px;
-  padding-left: 14px;
+export const LoginDemo = styled.span`
+  font-size: 20px;
+  line-height: 26px;
+  padding-left: 20px;
+  cursor: pointer;
+`;
+
+export const RegisterLink = styled.span`
+  color: var(--baemin100);
+  font-size: 20px;
+  line-height: 26px;
+  padding-right: 26px;
   cursor: pointer;
 `;
 

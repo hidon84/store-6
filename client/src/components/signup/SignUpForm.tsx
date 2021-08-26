@@ -38,6 +38,7 @@ import { postUser } from '~/lib/api/users';
 import HeaderTitle from './HeaderTitle';
 import { ErrorResponse } from '~/lib/api/types';
 import useUser from '~/lib/hooks/useUser';
+import { oauthUrl } from '~/lib/api/oauth';
 
 const SignUpForm: FC<{
   social?: 'GOOGLE' | 'FACEBOOK';
@@ -126,6 +127,20 @@ const SignUpForm: FC<{
       type: social ?? 'OWN',
     })
       .then(() => {
+        if (social === 'FACEBOOK') {
+          alert('회원가입 성공');
+          setTimeout(() => {
+            window.location.href = oauthUrl.facebook.login;
+          }, 500);
+          return;
+        }
+        if (social === 'GOOGLE') {
+          alert('회원가입 성공');
+          setTimeout(() => {
+            window.location.href = oauthUrl.google.login;
+          }, 500);
+          return;
+        }
         push('/login', { id: social ? user.id : id, from: '/signup' });
       })
       .catch((e: ErrorResponse) => {
