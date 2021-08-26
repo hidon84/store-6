@@ -3,7 +3,7 @@ import ProductItem from '~/components/product/ProductItem';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
 import { useHistory } from '~/core/Router';
-import { ProductLikeItemWrapper } from './index.style';
+import { ProductLikeItemWrapper, NoResourceWrapper } from './index.style';
 import * as productsApi from '~/lib/api/products';
 import * as likesApi from '~/lib/api/likes';
 import { LikesGetResponseBody } from '~/lib/api/types/likes';
@@ -11,11 +11,13 @@ import { alert } from '~/utils/modal';
 import { ErrorResponse } from '~/lib/api/types';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 import useUser from '~/lib/hooks/useUser';
+import NoResource from '~/components/common/NoResource';
 
 const LikeListPage: FC = () => {
   const [user] = useUser();
   const history = useHistory();
   const [itemList, setItemList] = useState<LikesGetResponseBody[]>(null);
+  const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
 
   useEffect(() => {
     if (user) {
@@ -39,7 +41,9 @@ const LikeListPage: FC = () => {
         .deleteProductFromLike(idx)
         .then(() => {
           const nextItemList = [...itemList];
-          const indexToDelete = nextItemList.findIndex((v) => v.idx === idx);
+          const indexToDelete = nextItemList.findIndex(
+            (v) => v.product.idx === idx,
+          );
           nextItemList.splice(indexToDelete, 1);
           setItemList(nextItemList);
         })
@@ -53,21 +57,27 @@ const LikeListPage: FC = () => {
       <SubPageHeader>
         <SubPageHeaderItem>좋아요 리스트</SubPageHeaderItem>
       </SubPageHeader>
-      <ProductLikeItemWrapper>
-        {itemList?.map(({ idx, product }) => (
-          <ProductItem
-            key={idx}
-            idx={idx}
-            title={product.title}
-            price={product.discountedPrice}
-            thumbnail={product.thumbnail}
-            isLikeItem
-            isLike
-            onClick={onClickItem}
-            onClickLike={onClickLikeHandler}
-          />
-        ))}
-      </ProductLikeItemWrapper>
+      {itemList && itemList.length ? (
+        <ProductLikeItemWrapper>
+          {itemList?.map(({ idx, product }) => (
+            <ProductItem
+              key={idx}
+              idx={product.idx}
+              title={product.title}
+              price={product.discountedPrice}
+              thumbnail={product.thumbnail}
+              isLikeItem
+              isLike
+              onClick={onClickItem}
+              onClickLike={onClickLikeHandler}
+            />
+          ))}
+        </ProductLikeItemWrapper>
+      ) : (
+        <NoResourceWrapper>
+          <NoResource content={NO_RESOURCE_CONTENT} />
+        </NoResourceWrapper>
+      )}
     </SubPageWrapper>
   );
 };

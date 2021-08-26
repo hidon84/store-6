@@ -94,6 +94,14 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   position: relative;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   bottom: 3px;
   gap: 15px;
 }
@@ -103,7 +111,8 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   width: 100px;
   height: 34px;
   font-size: 15px;
-  background: bottom left / contain no-repeat url();
+  position: relative;
+  top: 10px;
 }
 
 .c8::-webkit-input-placeholder {
@@ -178,6 +187,22 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
   filter: invert(71%) sepia(15%) saturate(2122%) hue-rotate(128deg) brightness(92%) contrast(78%);
 }
 
+.c4 input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.c4 input::-moz-placeholder {
+  color: #999;
+}
+
+.c4 input:-ms-input-placeholder {
+  color: #999;
+}
+
+.c4 input::placeholder {
+  color: #999;
+}
+
 .c6 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -228,6 +253,22 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
 .c9 input {
   padding: 0 16px 10px 16px;
   font-size: 15px;
+}
+
+.c9 input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.c9 input::-moz-placeholder {
+  color: #999;
+}
+
+.c9 input:-ms-input-placeholder {
+  color: #999;
+}
+
+.c9 input::placeholder {
+  color: #999;
 }
 
 .c10 {
@@ -310,36 +351,57 @@ exports[`<ShippingModal /> should render same with snapshot 1`] = `
       <div
         class="c7"
       >
-        <input
-          autocomplete="off"
-          class="c8"
-          maxlength="3"
-          placeholder="010"
-          type="text"
-          value=""
-        />
+        <div
+          style="width: 100px;"
+        >
+          <input
+            autocomplete="off"
+            class="c8"
+            maxlength="3"
+            placeholder="010"
+            type="text"
+            value=""
+          />
+          <img
+            alt="underline"
+          />
+        </div>
         <img
           alt="hyphen"
         />
-        <input
-          autocomplete="off"
-          class="c8"
-          maxlength="4"
-          placeholder="0000"
-          type="text"
-          value=""
-        />
+        <div
+          style="width: 100px;"
+        >
+          <input
+            autocomplete="off"
+            class="c8"
+            maxlength="4"
+            placeholder="0000"
+            type="text"
+            value=""
+          />
+          <img
+            alt="underline"
+          />
+        </div>
         <img
           alt="hyphen"
         />
-        <input
-          autocomplete="off"
-          class="c8"
-          maxlength="4"
-          placeholder="0000"
-          type="text"
-          value=""
-        />
+        <div
+          style="width: 100px;"
+        >
+          <input
+            autocomplete="off"
+            class="c8"
+            maxlength="4"
+            placeholder="0000"
+            type="text"
+            value=""
+          />
+          <img
+            alt="underline"
+          />
+        </div>
       </div>
     </div>
     <div

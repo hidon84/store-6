@@ -12,6 +12,7 @@ import {
   Count,
   CountBtn,
 } from './index.style';
+import { formatPrice } from '~/utils/formatPrice';
 
 interface Props {
   cartIdx: number;
@@ -59,11 +60,11 @@ const CartItem: FC<Props> = ({
     <CartItemWrapper>
       <CartImg src={thumbnail} />
       <CartTitle>{[title]}</CartTitle>
-      <CartPrice>{discountedPrice}</CartPrice>
-      <CartCount>{orderPrice}</CartCount>
+      <CartPrice>{formatPrice(discountedPrice, '')}</CartPrice>
+      <CartCount>{formatPrice(orderPrice, '')}</CartCount>
       <CartCounter>
         <CountBtn onClick={handleUpBtnClick}>&uarr;</CountBtn>
-        <Count>{count}개</Count>
+        <Count>{count}</Count>
         <CountBtn onClick={handleDownBtnClick}>&darr;</CountBtn>
       </CartCounter>
       <CartCancle onClick={handleRemoveBtnClick}>

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 import DaumPostcode, { AddressData } from 'react-daum-postcode';
-import { cancleSVG, hyphenSVG } from '~/assets';
+import { cancleSVG, hyphenSVG, underbaeminSVG } from '~/assets';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import useInputValidator from '~/lib/hooks/useInputValidator';
@@ -166,32 +166,41 @@ const ShippingModal: FC<Props> = ({
       <Phone>
         <div>연락처</div>
         <PhoneInputWrapper>
-          <PhoneInput
-            autoComplete="off"
-            type="text"
-            value={ph0}
-            placeholder="010"
-            onChange={handlePh0}
-            maxLength={3}
-          />
+          <div style={{ width: '100px' }}>
+            <PhoneInput
+              autoComplete="off"
+              type="text"
+              value={ph0}
+              placeholder="010"
+              onChange={handlePh0}
+              maxLength={3}
+            />
+            <img src={underbaeminSVG} alt="underline" />
+          </div>
           <img src={hyphenSVG} alt="hyphen" />
-          <PhoneInput
-            autoComplete="off"
-            type="text"
-            value={ph1}
-            placeholder="0000"
-            onChange={handlePh1}
-            maxLength={4}
-          />
+          <div style={{ width: '100px' }}>
+            <PhoneInput
+              autoComplete="off"
+              type="text"
+              value={ph1}
+              placeholder="0000"
+              onChange={handlePh1}
+              maxLength={4}
+            />
+            <img src={underbaeminSVG} alt="underline" />
+          </div>
           <img src={hyphenSVG} alt="hyphen" />
-          <PhoneInput
-            autoComplete="off"
-            type="text"
-            value={ph2}
-            placeholder="0000"
-            onChange={handlePh2}
-            maxLength={4}
-          />
+          <div style={{ width: '100px' }}>
+            <PhoneInput
+              autoComplete="off"
+              type="text"
+              value={ph2}
+              placeholder="0000"
+              onChange={handlePh2}
+              maxLength={4}
+            />
+            <img src={underbaeminSVG} alt="underline" />
+          </div>
         </PhoneInputWrapper>
       </Phone>
       <Divider width="640px" direction="horizontal" />

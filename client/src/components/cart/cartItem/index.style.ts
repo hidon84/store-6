@@ -5,9 +5,6 @@ export const CartItemWrapper = styled.div`
   display: flex;
   align-items: center;
   font-size: 15px;
-  > * {
-    margin-left: 60px;
-  }
 `;
 
 export const CartImg = styled.img`
@@ -27,20 +24,23 @@ export const CartTitle = styled.div`
   line-height: 1.4;
   overflow-y: auto;
   text-overflow: ellipsis;
+  margin-left: 80px;
 `;
 
 export const CartPrice = styled.div`
   width: 140px;
+  margin-left: 60px;
 `;
 
 export const CartCount = styled.div`
   width: 140px;
+  margin-left: 20px;
 `;
 
 export const CartCounter = styled.div`
+  margin-left: 12px;
   width: 80px;
   display: flex;
-  gap: 10px;
 `;
 
 export const CountBtn = styled.button`
@@ -64,6 +64,7 @@ export const CartCancle = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-left: 80px;
 
   &:hover {
     transition: transform 300ms;

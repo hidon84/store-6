@@ -21,13 +21,15 @@ import {
 } from './index.style';
 
 const message = {
-  EMAIL_UPDATE_SUCCESS: '이메일이 수정되었습니다.',
-  PHONE_UPDATE_SUCCESS: '연락처가 수정되었습니다.',
-  PHOTO_UPDATE_SUCCESS: '사진이 수정되었습니다.',
-  NOT_CORRECT_IMAGE: '올바른 이미지파일 형식이 아닙니다.',
-  EMAIL_UPDATE_FAIL: '이메일 수정에 실패했습니다.',
-  PHONE_UPDATE_FAIL: '연락처 수정에 실패했습니다.',
-  PHOTO_UPDATE_FAIL: '사진 수정에 실패했습니다',
+  emailUpdateSuccess: '이메일이 수정되었습니다.',
+  phoneUpdateSuccess: '연락처가 수정되었습니다.',
+  photoUpdateSuccess: '사진이 수정되었습니다.',
+  notCorrectImage: '올바른 이미지파일 형식이 아닙니다.',
+  emailUpdateFail: '이메일 수정에 실패했습니다.',
+  emailInvalid: '올바른 이메일 형식이 아닙니다.',
+  phoneInvalid: '올바른 연락처 형식이 아닙니다.',
+  phoneUpdateFail: '연락처 수정에 실패했습니다.',
+  photoUpdateFail: '사진 수정에 실패했습니다',
 };
 
 const MyPage: React.FC = () => {
@@ -40,28 +42,28 @@ const MyPage: React.FC = () => {
   const handleSubmitEmail = (value: string) => {
     return putMe({ email: value })
       .then(() => {
-        alert(message.EMAIL_UPDATE_SUCCESS);
+        alert(message.emailUpdateSuccess);
         setUserInfo({ ...userInfo, email: value });
       })
-      .catch(() => alert(message.EMAIL_UPDATE_FAIL));
+      .catch(() => alert(message.emailUpdateFail));
   };
 
   const handleSubmitPhone = (value: string) => {
     return putMe({ phone: value })
       .then(() => {
-        alert(message.PHONE_UPDATE_SUCCESS);
+        alert(message.phoneUpdateSuccess);
         setUserInfo({ ...userInfo, phone: value });
       })
-      .catch(() => alert(message.PHONE_UPDATE_FAIL));
+      .catch(() => alert(message.phoneUpdateFail));
   };
 
   const handleSubmitProfile = (file: File, fileToString: string) => {
     return putMe({ profile: file })
       .then(() => {
         setProfile(fileToString);
-        alert(message.PHOTO_UPDATE_SUCCESS);
+        alert(message.photoUpdateSuccess);
       })
-      .catch(() => alert(message.PHOTO_UPDATE_FAIL));
+      .catch(() => alert(message.photoUpdateFail));
   };
 
   const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +73,7 @@ const MyPage: React.FC = () => {
     }
     if (!file.type.match(REG_IMAGE)) {
       e.target.value = '';
-      alert(message.NOT_CORRECT_IMAGE);
+      alert(message.notCorrectImage);
       return;
     }
     const reader = new FileReader();
@@ -119,7 +121,7 @@ const MyPage: React.FC = () => {
 
         <UserInfoInput
           title="이메일"
-          showWarning={() => alert(message.EMAIL_UPDATE_FAIL)}
+          showWarning={() => alert(message.emailInvalid)}
           value={userInfo?.email}
           placeholder={userInfo?.email}
           onSubmit={handleSubmitEmail}
@@ -131,7 +133,7 @@ const MyPage: React.FC = () => {
 
         <UserInfoInput
           title="연락처"
-          showWarning={() => alert(message.PHONE_UPDATE_FAIL)}
+          showWarning={() => alert(message.phoneInvalid)}
           value={userInfo?.phone}
           placeholder={userInfo?.phone?.split('-').join(' ')}
           onSubmit={handleSubmitPhone}
