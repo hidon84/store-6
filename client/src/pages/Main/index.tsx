@@ -7,29 +7,26 @@ import Peer, { MediaConnection, DataConnection } from 'peerjs';
 import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import {
-  Book,
-  Baedal,
-  Hat,
-  Gift,
-  House,
-  Kk,
-  Tree,
-  Pencil,
-  Colab,
   Stain,
   Logo,
+  TypeCategoryIcon,
+  DoodleAnnouncement1,
+  DoodleAnnouncement2,
+  Button,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { MainContainer } from './index.style';
 import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
+import { RouterContext } from '~/core/Router';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
   peerCalls: Record<string, MediaConnection>;
   connections: Record<string, DataConnection>;
   minimi: Minimi;
+  entered?: TypeCategoryIcon;
   y: number;
   x: number;
 }
@@ -46,6 +43,18 @@ const [DY, DX] = [2, 2];
 const delayMS = 400;
 const pleaseAlloweRecord =
   '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
+
+const categoryCoords = {
+  book: { x: 23, y: 15 },
+  hat: { x: 14, y: 62 },
+  house: { x: 58, y: 36 },
+  kk: { x: 72, y: 18 },
+  baedal: { x: 30, y: 43 },
+  tree: { x: 38, y: 76 },
+  pencil: { x: 80, y: 43 },
+  colab: { x: 66, y: 72 },
+  gift: { x: 5, y: 34 },
+};
 
 class Main extends Component<{ u?: string }, MainState> {
   audioGridRef: RefObject<HTMLDivElement>;
@@ -231,20 +240,69 @@ class Main extends Component<{ u?: string }, MainState> {
     });
   };
 
-  onKeyDown = (event: globalThis.KeyboardEvent) => {
+  // {category : string
+  boundChecker = () => {
+    const threshold = {
+      y: 14,
+      x: 12,
+    };
+    const characterOffset = {
+      y: 3,
+      x: 3,
+    };
     const { y, x } = this.state;
+    let enteredCategory: TypeCategoryIcon;
+    Object.entries(categoryCoords).forEach(
+      ([category, { x: categoryX, y: categoryY }]) => {
+        if (
+          categoryY - threshold.y < y - characterOffset.y &&
+          y - characterOffset.y < categoryY + threshold.y &&
+          categoryX - threshold.x < x - characterOffset.x &&
+          x - characterOffset.x < categoryX + threshold.x
+        ) {
+          enteredCategory = category as TypeCategoryIcon;
+        }
+      },
+    );
+    if (enteredCategory) {
+      this.setState({ entered: enteredCategory }, () => {
+        alert(`스페이스 버튼을 눌러서 ${enteredCategory} 카테고리로 이동해요`);
+      });
+    } else {
+      this.setState({ entered: undefined });
+    }
+  };
+
+  onMinimiMove = () => {
+    this.boundChecker();
+    this.broadCastMove();
+  };
+
+  onKeyDown = (event: globalThis.KeyboardEvent) => {
+    const { y, x, entered } = this.state;
+
     switch (event.code) {
       case 'ArrowUp':
-        this.setState({ y: Math.max(0, y - DY) }, this.broadCastMove);
+        this.setState({ y: Math.max(0, y - DY) }, this.onMinimiMove);
         break;
       case 'ArrowDown':
-        this.setState({ y: Math.min(90, y + DY) }, this.broadCastMove);
+        this.setState({ y: Math.min(90, y + DY) }, this.onMinimiMove);
         break;
       case 'ArrowLeft':
-        this.setState({ x: Math.max(0, x - DX) }, this.broadCastMove);
+        this.setState({ x: Math.max(0, x - DX) }, this.onMinimiMove);
         break;
       case 'ArrowRight':
-        this.setState({ x: Math.min(100, x + DX) }, this.broadCastMove);
+        this.setState({ x: Math.min(100, x + DX) }, this.onMinimiMove);
+        break;
+      case 'Space':
+        if (!entered) break;
+        this.context.push({
+          pathname: '/products',
+          state: {
+            from: '/',
+            category: entered,
+          },
+        });
         break;
       default:
         break;
@@ -252,16 +310,16 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   render() {
-    const { minimi, y, x, users } = this.state;
+    const { minimi, y, x, users, entered } = this.state;
     return (
       <MainContainer>
         <div className="audio-grid" ref={this.audioGridRef} />
-        <PixelArt className="cat" />
+        <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
         <PixelArt className={minimi} coord={{ left: `${x}%`, top: `${y}%` }} />
-        <PixelArt className="flower" coord={{ left: '90%' }} />
-        <PixelArt className="ladybug" coord={{ top: '80%' }} />
+        <PixelArt className="flower" coord={{ top: '8%', left: '80%' }} />
+        <PixelArt className="ladybug" coord={{ top: '70%' }} />
         <PixelArt className="hedgehog" coord={{ top: '80%', right: '40%' }} />
         {users.map((user) => (
           <PixelArt
@@ -270,20 +328,24 @@ class Main extends Component<{ u?: string }, MainState> {
             coord={{ left: `${user.x}%`, top: `${user.y}%` }}
           />
         ))}
-        <Book />
-        <Baedal />
-        <Hat />
-        <Gift />
-        <House />
-        <Kk />
-        <Tree />
-        <Pencil />
-        <Colab />
+        <DoodleAnnouncement1 />
+        <DoodleAnnouncement2 />
+        <Button category="book" entered={entered === 'book'} />
+        <Button category="baedal" entered={entered === 'baedal'} />
+        <Button category="hat" entered={entered === 'hat'} />
+        <Button category="gift" entered={entered === 'gift'} />
+        <Button category="house" entered={entered === 'house'} />
+        <Button category="kk" entered={entered === 'kk'} />
+        <Button category="tree" entered={entered === 'tree'} />
+        <Button category="pencil" entered={entered === 'pencil'} />
+        <Button category="colab" entered={entered === 'colab'} />
         <Stain />
         <Logo />
       </MainContainer>
     );
   }
 }
+
+Main.contextType = RouterContext;
 
 export default Main;

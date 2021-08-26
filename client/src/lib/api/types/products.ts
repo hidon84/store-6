@@ -34,6 +34,10 @@ export interface ProductDetailGetResponseBody {
   isCart?: boolean;
   createdAt: string;
   updatedAt: string;
+  recommend: {
+    idx: number;
+    thumbnail: string;
+  }[];
 }
 
 export interface ProductViewPostResponseBody {

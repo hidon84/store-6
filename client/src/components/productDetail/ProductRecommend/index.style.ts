@@ -16,9 +16,8 @@ export const ImageWrapper = styled.div`
     border-radius: 10px;
     margin-right: 15px;
     cursor: pointer;
-
+    transition: transform 300ms;
     &:hover {
-      transition: transform 300ms;
       transform: scale(1.1);
     }
   }

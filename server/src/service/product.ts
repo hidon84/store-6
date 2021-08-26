@@ -111,6 +111,15 @@ class ProductService {
         throw new ErrorResponse(commonError.notFound);
       }
 
+      const includeCategory = await this.productRepository.findCategoryByIdx(
+        productIdx,
+      );
+
+      const recommend = await this.productRepository.findTopRankByCategory(
+        includeCategory!.category.idx,
+        product.idx,
+      );
+
       const [productImages, viewCnt, reviewCnt, likeCnt] = await Promise.all([
         this.productImageRepository.findUrlsByProductIdx(productIdx),
         this.viewRepository.getCntByProductIdx(productIdx),
@@ -126,6 +135,7 @@ class ProductService {
         likeCnt,
         isLike: false,
         isCart: false,
+        recommend,
       };
 
       if (!loginIdx) {
@@ -153,7 +163,7 @@ class ProductService {
         result.isCart = true;
       }
 
-      return result;
+      return { ...result };
     } catch (e) {
       if (e?.isOperational) {
         throw e;
