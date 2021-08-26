@@ -67,9 +67,12 @@ const LoginPage: FC = () => {
       id,
       password: pw,
     })
-      .then(() => usersApi.getMe())
+      .then(usersApi.getMe)
       .then((res) => userDispatch(setLogin(res.data)))
-      .then(() => goBack())
+      .then(() => {
+        alert('로그인에 성공하셨습니다.');
+        goBack();
+      })
       .catch((err: ErrorResponse) => {
         alert(err.message);
       });

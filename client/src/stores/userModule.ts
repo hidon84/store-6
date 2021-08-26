@@ -11,7 +11,7 @@ export interface UserModuleState {
 }
 
 interface IPayload extends PUser {
-  error: ErrorResponseBody;
+  error?: ErrorResponseBody;
 }
 
 export interface UserModuleAction {
