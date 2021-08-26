@@ -16,6 +16,7 @@ import {
 import productListModule, {
   ActionType,
   setCategory,
+  setLastPage,
   setNextPage,
 } from '~/stores/productListModule';
 
@@ -94,6 +95,9 @@ const useScrollPoint = (targetPoint: number): boolean => {
 
 // Component
 const ProductList: FC = () => {
+  const TARGET_POINT = 500;
+  const DEFAULT_PRODUCTS_AMOUNT = 9;
+
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
   const { state } = useLocation();
   const listFooterRef = useRef<HTMLDivElement>();
@@ -102,17 +106,22 @@ const ProductList: FC = () => {
   const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
   const entry = useIntersection(listFooterRef, { threshold: 0.95 });
 
-  const TARGET_POINT = 500;
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
   const fetchProducts = () => {
+    if (filterState.isLastPage) return;
+
     const isNextPageRequest = filterState.page !== 1;
     productsAPI
       .getProducts(filterState)
       .then(({ data }) => {
+        if (data.length < DEFAULT_PRODUCTS_AMOUNT)
+          productListDispatch(setLastPage());
+
         if (!isNextPageRequest) setProducts(data);
         else setProducts((prev) => [...prev, ...data]);
-
+      })
+      .then(() => {
         setTimeout(
           () => fetchDispatch(finishFetch()),
           fetchState.forcedDelayTime,
