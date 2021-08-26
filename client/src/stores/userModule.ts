@@ -50,8 +50,10 @@ const userReducer = (
     case SET_ERROR:
       return { ...UserModuleState, requestError: action.payload.error };
     case SET_USER_INFO: {
-      console.log(action.payload);
-      return { ...UserModuleState, user: { ...UserModuleState.user } };
+      return {
+        ...UserModuleState,
+        user: { ...UserModuleState.user, ...action.payload },
+      };
     }
     default:
       return { ...UserModuleState };
