@@ -34,5 +34,5 @@ export const NoResourceWrapper = styled.div`
 
 export const ListFooter = styled.div`
   width: 100%;
-  height: 40px;
+  height: 100px;
 `;

@@ -16,6 +16,7 @@ import {
 import productListModule, {
   ActionType,
   setCategory,
+  setLastPage,
   setNextPage,
 } from '~/stores/productListModule';
 
@@ -71,7 +72,7 @@ interface FilterContextState {
 
 interface FetchContextState {
   state: {
-    state: string;
+    action: string;
     forcedDelayTime: number;
   };
   dispatch: (action: FetchModuleAction) => void;
@@ -94,25 +95,33 @@ const useScrollPoint = (targetPoint: number): boolean => {
 
 // Component
 const ProductList: FC = () => {
+  const TARGET_POINT = 500;
+  const DEFAULT_PRODUCTS_AMOUNT = 9;
+
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
   const { state } = useLocation();
   const listFooterRef = useRef<HTMLDivElement>();
 
-  const { filterState, dispatch } = productListModule();
+  const { filterState, dispatch: productListDispatch } = productListModule();
   const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
-  const entry = useIntersection(listFooterRef, {});
+  const entry = useIntersection(listFooterRef, { threshold: 0.95 });
 
-  const TARGET_POINT = 700;
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
   const fetchProducts = () => {
+    if (filterState.isLastPage) return;
+
     const isNextPageRequest = filterState.page !== 1;
     productsAPI
       .getProducts(filterState)
       .then(({ data }) => {
+        if (data.length < DEFAULT_PRODUCTS_AMOUNT)
+          productListDispatch(setLastPage());
+
         if (!isNextPageRequest) setProducts(data);
         else setProducts((prev) => [...prev, ...data]);
-
+      })
+      .then(() => {
         setTimeout(
           () => fetchDispatch(finishFetch()),
           fetchState.forcedDelayTime,
@@ -126,25 +135,25 @@ const ProductList: FC = () => {
   useEffect(() => {
     if (!state) return;
     if (state.from === '/') {
-      dispatch(setCategory(CATEGORY_TO_IDX[state.category]));
+      productListDispatch(setCategory(CATEGORY_TO_IDX[state.category]));
     }
   }, [state]);
 
   useEffect(() => {
-    if (fetchState.state === INIT_FETCH) fetchProducts();
+    if (fetchState.action === INIT_FETCH) fetchProducts();
 
     // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
-    if (fetchState.state === START_FETCH) {
+    if (fetchState.action === START_FETCH) {
       setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
     }
-  }, [filterState, fetchState.state]);
+  }, [filterState, fetchState.action]);
 
   useEffect(() => {
     if (
-      fetchState.state !== INIT_FETCH && //
+      fetchState.action !== INIT_FETCH && //
       entry?.isIntersecting
     ) {
-      dispatch(setNextPage());
+      productListDispatch(setNextPage());
       fetchDispatch(initFetch());
     }
   }, [entry]);
@@ -153,7 +162,9 @@ const ProductList: FC = () => {
     <FetchContext.Provider
       value={{ state: fetchState, dispatch: fetchDispatch }}
     >
-      <FilterContext.Provider value={{ state: filterState, dispatch }}>
+      <FilterContext.Provider
+        value={{ state: filterState, dispatch: productListDispatch }}
+      >
         <ProductListWrapper>
           <LeftSection>
             <CategoryFilter />
