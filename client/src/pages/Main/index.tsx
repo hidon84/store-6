@@ -313,7 +313,8 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   onKeyDown = (event: globalThis.KeyboardEvent) => {
-    const { y, x } = this.state;
+    const { y, x, entered } = this.state;
+
     switch (event.code) {
       case 'ArrowUp':
         this.setState({ y: Math.max(0, y - DY) }, this.onMinimiMove);
@@ -326,6 +327,15 @@ class Main extends Component<{ u?: string }, MainState> {
         break;
       case 'ArrowRight':
         this.setState({ x: Math.min(100, x + DX) }, this.onMinimiMove);
+        break;
+      case 'Enter':
+        if (!entered) break;
+        window.history.pushState(
+          { from: '/', category: entered },
+          '',
+          '/products',
+        );
+        window.location.href = '/products';
         break;
       default:
         break;

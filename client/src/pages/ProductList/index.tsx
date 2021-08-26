@@ -15,6 +15,7 @@ import {
 } from '~/lib/api/types';
 import productListModule, {
   ActionType,
+  setCategory,
   setNextPage,
 } from '~/stores/productListModule';
 
@@ -39,6 +40,20 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
+import { alert } from '~/utils/modal';
+
+// Constants
+const CATEGORY_TO_IDX = {
+  book: 1,
+  pencil: 2,
+  house: 3,
+  tree: 4,
+  baedal: 5,
+  kk: 6,
+  hat: 7,
+  gift: 8,
+  colab: 9,
+};
 
 // Interface
 export interface ProductData {
@@ -106,6 +121,20 @@ const ProductList: FC = () => {
         throw new Error(error.data.message);
       });
   };
+
+  useEffect(() => {
+    const { state } = window.history;
+    alert(JSON.stringify(state));
+    if (state.from === '/') {
+      dispatch(setCategory(CATEGORY_TO_IDX[state.category]));
+
+      window.history.replaceState(
+        { ...state, category: undefined },
+        '',
+        '/products',
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (fetchState.state === INIT_FETCH) fetchProducts();

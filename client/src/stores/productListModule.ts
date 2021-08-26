@@ -30,10 +30,13 @@ const SET_NEXT_PAGE = 'SET_NEXT_PAGE';
 const REMOVE_SEARCH_VALUE = 'REMOVE_SEARCH_VALUE';
 
 // Action Creator
-export const setCategory = (payload: CategoryType) => ({
-  type: SET_CATEGORY,
-  payload: { category: payload },
-});
+export const setCategory = (payload: CategoryType) => {
+  console.log(payload);
+  return {
+    type: SET_CATEGORY,
+    payload: { category: payload },
+  };
+};
 export const setOrder = (payload: OrderType) => ({
   type: SET_ORDER,
   payload: { order: payload },
