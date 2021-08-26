@@ -1,7 +1,6 @@
 import React, { FC, useState, useCallback, useRef } from 'react';
 import getCursorPos from '~/utils/getCursorPos';
 import {
-  TargetImage,
   StyledMagnifier,
   StyledImageMagnifier,
 } from './index.style';
@@ -72,11 +71,13 @@ const ImageMagnifier: FC<IProps> = ({ imageSrc, imageAlt, zoom = 3 }) => {
       onMouseEnter={showMagnifier}
       onMouseLeave={hideMagnifier}
     >
-      <TargetImage
+      <img
+        width="100%"
         src={imageSrc}
         alt={imageAlt}
         onLoad={imageOnLoad}
         ref={imgRef}
+        referrerPolicy="no-referrer"
       />
       <StyledMagnifier
         width={magnifierWidth}

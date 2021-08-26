@@ -7,10 +7,6 @@ interface IStyledMagnifierProps {
   show: boolean;
 }
 
-export const TargetImage = styled.img.attrs({
-  width: '100%',
-})``;
-
 export const StyledImageMagnifier = styled.div`
   position: relative;
   width: 400px;

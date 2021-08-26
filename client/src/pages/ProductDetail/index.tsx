@@ -104,7 +104,6 @@ const ProductDetail: FC = () => {
           <ImageMagnifier
             key={image}
             imageSrc={image}
-            //referrerPolicy="no-referrer"
             imageAlt={`detail image ${imgIdx}`}
           />
         ))}
