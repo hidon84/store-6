@@ -1,9 +1,6 @@
 import React, { FC, useState } from 'react';
-import { SmallCircleSVG, BigCircleSVG } from '~/assets';
+import { SmallCircleSVG } from '~/assets';
 import { IconWrapper, Circle } from './index.style';
-
-const BigIconPrefix =
-  'https:/store-6-bucket.s3.ap-northeast-2.amazonaws.com/common/big';
 
 /**
  *
@@ -13,14 +10,12 @@ const BigIconPrefix =
  * <Icon src=${SmallGiftSVG}/>
  */
 const Icon: FC<{ src: string }> = ({ src }) => {
-  const isBig = src.startsWith(BigIconPrefix);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <IconWrapper onMouseLeave={() => setIsHovered(false)}>
       <img src={src} alt="icon" onMouseEnter={() => setIsHovered(true)} />
-      {!isHovered && isBig && <Circle src={BigCircleSVG} alt="" />}
-      {!isHovered && !isBig && <Circle src={SmallCircleSVG} alt="" />}
+      {!isHovered && <Circle src={SmallCircleSVG} alt="" />}
     </IconWrapper>
   );
 };
