@@ -2,8 +2,8 @@ import { FC, useEffect, useState, useCallback, useContext } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
-import ShipItem from '../shippItem';
-import ShippingModal from '../shippingModal';
+import ShipItem from '../ShippItem';
+import ShippingModal from '../ShippingModal';
 import { ButtonWrapper, ShipHeader } from './index.style';
 import {
   deleteShipping,

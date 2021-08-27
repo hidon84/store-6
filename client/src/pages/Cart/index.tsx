@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import Cart from '~/components/cart/cart';
-import Shipping from '~/components/cart/shipping';
+import Cart from '~/components/cart/Cart';
+import Shipping from '~/components/shipping/Shipping';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';

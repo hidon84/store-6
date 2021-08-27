@@ -18,8 +18,8 @@ export const CheckboxWrapper = styled.div`
 export const ShipUser = styled.div`
   line-height: 1.4;
   width: 150px;
-  div:last-child{
-      color #999999;
+  div:last-child {
+    color: #999999;
   }
 `;
 
