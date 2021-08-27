@@ -4,6 +4,50 @@
 
 <p align="center"><b>6팀 배 출발!</b></p>
 
+[![TypeScript Badge](https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white)]() [![React Badge](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white)]() [![styled Badge](https://img.shields.io/badge/Styled-DB7093?style=flat-square&logo=styled-components&logoColor=white)]() [![webpack Badge](https://img.shields.io/badge/webpack-8DD6F9?style=flat-square&logo=webpack&logoColor=white)]() [![babel Badge](https://img.shields.io/badge/babel-F9DC3E?style=flat-square&logo=babel&logoColor=black)]() [![typeorm Badge](https://img.shields.io/badge/typeorm-000?style=flat-square&logo=typeorm&logoColor=white)]()
+
+
+
+# 자랑거리
+
+## 멤버가 자랑거리임!!
+
+프로그래밍계의 박지성. 두개의 심장. 게더에서 없어지지않는 지치지않는 그의 이름 황.병.헌.
+
+그 이외에도 자랑할 멤버가 많지만 지면이 짧은 관계로 이하 생략.
+
+![자세한설명은생략한다](https://user-images.githubusercontent.com/13645032/131059878-c37f2ad6-862b-4ec6-ba6f-ac12820e5984.jpeg)
+
+## 체계적인 프로젝트 관리
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        작업일정 공유 캘린더
+      </th>
+      <th>
+        백로그
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060069-88355934-ace1-467f-a936-f76604e94de4.png">
+      </td>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060139-7d4d57d6-6ebe-4c3b-9011-f7f4705a07f9.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
 
 # 🐾 6팀의 즐거운 항해 발자취
 
