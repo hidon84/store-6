@@ -43,8 +43,10 @@ const ProductDetailContainer: FC<Props> = ({
     <ProductDetailContainerWrapper>
       <ProductName>{title}</ProductName>
       <PriceParagraph>
+        {originPrice !== discountedPrice && (
+          <OriginPrice>{formatPrice(originPrice)}</OriginPrice>
+        )}
         <DiscountedPrice>{formatPrice(discountedPrice)}</DiscountedPrice>
-        <OriginPrice>{formatPrice(originPrice)}</OriginPrice>
       </PriceParagraph>
       <MainSectionDivider />
       <SubInfos title="상품필수 정보" infos={mandatoryInfo} />
