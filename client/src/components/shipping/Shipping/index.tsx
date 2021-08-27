@@ -43,14 +43,14 @@ const Shipping: FC = () => {
   const fetchShipping = () => {
     getShippings()
       .then((response) => {
-        if (response.data.length) {
-          const shippings = response.data;
+        const shippings = response.data;
+        if (shippings.length) {
           const selected = shippings.findIndex(
             (item) => item.defaultShipping === true,
           );
           if (selected > -1) setSelectedShipIdx(shippings[selected].idx);
-          setShipItems(shippings);
         }
+        setShipItems(shippings);
       })
       .catch((e: ErrorResponse) => alert(e.message));
   };
