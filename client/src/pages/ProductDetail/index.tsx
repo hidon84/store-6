@@ -26,6 +26,7 @@ import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
 import ProductDetailImages from '~/components/productDetail/ProductDetailImages';
 import UserContext from '~/lib/contexts/userContext';
+import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -46,6 +47,7 @@ const ProductDetail: FC = () => {
   const idx = Number(useParams().id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
+  const [isNotFound, setIsNotFound] = useState(false);
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
   const imagesContainerRef = useRef<HTMLDivElement>();
   const scrollProgressRef = useRef<HTMLImageElement>();
@@ -80,12 +82,8 @@ const ProductDetail: FC = () => {
 
     productsApi
       .getProductDetail(idx)
-      .then((result) => {
-        setProduct(result.data);
-      })
-      .catch((e: ErrorResponse) => {
-        alert(e.message);
-      });
+      .then((result) => setProduct(result.data))
+      .catch(() => setIsNotFound(true));
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
@@ -137,6 +135,7 @@ const ProductDetail: FC = () => {
 
   const goPrevPage = useCallback(() => history.goBack(), [history]);
 
+  if (isNotFound) return <NoMatchingRoute />;
   if (product === null) return null;
   const { thumbnail, images } = product;
 
