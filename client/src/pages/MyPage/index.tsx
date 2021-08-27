@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import Divider from '~/components/common/Divider';
 import UserInfoInput from '~/components/my/UserInfoInput';
@@ -38,10 +38,6 @@ const message = {
 };
 
 const MyPage: React.FC = () => {
-  const [profile, setProfile] = useState<string>(
-    'https://user-images.githubusercontent.com/47776356/129712816-13701b24-57cc-451e-93c6-ca7afe190af1.jpeg',
-  );
-
   const { push } = useHistory();
   const { user: userState, userDispatch } = useContext(UserContext);
 
@@ -66,7 +62,7 @@ const MyPage: React.FC = () => {
   const handleSubmitProfile = (file: File, fileToString: string) => {
     return putMe({ profile: file })
       .then(() => {
-        setProfile(fileToString);
+        userDispatch(setUserInfo({ ...userState.user, profile: fileToString }));
         alert(message.photoUpdateSuccess);
       })
       .catch(() => alert(message.photoUpdateFail));
@@ -99,10 +95,7 @@ const MyPage: React.FC = () => {
   useEffect(() => {
     if (!userState.isLoggedIn) {
       push('/', { from: '/me', error: 'accessWithoutToken' });
-      return;
     }
-
-    if (userState.user?.profile) setProfile(userState.user.profile);
   }, [userState]);
 
   return (
@@ -115,7 +108,7 @@ const MyPage: React.FC = () => {
           <RowTitle>사진</RowTitle>
           <PhotoWrapper>
             <div>
-              <ImagePreview image={profile} size="60px" />
+              <ImagePreview image={userState.user?.profile} size="60px" />
               <ImageInput onChange={handleImageInput} id="img" type="file" />
             </div>
             <ImageDesc>
