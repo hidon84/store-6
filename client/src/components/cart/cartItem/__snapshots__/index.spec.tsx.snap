@@ -39,6 +39,7 @@ exports[`<CartItem /> should render same with snapshot 1`] = `
   overflow-y: auto;
   text-overflow: ellipsis;
   margin-left: 80px;
+  cursor: pointer;
 }
 
 .c3 {
