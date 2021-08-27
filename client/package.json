@@ -6,9 +6,9 @@
   "repository": "https://github.com/woowa-techcamp-2021/store-6",
   "license": "MIT",
   "scripts": {
+    "clean": "rimraf dist",
     "start": "env-cmd -f .env.prod webpack serve --mode production",
     "start:dev": "env-cmd -f .env.dev webpack serve --mode development",
-    "prebuild": "rimraf dist",
     "build": "env-cmd -f .env.prod webpack --mode production --progress",
     "lint": "yarn eslint --ext .tsx --ext .ts src",
     "lint:fix": "yarn eslint --ext .tsx --ext .ts src --fix",
