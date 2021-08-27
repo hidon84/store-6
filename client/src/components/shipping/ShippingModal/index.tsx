@@ -7,7 +7,7 @@ import useInputValidator from '~/lib/hooks/useInputValidator';
 import useOnClickOutside from '~/lib/hooks/useOnClickOutside';
 import { alert } from '~/utils/modal';
 import { ph0Validator, ph1Validator, ph2Validator } from '~/utils/validation';
-import { ShipType } from '~/components/cart/shipping';
+import { ShipType } from '~/components/shipping/Shipping';
 import {
   ModalWrapper,
   PhoneInputWrapper,

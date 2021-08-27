@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { cancleSVG, modifySVG, underlineShortSVG } from '~/assets';
 import Checkbox from '~/components/common/Checkbox';
 import { confirm } from '~/utils/modal';
-import { ShipType } from '~/components/cart/shipping';
+import { ShipType } from '~/components/shipping/Shipping';
 
 import {
   ShipItemWrapper,

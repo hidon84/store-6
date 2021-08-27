@@ -43,8 +43,12 @@ const Navigation: FC = () => {
         </Link>
         <HeaderRightSection>
           <Link to="/cart">
-            <CartWrapper activate={pathname === urls.cart}>
-              <CartIcon activate={pathname === urls.cart} />
+            <CartWrapper
+              activate={pathname === urls.cart || pathname === urls.shipping}
+            >
+              <CartIcon
+                activate={pathname === urls.cart || pathname === urls.shipping}
+              />
               <Badge badgeContent={cartAmount.toString()} />
             </CartWrapper>
           </Link>

@@ -5,7 +5,7 @@ import { deleteCartItem, getCartItems } from '~/lib/api/cart';
 import { CartGetResponseBody } from '~/lib/api/types';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import { alert } from '~/utils/modal';
-import CartItem from '../cartItem';
+import CartItem from '../CartItem';
 import { CartFooter, CartHeader } from './index.style';
 import { formatPrice } from '~/utils/formatPrice';
 import UserContext from '~/lib/contexts/userContext';
