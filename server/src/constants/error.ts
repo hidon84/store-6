@@ -241,3 +241,10 @@ export const likeDeleteError = {
     message: 'Unable to Delete LikeItem',
   },
 };
+
+export const ProductSaveError = {
+  unable: {
+    statusCode: 500,
+    message: 'Unable to Save ProductItem',
+  },
+};

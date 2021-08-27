@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
 import Divider from '~/components/common/Divider';
-import { putMe } from '~/lib/api/users';
-import { REG_EMAIL, REG_IMAGE, REG_PHONE } from '~/utils/validation';
-import { alert } from '~/utils/modal';
 import UserInfoInput from '~/components/my/UserInfoInput';
 import PhoneInput from '~/components/my/PhoneInput';
 import EmailInput from '~/components/my/EmailInput';
-import useUser from '~/lib/hooks/useUser';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
+
+import { setUserInfo } from '~/stores/userModule';
+import { putMe } from '~/lib/api/users';
+import UserContext from '~/lib/contexts/userContext';
+import { alert } from '~/utils/modal';
+import { REG_EMAIL, REG_IMAGE, REG_PHONE } from '~/utils/validation';
+
 import {
   RowWrapper,
   RowTitle,
@@ -19,15 +23,18 @@ import {
   ImageInput,
   MyPageContent,
 } from './index.style';
+import { useHistory } from '~/core/Router';
 
 const message = {
-  EMAIL_UPDATE_SUCCESS: '이메일이 수정되었습니다.',
-  PHONE_UPDATE_SUCCESS: '연락처가 수정되었습니다.',
-  PHOTO_UPDATE_SUCCESS: '사진이 수정되었습니다.',
-  NOT_CORRECT_IMAGE: '올바른 이미지파일 형식이 아닙니다.',
-  EMAIL_UPDATE_FAIL: '이메일 수정에 실패했습니다.',
-  PHONE_UPDATE_FAIL: '연락처 수정에 실패했습니다.',
-  PHOTO_UPDATE_FAIL: '사진 수정에 실패했습니다',
+  emailUpdateSuccess: '이메일이 수정되었습니다.',
+  phoneUpdateSuccess: '연락처가 수정되었습니다.',
+  photoUpdateSuccess: '사진이 수정되었습니다.',
+  notCorrectImage: '올바른 이미지파일 형식이 아닙니다.',
+  emailUpdateFail: '이메일 수정에 실패했습니다.',
+  emailInvalid: '올바른 이메일 형식이 아닙니다.',
+  phoneInvalid: '올바른 연락처 형식이 아닙니다.',
+  phoneUpdateFail: '연락처 수정에 실패했습니다.',
+  photoUpdateFail: '사진 수정에 실패했습니다',
 };
 
 const MyPage: React.FC = () => {
@@ -35,33 +42,34 @@ const MyPage: React.FC = () => {
     'https://user-images.githubusercontent.com/47776356/129712816-13701b24-57cc-451e-93c6-ca7afe190af1.jpeg',
   );
 
-  const [userInfo, setUserInfo] = useUser();
+  const { push } = useHistory();
+  const { user: userState, userDispatch } = useContext(UserContext);
 
   const handleSubmitEmail = (value: string) => {
     return putMe({ email: value })
       .then(() => {
-        alert(message.EMAIL_UPDATE_SUCCESS);
-        setUserInfo({ ...userInfo, email: value });
+        alert(message.emailUpdateSuccess);
+        userDispatch(setUserInfo({ email: value }));
       })
-      .catch(() => alert(message.EMAIL_UPDATE_FAIL));
+      .catch(() => alert(message.emailUpdateFail));
   };
 
   const handleSubmitPhone = (value: string) => {
     return putMe({ phone: value })
       .then(() => {
-        alert(message.PHONE_UPDATE_SUCCESS);
-        setUserInfo({ ...userInfo, phone: value });
+        alert(message.phoneUpdateSuccess);
+        userDispatch(setUserInfo({ phone: value }));
       })
-      .catch(() => alert(message.PHONE_UPDATE_FAIL));
+      .catch(() => alert(message.phoneUpdateFail));
   };
 
   const handleSubmitProfile = (file: File, fileToString: string) => {
     return putMe({ profile: file })
       .then(() => {
         setProfile(fileToString);
-        alert(message.PHOTO_UPDATE_SUCCESS);
+        alert(message.photoUpdateSuccess);
       })
-      .catch(() => alert(message.PHOTO_UPDATE_FAIL));
+      .catch(() => alert(message.photoUpdateFail));
   };
 
   const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +79,7 @@ const MyPage: React.FC = () => {
     }
     if (!file.type.match(REG_IMAGE)) {
       e.target.value = '';
-      alert(message.NOT_CORRECT_IMAGE);
+      alert(message.notCorrectImage);
       return;
     }
     const reader = new FileReader();
@@ -89,10 +97,13 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (userInfo?.profile) {
-      setProfile(userInfo.profile);
+    if (!userState.isLoggedIn) {
+      push('/', { from: '/me', error: 'accessWithoutToken' });
+      return;
     }
-  }, [userInfo]);
+
+    if (userState.user?.profile) setProfile(userState.user.profile);
+  }, [userState]);
 
   return (
     <SubPageWrapper width="700px">
@@ -119,9 +130,9 @@ const MyPage: React.FC = () => {
 
         <UserInfoInput
           title="이메일"
-          showWarning={() => alert(message.EMAIL_UPDATE_FAIL)}
-          value={userInfo?.email}
-          placeholder={userInfo?.email}
+          showWarning={() => alert(message.emailInvalid)}
+          value={userState.user?.email}
+          placeholder={userState.user?.email}
           onSubmit={handleSubmitEmail}
           inputComponent={EmailInput}
           validator={emailValidator}
@@ -131,9 +142,9 @@ const MyPage: React.FC = () => {
 
         <UserInfoInput
           title="연락처"
-          showWarning={() => alert(message.PHONE_UPDATE_FAIL)}
-          value={userInfo?.phone}
-          placeholder={userInfo?.phone?.split('-').join(' ')}
+          showWarning={() => alert(message.phoneInvalid)}
+          value={userState.user?.phone}
+          placeholder={userState.user?.phone?.split('-').join(' ')}
           onSubmit={handleSubmitPhone}
           inputComponent={PhoneInput}
           validator={phoneValidator}

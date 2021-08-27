@@ -1,8 +1,8 @@
-import { FC, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import queryString from 'query-string';
 import { useLocation, useHistory } from '~/core/Router';
-import useUser from '~/lib/hooks/useUser';
 import { alert } from '~/utils/modal';
+
 import {
   ApiResponse,
   AuthResponseBody,
@@ -11,6 +11,8 @@ import {
   OauthCallbackGetResponseBody,
 } from '~/lib/api/types';
 import oauthStateDecoder from '~/utils/oauthStateDecoder';
+import UserContext from '~/lib/contexts/userContext';
+import { setUserInfo } from '~/stores/userModule';
 
 const invalidCallbackUrl = 'Invalid Oauth Callback URL';
 
@@ -29,7 +31,7 @@ const OauthCallback: FC<Props> = ({
   oauthCallback,
   social,
 }) => {
-  const [user, setUser] = useUser();
+  const { user: userState, userDispatch } = useContext(UserContext);
   const location = useLocation();
   const { push } = useHistory();
   const parsedQuery = queryString.parse(location.search);
@@ -61,7 +63,14 @@ const OauthCallback: FC<Props> = ({
     oauthCallback(requestQuery)
       .then((response) => {
         const { id, email, picture } = response.data;
-        setUser({ ...user, id, email, profile: picture });
+        userDispatch(
+          setUserInfo({
+            ...userState.user,
+            id,
+            email,
+            profile: picture,
+          }),
+        );
         push(`/signup/${social}`);
       })
       .catch((e: ErrorResponse) => {

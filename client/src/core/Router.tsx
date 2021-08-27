@@ -12,7 +12,8 @@ interface RouterLocation {
   pathname: string;
   hash: string;
   search: string;
-  state?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  state?: Record<string, any>;
 }
 
 interface RouterContextType {
@@ -24,7 +25,7 @@ interface RouterContextType {
   goBack: () => void;
 }
 
-const RouterContext = createContext<RouterContextType>({
+export const RouterContext = createContext<RouterContextType>({
   location: {
     pathname: '/somewhere',
     hash: '#howdy',
@@ -106,8 +107,8 @@ const Switch: React.FC<{
 
   for (const route of children) {
     const { exact, path } = route.props;
-    if (exact && route.props.path === routerCtx.location.pathname) return route;
-    if (exact && route.props.path !== routerCtx.location.pathname) continue;
+    if (exact && path === routerCtx.location.pathname) return route;
+    if (exact && path !== routerCtx.location.pathname) continue;
 
     const { regex, keys } = compilePath(path);
     const match = routerCtx.location.pathname.match(regex);
@@ -207,6 +208,7 @@ const useHistory = () => {
 };
 
 const StyledLink = styled.a`
+  all: unset;
   cursor: pointer;
 `;
 

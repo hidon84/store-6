@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { underbaeminSVG } from '~/assets';
 
 export const ModalWrapper = styled.div`
   position: fixed;
@@ -20,6 +19,8 @@ export const PhoneInputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   position: relative;
+  justify-content: center;
+  align-items: center;
   bottom: 3px;
   gap: 15px;
 `;
@@ -29,10 +30,11 @@ export const PhoneInput = styled.input`
   width: 100px;
   height: 34px;
   font-size: 15px;
-  background: bottom left / contain no-repeat url(${underbaeminSVG});
   &::placeholder {
     color: #999;
   }
+  position: relative;
+  top: 10px;
 `;
 
 export const Title = styled.div`
@@ -72,6 +74,9 @@ export const NameInputWrapper = styled.div`
     filter: invert(71%) sepia(15%) saturate(2122%) hue-rotate(128deg)
       brightness(92%) contrast(78%);
   }
+  input::placeholder {
+    color: #999;
+  }
 `;
 
 export const Phone = styled.div`
@@ -104,6 +109,10 @@ export const Address = styled.div`
   input {
     padding: 0 16px 10px 16px;
     font-size: 15px;
+
+    &::placeholder {
+      color: #999;
+    }
   }
 `;
 

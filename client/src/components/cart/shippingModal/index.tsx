@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 import DaumPostcode, { AddressData } from 'react-daum-postcode';
-import { cancleSVG, hyphenSVG } from '~/assets';
+import { cancleSVG, hyphenSVG, underbaeminSVG } from '~/assets';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import useInputValidator from '~/lib/hooks/useInputValidator';
@@ -106,10 +106,16 @@ const ShippingModal: FC<Props> = ({
   };
 
   const emptyEssage = '빈 항목이 있습니다.';
+  const phoneInvalid = '올바른 전화번호 형식이 아닙니다.';
 
   const validationCheck = () => {
-    if (!name || !ph0 || !ph1 || !ph2 || !code || !address || !detailAddress) {
+    if (!name || !ph0 || !ph1 || !ph2 || !code || !address) {
       alert(emptyEssage);
+      return;
+    }
+
+    if (ph0Validator(ph0) || ph1Validator(ph1) || ph2Validator(ph2)) {
+      alert(phoneInvalid);
       return;
     }
 
@@ -147,7 +153,12 @@ const ShippingModal: FC<Props> = ({
       <Name>
         <div>받으시는 분 이름</div>
         <NameInputWrapper>
-          <input type="text" value={name} onChange={handleChangeName} />
+          <input
+            type="text"
+            placeholder="이름 입력"
+            value={name}
+            onChange={handleChangeName}
+          />
           <Divider width="400px" direction="horizontal" />
         </NameInputWrapper>
       </Name>
@@ -155,29 +166,41 @@ const ShippingModal: FC<Props> = ({
       <Phone>
         <div>연락처</div>
         <PhoneInputWrapper>
-          <PhoneInput
-            autoComplete="off"
-            type="text"
-            value={ph0}
-            placeholder="010"
-            onChange={handlePh0}
-          />
+          <div style={{ width: '100px' }}>
+            <PhoneInput
+              autoComplete="off"
+              type="text"
+              value={ph0}
+              placeholder="010"
+              onChange={handlePh0}
+              maxLength={3}
+            />
+            <img src={underbaeminSVG} alt="underline" />
+          </div>
           <img src={hyphenSVG} alt="hyphen" />
-          <PhoneInput
-            autoComplete="off"
-            type="text"
-            value={ph1}
-            placeholder="0000"
-            onChange={handlePh1}
-          />
+          <div style={{ width: '100px' }}>
+            <PhoneInput
+              autoComplete="off"
+              type="text"
+              value={ph1}
+              placeholder="0000"
+              onChange={handlePh1}
+              maxLength={4}
+            />
+            <img src={underbaeminSVG} alt="underline" />
+          </div>
           <img src={hyphenSVG} alt="hyphen" />
-          <PhoneInput
-            autoComplete="off"
-            type="text"
-            value={ph2}
-            placeholder="0000"
-            onChange={handlePh2}
-          />
+          <div style={{ width: '100px' }}>
+            <PhoneInput
+              autoComplete="off"
+              type="text"
+              value={ph2}
+              placeholder="0000"
+              onChange={handlePh2}
+              maxLength={4}
+            />
+            <img src={underbaeminSVG} alt="underline" />
+          </div>
         </PhoneInputWrapper>
       </Phone>
       <Divider width="640px" direction="horizontal" />
@@ -205,6 +228,7 @@ const ShippingModal: FC<Props> = ({
               style={{ width: '410px' }}
               type="text"
               value={detailAddress}
+              placeholder="상세주소 입력"
               onChange={handleChangeDetailAddress}
             />
             <Divider width="410px" direction="horizontal" />

@@ -1,6 +1,19 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useContext, useState } from 'react';
 
+import { hyphenSVG } from '~/assets';
+
+import { useHistory } from '~/core/Router';
+import Button from '~/components/common/Button';
+import Checkbox from '~/components/common/Checkbox';
+import Copyright from '~/components/base/Copyright';
+import Space from '~/components/common/Space';
+
+import { oauthUrl } from '~/lib/api/oauth';
+import { ErrorResponse } from '~/lib/api/types';
+import { postUser } from '~/lib/api/users';
+import UserContext from '~/lib/contexts/userContext';
 import useInputValidator from '~/lib/hooks/useInputValidator';
+import { alert } from '~/utils/modal';
 import {
   emailValidator,
   idValidator,
@@ -10,14 +23,6 @@ import {
   pwValidator,
   WARNING_PWRE,
 } from '~/utils/validation';
-import { alert } from '~/utils/modal';
-
-import Button from '~/components/common/Button';
-import Checkbox from '~/components/common/Checkbox';
-import Copyright from '~/components/base/Copyright';
-import Space from '~/components/common/Space';
-
-import { hyphenSVG } from '~/assets';
 
 import {
   SignUpFormWrapper,
@@ -33,17 +38,14 @@ import {
   PhoneInputWrapper,
   PhoneInput,
 } from '~/pages/SignUp/index.style';
-import { useHistory } from '~/core/Router';
-import { postUser } from '~/lib/api/users';
+
 import HeaderTitle from './HeaderTitle';
-import { ErrorResponse } from '~/lib/api/types';
-import useUser from '~/lib/hooks/useUser';
 
 const SignUpForm: FC<{
   social?: 'GOOGLE' | 'FACEBOOK';
 }> = ({ social }) => {
   const { push } = useHistory();
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
   const [id, idWarning, handleId] = useInputValidator('', idValidator);
   const [pw, pwWarning, handlePW] = useInputValidator('', pwValidator);
   const [, pwReWarning, handlePWRe] = useInputValidator(
@@ -56,7 +58,7 @@ const SignUpForm: FC<{
   );
 
   const [email, emailWarning, handleEmail] = useInputValidator(
-    user?.email ?? '',
+    userState.user?.email ?? '',
     emailValidator,
   );
 
@@ -117,7 +119,7 @@ const SignUpForm: FC<{
      * @todo: postUser의 response 다듬기
      */
     await postUser({
-      id: social ? user.id : id,
+      id: social ? userState.user.id : id,
       password: pw,
       phone: `${ph0}-${ph1}-${ph2}`,
       email,
@@ -126,7 +128,24 @@ const SignUpForm: FC<{
       type: social ?? 'OWN',
     })
       .then(() => {
-        push('/login', { id: social ? user.id : id, from: '/signup' });
+        if (social === 'FACEBOOK') {
+          alert('회원가입 성공');
+          setTimeout(() => {
+            window.location.href = oauthUrl.facebook.login;
+          }, 500);
+          return;
+        }
+        if (social === 'GOOGLE') {
+          alert('회원가입 성공');
+          setTimeout(() => {
+            window.location.href = oauthUrl.google.login;
+          }, 500);
+          return;
+        }
+        push('/login', {
+          id: social ? userState.user.id : id,
+          from: '/signup',
+        });
       })
       .catch((e: ErrorResponse) => {
         alert(e.message);

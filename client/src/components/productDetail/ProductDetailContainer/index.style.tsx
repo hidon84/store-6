@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { ProductInfoDividerSVG } from '~/assets';
 
 export const ProductDetailContainerWrapper = styled.div`
-  width: 300px;
   height: fit-content;
 `;
 

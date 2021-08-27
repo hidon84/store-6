@@ -131,3 +131,87 @@ export const handleAddCart = async (
     next(e);
   }
 };
+
+export const handleRemoveCart = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const productServiceInstance = Container.get(ProductService);
+
+    const productIdx = Number(req.params.id);
+    if (Number.isNaN(productIdx) || productIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
+    }
+
+    const { amount } = await productServiceInstance.removeCart(
+      productIdx,
+      req.currentUser.idx,
+    );
+
+    res.json({ amount });
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const handleRemoveLike = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const productServiceInstance = Container.get(ProductService);
+
+    const productIdx = Number(req.params.id);
+    if (Number.isNaN(productIdx) || productIdx <= 0) {
+      throw new ErrorResponse(commonError.invalidPathParams);
+    }
+
+    await productServiceInstance.removeLike(productIdx, req.currentUser.idx);
+
+    res.end();
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const handleAddProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const productServiceInstance = Container.get(ProductService);
+
+    const {
+      category,
+      title,
+      thumbnail,
+      originPrice,
+      discountedPrice,
+      rank,
+      images,
+      mandatoryInfo,
+      shipInfo,
+    } = req.body;
+
+    const { idx, updatedAt, createdAt } =
+      await productServiceInstance.addProduct(
+        category,
+        title,
+        thumbnail,
+        originPrice,
+        discountedPrice,
+        rank,
+        images,
+        mandatoryInfo,
+        shipInfo,
+      );
+
+    res.json({ idx, updatedAt, createdAt });
+  } catch (e) {
+    next(e);
+  }
+};

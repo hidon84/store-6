@@ -1,46 +1,38 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 
-import { FC, useCallback, useEffect, useState } from 'react';
+import { useHistory } from '~/core/Router';
+import NoResource from '~/components/common/NoResource';
 import ProductItem from '~/components/product/ProductItem';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
-import { useHistory } from '~/core/Router';
-import { ProductLikeItemWrapper } from './index.style';
+import SubPageWrapper from '~/components/subpage/SubPageWrapper';
+
 import * as productsApi from '~/lib/api/products';
 import * as likesApi from '~/lib/api/likes';
 import { LikesGetResponseBody } from '~/lib/api/types/likes';
-import { alert } from '~/utils/modal';
 import { ErrorResponse } from '~/lib/api/types';
-import SubPageWrapper from '~/components/subpage/SubPageWrapper';
+import UserContext from '~/lib/contexts/userContext';
+import { alert } from '~/utils/modal';
 
-// @TODO Delete dummies
-const dummies = [];
-
-for (let i = 0; i < 100; i += 1) {
-  dummies.push({
-    idx: i + 1,
-    thumbnail:
-      'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com/product/sample.jpeg',
-    title: `test${i}`,
-    price: 3000,
-    createdAt: '',
-    updatedAt: '',
-  });
-}
+import { ProductLikeItemWrapper, NoResourceWrapper } from './index.style';
 
 const LikeListPage: FC = () => {
+  const { user: userState } = useContext(UserContext);
   const history = useHistory();
   const [itemList, setItemList] = useState<LikesGetResponseBody[]>(null);
+  const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
 
   useEffect(() => {
-    // @TODO Delete dummies
-    setItemList(dummies);
+    if (!userState.isLoggedIn) {
+      history.push('/', { from: '/like', error: 'accessWithoutToken' });
+      return;
+    }
+
     likesApi
       .getLikeItems()
       .then((result) => setItemList(result.data))
       .catch((e: ErrorResponse) => alert(e.message));
-  }, []);
+  }, [userState]);
 
   const onClickItem = useCallback(
     (idx: number) => {
@@ -51,17 +43,13 @@ const LikeListPage: FC = () => {
 
   const onClickLikeHandler = useCallback(
     (idx: number) => {
-      // @TODO API 테스트 이후 삭제해야 함
-      // const nextItemList = [...itemList];
-      // const indexToDelete = nextItemList.findIndex((v) => v.idx === idx);
-      // if (indexToDelete <= -1) return;
-      // nextItemList.splice(indexToDelete, 1);
-      // setItemList(nextItemList);
       productsApi
         .deleteProductFromLike(idx)
         .then(() => {
           const nextItemList = [...itemList];
-          const indexToDelete = nextItemList.findIndex((v) => v.idx === idx);
+          const indexToDelete = nextItemList.findIndex(
+            (v) => v.product.idx === idx,
+          );
           nextItemList.splice(indexToDelete, 1);
           setItemList(nextItemList);
         })
@@ -75,22 +63,27 @@ const LikeListPage: FC = () => {
       <SubPageHeader>
         <SubPageHeaderItem>좋아요 리스트</SubPageHeaderItem>
       </SubPageHeader>
-      <ProductLikeItemWrapper>
-        {/* @TODO LikesGetResponseBody 타입이 변경되면 수정해야 할 부분!! */}
-        {/* {itemList?.map(({ idx, name, price, thumbnail }) => (
-          <ProductItem
-            key={idx}
-            idx={idx}
-            title={name}
-            price={price}
-            thumbnail={thumbnail}
-            isLikeItem
-            isLike
-            onClick={onClickItem}
-            onClickLike={onClickLikeHandler}
-          />
-        ))} */}
-      </ProductLikeItemWrapper>
+      {itemList && itemList.length ? (
+        <ProductLikeItemWrapper>
+          {itemList?.map(({ idx, product }) => (
+            <ProductItem
+              key={idx}
+              idx={product.idx}
+              title={product.title}
+              price={product.discountedPrice}
+              thumbnail={product.thumbnail}
+              isLikeItem
+              isLike
+              onClick={onClickItem}
+              onClickLike={onClickLikeHandler}
+            />
+          ))}
+        </ProductLikeItemWrapper>
+      ) : (
+        <NoResourceWrapper>
+          <NoResource content={NO_RESOURCE_CONTENT} />
+        </NoResourceWrapper>
+      )}
     </SubPageWrapper>
   );
 };

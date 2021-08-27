@@ -5,7 +5,7 @@ export interface LikesGetResponseBody {
     title: string;
     thumbnail: string;
     originPrice: number;
-    discountedPrice: string;
+    discountedPrice: number;
     mandatoryInfo: Record<string, string>;
     description: string;
     shipInfo: Record<string, string>;

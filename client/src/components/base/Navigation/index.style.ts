@@ -75,10 +75,13 @@ const headerRightSectionHeight = '34px';
 export const HeaderRightSection = styled.div`
   position: absolute;
   top: calc(50% - ${headerRightSectionHeight} / 2);
-  height: fit-content;
   right: 0;
   display: flex;
-  gap: 35px;
+  align-items: center;
+
+  & > a:not(:last-child) {
+    margin-right: 45px;
+  }
 `;
 
 export const Badge = styled.div<{ badgeContent: string }>`

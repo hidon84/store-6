@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
-import { UsersGetResponseBody } from '../api/types';
+import { UserModuleAction, UserModuleState } from '~/stores/userModule';
 import createNamedContext from './createNamedContext';
 
 export interface UserContextState {
-  user: UsersGetResponseBody;
-  setUser: Dispatch<SetStateAction<UsersGetResponseBody>>;
+  user: UserModuleState;
+  userDispatch: (action: UserModuleAction) => void;
 }
 
 const UserContext = createNamedContext<UserContextState>('UserContext');

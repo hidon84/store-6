@@ -25,8 +25,27 @@ import modifySVG from './modify-pencil.svg';
 import cancleSVG from './cancle.svg';
 import underlineShortSVG from './underline-baemin-short.svg';
 import underbaeminSVG from './underline-baemin-color.svg';
+import detail1PNG from './productDatail1.png';
+import detail2PNG from './productDatail2.png';
+import detail3PNG from './productDatail3.png';
+import detail4PNG from './productDatail4.png';
+
+// Big Icons (메인 페이지)
+import BigBaedalSVG from './baedal.svg';
+import BigBookSVG from './book.svg';
+import BigColabSVG from './colab.svg';
+import BigGiftSVG from './gift.svg';
+import BigHatSVG from './hat.svg';
+import BigHouseSVG from './house.svg';
+import BigKKSVG from './kk.svg';
+import BigPencilSVG from './pencil.svg';
+import BigTreeSVG from './tree.svg';
+import doodleAnnouncement1 from './doodle-announcement1.svg';
+import doodleAnnouncement2 from './doodle-announcement2.svg';
 
 const S3_PREFIX = 'https://store-6-bucket.s3.ap-northeast-2.amazonaws.com';
+
+const BigCircleSVG = `${S3_PREFIX}/common/big-icon/circle.svg`;
 
 const LogoSVG = `${S3_PREFIX}/common/logo.svg`;
 const LineSVG = `${S3_PREFIX}/common/line.svg`;
@@ -52,18 +71,6 @@ const SmallKKSVG = `${S3_PREFIX}/common/small-icon/kk.svg`;
 const SmallPencilSVG = `${S3_PREFIX}/common/small-icon/pencil.svg`;
 const SmallTreeSVG = `${S3_PREFIX}/common/small-icon/tree.svg`;
 const SmallCircleSVG = `${S3_PREFIX}/common/small-icon/circle.svg`;
-
-// Big Icons (메인 페이지)
-const BigBaedalSVG = `${S3_PREFIX}/common/big-icon/baedal.svg`;
-const BigBookSVG = `${S3_PREFIX}/common/big-icon/book.svg`;
-const BigColabSVG = `${S3_PREFIX}/common/big-icon/colab.svg`;
-const BigGiftSVG = `${S3_PREFIX}/common/big-icon/gift.svg`;
-const BigHatSVG = `${S3_PREFIX}/common/big-icon/hat.svg`;
-const BigHouseSVG = `${S3_PREFIX}/common/big-icon/house.svg`;
-const BigKKSVG = `${S3_PREFIX}/common/big-icon/kk.svg`;
-const BigPencilSVG = `${S3_PREFIX}/common/big-icon/pencil.svg`;
-const BigTreeSVG = `${S3_PREFIX}/common/big-icon/tree.svg`;
-const BigCircleSVG = `${S3_PREFIX}/common/big-icon/circle.svg`;
 
 // Product Icons (상품 목록 페이지)
 const Hat2SVG = `${S3_PREFIX}/product/hat2.svg`;
@@ -158,4 +165,10 @@ export {
   ProductPageLayoutDividerSVG,
   ProductInfoDividerSVG,
   ProductInfoSubDividerSVG,
+  detail1PNG,
+  detail2PNG,
+  detail3PNG,
+  detail4PNG,
+  doodleAnnouncement1,
+  doodleAnnouncement2,
 };

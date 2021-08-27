@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import ErrorResponse from '@/utils/errorResponse';
@@ -7,6 +9,9 @@ import {
   productError,
   productViewError,
   productLikeError,
+  cartDeleteError,
+  likeDeleteError,
+  ProductSaveError,
 } from '@/constants/error';
 import ProductRepository from '@/repository/product';
 import ViewRepository from '@/repository/view';
@@ -15,6 +20,7 @@ import LikeRepository from '@/repository/like';
 import CartRepository from '@/repository/cart';
 import ProductImageRepository from '@/repository/productImage';
 import UserRepository from '@/repository/user';
+import CategoryRepository from '@/repository/category';
 
 @Service()
 class ProductService {
@@ -32,6 +38,8 @@ class ProductService {
 
   private cartRepository: CartRepository;
 
+  private categoryRepository: CategoryRepository;
+
   constructor(
     @InjectRepository(UserRepository) userRepository: UserRepository,
     @InjectRepository(ProductRepository) productRepository: ProductRepository,
@@ -41,6 +49,8 @@ class ProductService {
     @InjectRepository(ReviewRepository) reviewRepository: ReviewRepository,
     @InjectRepository(LikeRepository) likeRepository: LikeRepository,
     @InjectRepository(CartRepository) cartRepository: CartRepository,
+    @InjectRepository(CategoryRepository)
+    categoryRepository: CategoryRepository,
   ) {
     this.userRepository = userRepository;
     this.productRepository = productRepository;
@@ -49,6 +59,7 @@ class ProductService {
     this.reviewRepository = reviewRepository;
     this.likeRepository = likeRepository;
     this.cartRepository = cartRepository;
+    this.categoryRepository = categoryRepository;
   }
 
   async getProducts(querys: object) {
@@ -100,6 +111,15 @@ class ProductService {
         throw new ErrorResponse(commonError.notFound);
       }
 
+      const includeCategory = await this.productRepository.findCategoryByIdx(
+        productIdx,
+      );
+
+      const recommend = await this.productRepository.findTopRankByCategory(
+        includeCategory!.category.idx,
+        product.idx,
+      );
+
       const [productImages, viewCnt, reviewCnt, likeCnt] = await Promise.all([
         this.productImageRepository.findUrlsByProductIdx(productIdx),
         this.viewRepository.getCntByProductIdx(productIdx),
@@ -115,6 +135,7 @@ class ProductService {
         likeCnt,
         isLike: false,
         isCart: false,
+        recommend,
       };
 
       if (!loginIdx) {
@@ -142,7 +163,7 @@ class ProductService {
         result.isCart = true;
       }
 
-      return result;
+      return { ...result };
     } catch (e) {
       if (e?.isOperational) {
         throw e;
@@ -178,6 +199,106 @@ class ProductService {
         throw e;
       }
       throw new ErrorResponse(productLikeError.unable);
+    }
+  }
+
+  async removeCart(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const cart = await this.cartRepository.findByIdxOfProductAndUser(
+        userIdx,
+        productIdx,
+      );
+
+      if (!cart) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      await this.cartRepository.deleteItem(cart.idx);
+
+      const amount = await this.cartRepository.getCartAmountOfUser(userIdx);
+
+      return { amount };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(cartDeleteError.unable);
+    }
+  }
+
+  async removeLike(productIdx: number, userIdx: number) {
+    try {
+      const product = await this.productRepository.findByIdx(productIdx);
+      const user = await this.userRepository.findByIdx(userIdx);
+
+      if (!product || !user) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      const like = await this.likeRepository.findByIdxOfProductAndUser(
+        userIdx,
+        productIdx,
+      );
+
+      if (!like) {
+        throw new ErrorResponse(commonError.notFound);
+      }
+
+      await this.likeRepository.deleteItem(like);
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(likeDeleteError.unable);
+    }
+  }
+
+  async addProduct(
+    category: string,
+    title: string,
+    thumbnail: string,
+    originPrice: number,
+    discountedPrice: number,
+    rank: number,
+    images: string[],
+    mandatoryInfo: { key: string; value: string },
+    shipInfo: { key: string; value: string },
+  ) {
+    try {
+      const currentCategory = await this.categoryRepository.findByName(
+        category,
+      );
+
+      const newProduct = await this.productRepository.saveItem(
+        currentCategory!,
+        title,
+        thumbnail,
+        originPrice,
+        discountedPrice,
+        rank,
+        mandatoryInfo,
+        shipInfo,
+      );
+
+      for await (const image of images) {
+        await this.productImageRepository.saveItem(newProduct, image);
+      }
+
+      const { idx, updatedAt, createdAt } = newProduct;
+
+      return { idx, updatedAt, createdAt };
+    } catch (e) {
+      if (e?.isOperational) {
+        throw e;
+      }
+      throw new ErrorResponse(ProductSaveError.unable);
     }
   }
 }

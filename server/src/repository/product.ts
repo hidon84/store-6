@@ -1,5 +1,6 @@
-import { EntityRepository, Repository, Like, FindOperator } from 'typeorm';
+import { EntityRepository, Repository, Like, FindOperator, Not } from 'typeorm';
 import ProductEntity from '@/entity/product';
+import CategoryEntity from '@/entity/category';
 
 @EntityRepository(ProductEntity)
 class ProductRepository extends Repository<ProductEntity> {
@@ -72,6 +73,53 @@ class ProductRepository extends Repository<ProductEntity> {
     });
 
     return products;
+  }
+
+  async saveItem(
+    currentCategory: CategoryEntity,
+    title: string,
+    thumbnail: string,
+    originPrice: number,
+    discountedPrice: number,
+    rank: number,
+    mandatoryInfo: { key: string; value: string },
+    shipInfo: { key: string; value: string },
+  ) {
+    const product = new ProductEntity();
+    product.category = currentCategory;
+    product.title = title;
+    product.thumbnail = thumbnail;
+    product.originPrice = originPrice;
+    product.discountedPrice = discountedPrice;
+    product.rank = rank;
+    product.mandatoryInfo = mandatoryInfo;
+    product.shipInfo = shipInfo;
+
+    const newProduct = await this.save(product);
+    return newProduct;
+  }
+
+  async findCategoryByIdx(idx: number) {
+    const product = await this.findOne({
+      where: { idx },
+      relations: ['category'],
+    });
+    return product;
+  }
+
+  async findTopRankByCategory(categoryIdx: number, productIdx: number) {
+    const recommend = await this.find({
+      select: ['idx', 'thumbnail'],
+      where: {
+        category: categoryIdx,
+        idx: Not(productIdx),
+      },
+      order: {
+        rank: 'ASC',
+      },
+      take: 4,
+    });
+    return recommend;
   }
 }
 
