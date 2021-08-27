@@ -11,6 +11,8 @@ import {
   DivideLine,
   LayoutDivider,
   PrevPageButton,
+  ScrollProgress,
+  scrollProgressTransform,
 } from './index.style';
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
@@ -39,6 +41,7 @@ const ProductDetail: FC = () => {
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
   const imagesContainerRef = useRef<HTMLDivElement>();
+  const scrollProgressRef = useRef<HTMLImageElement>();
 
   useEffect(() => {
     const scrollImagesWhenWheel = (e: WheelEvent) => {
@@ -47,6 +50,15 @@ const ProductDetail: FC = () => {
         top: e.deltaY,
         left: 0,
       });
+
+      if (!scrollProgressRef.current) return;
+      const maxScrollHeight =
+        imagesContainerRef.current.scrollHeight -
+        imagesContainerRef.current.clientHeight;
+      const currentScrollPos = imagesContainerRef.current.scrollTop;
+      const scrollProgress = currentScrollPos / maxScrollHeight;
+      scrollProgressRef.current.style.transform =
+        scrollProgressTransform(scrollProgress);
     };
 
     document.addEventListener('wheel', scrollImagesWhenWheel);
@@ -133,6 +145,7 @@ const ProductDetail: FC = () => {
 
       <LayoutDivider aria-hidden="true">
         <DivideLine />
+        <ScrollProgress ref={scrollProgressRef} />
       </LayoutDivider>
 
       <RightSection>

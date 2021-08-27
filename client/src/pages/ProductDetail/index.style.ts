@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BackArrowSVG, ProductPageLayoutDividerSVG } from '~/assets';
+import ScrollProgressImage from '~/assets/scrollProgressImage.png';
 
 export const ProductDetailWrapper = styled.main`
   display: flex;
@@ -59,3 +60,15 @@ export const PrevPageArrow = styled.img.attrs({
   src: BackArrowSVG,
   alt: 'prev page',
 })``;
+
+export const scrollProgressTransform = (progress: number) =>
+  `translateY(${820 * progress}px) rotate(-90deg)`;
+export const ScrollProgress = styled.img.attrs({
+  src: ScrollProgressImage,
+  alt: 'scroll progress bar',
+  width: '40px',
+})`
+  position: absolute;
+  top: 10px;
+  right: 3px;
+`;
