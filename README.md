@@ -12,17 +12,19 @@
 
 ## 멤버가 자랑거리임!!
 
-프로그래밍계의 박지성. 두개의 심장. 게더에서 없어지지않는 지치지않는 그의 이름 황.병.헌.
+프로그래밍계의 박지성. 두개의 심장으로 키보드를 누비는 야생마. 지치지않는 그의 이름 황.병.헌.
 
-그 이외에도 자랑할 멤버가 많지만 지면이 짧은 관계로 이하 생략.
+그 이외에도 자랑할 멤버가 많지만 지면이 부족한 관계로 자세한 설명은 생략한다.
 
 ![자세한설명은생략한다](https://user-images.githubusercontent.com/13645032/131059878-c37f2ad6-862b-4ec6-ba6f-ac12820e5984.jpeg)
 
 ## 게더 왜씀! 그거 쓸바에 뜨끈~한 배민문방구 쓰고말지!
 
-메인페이지에서 webRTC라는 p2p 통신을 통해서 음성통화 + 캐릭터 이동동기화로 친구랑 놀 수 있어요!
+메인페이지에서 webRTC p2p 통신을 통해서 음성통화 + 캐릭터 위치동기화 기능으로 친구랑 놀 수 있어요!
 
 ![gate](https://user-images.githubusercontent.com/13645032/131062072-6a26a15e-644c-4b94-be7c-027b9d760692.gif)
+
+~~아니 이사람들 왜 쇼핑몰만들라는데 게더를 만들어놨어~~
 
 # 🐾 6팀의 즐거운 항해 발자취
 
@@ -86,67 +88,36 @@
 
 # 실행방법
 
+[라이브데모 store.woowa.link](https://store.woowa.link)
+
 ## 서버 환경변수 설정 (.env)
 
-.env.dev 는 올라가있는데 이를 참고하면됩니다.
-
-```
-PORT=5000
-API_VERSION=0.0.1
-
-REDIS_HOST=
-REDIS_PORT=
-
-DB_HOST=
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-
-JWT_ALGORITHM='HS256'
-JWT_SECRET='jwt_secret'
-JWT_EXPIRE_ACCESS=0.5
-JWT_EXPIRE_REFRESH=336
-
-/* S3 관련 설정 */
-AWS_KEY= /* accessKeyId */
-AWS_PW= /* secretAccessKey */
-AWS_REGION=
-AWS_BUCKET=
-AWS_MAX_SIZE= /* 비워놔도됨 */
-
-OAUTH_GOOGLE_CLIENT_ID=
-OAUTH_GOOGLE_CLIENT_SECRET=
-OAUTH_GOOGLE_CALLBACK_URL=
-
-OAUTH_FACEBOOK_CLIENT_ID=
-OAUTH_FACEBOOK_CLIENT_SECRET=
-OAUTH_FACEBOOK_CALLBACK_URL=
-```
+[server/.env.dev](server/.env.dev) 를 참고해서 환경변수 파일을 만들어주세요
 
 ## 서버 실행
 
-.env 설정으로 실행
+server/ 디렉토리에 아래 명령어를 실행합니다.
 
 ```sh
-yarn start
+yarn dev # 개발용 서버 (.env.dev 필요)
+# or 
+yarn start # 배포용 서버 (.env 필요)
 ```
 
-.env.dev 설정으로 실행
+## webRTC 브로커서버 실행
+
+server/ 디렉토리에서 아래 명령어를 실행합니다.
 
 ```sh
-yarn dev
+yarn p2p-dev # 개발용 브로커 서버 
+# or
+yarn p2p # 배포용 브로커 서버
 ```
 
 ## 클라이언트 실행
 
-/client/.env.dev 설정을 이용해서 실행
-
 ```sh
-yarn start:dev
-```
-
-/client/.env.prod 설정을 이용해서 실행
-
-```sh
-yarn build
+yarn start:dev # 개발용 핫로딩 서버 (.env.dev 필요)
+# or
+yarn build # 배포용 빌드 (.env.prod 필요)
 ```
