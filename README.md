@@ -24,10 +24,13 @@
   <thead>
     <tr>
       <th>
-        작업일정 공유 캘린더
+        <a href="https://snow-bagpipe-339.notion.site/fe8281f1606c4418bc7079a7d8c87d9c?v=00a2b3a456334514b7fd58955a6e1da7">작업일정 공유 캘린더</a>
       </th>
       <th>
-        백로그
+        <a href="https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=0">백로그</a>
+      </th>
+      <th>
+        <a href="https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=1222181688">번업 차트</a>
       </th>
     </tr>
   </thead>
@@ -39,14 +42,12 @@
       <td align="center">
         <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060139-7d4d57d6-6ebe-4c3b-9011-f7f4705a07f9.png">
       </td>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060782-bcd91232-99ab-4d43-8f6b-a203e971501c.png">
+      </td>
     </tr>
   </tbody>
 </table>
-
-
-
-
-
 
 
 # 🐾 6팀의 즐거운 항해 발자취
@@ -54,12 +55,6 @@
 - [배포 링크 store.woowa.link](https://store.woowa.link/)
 
 - [항해기록](https://snow-bagpipe-339.notion.site/59f1c69982314c10b13163c7f29638af)
-
-- [작업 일정 캘린더](https://snow-bagpipe-339.notion.site/fe8281f1606c4418bc7079a7d8c87d9c?v=00a2b3a456334514b7fd58955a6e1da7)
-
-- [Backlog 링크](https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=0)
-
-- [BurnUp Chart 링크](https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=1222181688)
 
 - [Figma 링크](https://www.figma.com/file/4zOaAFuQAkAb6uKSPSXOjz/%EB%B0%B0%EB%8A%94-%ED%95%AD%EA%B5%AC%EC%97%90-%EC%A0%95%EB%B0%95%ED%95%B4-%EC%9E%88%EC%9D%84-%EB%95%8C-%EA%B0%80%EC%9E%A5-%EC%95%88%EC%A0%84%ED%95%98%EB%8B%A4.-%EA%B7%B8%EB%9F%AC%EB%82%98-%EA%B7%B8%EA%B2%83%EC%9D%B4-6%ED%8C%80%EC%9D%98-%EC%A1%B4%EC%9E%AC-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EC%95%84%EB%8B%88%EB%8B%A4.?node-id=0%3A1)
 
