@@ -4,9 +4,10 @@
 
 <p align="center"><b>6팀 배 출발!</b></p>
 
+
 # 🐾 6팀의 즐거운 항해 발자취
 
-- [배포 링크](https://store.woowa.link/)
+- [배포 링크 store.woowa.link](https://store.woowa.link/)
 
 - [항해기록](https://snow-bagpipe-339.notion.site/59f1c69982314c10b13163c7f29638af)
 
@@ -20,3 +21,69 @@
 
 - [wiki 링크](https://github.com/woowa-techcamp-2021/store-6/wiki)
 
+# 실행방법
+
+## 서버 환경변수 설정 (.env)
+
+.env.dev 는 올라가있는데 이를 참고하면됩니다.
+
+```
+PORT=5000
+API_VERSION=0.0.1
+
+REDIS_HOST=
+REDIS_PORT=
+
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+
+JWT_ALGORITHM='HS256'
+JWT_SECRET='jwt_secret'
+JWT_EXPIRE_ACCESS=0.5
+JWT_EXPIRE_REFRESH=336
+
+/* S3 관련 설정 */
+AWS_KEY= /* accessKeyId */
+AWS_PW= /* secretAccessKey */
+AWS_REGION=
+AWS_BUCKET=
+AWS_MAX_SIZE= /* 비워놔도됨 */
+
+OAUTH_GOOGLE_CLIENT_ID=
+OAUTH_GOOGLE_CLIENT_SECRET=
+OAUTH_GOOGLE_CALLBACK_URL=
+
+OAUTH_FACEBOOK_CLIENT_ID=
+OAUTH_FACEBOOK_CLIENT_SECRET=
+OAUTH_FACEBOOK_CALLBACK_URL=
+```
+
+## 서버 실행
+
+.env 설정으로 실행
+
+```sh
+yarn start
+```
+
+.env.dev 설정으로 실행
+
+```sh
+yarn dev
+```
+
+## 클라이언트 실행
+
+/client/.env.dev 설정을 이용해서 실행
+
+```sh
+yarn start:dev
+```
+
+/client/.env.prod 설정을 이용해서 실행
+
+```sh
+yarn build
+```
