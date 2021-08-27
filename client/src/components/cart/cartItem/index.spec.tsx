@@ -7,6 +7,7 @@ describe('<CartItem />', () => {
   it('should render same with snapshot', () => {
     const cartIdx = 1;
     const product = {
+      idx: 1,
       title: 'test',
       thumbnail: 'test',
       discountedPrice: 2,
