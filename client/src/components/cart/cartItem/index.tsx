@@ -13,10 +13,12 @@ import {
   CountBtn,
 } from './index.style';
 import { formatPrice } from '~/utils/formatPrice';
+import { useHistory } from '~/core/Router';
 
 interface Props {
   cartIdx: number;
   product: {
+    idx: number;
     title: string;
     thumbnail: string;
     discountedPrice: number;
@@ -31,9 +33,10 @@ const CartItem: FC<Props> = ({
   changeAmount,
   removeCartItem,
 }) => {
-  const { thumbnail, title, discountedPrice } = product;
+  const { thumbnail, title, discountedPrice, idx } = product;
   const [count, setCount] = useState(1);
   const [orderPrice, setOrderPrice] = useState(discountedPrice);
+  const { push } = useHistory();
 
   const handleUpBtnClick = () => {
     setOrderPrice(orderPrice + discountedPrice);
@@ -56,9 +59,13 @@ const CartItem: FC<Props> = ({
     });
   };
 
+  const handleImgClick = () => {
+    push(`/products/${idx}`);
+  };
+
   return (
     <CartItemWrapper>
-      <CartImg src={thumbnail} />
+      <CartImg src={thumbnail} onClick={handleImgClick} />
       <CartTitle>{[title]}</CartTitle>
       <CartPrice>{formatPrice(discountedPrice, '')}</CartPrice>
       <CartCount>{formatPrice(orderPrice, '')}</CartCount>

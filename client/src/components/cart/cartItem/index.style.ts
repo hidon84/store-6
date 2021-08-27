@@ -14,6 +14,7 @@ export const CartImg = styled.img`
   border-radius: 10px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
     drop-shadow(2px 2px 12px rgba(0, 0, 0, 0.15));
+  cursor:pointer;
 `;
 
 export const CartTitle = styled.div`
