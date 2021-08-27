@@ -6,10 +6,10 @@ export const ProductDetailWrapper = styled.main`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  padding-top: 50px;
-  width: 900px;
-  margin-top: 4px;
   height: calc(100% - 54px);
+  padding-top: 50px;
+  margin-top: 4px;
+  width: 900px;
 `;
 
 export const LeftSection = styled.section`
@@ -45,6 +45,7 @@ export const DivideLine = styled.img.attrs({
   src: ProductPageLayoutDividerSVG,
   alt: 'divider',
 })`
+  height: calc(100vh - 130px);
   position: relative;
 `;
 

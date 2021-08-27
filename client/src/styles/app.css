@@ -6,6 +6,7 @@
   --tablet-max-width: 1440px;
   height: 100%;
   max-width: var(--tablet-max-width);
+  overflow-x:hidden;
 }
 
 body {
