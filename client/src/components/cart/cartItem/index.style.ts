@@ -26,6 +26,7 @@ export const CartTitle = styled.div`
   overflow-y: auto;
   text-overflow: ellipsis;
   margin-left: 80px;
+  cursor: pointer;
 `;
 
 export const CartPrice = styled.div`

@@ -66,7 +66,7 @@ const CartItem: FC<Props> = ({
   return (
     <CartItemWrapper>
       <CartImg src={thumbnail} onClick={handleImgClick} />
-      <CartTitle>{[title]}</CartTitle>
+      <CartTitle onClick={handleImgClick}>{[title]}</CartTitle>
       <CartPrice>{formatPrice(discountedPrice, '')}</CartPrice>
       <CartCount>{formatPrice(orderPrice, '')}</CartCount>
       <CartCounter>
