@@ -63,6 +63,7 @@ export const PrevPageArrow = styled.img.attrs({
 
 export const scrollProgressTransform = (progress: number) =>
   `translateY(${820 * progress}px) rotate(-90deg)`;
+
 export const ScrollProgress = styled.img.attrs({
   src: ScrollProgressImage,
   alt: 'scroll progress bar',
@@ -71,4 +72,5 @@ export const ScrollProgress = styled.img.attrs({
   position: absolute;
   top: 10px;
   right: 3px;
+  transform: rotate(-90deg);
 `;
