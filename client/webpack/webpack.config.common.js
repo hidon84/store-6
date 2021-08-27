@@ -1,14 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   entry: {
-    'js/app/app': ['./src/index.tsx']
+    'js/app': ['./src/index.tsx']
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
+    filename: '[name].[chunkhash].js',
     publicPath: '/',
   },
   module: {
@@ -33,6 +35,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
