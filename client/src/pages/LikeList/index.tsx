@@ -1,32 +1,38 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
+
+import { useHistory } from '~/core/Router';
+import NoResource from '~/components/common/NoResource';
 import ProductItem from '~/components/product/ProductItem';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
-import { useHistory } from '~/core/Router';
-import { ProductLikeItemWrapper, NoResourceWrapper } from './index.style';
+import SubPageWrapper from '~/components/subpage/SubPageWrapper';
+
 import * as productsApi from '~/lib/api/products';
 import * as likesApi from '~/lib/api/likes';
 import { LikesGetResponseBody } from '~/lib/api/types/likes';
-import { alert } from '~/utils/modal';
 import { ErrorResponse } from '~/lib/api/types';
-import SubPageWrapper from '~/components/subpage/SubPageWrapper';
-import useUser from '~/lib/hooks/useUser';
-import NoResource from '~/components/common/NoResource';
+import UserContext from '~/lib/contexts/userContext';
+import { alert } from '~/utils/modal';
+
+import { ProductLikeItemWrapper, NoResourceWrapper } from './index.style';
 
 const LikeListPage: FC = () => {
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
   const history = useHistory();
   const [itemList, setItemList] = useState<LikesGetResponseBody[]>(null);
   const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
 
   useEffect(() => {
-    if (user) {
-      likesApi
-        .getLikeItems()
-        .then((result) => setItemList(result.data))
-        .catch((e: ErrorResponse) => alert(e.message));
+    if (!userState.isLoggedIn) {
+      history.push('/', { from: '/like', error: 'accessWithoutToken' });
+      return;
     }
-  }, [user]);
+
+    likesApi
+      .getLikeItems()
+      .then((result) => setItemList(result.data))
+      .catch((e: ErrorResponse) => alert(e.message));
+  }, [userState]);
 
   const onClickItem = useCallback(
     (idx: number) => {

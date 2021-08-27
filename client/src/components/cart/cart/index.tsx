@@ -1,14 +1,14 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useContext } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { deleteCartItem, getCartItems } from '~/lib/api/cart';
 import { CartGetResponseBody } from '~/lib/api/types';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
-import useUser from '~/lib/hooks/useUser';
 import { alert } from '~/utils/modal';
 import CartItem from '../cartItem';
 import { CartFooter, CartHeader } from './index.style';
 import { formatPrice } from '~/utils/formatPrice';
+import UserContext from '~/lib/contexts/userContext';
 
 const message = {
   failedToGetCartItems: '장바구니 리스트를 가져오는 데 실패했습니다.',
@@ -21,7 +21,7 @@ const Cart: FC = () => {
   const setCartAmount = useSetCartAmount();
   const [cartItems, setCartItems] = useState<CartGetResponseBody[]>([]);
   const [amount, setAmount] = useState(0);
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
 
   const calAmount = (items: CartGetResponseBody[]) => {
     return items.reduce((acc, cur) => {
@@ -39,10 +39,8 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchCart();
-    }
-  }, [user]);
+    if (userState.isLoggedIn) fetchCart();
+  }, [userState]);
 
   const onSubmit = () => {
     alert(message.youCanNotPay);

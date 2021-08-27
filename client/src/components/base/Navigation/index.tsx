@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Link, useLocation } from '~/core/Router';
 
 import HeaderLogo from '~/components/base/HeaderLogo';
@@ -8,7 +8,6 @@ import ProductLikeButton from '~/components/product/ProductLikeButton';
 
 import urls from '~/lib/constants/urls';
 import useCartAmount from '~/lib/hooks/useCartAmount';
-import useUser from '~/lib/hooks/useUser';
 
 import {
   NavigationWrapper,
@@ -22,9 +21,10 @@ import {
   DoodleUselessIcon,
   MyPageIcon,
 } from './index.style';
+import UserContext from '~/lib/contexts/userContext';
 
 const Navigation: FC = () => {
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
   const cartAmount = useCartAmount();
   const { pathname } = useLocation();
   if ([urls.main, urls.login].includes(pathname)) return null;
@@ -54,8 +54,8 @@ const Navigation: FC = () => {
               fillLineWhenHover
             />
           </Link>
-          {user ? (
-            <ProfileIcon pathname={pathname} user={user} />
+          {userState.isLoggedIn ? (
+            <ProfileIcon pathname={pathname} user={userState.user} />
           ) : (
             <Link to="/login">
               <MyPageIcon activate={pathname === urls.login} />

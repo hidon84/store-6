@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useCallback } from 'react';
+import { FC, useEffect, useState, useCallback, useContext } from 'react';
 import Button from '~/components/common/Button';
 import Divider from '~/components/common/Divider';
 import { alert } from '~/utils/modal';
@@ -12,8 +12,8 @@ import {
   putShipping,
   selectShipping,
 } from '~/lib/api/shipping';
-import useUser from '~/lib/hooks/useUser';
 import { ErrorResponse } from '~/lib/api/types';
+import UserContext from '~/lib/contexts/userContext';
 
 export type ShipType = {
   idx?: number;
@@ -33,7 +33,7 @@ const message = {
 };
 
 const Shipping: FC = () => {
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
   const [shipItems, setShipItems] = useState<ShipType[]>([]);
   const [selectedShipIdx, setSelectedShipIdx] = useState<number>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -56,10 +56,8 @@ const Shipping: FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchShipping();
-    }
-  }, [user]);
+    if (userState.isLoggedIn) fetchShipping();
+  }, [userState]);
 
   const handleNewBtnClick = useCallback(() => {
     setIsModalOpen(true);

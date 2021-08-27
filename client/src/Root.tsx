@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import App from './App';
 import { BrowserRouter } from './core/Router';
+
+import * as cartApi from '~/lib/api/cart';
 import CartAmountContext from './lib/contexts/cartAmountContext';
 import SetCartAmountContext from './lib/contexts/setCartAmountContext';
 import UserContext from './lib/contexts/userContext';
 import useAutoLogin from './lib/hooks/useAutoLogin';
-import * as cartApi from '~/lib/api/cart';
+
 import { alert } from './utils/modal';
 
 const message = {
@@ -13,20 +15,20 @@ const message = {
 };
 
 const Root = () => {
-  const [user, setUser] = useAutoLogin();
+  const { userState, userDispatch } = useAutoLogin();
   const [cartAmount, setCartAmount] = useState(0);
 
   useEffect(() => {
-    if (user) {
+    if (userState.isLoggedIn) {
       cartApi
         .getCartAmount()
         .then((result) => setCartAmount(result.data.amount))
         .catch(() => alert(message.failedToGetCartAmount));
     }
-  }, [user]);
+  }, [userState.isLoggedIn]);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user: userState, userDispatch }}>
       <CartAmountContext.Provider value={{ cartAmount }}>
         <SetCartAmountContext.Provider value={{ setCartAmount }}>
           <BrowserRouter>
