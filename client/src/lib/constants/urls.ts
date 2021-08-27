@@ -8,6 +8,7 @@ const urls = {
   },
   myPage: '/me',
   cart: '/cart',
+  shipping: '/shipping',
   likeList: '/like',
   oauth: {
     googleCallback: '/oauth/google/callback',

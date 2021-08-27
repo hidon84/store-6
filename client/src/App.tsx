@@ -10,7 +10,7 @@ import ConfirmModal from './components/modal/ConfirmModal';
 import MyPage from './pages/MyPage';
 import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
-import CartPage from './pages/Cart';
+import CartAndShippingPage from './pages/CartAndShipping';
 import ProductDetail from './pages/ProductDetail';
 import GoogleCallbackPage from './pages/GoogleCallback';
 import FacebookCallbackPage from './pages/FacebookCallback';
@@ -59,7 +59,10 @@ const App = () => {
             <MyPage />
           </Route>
           <Route exact path="/cart">
-            <CartPage />
+            <CartAndShippingPage pageType="cart" />
+          </Route>
+          <Route exact path="/shipping">
+            <CartAndShippingPage pageType="shipping" />
           </Route>
           <Route exact path="/like">
             <LikeListPage />
