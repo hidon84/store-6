@@ -1,4 +1,11 @@
-import { FC, useEffect, useState, useCallback } from 'react';
+import {
+  FC,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  useContext,
+} from 'react';
 import ProductDetailContainer from '~/components/productDetail/ProductDetailContainer';
 import { useHistory, useParams } from '~/core/Router';
 import { ErrorResponse, ProductDetailGetResponseBody } from '~/lib/api/types';
@@ -11,11 +18,14 @@ import {
   DivideLine,
   LayoutDivider,
   PrevPageButton,
+  ScrollProgress,
+  scrollProgressTransform,
 } from './index.style';
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
-import ImageMagnifier from '~/components/productDetail/ImageMagnifier';
+import ProductDetailImages from '~/components/productDetail/ProductDetailImages';
+import UserContext from '~/lib/contexts/userContext';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -23,6 +33,7 @@ const message = {
   successToAddToCart:
     '장바구니에 추가하였습니다. 장바구니 페이지로 이동하시겠습니까?',
   failedToLike: '좋아요 설정을 하는 데 실패했습니다.',
+  needLogin: '로그인이 필요합니다',
   successToLike: '이 상품에 좋아요 설정을 합니다.',
   successToUnLike: '이 상품에 대해 좋아요 설정을 해제합니다.',
 };
@@ -30,11 +41,36 @@ const message = {
 const statusCodeAlreadyAdded = 409;
 
 const ProductDetail: FC = () => {
+  const { user: userState } = useContext(UserContext);
   const setCartAmount = useSetCartAmount();
   const idx = Number(useParams().id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [product, setProduct] = useState<ProductDetailGetResponseBody>(null);
+  const imagesContainerRef = useRef<HTMLDivElement>();
+  const scrollProgressRef = useRef<HTMLImageElement>();
+
+  useEffect(() => {
+    const scrollImagesWhenWheel = (e: WheelEvent) => {
+      if (!imagesContainerRef.current) return;
+      imagesContainerRef.current.scrollBy({
+        top: e.deltaY,
+        left: 0,
+      });
+
+      if (!scrollProgressRef.current) return;
+      const maxScrollHeight =
+        imagesContainerRef.current.scrollHeight -
+        imagesContainerRef.current.clientHeight;
+      const currentScrollPos = imagesContainerRef.current.scrollTop;
+      const scrollProgress = currentScrollPos / maxScrollHeight;
+      scrollProgressRef.current.style.transform =
+        scrollProgressTransform(scrollProgress);
+    };
+
+    document.addEventListener('wheel', scrollImagesWhenWheel);
+    return () => document.removeEventListener('wheel', scrollImagesWhenWheel);
+  }, []);
 
   useEffect(() => {
     if (!isIdxValid) {
@@ -53,6 +89,10 @@ const ProductDetail: FC = () => {
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
+    if (!userState.isLoggedIn) {
+      alert(message.needLogin);
+      return;
+    }
     productsApi
       .postProductToCart(idx)
       .then((result) => {
@@ -66,6 +106,10 @@ const ProductDetail: FC = () => {
   }, [idx, product, setCartAmount]);
 
   const onClickLike = useCallback(() => {
+    if (!userState.isLoggedIn) {
+      alert(message.needLogin);
+      return;
+    }
     if (product?.isLike) {
       productsApi
         .deleteProductFromLike(idx)
@@ -90,27 +134,27 @@ const ProductDetail: FC = () => {
         });
     }
   }, [idx, product]);
-  if (product === null) return null;
 
+  const goPrevPage = useCallback(() => history.goBack(), [history]);
+
+  if (product === null) return null;
   const { thumbnail, images } = product;
+
   return (
     <ProductDetailWrapper>
-      <PrevPageButton>
+      <PrevPageButton onClick={goPrevPage}>
         <PrevPageArrow />
       </PrevPageButton>
-      <LeftSection>
-        <img src={thumbnail} alt="thumbnail" referrerPolicy="no-referrer" />
-        {images.map((image, imgIdx) => (
-          <ImageMagnifier
-            key={image}
-            imageSrc={image}
-            imageAlt={`detail image ${imgIdx}`}
-          />
-        ))}
+
+      <LeftSection ref={imagesContainerRef}>
+        <ProductDetailImages thumbnail={thumbnail} images={images} />
       </LeftSection>
+
       <LayoutDivider aria-hidden="true">
         <DivideLine />
+        <ScrollProgress ref={scrollProgressRef} />
       </LayoutDivider>
+
       <RightSection>
         <ProductDetailContainer
           product={product}
