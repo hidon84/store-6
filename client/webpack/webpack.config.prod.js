@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    chunkFilename: "[name].js",
+    chunkFilename: "[name].[chunkhash].js",
   },
   module: {
     rules: [
@@ -35,9 +35,8 @@ module.exports = {
         },
       },
       {
-        test: /\.(svg|png|jpe?g|gif)$/,
+        test: /\.(svg|png|jpe?g|gif)$/i,
         loader: 'image-webpack-loader',
-        // This will apply the loader before the other ones
         enforce: 'pre',
       },
     ]
@@ -57,9 +56,9 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/]/, ///< put all used node_modules modules in this chunk
-          name: "js/vendor", ///< name of bundle
-          chunks: "all" ///< type of code to put in this bundle
+          test: /[\\/]node_modules[\\/]/,
+          name: "js/vendor",
+          chunks: "all",
         },
       },
     },
