@@ -1,4 +1,11 @@
-import { FC, useEffect, useState, useCallback, useRef } from 'react';
+import {
+  FC,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  useContext,
+} from 'react';
 import ProductDetailContainer from '~/components/productDetail/ProductDetailContainer';
 import { useHistory, useParams } from '~/core/Router';
 import { ErrorResponse, ProductDetailGetResponseBody } from '~/lib/api/types';
@@ -18,7 +25,7 @@ import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
 import ProductDetailImages from '~/components/productDetail/ProductDetailImages';
-import useUser from '~/lib/hooks/useUser';
+import UserContext from '~/lib/contexts/userContext';
 
 const message = {
   failedToGetProductDetail: '상품 정보를 불러오는 데 실패했습니다',
@@ -34,7 +41,7 @@ const message = {
 const statusCodeAlreadyAdded = 409;
 
 const ProductDetail: FC = () => {
-  const [user] = useUser();
+  const { user: userState } = useContext(UserContext);
   const setCartAmount = useSetCartAmount();
   const idx = Number(useParams().id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
@@ -82,7 +89,7 @@ const ProductDetail: FC = () => {
   }, [idx]);
 
   const onClickAddToCart = useCallback(() => {
-    if (!user) {
+    if (!userState.isLoggedIn) {
       alert(message.needLogin);
       return;
     }
@@ -99,7 +106,7 @@ const ProductDetail: FC = () => {
   }, [idx, product, setCartAmount]);
 
   const onClickLike = useCallback(() => {
-    if (!user) {
+    if (!userState.isLoggedIn) {
       alert(message.needLogin);
       return;
     }
