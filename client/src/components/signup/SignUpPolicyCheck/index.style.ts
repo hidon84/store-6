@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Policy = styled.pre`
+const Policy = styled.div`
   display: block;
   margin-top: 8px;
   border: 1px solid #eeeeee;
