@@ -104,28 +104,26 @@ const ProductList: FC = () => {
 
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
-  const fetchProducts = () => {
+  const fetchProducts = async () => {
     if (filterState.isLastPage) return;
 
-    const isNextPageRequest = filterState.page !== 1;
-    productsAPI
-      .getProducts(filterState)
-      .then(({ data }) => {
-        if (data.length < DEFAULT_PRODUCTS_AMOUNT)
-          productListDispatch(setLastPage());
+    try {
+      const { data } = await productsAPI.getProducts(filterState);
 
-        if (!isNextPageRequest) setProducts(data);
-        else setProducts((prev) => [...prev, ...data]);
-      })
-      .then(() => {
-        setTimeout(
-          () => fetchDispatch(finishFetch()),
-          fetchState.forcedDelayTime,
-        );
-      })
-      .catch((error: ErrorResponse) => {
-        throw new Error(error.data.message);
-      });
+      if (data.length < DEFAULT_PRODUCTS_AMOUNT)
+        productListDispatch(setLastPage());
+
+      const isNextPageRequest = filterState.page !== 1;
+      if (!isNextPageRequest) setProducts(data);
+      else setProducts((prev) => [...prev, ...data]);
+
+      setTimeout(
+        () => fetchDispatch(finishFetch()),
+        fetchState.forcedDelayTime,
+      );
+    } catch (error) {
+      throw new Error(error.data.message);
+    }
   };
 
   useEffect(() => {
