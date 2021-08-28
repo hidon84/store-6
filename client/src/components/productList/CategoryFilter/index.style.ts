@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const CategoryFilterWrapper = styled.div`
+const CategoryFilterWrapper = styled.div`
   img {
     cursor: pointer;
   }
 `;
 
-export const CategoryHeder = styled.div`
+const CategoryHeader = styled.div`
   font-size: 25px;
   display: flex;
   align-items: center;
@@ -22,8 +22,10 @@ export const CategoryHeder = styled.div`
   }
 `;
 
-export const CategoryContainer = styled.div`
+const CategoryContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
 `;
+
+export default { CategoryFilterWrapper, CategoryHeader, CategoryContainer };
