@@ -43,7 +43,9 @@ const Navigation: FC = () => {
               <S.CartIcon
                 activate={pathname === urls.cart || pathname === urls.shipping}
               />
-              <S.Badge badgeContent={cartAmount.toString()} />
+              {userState.isLoggedIn && (
+                <S.Badge badgeContent={cartAmount.toString()} />
+              )}
             </S.CartWrapper>
           </Link>
           <Link to="/like">
