@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 /* eslint-disable react/no-unused-state */
-import { Component, createRef, RefObject } from 'react';
+import { Component } from 'react';
 import Peer, { MediaConnection, DataConnection } from 'peerjs';
 import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,6 +21,7 @@ import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
 import './audio-grid.css';
+import RTCAudio from './RTCAudio';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
@@ -29,6 +30,7 @@ interface MainState {
     { mediaConn: MediaConnection; isSendingVoice: boolean }
   >;
   connections: Record<string, DataConnection>;
+  streams: { id: string; stream: MediaStream }[];
   minimi: Minimi;
   entered?: TypeCategoryIcon;
   y: number;
@@ -65,7 +67,6 @@ const categoryCoords = {
 };
 
 class Main extends Component<{ u?: string }, MainState> {
-  audioGridRef: RefObject<HTMLDivElement>;
   peer: Peer;
   myId: string;
   myStream?: MediaStream;
@@ -81,6 +82,7 @@ class Main extends Component<{ u?: string }, MainState> {
       y,
       x,
       users: [],
+      streams: [],
     };
     this.socket = createSocket();
     this.myId = uuidv4();
@@ -88,7 +90,6 @@ class Main extends Component<{ u?: string }, MainState> {
     this.peer.on('open', (id) => {
       this.socket.emit('join-room', id);
     });
-    this.audioGridRef = createRef<HTMLDivElement>();
     this.setupConnections = this.setupConnections.bind(this);
     this.addConnections = this.addConnections.bind(this);
     this.addAudioStream = this.addAudioStream.bind(this);
@@ -209,12 +210,23 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setState({ connections });
   };
 
-  addAudioStream = (video: HTMLAudioElement, stream: MediaStream) => {
+  addAudioStream = (stream: MediaStream, id: string) => {
     // eslint-disable-next-line no-param-reassign
-    video.srcObject = stream;
-    video.addEventListener('loadedmetadata', () => {
-      video.play();
-    });
+    const { streams } = this.state;
+    const nextStreams = [
+      ...streams,
+      {
+        stream,
+        id,
+      },
+    ];
+    this.setState({ streams: nextStreams });
+  };
+
+  removeAudioStream = (id: string) => {
+    const { streams } = this.state;
+    const nextStreams = streams.filter((streamInfo) => streamInfo.id !== id);
+    this.setState({ streams: nextStreams });
   };
 
   setupAudioStream = () => {
@@ -225,11 +237,11 @@ class Main extends Component<{ u?: string }, MainState> {
         .then((myStream) => {
           this.myStream = myStream;
           call.answer(myStream);
-          const newAudio = document.createElement('audio');
-          newAudio.setAttribute('controls', '');
-          this.audioGridRef.current.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
+            this.addAudioStream(otherUserStream, call.peer);
+          });
+          call.on('close', () => {
+            this.removeAudioStream(call.peer);
           });
         })
         .catch((_) => {
@@ -243,11 +255,11 @@ class Main extends Component<{ u?: string }, MainState> {
           };
           this.setState({ peerCalls: nextPeers });
           call.answer(undefined);
-          const newAudio = document.createElement('audio');
-          newAudio.setAttribute('controls', '');
-          this.audioGridRef.current.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
+            this.addAudioStream(otherUserStream, call.peer);
+          });
+          call.on('close', () => {
+            this.removeAudioStream(call.peer);
           });
           alert(toastMessage.pleaseTurnOnMic, 3000);
         });
@@ -258,13 +270,11 @@ class Main extends Component<{ u?: string }, MainState> {
         .then((myStream) => {
           this.myStream = myStream;
           const call = this.peer.call(userId, myStream);
-          const newAudio = document.createElement('audio');
-          this.audioGridRef.current?.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
+            this.addAudioStream(otherUserStream, call.peer);
           });
           call.on('close', () => {
-            newAudio.remove();
+            this.removeAudioStream(call.peer);
           });
           const { peerCalls } = this.state;
           const nextPeers = {
@@ -369,10 +379,18 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   render() {
-    const { minimi, y, x, users, entered } = this.state;
+    const { minimi, y, x, users, entered, streams } = this.state;
     return (
       <MainContainer>
-        <div className="audio-grid" ref={this.audioGridRef} />
+        <div className="audio-grid">
+          {streams.map((streamInfo) => (
+            <RTCAudio
+              key={streamInfo.id}
+              id={streamInfo.id}
+              stream={streamInfo.stream}
+            />
+          ))}
+        </div>
         <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
