@@ -29,6 +29,7 @@ import detail1PNG from './productDatail1.png';
 import detail2PNG from './productDatail2.png';
 import detail3PNG from './productDatail3.png';
 import detail4PNG from './productDatail4.png';
+import festivalSVG from './festival.svg';
 
 // Big Icons (메인 페이지)
 import BigBaedalSVG from './baedal.svg';
@@ -93,6 +94,7 @@ const ProductInfoSubDividerSVG = `${S3_PREFIX}/product-detail/product-info-sub-d
 
 export {
   LogoSVG,
+  festivalSVG,
   VertLineSVG,
   DoodleUselessSVG,
   NoResourceSVG,

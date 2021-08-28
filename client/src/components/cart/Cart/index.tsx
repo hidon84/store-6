@@ -1,14 +1,18 @@
 import { FC, useState, useEffect, useContext } from 'react';
+
 import Button from '~/components/common/Button';
+import CartItem from '~/components/cart/cartItem';
 import Divider from '~/components/common/Divider';
+
 import { deleteCartItem, getCartItems } from '~/lib/api/cart';
 import { CartGetResponseBody } from '~/lib/api/types';
-import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
-import { alert } from '~/utils/modal';
-import CartItem from '../CartItem';
-import { CartFooter, CartHeader } from './index.style';
-import { formatPrice } from '~/utils/formatPrice';
 import UserContext from '~/lib/contexts/userContext';
+import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
+
+import { alert } from '~/utils/modal';
+import { formatPrice } from '~/utils/formatPrice';
+
+import { CartFooter, CartHeader } from './index.style';
 
 const message = {
   failedToGetCartItems: '장바구니 리스트를 가져오는 데 실패했습니다.',

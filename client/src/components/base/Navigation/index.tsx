@@ -7,21 +7,10 @@ import Divider from '~/components/common/Divider';
 import ProductLikeButton from '~/components/product/ProductLikeButton';
 
 import urls from '~/lib/constants/urls';
+import UserContext from '~/lib/contexts/userContext';
 import useCartAmount from '~/lib/hooks/useCartAmount';
 
-import {
-  NavigationWrapper,
-  Content,
-  HeaderRightSection,
-  CartWrapper,
-  Badge,
-  UselessDoodle,
-  Logo,
-  CartIcon,
-  DoodleUselessIcon,
-  MyPageIcon,
-} from './index.style';
-import UserContext from '~/lib/contexts/userContext';
+import S from './index.style';
 
 const Navigation: FC = () => {
   const { user: userState } = useContext(UserContext);
@@ -31,26 +20,31 @@ const Navigation: FC = () => {
   if (pathname.includes(urls.signup)) return null;
 
   return (
-    <NavigationWrapper>
-      <Content>
-        <UselessDoodle>
-          <DoodleUselessIcon />
-        </UselessDoodle>
+    <S.NavigationWrapper>
+      <S.Content>
         <Link to="/">
-          <Logo>
-            <HeaderLogo />
-          </Logo>
+          <S.FestivalWrapper>
+            <S.FestivalIcon />
+          </S.FestivalWrapper>
         </Link>
-        <HeaderRightSection>
+        <S.UselessDoodle>
+          <S.DoodleUselessIcon />
+        </S.UselessDoodle>
+        <Link to="/products">
+          <S.Logo>
+            <HeaderLogo />
+          </S.Logo>
+        </Link>
+        <S.HeaderRightSection>
           <Link to="/cart">
-            <CartWrapper
+            <S.CartWrapper
               activate={pathname === urls.cart || pathname === urls.shipping}
             >
-              <CartIcon
+              <S.CartIcon
                 activate={pathname === urls.cart || pathname === urls.shipping}
               />
-              <Badge badgeContent={cartAmount.toString()} />
-            </CartWrapper>
+              <S.Badge badgeContent={cartAmount.toString()} />
+            </S.CartWrapper>
           </Link>
           <Link to="/like">
             <ProductLikeButton
@@ -62,13 +56,13 @@ const Navigation: FC = () => {
             <ProfileIcon pathname={pathname} user={userState.user} />
           ) : (
             <Link to="/login">
-              <MyPageIcon activate={pathname === urls.login} />
+              <S.MyPageIcon activate={pathname === urls.login} />
             </Link>
           )}
-        </HeaderRightSection>
-      </Content>
+        </S.HeaderRightSection>
+      </S.Content>
       <Divider />
-    </NavigationWrapper>
+    </S.NavigationWrapper>
   );
 };
 
