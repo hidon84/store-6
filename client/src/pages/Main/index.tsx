@@ -53,11 +53,7 @@ const toastMessage = {
 };
 
 const MEDIA_OPTIONS = {
-  audio: {
-    channelCount: 2,
-    echoCancellation: true,
-    noiseSuppression: true,
-  },
+  audio: true,
   video: {
     width: { min: 100, ideal: 240 },
     height: { min: 75, ideal: 180 },
