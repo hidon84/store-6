@@ -1,11 +1,15 @@
 import { FC, useContext, useEffect, useRef } from 'react';
 
 import { SearchBoxUnderlineSVG, SearchSVG, XSVG } from '~/assets';
+import RecentlySearchTermBox from '~/components/productList/RecentlySearchTermBox';
+
 import { FetchContext, FilterContext } from '~/pages/ProductList';
+
 import { startFetch } from '~/stores/fetchModule';
 import { removeSearchValue } from '~/stores/productListModule';
 
-import RecentlySearchTermBox from '../RecentlySearchTermBox';
+import useSearchTerm from '~/lib/hooks/useSearchTerm';
+
 import {
   SearchBoxForm,
   SearchInput,
@@ -13,7 +17,6 @@ import {
   SearchLine,
   ValueRemoveButton,
 } from './index.style';
-import useSearchTerm from './useSearchTerm';
 
 const SearchBox: FC = () => {
   const searchTermRef = useRef<HTMLInputElement>();
