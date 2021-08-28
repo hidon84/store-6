@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PhoneInput /> should render same with snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  font-size: inhert;
+}
+
+.c2 {
+  text-align: center;
+  box-sizing: border-box;
+  width: 100px;
+  height: 34px;
+  background: bottom left / contain no-repeat url();
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.c2::-webkit-input-placeholder {
+  color: #999;
+}
+
+.c2::-moz-placeholder {
+  color: #999;
+}
+
+.c2:-ms-input-placeholder {
+  color: #999;
+}
+
+.c2::placeholder {
+  color: #999;
+}
+
+.c0 {
+  width: 370px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <input
+        class="c2"
+        maxlength="3"
+        placeholder="입력이"
+        type="text"
+        value=""
+      />
+      <img
+        alt="hyphen"
+      />
+      <input
+        class="c2"
+        maxlength="4"
+        placeholder="필요"
+        type="text"
+        value=""
+      />
+      <img
+        alt="hyphen"
+      />
+      <input
+        class="c2"
+        maxlength="4"
+        placeholder="합니다"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;
