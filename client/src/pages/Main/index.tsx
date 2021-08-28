@@ -23,7 +23,10 @@ import { RouterContext } from '~/core/Router';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
-  peerCalls: Record<string, MediaConnection>;
+  peerCalls: Record<
+    string,
+    { mediaConn: MediaConnection; isSendingVoice: boolean }
+  >;
   connections: Record<string, DataConnection>;
   minimi: Minimi;
   entered?: TypeCategoryIcon;
@@ -89,17 +92,15 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   componentDidMount() {
-    if (window.history.state) {
-      const { from, error } = window.history.state;
-      if (error === 'accessWithToken') {
-        alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
-      } else if (error === 'accessWithoutToken') {
-        alert(
-          `로그인을 하지 않은 채로 ${from.slice(
-            1,
-          )}페이지로 이동할 수 없습니다.`,
-        );
-      }
+    const { state } = this.context.location;
+    if (!state) return;
+    const { from, error } = state;
+    if (error === 'accessWithToken') {
+      alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
+    } else if (error === 'accessWithoutToken') {
+      alert(
+        `로그인을 하지 않은 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`,
+      );
     }
   }
 
@@ -152,7 +153,7 @@ class Main extends Component<{ u?: string }, MainState> {
     this.socket.on('user-disconnected', (userId) => {
       alert(`user-disconnected: , ${userId}`);
       const { peerCalls } = this.state;
-      peerCalls[userId]?.close();
+      peerCalls[userId]?.mediaConn.close();
       delete peerCalls[userId];
       this.setState({
         peerCalls,
@@ -210,6 +211,15 @@ class Main extends Component<{ u?: string }, MainState> {
           });
         })
         .catch((_) => {
+          const { peerCalls } = this.state;
+          const nextPeers = {
+            ...peerCalls,
+            [call.peer]: {
+              mediaConn: call,
+              isSendingVoice: false,
+            },
+          };
+          this.setState({ peerCalls: nextPeers });
           call.answer(undefined);
           const newAudio = document.createElement('audio');
           this.audioGridRef.current.appendChild(newAudio);
@@ -236,7 +246,10 @@ class Main extends Component<{ u?: string }, MainState> {
           const { peerCalls } = this.state;
           const nextPeers = {
             ...peerCalls,
-            [userId]: call,
+            [call.peer]: {
+              mediaConn: call,
+              isSendingVoice: true,
+            },
           };
           this.setState({ peerCalls: nextPeers });
         })
