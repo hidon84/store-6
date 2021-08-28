@@ -30,6 +30,7 @@ import detail2PNG from './productDatail2.png';
 import detail3PNG from './productDatail3.png';
 import detail4PNG from './productDatail4.png';
 import festivalSVG from './festival.svg';
+import CategoryAllSVG from './category-all.svg';
 
 // Big Icons (메인 페이지)
 import BigBaedalSVG from './baedal.svg';
@@ -98,6 +99,7 @@ export {
   VertLineSVG,
   DoodleUselessSVG,
   NoResourceSVG,
+  CategoryAllSVG,
   NoRouteGIF,
   HeartSVG,
   MypageSVG,

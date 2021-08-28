@@ -22,6 +22,7 @@ import {
   SmallTreeSVG,
   RefreshSVG,
   SmallBookSVG,
+  CategoryAllSVG,
 } from '~/assets';
 
 import CategoryItem from '../CategoryItem';
@@ -38,6 +39,7 @@ const Categorys = [
   Hat2SVG,
   SmallGiftSVG,
   SmallColabSVG,
+  CategoryAllSVG,
 ];
 
 const CategoryFilter: React.FC = () => {
