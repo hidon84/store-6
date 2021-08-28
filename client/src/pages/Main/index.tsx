@@ -20,6 +20,7 @@ import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
+import './audio-grid.css';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
@@ -225,6 +226,7 @@ class Main extends Component<{ u?: string }, MainState> {
           this.myStream = myStream;
           call.answer(myStream);
           const newAudio = document.createElement('audio');
+          newAudio.setAttribute('controls', '');
           this.audioGridRef.current.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
@@ -242,6 +244,7 @@ class Main extends Component<{ u?: string }, MainState> {
           this.setState({ peerCalls: nextPeers });
           call.answer(undefined);
           const newAudio = document.createElement('audio');
+          newAudio.setAttribute('controls', '');
           this.audioGridRef.current.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
