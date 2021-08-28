@@ -12,6 +12,7 @@ import * as likesApi from '~/lib/api/likes';
 import { LikesGetResponseBody } from '~/lib/api/types/likes';
 import { ErrorResponse } from '~/lib/api/types';
 import UserContext from '~/lib/contexts/userContext';
+
 import { alert } from '~/utils/modal';
 
 import { ProductLikeItemWrapper, NoResourceWrapper } from './index.style';
