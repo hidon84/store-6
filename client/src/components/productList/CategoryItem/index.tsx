@@ -16,7 +16,7 @@ interface Props {
 }
 
 const CategoryItem: React.FC<Props> = ({ idx, image }) => {
-  const ImagContainer = useRef();
+  const ImgRef = useRef();
   const { dispatch: filterDispatch, ...currentState } =
     useContext(FilterContext);
   const { dispatch: fetchDispatch } = useContext(FetchContext);
@@ -29,8 +29,10 @@ const CategoryItem: React.FC<Props> = ({ idx, image }) => {
   };
 
   useEffect(() => {
-    const node = ImagContainer.current as HTMLElement;
+    const node = ImgRef.current as HTMLElement;
     if (idx === currentState.state.category) {
+      node.classList.add('selected');
+    } else if (idx === 10 && !currentState.state.category) {
       node.classList.add('selected');
     } else {
       node.classList.remove('selected');
@@ -38,7 +40,7 @@ const CategoryItem: React.FC<Props> = ({ idx, image }) => {
   });
 
   return (
-    <ImageContainer onClick={handleImgClick} ref={ImagContainer}>
+    <ImageContainer onClick={handleImgClick} ref={ImgRef}>
       <img src={image} alt="category" />
     </ImageContainer>
   );
