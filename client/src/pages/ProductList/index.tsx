@@ -9,7 +9,6 @@ import {
 
 import * as productsAPI from '~/lib/api/products';
 import {
-  ErrorResponse,
   ProductsGetRequestQuery,
   ProductsGetResponseBody,
 } from '~/lib/api/types';
