@@ -65,11 +65,11 @@ const LoginPage: FC = () => {
     setIsPageAccessed(true);
 
     if (idWarning.length > 2 || id.length < 4) {
-      alert(`아이디 폼에러. ${idWarning}`);
+      alert(`로그인 실패`);
       return;
     }
     if (pwWarning) {
-      alert(`비밀번호 폼에러. ${pwWarning}`);
+      alert(`로그인 실패`);
       return;
     }
 
@@ -123,14 +123,14 @@ const LoginPage: FC = () => {
           placeholder="아이디"
           onChange={handleId}
         />
-        <InputHelp>{idWarning}</InputHelp>
+        <InputHelp> </InputHelp>
         <Input
           autoComplete="off"
           type="password"
           placeholder="비밀번호"
           onChange={handlePW}
         />
-        <InputHelp>{pwWarning}</InputHelp>
+        <InputHelp> </InputHelp>
         <ButtonWrapper>
           <Button size="lg">로그인</Button>
         </ButtonWrapper>
