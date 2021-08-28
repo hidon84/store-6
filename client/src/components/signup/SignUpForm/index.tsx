@@ -90,7 +90,7 @@ const SignUpForm: FC<{
       await userAPI.postUser({
         id: social ? userState.user.id : userAccount.id,
         password: userAccount.pw,
-        phone: phone,
+        phone,
         email,
         privacyTermsAndConditions: policyCheck.privacyTerms,
         serviceTermsAndConditions: policyCheck.serviceTerms,

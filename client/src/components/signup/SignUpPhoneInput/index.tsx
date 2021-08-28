@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const SignUpPhoneInput: FC<IProps> = ({ value, onChange }) => {
-  const [phone, phoneWarning, _, onInput] = useInputValidator(
+  const [phone, phoneWarning, , onInput] = useInputValidator(
     '',
     phoneValidator,
   );
