@@ -4,7 +4,6 @@
 
 import React, { useContext } from 'react';
 import { FetchContext, FilterContext } from '~/pages/ProductList';
-import { resetCategory } from '~/stores/productListModule';
 import {
   CategoryFilterWrapper,
   CategoryHeder,
@@ -20,14 +19,11 @@ import {
   SmallHouseSVG,
   SmallKKSVG,
   SmallTreeSVG,
-  RefreshSVG,
   SmallBookSVG,
   CategoryAllSVG,
 } from '~/assets';
 
 import CategoryItem from '../CategoryItem';
-import { startFetch } from '~/stores/fetchModule';
-import scrollToTop from '~/utils/scrollToTop';
 
 const Categorys = [
   SmallBookSVG,
@@ -43,19 +39,16 @@ const Categorys = [
 ];
 
 const CategoryFilter: React.FC = () => {
-  const { dispatch } = useContext(FilterContext);
-  const { dispatch: fetchDispatch } = useContext(FetchContext);
-  const handleResetBtnClick = () => {
-    dispatch(resetCategory());
-    fetchDispatch(startFetch());
-    scrollToTop({ behavior: 'auto' });
-  };
+  // const handleResetBtnClick = () => {
+  //   dispatch(resetCategory());
+  //   fetchDispatch(startFetch());
+  //   scrollToTop({ behavior: 'auto' });
+  // };
 
   return (
     <CategoryFilterWrapper>
       <CategoryHeder>
         <div>카테고리</div>
-        <img onClick={handleResetBtnClick} src={RefreshSVG} alt="reset" />
       </CategoryHeder>
       <CategoryContainer>
         {Categorys.map((item, index) => (
