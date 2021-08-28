@@ -6,7 +6,7 @@ export const PhoneWrapper = styled.div<{ fontSize }>`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  font-size: ${({ fontSize }) => fontSize || 'inhert'};
+  font-size: ${({ fontSize }) => fontSize || 'inherit'};
 `;
 
 export const StyledPhoneInput = styled.input`
