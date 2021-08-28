@@ -117,7 +117,6 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setupAudioStream();
 
     this.socket.on('user-connected', async (userId: string) => {
-      alert(`user-connected! ${userId}`);
       const conn = this.peer.connect(userId);
 
       setTimeout(() => {
@@ -140,18 +139,20 @@ class Main extends Component<{ u?: string }, MainState> {
         if (data.message === 'updateMinimi') {
           this.updateMinimi(data);
         } else if (data.message === 'hello') {
-          alert(`new user?: ${con.peer}`);
           const conn = this.peer.connect(con.peer);
           setTimeout(() => {
             conn.send({ message: 'hello2', from: this.myId });
             this.addConnections(con.peer, conn);
           }, delayMS);
+        } else if (data.message === 'callMe') {
+          alert(`${con.peer}가 내 목소리를 듣기 시작합니다.`);
+          this.callTo(con.peer);
         }
       });
     });
 
     this.socket.on('user-disconnected', (userId) => {
-      alert(`user-disconnected: , ${userId}`);
+      alert(`${userId} 님 퇴장.`);
       const { peerCalls } = this.state;
       peerCalls[userId]?.mediaConn.close();
       delete peerCalls[userId];
@@ -164,6 +165,21 @@ class Main extends Component<{ u?: string }, MainState> {
 
     document.body.addEventListener('keydown', this.onKeyDown);
   }
+
+  callTo = (peerId: string) => {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((myVoice) => {
+      const call = this.peer.call(peerId, myVoice);
+      const { peerCalls } = this.state;
+      const nextPeers = {
+        ...peerCalls,
+        [peerId]: {
+          mediaConn: call,
+          isSendingVoice: false,
+        },
+      };
+      this.setState({ peerCalls: nextPeers });
+    });
+  };
 
   updateMinimi = (minimiMessage: MinimiUpdateMessage) => {
     const { y, x, from, minimi } = minimiMessage;
@@ -226,7 +242,7 @@ class Main extends Component<{ u?: string }, MainState> {
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
           });
-          alert(pleaseAlloweRecord, 3000);
+          alert(`${call.peer}의 음성을 듣기 시작합니다.`, 3000);
         });
     });
     this.socket.on('user-connected', async (userId) => {
@@ -254,7 +270,10 @@ class Main extends Component<{ u?: string }, MainState> {
           this.setState({ peerCalls: nextPeers });
         })
         .catch((_) => {
-          alert(pleaseAlloweRecord, 3000);
+          setTimeout(() => {
+            const { connections } = this.state;
+            connections[userId]?.send({ message: 'callMe', from: this.myId });
+          }, delayMS);
         });
     });
   };
@@ -274,7 +293,6 @@ class Main extends Component<{ u?: string }, MainState> {
     });
   };
 
-  // {category : string
   boundChecker = () => {
     const threshold = {
       y: 14,
