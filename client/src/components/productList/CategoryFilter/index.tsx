@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  CategoryFilterWrapper,
-  CategoryHeder,
-  CategoryContainer,
-} from './index.style';
+import S from './index.style';
 
 import {
   SmallPencilSVG,
@@ -18,8 +14,7 @@ import {
   SmallBookSVG,
   CategoryAllSVG,
 } from '~/assets';
-
-import CategoryItem from '../CategoryItem';
+import CategoryItem from '~/components/productList/CategoryItem';
 
 const Categorys = [
   SmallBookSVG,
@@ -35,16 +30,16 @@ const Categorys = [
 ];
 
 const CategoryFilter: React.FC = () => (
-  <CategoryFilterWrapper>
-    <CategoryHeder>
+  <S.CategoryFilterWrapper>
+    <S.CategoryHeader>
       <div>카테고리</div>
-    </CategoryHeder>
-    <CategoryContainer>
+    </S.CategoryHeader>
+    <S.CategoryContainer>
       {Categorys.map((item, index) => (
         <CategoryItem key={item} idx={index + 1} image={item} />
       ))}
-    </CategoryContainer>
-  </CategoryFilterWrapper>
+    </S.CategoryContainer>
+  </S.CategoryFilterWrapper>
 );
 
 export default CategoryFilter;

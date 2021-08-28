@@ -1,22 +1,17 @@
 import { FC, useContext, useEffect, useRef } from 'react';
 
 import { SearchBoxUnderlineSVG, SearchSVG, XSVG } from '~/assets';
+
 import RecentlySearchTermBox from '~/components/productList/RecentlySearchTermBox';
 
-import { FetchContext, FilterContext } from '~/pages/ProductList';
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
+import useSearchTerm from '~/lib/hooks/useSearchTerm';
 
 import { startFetch } from '~/stores/fetchModule';
 import { removeSearchValue } from '~/stores/productListModule';
 
-import useSearchTerm from '~/lib/hooks/useSearchTerm';
-
-import {
-  SearchBoxForm,
-  SearchInput,
-  SearchButton,
-  SearchLine,
-  ValueRemoveButton,
-} from './index.style';
+import S from './index.style';
 
 const SearchBox: FC = () => {
   const searchTermRef = useRef<HTMLInputElement>();
@@ -44,25 +39,25 @@ const SearchBox: FC = () => {
 
   return (
     <>
-      <SearchBoxForm onSubmit={handleSearchTrigger}>
-        <SearchButton type="submit">
+      <S.SearchBoxForm onSubmit={handleSearchTrigger}>
+        <S.SearchButton type="submit">
           <img src={SearchSVG} alt="search" />
-        </SearchButton>
-        <SearchInput
+        </S.SearchButton>
+        <S.SearchInput
           type="search"
           name="q"
           ref={searchTermRef}
           onInput={handleInput}
         />
-        <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
-        <ValueRemoveButton
+        <S.SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
+        <S.ValueRemoveButton
           type="button"
           isEmpty={isSearchValueEmpty}
           onClick={removeTerm}
         >
           <img src={XSVG} alt="x" />
-        </ValueRemoveButton>
-      </SearchBoxForm>
+        </S.ValueRemoveButton>
+      </S.SearchBoxForm>
       <RecentlySearchTermBox
         termList={termList}
         removeTermOnList={removeTermOnList}

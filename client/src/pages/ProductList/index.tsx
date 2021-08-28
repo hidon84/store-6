@@ -1,23 +1,4 @@
-import {
-  FC,
-  createContext,
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-} from 'react';
-
-import * as productsAPI from '~/lib/api/products';
-import {
-  ProductsGetRequestQuery,
-  ProductsGetResponseBody,
-} from '~/lib/api/types';
-import productListModule, {
-  ActionType,
-  setCategory,
-  setLastPage,
-  setNextPage,
-} from '~/stores/productListModule';
+import { FC, useEffect, useState, useRef } from 'react';
 
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
@@ -28,15 +9,26 @@ import SearchBox from '~/components/productList/SearchBox';
 
 import { useLocation } from '~/core/Router';
 
-import S from './index.style';
+import * as productsAPI from '~/lib/api/products';
+import { ProductsGetResponseBody } from '~/lib/api/types';
+import FilterContext from '~/lib/contexts/filterContext';
+import FetchContext from '~/lib/contexts/fetchContext';
 import useIntersection from '~/lib/hooks/useIntersection';
+import useScrollPoint from '~/lib/hooks/useScrollPoint';
+
 import fetchModule, {
-  FetchModuleAction,
   finishFetch,
   initFetch,
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
+import productListModule, {
+  setCategory,
+  setLastPage,
+  setNextPage,
+} from '~/stores/productListModule';
+
+import S from './index.style';
 
 // Constants
 const CATEGORY_TO_IDX = {
@@ -59,34 +51,6 @@ export interface ProductData {
   originPrice: number;
   discountedPrice: number;
 }
-
-interface FilterContextState {
-  state: ProductsGetRequestQuery;
-  dispatch: (action: ActionType) => void;
-}
-
-interface FetchContextState {
-  state: {
-    action: string;
-    forcedDelayTime: number;
-  };
-  dispatch: (action: FetchModuleAction) => void;
-}
-
-// Context
-export const FilterContext = createContext<FilterContextState>(null);
-export const FetchContext = createContext<FetchContextState>(null);
-
-// Hook (only use in here)
-const useScrollPoint = (targetPoint: number): boolean => {
-  const [isScrollPoint, setIsScrollPoint] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    setIsScrollPoint(window.pageYOffset > targetPoint);
-  }, []);
-  window.addEventListener('scroll', handleScroll);
-  return isScrollPoint;
-};
 
 // Component
 const ProductList: FC = () => {

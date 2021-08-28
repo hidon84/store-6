@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { FC, useContext } from 'react';
-
 import {
   Hat2SVG,
   SmallBaedalSVG,
@@ -12,7 +11,8 @@ import {
   SmallPencilSVG,
   SmallTreeSVG,
 } from '~/assets';
-import { FilterContext } from '~/pages/ProductList';
+
+import FilterContext from '~/lib/contexts/filterContext';
 
 import {
   IdentifierWrapper,

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
-import { FetchContext, FilterContext } from '~/pages/ProductList';
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
 
 import { startFetch } from '~/stores/fetchModule';
 import { resetCategory, setCategory } from '~/stores/productListModule';
