@@ -21,7 +21,7 @@ import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
 import './audio-grid.css';
-import RTCAudio from './RTCAudio';
+import RTCVideo from './RTCVideo';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
@@ -50,6 +50,18 @@ const toastMessage = {
     '누군가의 음성을 듣기시작하지만 상대는 못듣소. 마이크를 허용해주시오.',
   speakConnected: '누군가 내 목소리를 듣기 시작했다오..',
   userLeft: '누군가 퇴장했다오...',
+};
+
+const MEDIA_OPTIONS = {
+  audio: {
+    channelCount: 2,
+    echoCancellation: true,
+    noiseSuppression: true,
+  },
+  video: {
+    width: { min: 100, ideal: 240 },
+    height: { min: 75, ideal: 180 },
+  },
 };
 
 const [DY, DX] = [2, 2];
@@ -173,7 +185,7 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   callTo = (peerId: string) => {
-    navigator.mediaDevices.getUserMedia({ audio: true }).then((myVoice) => {
+    navigator.mediaDevices.getUserMedia(MEDIA_OPTIONS).then((myVoice) => {
       const call = this.peer.call(peerId, myVoice);
       const { peerCalls } = this.state;
       const nextPeers = {
@@ -214,7 +226,7 @@ class Main extends Component<{ u?: string }, MainState> {
     // eslint-disable-next-line no-param-reassign
     const { streams } = this.state;
     const nextStreams = [
-      ...streams,
+      ...streams.filter((streamInfo) => streamInfo.id !== id),
       {
         stream,
         id,
@@ -233,7 +245,7 @@ class Main extends Component<{ u?: string }, MainState> {
     /* When Someone tries to call me */
     this.peer.on('call', (call) => {
       navigator.mediaDevices
-        .getUserMedia({ audio: true })
+        .getUserMedia(MEDIA_OPTIONS)
         .then((myStream) => {
           this.myStream = myStream;
           call.answer(myStream);
@@ -266,7 +278,7 @@ class Main extends Component<{ u?: string }, MainState> {
     });
     this.socket.on('user-connected', async (userId) => {
       navigator.mediaDevices
-        .getUserMedia({ audio: true })
+        .getUserMedia(MEDIA_OPTIONS)
         .then((myStream) => {
           this.myStream = myStream;
           const call = this.peer.call(userId, myStream);
@@ -384,7 +396,7 @@ class Main extends Component<{ u?: string }, MainState> {
       <MainContainer>
         <div className="audio-grid">
           {streams.map((streamInfo) => (
-            <RTCAudio
+            <RTCVideo
               key={streamInfo.id}
               id={streamInfo.id}
               stream={streamInfo.stream}

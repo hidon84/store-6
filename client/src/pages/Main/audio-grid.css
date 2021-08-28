@@ -6,10 +6,12 @@
   bottom: 0px;
   width: 200px;
   height: 90vh;
+  margin-right: 10px;
   gap: 1rem;
+  overflow-y: auto;
 }
 
-.audio-grid audio {
+.audio-grid video {
   display: block;
   width: 200px;
 }
