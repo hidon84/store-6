@@ -9,7 +9,8 @@ import NoResource from '~/components/common/NoResource';
 import ProductItem from '~/components/product/ProductItem';
 
 import { useHistory } from '~/core/Router';
-import { FetchContext, ProductData } from '~/pages/ProductList';
+import FetchContext from '~/lib/contexts/fetchContext';
+import { ProductData } from '~/pages/ProductList';
 import { INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
 
 import {
