@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
+
 import { FetchContext, FilterContext } from '~/pages/ProductList';
+
 import { startFetch } from '~/stores/fetchModule';
-import { setCategory } from '~/stores/productListModule';
+import { resetCategory, setCategory } from '~/stores/productListModule';
+
 import scrollToTop from '~/utils/scrollToTop';
+
 import { ImageContainer } from './index.style';
 
 interface Props {
@@ -11,17 +15,17 @@ interface Props {
 }
 
 const CategoryItem: React.FC<Props> = ({ idx, image }) => {
+  const ImagContainer = useRef();
   const { dispatch: filterDispatch, ...currentState } =
     useContext(FilterContext);
   const { dispatch: fetchDispatch } = useContext(FetchContext);
 
   const handleImgClick = () => {
-    filterDispatch(setCategory(idx));
+    if (idx === 10) filterDispatch(resetCategory());
+    else filterDispatch(setCategory(idx));
     fetchDispatch(startFetch());
     scrollToTop({ behavior: 'auto' });
   };
-
-  const ImagContainer = useRef();
 
   useEffect(() => {
     const node = ImagContainer.current as HTMLElement;
