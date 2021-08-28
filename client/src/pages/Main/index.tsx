@@ -42,7 +42,7 @@ type MinimiUpdateMessage = {
 const [DY, DX] = [2, 2];
 const delayMS = 400;
 const pleaseAlloweRecord =
-  '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
+  '다른사람은 내목소리를 못들어요. 마이크 권한을 켜주세요.';
 
 const categoryCoords = {
   book: { x: 23, y: 15 },
@@ -210,6 +210,12 @@ class Main extends Component<{ u?: string }, MainState> {
           });
         })
         .catch((_) => {
+          call.answer(undefined);
+          const newAudio = document.createElement('audio');
+          this.audioGridRef.current.appendChild(newAudio);
+          call.on('stream', (otherUserStream) => {
+            this.addAudioStream(newAudio, otherUserStream);
+          });
           alert(pleaseAlloweRecord, 3000);
         });
     });
