@@ -99,7 +99,7 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!userState.isLoggedIn) {
+    if (userState.error) {
       push('/', { from: '/me', error: 'accessWithoutToken' });
     }
   }, [userState]);

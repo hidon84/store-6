@@ -80,11 +80,12 @@ const ProductDetail: FC = () => {
       return;
     }
 
+    if (!userState.error && !userState.isLoggedIn) return;
     productsApi
       .getProductDetail(idx)
       .then((result) => setProduct(result.data))
       .catch(() => setIsNotFound(true));
-  }, [idx]);
+  }, [idx, userState.isLoggedIn, userState.error]);
 
   const onClickAddToCart = useCallback(() => {
     if (!userState.isLoggedIn) {
@@ -136,7 +137,8 @@ const ProductDetail: FC = () => {
   const goPrevPage = useCallback(() => history.goBack(), [history]);
 
   if (isNotFound) return <NoMatchingRoute />;
-  if (product === null) return null;
+  if ((!userState.error && !userState.isLoggedIn) || product === null)
+    return null;
   const { thumbnail, images } = product;
 
   return (
