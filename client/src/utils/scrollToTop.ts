@@ -2,9 +2,7 @@ type TBehavior = {
   behavior: 'smooth' | 'auto';
 };
 
-const scrollToTop =
-  ({ behavior = 'smooth' }: TBehavior) =>
-  () =>
-    window.scrollTo({ top: 0, behavior });
+const scrollToTop = ({ behavior = 'auto' }: TBehavior) =>
+  window.scrollTo({ top: 0, behavior });
 
 export default scrollToTop;
