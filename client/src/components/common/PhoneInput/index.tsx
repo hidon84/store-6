@@ -9,6 +9,7 @@ interface Props {
   value?: string;
   disabled?: boolean;
   placeholder?: string;
+  fontSize?: string;
 }
 
 const phoneNumbersInfo = [
@@ -22,6 +23,7 @@ const PhoneInput: React.FC<Props> = ({
   value,
   disabled,
   placeholder,
+  fontSize,
 }) => {
   const phoneValue = useMemo(() => {
     const result = phoneNumbersInfo.map(() => '');
@@ -60,7 +62,7 @@ const PhoneInput: React.FC<Props> = ({
   );
 
   return (
-    <PhoneWrapper>
+    <PhoneWrapper fontSize={fontSize}>
       {phoneNumbersInfo.map((phoneNumberInfo, i) => {
         return (
           <Fragment key={phoneNumberInfo.key}>
@@ -73,7 +75,7 @@ const PhoneInput: React.FC<Props> = ({
               placeholder={phonePlaceHolder[i]}
             />
             {i !== phoneNumbersInfo.length - 1 && (
-              <img style={{ margin: '10px' }} src={hyphenSVG} alt="hyphen" />
+              <img src={hyphenSVG} alt="hyphen" />
             )}
           </Fragment>
         );

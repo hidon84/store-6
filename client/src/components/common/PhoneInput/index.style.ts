@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { phoneUnderLineSVG } from '~/assets';
 
-export const PhoneWrapper = styled.div`
+export const PhoneWrapper = styled.div<{ fontSize }>`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
-  bottom: 4px;
+  font-size: ${({ fontSize }) => fontSize || 'inherit'};
 `;
 
 export const StyledPhoneInput = styled.input`
@@ -14,11 +14,9 @@ export const StyledPhoneInput = styled.input`
   box-sizing: border-box;
   width: 100px;
   height: 34px;
-  padding: 0 16px 10px 16px;
-  margin-top: 16px;
-  line-height: 25px;
-  font-size: 14px;
   background: bottom left / contain no-repeat url(${phoneUnderLineSVG});
+  font-size: inherit;
+  line-height: inherit;
 
   &::placeholder {
     color: #999;
