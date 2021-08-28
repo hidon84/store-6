@@ -24,16 +24,13 @@ import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
 import OrderFilter from '~/components/productList/OrderFilter';
 import ProductItemContainer from '~/components/productList/ProductItemContainer';
+import ScrollToTop from '~/components/productList/ScrollToTop';
 import SearchBox from '~/components/productList/SearchBox';
 
-import {
-  ProductListWrapper,
-  LeftSection,
-  RightSection,
-  VerticalDivider,
-} from './index.style';
+import { useLocation } from '~/core/Router';
+
+import S from './index.style';
 import useIntersection from '~/lib/hooks/useIntersection';
-import ScrollToTop from '~/components/productList/ScrollToTop';
 import fetchModule, {
   FetchModuleAction,
   finishFetch,
@@ -41,7 +38,6 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
-import { useLocation } from '~/core/Router';
 
 // Constants
 const CATEGORY_TO_IDX = {
@@ -141,18 +137,13 @@ const ProductList: FC = () => {
 
   useEffect(() => {
     if (fetchState.action === INIT_FETCH) fetchProducts();
-
-    // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
     if (fetchState.action === START_FETCH) {
       setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
     }
   }, [filterState, fetchState.action]);
 
   useEffect(() => {
-    if (
-      fetchState.action !== INIT_FETCH && //
-      entry?.isIntersecting
-    ) {
+    if (fetchState.action !== INIT_FETCH && entry?.isIntersecting) {
       productListDispatch(setNextPage());
       fetchDispatch(initFetch());
     }
@@ -165,19 +156,19 @@ const ProductList: FC = () => {
       <FilterContext.Provider
         value={{ state: filterState, dispatch: productListDispatch }}
       >
-        <ProductListWrapper>
-          <LeftSection>
+        <S.ProductListWrapper>
+          <S.LeftSection>
             <CategoryFilter />
             <OrderFilter />
-          </LeftSection>
-          <VerticalDivider />
-          <RightSection>
+          </S.LeftSection>
+          <S.VerticalDivider />
+          <S.RightSection>
             <CategoryIdentifier />
             <SearchBox />
             <ProductItemContainer products={products} ref={listFooterRef} />
-          </RightSection>
+          </S.RightSection>
           <ScrollToTop isVisible={isScrollPoint} />
-        </ProductListWrapper>
+        </S.ProductListWrapper>
       </FilterContext.Provider>
     </FetchContext.Provider>
   );
