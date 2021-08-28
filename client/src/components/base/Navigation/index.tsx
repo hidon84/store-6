@@ -22,10 +22,13 @@ const Navigation: FC = () => {
   return (
     <S.NavigationWrapper>
       <S.Content>
+        <S.FestivalWrapper>
+          <S.FestivalIcon />
+        </S.FestivalWrapper>
         <S.UselessDoodle>
           <S.DoodleUselessIcon />
         </S.UselessDoodle>
-        <Link to="/">
+        <Link to="/products">
           <S.Logo>
             <HeaderLogo />
           </S.Logo>

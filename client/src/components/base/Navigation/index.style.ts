@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { CartSVG, DoodleUselessSVG, MypageSVG } from '~/assets';
+import { CartSVG, DoodleUselessSVG, festivalSVG, MypageSVG } from '~/assets';
 
 export const IconActivateCSS = css`
   filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
@@ -10,6 +10,11 @@ export const IconActivateHoverCSS = css`
   filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
     brightness(70%) contrast(87%);
 `;
+
+export const FestivalIcon = styled.img.attrs({
+  src: festivalSVG,
+  alt: 'useless doodle',
+})``;
 
 export const DoodleUselessIcon = styled.img.attrs({
   src: DoodleUselessSVG,
@@ -49,11 +54,19 @@ export const Content = styled.div`
   width: 920px;
 `;
 
+export const FestivalWrapper = styled.div`
+  position: absolute;
+  top: 18px;
+  left: 0;
+  height: fit-content;
+  cursor: pointer;
+`;
+
 const uselessDoodleHeight = '16px';
 export const UselessDoodle = styled.div`
   position: absolute;
   top: calc(50% - ${uselessDoodleHeight} / 2);
-  left: 0;
+  left: 150px;
   height: ${uselessDoodleHeight};
 `;
 
