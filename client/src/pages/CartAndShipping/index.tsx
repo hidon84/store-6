@@ -1,11 +1,15 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useContext, useEffect } from 'react';
+
 import Cart from '~/components/cart/Cart';
 import Shipping from '~/components/shipping/Shipping';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
 import SubPageHeaderItem from '~/components/subpage/SubPageHeaderItem';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
+
 import { useHistory } from '~/core/Router';
+
 import urls from '~/lib/constants/urls';
+import UserContext from '~/lib/contexts/userContext';
 
 interface IProps {
   pageType?: 'cart' | 'shipping';
@@ -14,6 +18,13 @@ interface IProps {
 const CartAndShippingPage: FC<IProps> = ({ pageType = 'cart' }) => {
   const { push } = useHistory();
   const isCartPage = pageType === 'cart';
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!user.isLoggedIn)
+      push('/', { from: '/like', error: 'accessWithoutToken' });
+    return () => {};
+  }, [user]);
 
   const goCartPage = useCallback(
     () => !isCartPage && push(urls.cart),

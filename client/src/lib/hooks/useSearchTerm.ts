@@ -1,7 +1,11 @@
 import { useContext, useState } from 'react';
-import { FetchContext, FilterContext } from '~/pages/ProductList';
+
 import { startFetch } from '~/stores/fetchModule';
 import { removeSearchValue, setSearchValue } from '~/stores/productListModule';
+
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
+
 import {
   getValueOnLocalStorage,
   setValueOnLocalStorage,

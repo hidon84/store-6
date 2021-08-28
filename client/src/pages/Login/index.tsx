@@ -43,6 +43,8 @@ import { setLogin } from '~/stores/userModule';
 
 import * as usersApi from '~/lib/api/users';
 
+const MESSAGE_LOGIN_FAIL = '로그인 실패';
+
 const LoginPage: FC = () => {
   const { state } = useLocation();
   const { goBack, push } = useHistory();
@@ -65,11 +67,11 @@ const LoginPage: FC = () => {
     setIsPageAccessed(true);
 
     if (idWarning.length > 2 || id.length < 4) {
-      alert(`아이디 폼에러. ${idWarning}`);
+      alert(MESSAGE_LOGIN_FAIL);
       return;
     }
     if (pwWarning) {
-      alert(`비밀번호 폼에러. ${pwWarning}`);
+      alert(MESSAGE_LOGIN_FAIL);
       return;
     }
 
@@ -123,14 +125,14 @@ const LoginPage: FC = () => {
           placeholder="아이디"
           onChange={handleId}
         />
-        <InputHelp>{idWarning}</InputHelp>
+        <InputHelp> </InputHelp>
         <Input
           autoComplete="off"
           type="password"
           placeholder="비밀번호"
           onChange={handlePW}
         />
-        <InputHelp>{pwWarning}</InputHelp>
+        <InputHelp> </InputHelp>
         <ButtonWrapper>
           <Button size="lg">로그인</Button>
         </ButtonWrapper>

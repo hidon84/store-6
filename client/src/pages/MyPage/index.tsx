@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react';
 
 import Divider from '~/components/common/Divider';
 import UserInfoInput from '~/components/my/UserInfoInput';
-import PhoneInput from '~/components/my/PhoneInput';
 import EmailInput from '~/components/my/EmailInput';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
@@ -24,6 +23,7 @@ import {
   MyPageContent,
 } from './index.style';
 import { useHistory } from '~/core/Router';
+import MyPagePhoneInput from '~/components/my/MyPagePhoneInput';
 
 const message = {
   emailUpdateSuccess: '이메일이 수정되었습니다.',
@@ -99,7 +99,7 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!userState.isLoggedIn) {
+    if (userState.error) {
       push('/', { from: '/me', error: 'accessWithoutToken' });
     }
   }, [userState]);
@@ -149,7 +149,7 @@ const MyPage: React.FC = () => {
           value={userState.user?.phone}
           placeholder={userState.user?.phone?.split('-').join(' ')}
           onSubmit={handleSubmitPhone}
-          inputComponent={PhoneInput}
+          inputComponent={MyPagePhoneInput}
           validator={phoneValidator}
         />
       </MyPageContent>
