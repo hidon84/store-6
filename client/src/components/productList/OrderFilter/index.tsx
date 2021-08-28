@@ -1,14 +1,7 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
-import React, { useContext } from 'react';
-import { setOrder } from '~/stores/productListModule';
+import React from 'react';
 import { OrderFilterWrapper, OrderHeder, OrderContainer } from './index.style';
 
 import OrderItem from '../OrderItem';
-import { startFetch } from '~/stores/fetchModule';
-import FilterContext from '~/lib/contexts/filterContext';
-import FetchContext from '~/lib/contexts/fetchContext';
 
 const orders = [
   { order: 'recent', content: '최신순' },
