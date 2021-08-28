@@ -15,7 +15,7 @@ exports[`<PhoneInput /> should render same with snapshot 1`] = `
   -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  font-size: inhert;
+  font-size: inherit;
 }
 
 .c2 {
