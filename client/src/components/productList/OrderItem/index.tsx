@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FetchContext, FilterContext } from '~/pages/ProductList';
 import { UnderlineBaeminColorSVG } from '~/assets';
-import { setOrder } from '~/stores/productListModule';
-import { TitleContainer, Title } from './index.style';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
+
+import { setOrder } from '~/stores/productListModule';
 import { startFetch } from '~/stores/fetchModule';
+
+import FilterContext from '~/lib/contexts/filterContext';
+import FetchContext from '~/lib/contexts/fetchContext';
+
+import { TitleContainer, Title } from './index.style';
 
 interface Props {
   content: string;

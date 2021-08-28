@@ -1,9 +1,11 @@
 import { FC, useContext, useEffect, useRef } from 'react';
-
 import { SearchBoxUnderlineSVG, SearchSVG, XSVG } from '~/assets';
-import { FetchContext, FilterContext } from '~/pages/ProductList';
+
 import { startFetch } from '~/stores/fetchModule';
 import { removeSearchValue } from '~/stores/productListModule';
+
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
 
 import RecentlySearchTermBox from '../RecentlySearchTermBox';
 import {

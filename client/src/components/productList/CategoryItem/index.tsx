@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { FetchContext, FilterContext } from '~/pages/ProductList';
+
 import { startFetch } from '~/stores/fetchModule';
 import { setCategory } from '~/stores/productListModule';
+
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
+
 import { ImageContainer } from './index.style';
 
 interface Props {
