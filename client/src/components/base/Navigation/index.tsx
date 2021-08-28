@@ -10,7 +10,7 @@ import urls from '~/lib/constants/urls';
 import UserContext from '~/lib/contexts/userContext';
 import useCartAmount from '~/lib/hooks/useCartAmount';
 
-import * as S from './index.style';
+import S from './index.style';
 
 const Navigation: FC = () => {
   const { user: userState } = useContext(UserContext);

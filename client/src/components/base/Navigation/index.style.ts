@@ -1,27 +1,27 @@
 import styled, { css, keyframes } from 'styled-components';
 import { CartSVG, DoodleUselessSVG, festivalSVG, MypageSVG } from '~/assets';
 
-export const IconActivateCSS = css`
+const IconActivateCSS = css`
   filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
     brightness(95%) contrast(87%);
 `;
 
-export const IconActivateHoverCSS = css`
+const IconActivateHoverCSS = css`
   filter: invert(61%) sepia(53%) saturate(573%) hue-rotate(129deg)
     brightness(70%) contrast(87%);
 `;
 
-export const FestivalIcon = styled.img.attrs({
+const FestivalIcon = styled.img.attrs({
   src: festivalSVG,
   alt: 'useless doodle',
 })``;
 
-export const DoodleUselessIcon = styled.img.attrs({
+const DoodleUselessIcon = styled.img.attrs({
   src: DoodleUselessSVG,
   alt: 'useless doodle',
 })``;
 
-export const CartIcon = styled.img.attrs({
+const CartIcon = styled.img.attrs({
   src: CartSVG,
   alt: 'cart',
 })<{ activate?: boolean }>`
@@ -29,7 +29,7 @@ export const CartIcon = styled.img.attrs({
   ${({ activate = false }) => activate && IconActivateCSS}
 `;
 
-export const MyPageIcon = styled.img.attrs({
+const MyPageIcon = styled.img.attrs({
   src: MypageSVG,
   alt: 'user',
 })<{ activate?: boolean }>`
@@ -41,12 +41,12 @@ export const MyPageIcon = styled.img.attrs({
   ${({ activate = false }) => activate && IconActivateCSS}
 `;
 
-export const NavigationWrapper = styled.nav`
+const NavigationWrapper = styled.nav`
   width: 100%;
   height: 100px;
 `;
 
-export const Content = styled.div`
+const Content = styled.div`
   height: 100%;
   position: relative;
   height: 100px;
@@ -72,7 +72,7 @@ const shake = keyframes`
   }
 `;
 
-export const FestivalWrapper = styled.div`
+const FestivalWrapper = styled.div`
   position: absolute;
   top: 18px;
   cursor: pointer;
@@ -83,7 +83,7 @@ export const FestivalWrapper = styled.div`
 `;
 
 const uselessDoodleHeight = '16px';
-export const UselessDoodle = styled.div`
+const UselessDoodle = styled.div`
   position: absolute;
   top: calc(50% - ${uselessDoodleHeight} / 2);
   left: 150px;
@@ -93,7 +93,7 @@ export const UselessDoodle = styled.div`
 const logoHeight = '71px';
 const logoWidth = '203px';
 const logoOffset = '10px';
-export const Logo = styled.div`
+const Logo = styled.div`
   position: absolute;
   top: calc(50% - ${logoHeight} / 2);
   left: calc(50% - ${logoWidth} / 2 - ${logoOffset});
@@ -105,7 +105,7 @@ export const Logo = styled.div`
 `;
 
 const headerRightSectionHeight = '34px';
-export const HeaderRightSection = styled.div`
+const HeaderRightSection = styled.div`
   position: absolute;
   top: calc(50% - ${headerRightSectionHeight} / 2);
   right: 0;
@@ -117,7 +117,7 @@ export const HeaderRightSection = styled.div`
   }
 `;
 
-export const Badge = styled.div<{ badgeContent: string }>`
+const Badge = styled.div<{ badgeContent: string }>`
   position: absolute;
   bottom: 0px;
   right: -8px;
@@ -135,7 +135,7 @@ export const Badge = styled.div<{ badgeContent: string }>`
   }
 `;
 
-export const CartWrapper = styled.div<{ activate?: boolean }>`
+const CartWrapper = styled.div<{ activate?: boolean }>`
   position: relative;
 
   &:hover {
@@ -145,3 +145,20 @@ export const CartWrapper = styled.div<{ activate?: boolean }>`
     }
   }
 `;
+
+export default {
+  IconActivateCSS,
+  IconActivateHoverCSS,
+  FestivalIcon,
+  DoodleUselessIcon,
+  CartIcon,
+  MyPageIcon,
+  NavigationWrapper,
+  Content,
+  FestivalWrapper,
+  UselessDoodle,
+  Logo,
+  HeaderRightSection,
+  Badge,
+  CartWrapper,
+};
