@@ -1,20 +1,8 @@
-import {
-  FC,
-  createContext,
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-} from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 
 import * as productsAPI from '~/lib/api/products';
-import {
-  ErrorResponse,
-  ProductsGetRequestQuery,
-  ProductsGetResponseBody,
-} from '~/lib/api/types';
+import { ErrorResponse, ProductsGetResponseBody } from '~/lib/api/types';
 import productListModule, {
-  ActionType,
   setCategory,
   setLastPage,
   setNextPage,
@@ -35,13 +23,17 @@ import {
 import useIntersection from '~/lib/hooks/useIntersection';
 import ScrollToTop from '~/components/productList/ScrollToTop';
 import fetchModule, {
-  FetchModuleAction,
   finishFetch,
   initFetch,
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
 import { useLocation } from '~/core/Router';
+
+import FilterContext from '~/lib/contexts/filterContext';
+import FetchContext from '~/lib/contexts/fetchContext';
+
+import useScrollPoint from '~/lib/hooks/useScrollPoint';
 
 // Constants
 const CATEGORY_TO_IDX = {
@@ -64,34 +56,6 @@ export interface ProductData {
   originPrice: number;
   discountedPrice: number;
 }
-
-interface FilterContextState {
-  state: ProductsGetRequestQuery;
-  dispatch: (action: ActionType) => void;
-}
-
-interface FetchContextState {
-  state: {
-    action: string;
-    forcedDelayTime: number;
-  };
-  dispatch: (action: FetchModuleAction) => void;
-}
-
-// Context
-export const FilterContext = createContext<FilterContextState>(null);
-export const FetchContext = createContext<FetchContextState>(null);
-
-// Hook (only use in here)
-const useScrollPoint = (targetPoint: number): boolean => {
-  const [isScrollPoint, setIsScrollPoint] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    setIsScrollPoint(window.pageYOffset > targetPoint);
-  }, []);
-  window.addEventListener('scroll', handleScroll);
-  return isScrollPoint;
-};
 
 // Component
 const ProductList: FC = () => {
