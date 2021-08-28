@@ -7,6 +7,8 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
+import UserContext from '~/lib/contexts/userContext';
+import { alert } from '~/utils/modal';
 
 interface RouterLocation {
   pathname: string;
@@ -217,14 +219,18 @@ const Link: React.FC<{ to: string; children: React.ReactNode }> = ({
   children,
 }) => {
   const { push } = useHistory();
+  const { user } = useContext(UserContext);
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!user.isLoggedIn && ['/like', '/cart'].includes(to)) {
+      return alert('로그인이 필요한 서비스입니다.');
+    }
+    return push(to);
+  };
+
   return (
-    <StyledLink
-      href={to}
-      onClick={(e) => {
-        e.preventDefault();
-        push(to);
-      }}
-    >
+    <StyledLink href={to} onClick={handleLinkClick}>
       {children}
     </StyledLink>
   );
