@@ -1,39 +1,34 @@
 import { FC, useEffect, useState, useRef } from 'react';
 
-import * as productsAPI from '~/lib/api/products';
-import { ErrorResponse, ProductsGetResponseBody } from '~/lib/api/types';
-import productListModule, {
-  setCategory,
-  setLastPage,
-  setNextPage,
-} from '~/stores/productListModule';
-
 import CategoryFilter from '~/components/productList/CategoryFilter';
 import CategoryIdentifier from '~/components/productList/CategoryIdentifier';
 import OrderFilter from '~/components/productList/OrderFilter';
 import ProductItemContainer from '~/components/productList/ProductItemContainer';
+import ScrollToTop from '~/components/productList/ScrollToTop';
 import SearchBox from '~/components/productList/SearchBox';
 
-import {
-  ProductListWrapper,
-  LeftSection,
-  RightSection,
-  VerticalDivider,
-} from './index.style';
+import { useLocation } from '~/core/Router';
+
+import * as productsAPI from '~/lib/api/products';
+import { ProductsGetResponseBody } from '~/lib/api/types';
+import FilterContext from '~/lib/contexts/filterContext';
+import FetchContext from '~/lib/contexts/fetchContext';
 import useIntersection from '~/lib/hooks/useIntersection';
-import ScrollToTop from '~/components/productList/ScrollToTop';
+import useScrollPoint from '~/lib/hooks/useScrollPoint';
+
 import fetchModule, {
   finishFetch,
   initFetch,
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
-import { useLocation } from '~/core/Router';
+import productListModule, {
+  setCategory,
+  setLastPage,
+  setNextPage,
+} from '~/stores/productListModule';
 
-import FilterContext from '~/lib/contexts/filterContext';
-import FetchContext from '~/lib/contexts/fetchContext';
-
-import useScrollPoint from '~/lib/hooks/useScrollPoint';
+import S from './index.style';
 
 // Constants
 const CATEGORY_TO_IDX = {
@@ -72,28 +67,26 @@ const ProductList: FC = () => {
 
   const isScrollPoint = useScrollPoint(TARGET_POINT);
 
-  const fetchProducts = () => {
+  const fetchProducts = async () => {
     if (filterState.isLastPage) return;
 
-    const isNextPageRequest = filterState.page !== 1;
-    productsAPI
-      .getProducts(filterState)
-      .then(({ data }) => {
-        if (data.length < DEFAULT_PRODUCTS_AMOUNT)
-          productListDispatch(setLastPage());
+    try {
+      const { data } = await productsAPI.getProducts(filterState);
 
-        if (!isNextPageRequest) setProducts(data);
-        else setProducts((prev) => [...prev, ...data]);
-      })
-      .then(() => {
-        setTimeout(
-          () => fetchDispatch(finishFetch()),
-          fetchState.forcedDelayTime,
-        );
-      })
-      .catch((error: ErrorResponse) => {
-        throw new Error(error.data.message);
-      });
+      if (data.length < DEFAULT_PRODUCTS_AMOUNT)
+        productListDispatch(setLastPage());
+
+      const isNextPageRequest = filterState.page !== 1;
+      if (!isNextPageRequest) setProducts(data);
+      else setProducts((prev) => [...prev, ...data]);
+
+      setTimeout(
+        () => fetchDispatch(finishFetch()),
+        fetchState.forcedDelayTime,
+      );
+    } catch (error) {
+      throw new Error(error.data.message);
+    }
   };
 
   useEffect(() => {
@@ -105,18 +98,13 @@ const ProductList: FC = () => {
 
   useEffect(() => {
     if (fetchState.action === INIT_FETCH) fetchProducts();
-
-    // TODO: 필터를 한번에 여러 번 누르는 경우를 대비하여 debounce를 걸어줘야 합니다.
     if (fetchState.action === START_FETCH) {
       setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
     }
   }, [filterState, fetchState.action]);
 
   useEffect(() => {
-    if (
-      fetchState.action !== INIT_FETCH && //
-      entry?.isIntersecting
-    ) {
+    if (fetchState.action !== INIT_FETCH && entry?.isIntersecting) {
       productListDispatch(setNextPage());
       fetchDispatch(initFetch());
     }
@@ -129,19 +117,19 @@ const ProductList: FC = () => {
       <FilterContext.Provider
         value={{ state: filterState, dispatch: productListDispatch }}
       >
-        <ProductListWrapper>
-          <LeftSection>
+        <S.ProductListWrapper>
+          <S.LeftSection>
             <CategoryFilter />
             <OrderFilter />
-          </LeftSection>
-          <VerticalDivider />
-          <RightSection>
+          </S.LeftSection>
+          <S.VerticalDivider />
+          <S.RightSection>
             <CategoryIdentifier />
             <SearchBox />
             <ProductItemContainer products={products} ref={listFooterRef} />
-          </RightSection>
+          </S.RightSection>
           <ScrollToTop isVisible={isScrollPoint} />
-        </ProductListWrapper>
+        </S.ProductListWrapper>
       </FilterContext.Provider>
     </FetchContext.Provider>
   );

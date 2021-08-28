@@ -1,14 +1,6 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/no-array-index-key */
+import React from 'react';
 
-import React, { useContext } from 'react';
-import { resetCategory } from '~/stores/productListModule';
-import {
-  CategoryFilterWrapper,
-  CategoryHeder,
-  CategoryContainer,
-} from './index.style';
+import S from './index.style';
 
 import {
   SmallPencilSVG,
@@ -19,15 +11,10 @@ import {
   SmallHouseSVG,
   SmallKKSVG,
   SmallTreeSVG,
-  RefreshSVG,
   SmallBookSVG,
+  CategoryAllSVG,
 } from '~/assets';
-
-import CategoryItem from '../CategoryItem';
-import { startFetch } from '~/stores/fetchModule';
-
-import FilterContext from '~/lib/contexts/filterContext';
-import FetchContext from '~/lib/contexts/fetchContext';
+import CategoryItem from '~/components/productList/CategoryItem';
 
 const Categorys = [
   SmallBookSVG,
@@ -39,29 +26,20 @@ const Categorys = [
   Hat2SVG,
   SmallGiftSVG,
   SmallColabSVG,
+  CategoryAllSVG,
 ];
 
-const CategoryFilter: React.FC = () => {
-  const { dispatch } = useContext(FilterContext);
-  const { dispatch: fetchDispatch } = useContext(FetchContext);
-  const handleResetBtnClick = () => {
-    dispatch(resetCategory());
-    fetchDispatch(startFetch());
-  };
-
-  return (
-    <CategoryFilterWrapper>
-      <CategoryHeder>
-        <div>카테고리</div>
-        <img onClick={handleResetBtnClick} src={RefreshSVG} alt="reset" />
-      </CategoryHeder>
-      <CategoryContainer>
-        {Categorys.map((item, index) => (
-          <CategoryItem key={index} idx={index + 1} image={item} />
-        ))}
-      </CategoryContainer>
-    </CategoryFilterWrapper>
-  );
-};
+const CategoryFilter: React.FC = () => (
+  <S.CategoryFilterWrapper>
+    <S.CategoryHeader>
+      <div>카테고리</div>
+    </S.CategoryHeader>
+    <S.CategoryContainer>
+      {Categorys.map((item, index) => (
+        <CategoryItem key={item} idx={index + 1} image={item} />
+      ))}
+    </S.CategoryContainer>
+  </S.CategoryFilterWrapper>
+);
 
 export default CategoryFilter;

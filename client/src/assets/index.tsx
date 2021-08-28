@@ -30,6 +30,7 @@ import detail2PNG from './productDatail2.png';
 import detail3PNG from './productDatail3.png';
 import detail4PNG from './productDatail4.png';
 import festivalSVG from './festival.svg';
+import CategoryAllSVG from './category-all.svg';
 
 // Big Icons (메인 페이지)
 import BigBaedalSVG from './baedal.svg';
@@ -76,7 +77,6 @@ const SmallCircleSVG = `${S3_PREFIX}/common/small-icon/circle.svg`;
 // Product Icons (상품 목록 페이지)
 const Hat2SVG = `${S3_PREFIX}/product/hat2.svg`;
 const SearchSVG = `${S3_PREFIX}/product/search.svg`;
-const RefreshSVG = `${S3_PREFIX}/product/refresh.svg`;
 const SpringSVG = `${S3_PREFIX}/product/spring.svg`;
 const UnderlineBaeminColorSVG = `${S3_PREFIX}/product/underline-baemin-color.svg`;
 const SearchBoxUnderlineSVG = `${S3_PREFIX}/product/search-box-underline.svg`;
@@ -98,6 +98,7 @@ export {
   VertLineSVG,
   DoodleUselessSVG,
   NoResourceSVG,
+  CategoryAllSVG,
   NoRouteGIF,
   HeartSVG,
   MypageSVG,
@@ -142,7 +143,6 @@ export {
   BigCircleSVG,
   Hat2SVG,
   SearchSVG,
-  RefreshSVG,
   SpringSVG,
   UnderlineBaeminColorSVG,
   mooyahoSVG,

@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
-import { startFetch } from '~/stores/fetchModule';
-import { setCategory } from '~/stores/productListModule';
-
 import FetchContext from '~/lib/contexts/fetchContext';
 import FilterContext from '~/lib/contexts/filterContext';
+
+import { startFetch } from '~/stores/fetchModule';
+import { resetCategory, setCategory } from '~/stores/productListModule';
+
+import scrollToTop from '~/utils/scrollToTop';
 
 import { ImageContainer } from './index.style';
 
@@ -14,20 +16,23 @@ interface Props {
 }
 
 const CategoryItem: React.FC<Props> = ({ idx, image }) => {
+  const ImgRef = useRef();
   const { dispatch: filterDispatch, ...currentState } =
     useContext(FilterContext);
   const { dispatch: fetchDispatch } = useContext(FetchContext);
 
   const handleImgClick = () => {
-    filterDispatch(setCategory(idx));
+    if (idx === 10) filterDispatch(resetCategory());
+    else filterDispatch(setCategory(idx));
     fetchDispatch(startFetch());
+    scrollToTop({ behavior: 'auto' });
   };
 
-  const ImagContainer = useRef();
-
   useEffect(() => {
-    const node = ImagContainer.current as HTMLElement;
+    const node = ImgRef.current as HTMLElement;
     if (idx === currentState.state.category) {
+      node.classList.add('selected');
+    } else if (idx === 10 && !currentState.state.category) {
       node.classList.add('selected');
     } else {
       node.classList.remove('selected');
@@ -35,7 +40,7 @@ const CategoryItem: React.FC<Props> = ({ idx, image }) => {
   });
 
   return (
-    <ImageContainer onClick={handleImgClick} ref={ImagContainer}>
+    <ImageContainer onClick={handleImgClick} ref={ImgRef}>
       <img src={image} alt="category" />
     </ImageContainer>
   );
