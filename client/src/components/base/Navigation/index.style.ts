@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { CartSVG, DoodleUselessSVG, festivalSVG, MypageSVG } from '~/assets';
 
 export const IconActivateCSS = css`
@@ -54,12 +54,32 @@ export const Content = styled.div`
   width: 920px;
 `;
 
+const shake = keyframes`
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  
+  20%, 80% {
+    transform: translateX(2px);
+  }
+
+  30%, 50%, 70% {
+    transform: translateX(-4px);
+  }
+
+  40%, 60% {
+    transform: translateX(4px);
+  }
+`;
+
 export const FestivalWrapper = styled.div`
   position: absolute;
   top: 18px;
-  left: 0;
-  height: fit-content;
   cursor: pointer;
+
+  &:hover {
+    animation: ${shake} 0.6s ease-in-out;
+  }
 `;
 
 const uselessDoodleHeight = '16px';
