@@ -49,10 +49,7 @@ const SignUpForm: FC<{
   );
 
   const inputDataValidator = () => {
-    if (
-      policyCheck.serviceTerms === false ||
-      policyCheck.privacyTerms === false
-    ) {
+    if (!policyCheck.serviceTerms || !policyCheck.privacyTerms) {
       return message.needCheckTerms;
     }
     const warning =
