@@ -42,11 +42,15 @@ type MinimiUpdateMessage = {
   message: 'updateMinimi';
 };
 
+const toastMessage = {
+  pleaseTurnOnMic:
+    '누군가의 음성을 듣기시작하지만 상대는 못듣소. 마이크를 허용해주시오.',
+  speakConnected: '누군가 내 목소리를 듣기 시작했다오..',
+  userLeft: '누군가 퇴장했다오...',
+};
+
 const [DY, DX] = [2, 2];
 const delayMS = 400;
-const pleaseAlloweRecord =
-  '다른사람은 내목소리를 못들어요. 마이크 권한을 켜주세요.';
-
 const categoryCoords = {
   book: { x: 23, y: 15 },
   hat: { x: 14, y: 62 },
@@ -145,14 +149,14 @@ class Main extends Component<{ u?: string }, MainState> {
             this.addConnections(con.peer, conn);
           }, delayMS);
         } else if (data.message === 'callMe') {
-          alert(`${con.peer}가 내 목소리를 듣기 시작합니다.`);
+          alert(toastMessage.speakConnected);
           this.callTo(con.peer);
         }
       });
     });
 
     this.socket.on('user-disconnected', (userId) => {
-      alert(`${userId} 님 퇴장.`);
+      alert(toastMessage.userLeft);
       const { peerCalls } = this.state;
       peerCalls[userId]?.mediaConn.close();
       delete peerCalls[userId];
@@ -242,7 +246,7 @@ class Main extends Component<{ u?: string }, MainState> {
           call.on('stream', (otherUserStream) => {
             this.addAudioStream(newAudio, otherUserStream);
           });
-          alert(`${call.peer}의 음성을 듣기 시작합니다.`, 3000);
+          alert(toastMessage.pleaseTurnOnMic, 3000);
         });
     });
     this.socket.on('user-connected', async (userId) => {
