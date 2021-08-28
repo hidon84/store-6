@@ -1,30 +1,39 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { elementFadeIn, elementFadeOut } from '~/utils/elementFade';
 import { getRandomIndex } from '~/utils/getRandomIndex';
-
-import { LoadingTextWrapper, Text, TextArea } from './index.style';
+import S from './index.style';
 import { PHRASES } from './phrases';
 
-const LoadingText: FC<{ isFetching: boolean }> = ({ isFetching }) => {
-  const [phrase, setPhrase] = useState(PHRASES[getRandomIndex(PHRASES.length)]);
+interface IProps {
+  show: boolean;
+}
 
-  /**
-   * Fetching이 끝날 경우, 다음 Fetching에 대비해 phrase를 미리 만들어 놓습니다.
-   */
+const LoadingText: FC<IProps> = ({ show }) => {
+  const wrapperRef = useRef<HTMLDivElement>();
+  const [loadingText, setLoadingText] = useState([]);
+
+  const setRandomLoadingText = () => {
+    setLoadingText(PHRASES[getRandomIndex(PHRASES.length)]);
+  };
+
   useEffect(() => {
-    if (!isFetching) {
-      const idx = getRandomIndex(PHRASES.length);
-      setPhrase(PHRASES[idx]);
+    if (show && wrapperRef.current) {
+      elementFadeIn(wrapperRef.current, 0);
+    } else {
+      elementFadeOut(wrapperRef.current, 400).then(() => {
+        setRandomLoadingText();
+      });
     }
-  }, [isFetching]);
+  }, [show]);
+
+  const loadingTexts = useMemo(() => {
+    return loadingText.map((ph) => <S.Text key={ph}>{ph}</S.Text>);
+  }, [loadingText]);
 
   return (
-    <LoadingTextWrapper>
-      <TextArea isFetching={isFetching}>
-        {phrase.map((ph) => (
-          <Text key={ph}>{ph}</Text>
-        ))}
-      </TextArea>
-    </LoadingTextWrapper>
+    <S.LoadingTextWrapper ref={wrapperRef}>
+      <S.TextArea show={show}>{loadingTexts}</S.TextArea>
+    </S.LoadingTextWrapper>
   );
 };
 

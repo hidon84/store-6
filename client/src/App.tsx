@@ -1,27 +1,33 @@
+import '~/styles/app.css';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { Switch, Route, useHistory } from '~/core/Router';
-import '~/styles/app.css';
-import Navigation from '~/components/base/Navigation';
-import LoginPage from '~/pages/Login';
-import SignUpPage from '~/pages/SignUp';
-import AlertModal from './components/modal/AlertModal';
-import ConfirmModal from './components/modal/ConfirmModal';
-import MyPage from './pages/MyPage';
-import ProductList from './pages/ProductList';
-import MainPage from './pages/Main';
-import CartAndShippingPage from './pages/CartAndShipping';
-import ProductDetail from './pages/ProductDetail';
-import GoogleCallbackPage from './pages/GoogleCallback';
-import FacebookCallbackPage from './pages/FacebookCallback';
-import LikeListPage from './pages/LikeList';
+import { TransitionGroup, Transition } from 'react-transition-group';
+import { useHistory } from '~/core/Router';
 import titles from './lib/constants/titles';
 
-const Main = styled.main`
+import AlertModal from './components/modal/AlertModal';
+import ConfirmModal from './components/modal/ConfirmModal';
+
+import Navigation from '~/components/base/Navigation';
+import LoadingText from './components/common/LoadingText';
+import Routes from './Routes';
+
+const Main = styled.main<{ nonScroll: boolean }>`
   position: relative;
   height: calc(100% - 104px);
   width: 1156px;
+  ${({ nonScroll }) => nonScroll && `overflow: hidden;`}
 `;
+
+const StyledWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+`;
+
+const loadingAnimationDuration = 400;
 
 const App = () => {
   const { location } = useHistory();
@@ -35,46 +41,23 @@ const App = () => {
   return (
     <>
       <Navigation />
-      <Main>
-        <Switch>
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-          <Route exact path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/signup/:stage">
-            <SignUpPage />
-          </Route>
-          <Route path="/hello/:name/:number">
-            <div>임시 Route</div>
-          </Route>
-          <Route exact path="/products">
-            <ProductList />
-          </Route>
-          <Route path="/products/:id">
-            <ProductDetail />
-          </Route>
-          <Route exact path="/me">
-            <MyPage />
-          </Route>
-          <Route exact path="/cart">
-            <CartAndShippingPage pageType="cart" />
-          </Route>
-          <Route exact path="/shipping">
-            <CartAndShippingPage pageType="shipping" />
-          </Route>
-          <Route exact path="/like">
-            <LikeListPage />
-          </Route>
-          <Route exact path="/oauth/google/callback">
-            <GoogleCallbackPage />
-          </Route>
-          <Route exact path="/oauth/facebook/callback">
-            <FacebookCallbackPage />
-          </Route>
-        </Switch>
-      </Main>
+      <TransitionGroup className="transition-group" component={null}>
+        <Transition key={location.pathname} timeout={loadingAnimationDuration}>
+          {(state: string) => {
+            return (
+              <>
+                <Main nonScroll={state !== 'entered'}>
+                  <StyledWrapper>
+                    <Routes />
+                  </StyledWrapper>
+                </Main>
+                <LoadingText show={state !== 'entered'} />
+              </>
+            );
+          }}
+        </Transition>
+      </TransitionGroup>
+
       <AlertModal />
       <ConfirmModal />
     </>
