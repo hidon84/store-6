@@ -38,13 +38,22 @@ const SearchBox: FC = () => {
     searchTermRef.current.value = '';
   };
 
+  const handleInput = () => {
+    if (searchTermRef.current.value === '') removeTerm();
+  };
+
   return (
     <>
       <SearchBoxForm onSubmit={handleSearchTrigger}>
         <SearchButton type="submit">
           <img src={SearchSVG} alt="search" />
         </SearchButton>
-        <SearchInput type="search" name="q" ref={searchTermRef} />
+        <SearchInput
+          type="search"
+          name="q"
+          ref={searchTermRef}
+          onInput={handleInput}
+        />
         <SearchLine src={SearchBoxUnderlineSVG} alt="search-line" />
         <ValueRemoveButton
           type="button"
