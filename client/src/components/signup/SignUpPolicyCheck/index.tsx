@@ -2,6 +2,7 @@ import { FC, useCallback } from 'react';
 import Checkbox from '~/components/common/Checkbox';
 import SignUpLabel from '../SignUpLabel';
 import S from './index.style';
+import terms from '~/lib/constants/terms';
 
 interface IProps {
   serviceTermsCheck?: boolean;
@@ -50,24 +51,14 @@ const SignUpPolicyCheck: FC<IProps> = ({
           <span>개인정보 이용약관 (필수)</span>
         </S.CheckboxWrapper>
       </S.CheckboxSection>
-      <S.Policy>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
-        doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis
-        ducimus? Nulla, laudantium maxime incidunt laborum iure vero
-        consequuntur tenetur voluptatibus voluptate.
-      </S.Policy>
+      <S.Policy>{terms.service}</S.Policy>
       <S.CheckboxSection>
         <S.CheckboxWrapper onClick={onCheckServiceTerms}>
           <Checkbox checked={serviceTermsCheck} />
           <span>배민문방구 이용약관 (필수)</span>
         </S.CheckboxWrapper>
       </S.CheckboxSection>
-      <S.Policy>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
-        doloremque quam quasi cupiditate suscipit optio, aliquid vero omnis
-        ducimus? Nulla, laudantium maxime incidunt laborum iure vero
-        consequuntur tenetur voluptatibus voluptate.
-      </S.Policy>
+      <S.Policy>{terms.privacy}</S.Policy>
     </div>
   );
 };

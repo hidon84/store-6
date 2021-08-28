@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Policy = styled.div`
+const Policy = styled.pre`
   display: block;
   margin-top: 8px;
   border: 1px solid #eeeeee;
@@ -12,6 +12,7 @@ const Policy = styled.div`
   box-sizing: border-box;
   height: 80px;
   font-family: 'noto sans', sans-serif !important;
+  white-space: pre-line;
 `;
 
 const CheckboxSection = styled.section`
