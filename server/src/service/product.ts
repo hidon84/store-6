@@ -151,6 +151,7 @@ class ProductService {
         userIdx,
         productIdx,
       );
+
       if (like) {
         result.isLike = true;
       }

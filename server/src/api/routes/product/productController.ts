@@ -39,10 +39,12 @@ export const handleGetProductDetail = async (
     }
 
     const token = getTokenFromHeader(req);
+
     if (token) {
       let productDetailInfoResult;
       try {
         const decodedToken = jwtHelper.decodeAccessToken(token);
+
         productDetailInfoResult = await productServiceInstance.getProductDetail(
           productIdx,
           decodedToken.idx,
