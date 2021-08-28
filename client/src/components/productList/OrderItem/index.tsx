@@ -5,6 +5,7 @@ import { setOrder } from '~/stores/productListModule';
 import { TitleContainer, Title } from './index.style';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
 import { startFetch } from '~/stores/fetchModule';
+import scrollToTop from '~/utils/scrollToTop';
 
 interface Props {
   content: string;
@@ -20,6 +21,7 @@ const OrderItem: React.FC<Props> = ({ order, content }) => {
   const handleImgClick = () => {
     dispatch(setOrder(order as ProductsGetRequestQuery['order']));
     fetchDispatch(startFetch());
+    scrollToTop({ behavior: 'auto' });
   };
 
   useEffect(() => setIsSelected(order === currentState.state.order));

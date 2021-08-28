@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { FetchContext, FilterContext } from '~/pages/ProductList';
 import { startFetch } from '~/stores/fetchModule';
 import { setCategory } from '~/stores/productListModule';
+import scrollToTop from '~/utils/scrollToTop';
 import { ImageContainer } from './index.style';
 
 interface Props {
@@ -17,6 +18,7 @@ const CategoryItem: React.FC<Props> = ({ idx, image }) => {
   const handleImgClick = () => {
     filterDispatch(setCategory(idx));
     fetchDispatch(startFetch());
+    scrollToTop({ behavior: 'auto' });
   };
 
   const ImagContainer = useRef();

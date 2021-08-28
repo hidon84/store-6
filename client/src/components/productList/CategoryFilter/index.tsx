@@ -26,6 +26,7 @@ import {
 
 import CategoryItem from '../CategoryItem';
 import { startFetch } from '~/stores/fetchModule';
+import scrollToTop from '~/utils/scrollToTop';
 
 const Categorys = [
   SmallBookSVG,
@@ -45,6 +46,7 @@ const CategoryFilter: React.FC = () => {
   const handleResetBtnClick = () => {
     dispatch(resetCategory());
     fetchDispatch(startFetch());
+    scrollToTop({ behavior: 'auto' });
   };
 
   return (
