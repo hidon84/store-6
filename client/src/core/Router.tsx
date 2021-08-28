@@ -10,6 +10,8 @@ import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 import UserContext from '~/lib/contexts/userContext';
 import { alert } from '~/utils/modal';
 
+const NOT_LOGGED_IN_ERROR = '로그인이 필요한 서비스입니다.';
+
 interface RouterLocation {
   pathname: string;
   hash: string;
@@ -224,7 +226,7 @@ const Link: React.FC<{ to: string; children: React.ReactNode }> = ({
   const handleLinkClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!user.isLoggedIn && ['/like', '/cart'].includes(to)) {
-      return alert('로그인이 필요한 서비스입니다.');
+      return alert(NOT_LOGGED_IN_ERROR);
     }
     return push(to);
   };
