@@ -23,15 +23,17 @@ const LikeListPage: FC = () => {
   const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
 
   useEffect(() => {
-    if (!userState.isLoggedIn) {
+    if (userState.error) {
       history.push('/', { from: '/like', error: 'accessWithoutToken' });
       return;
     }
 
-    likesApi
-      .getLikeItems()
-      .then((result) => setItemList(result.data))
-      .catch((e: ErrorResponse) => alert(e.message));
+    if (userState.isLoggedIn) {
+      likesApi
+        .getLikeItems()
+        .then((result) => setItemList(result.data))
+        .catch((e: ErrorResponse) => alert(e.message));
+    }
   }, [userState]);
 
   const onClickItem = useCallback(
