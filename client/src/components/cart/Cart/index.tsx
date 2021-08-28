@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, useContext } from 'react';
 
 import Button from '~/components/common/Button';
-import CartItem from '~/components/cart/cartItem';
+import CartItem from '~/components/cart/CartItem';
 import Divider from '~/components/common/Divider';
 
 import { deleteCartItem, getCartItems } from '~/lib/api/cart';
