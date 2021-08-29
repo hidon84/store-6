@@ -9,6 +9,7 @@ import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 import UserContext from '~/lib/contexts/userContext';
+import { isSafari } from '~/utils/browserChecker';
 import { confirm } from '~/utils/modal';
 
 const NOT_LOGGED_IN_ERROR = `로그인이 필요한 서비스입니다. 
@@ -67,7 +68,10 @@ const BrowserRouter: React.FC<{
   const handleHashChange = (popEvent: PopStateEvent) => {
     const { pathname, hash, search } = window.location;
     const { state } = popEvent;
-    // window.location.reload();
+    if (isSafari()) {
+      // safari 크로스브라우징 이슈
+      window.location.reload();
+    }
     setWindowLocation({ ...windowLocation, pathname, hash, search, state });
   };
 
