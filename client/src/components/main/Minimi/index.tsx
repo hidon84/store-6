@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import Coord from './coord';
 import './cat/cat.css';
 import './chicken/chicken.css';
@@ -52,4 +52,4 @@ const genRandomPixelArt = () => {
 
 export { genRandomPixelArt, Minimi };
 
-export default PixelArt;
+export default memo(PixelArt);

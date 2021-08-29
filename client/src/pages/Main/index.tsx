@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/lines-between-class-members */
 /* eslint-disable react/no-unused-state */
-import { Component, createRef, RefObject } from 'react';
+import { Component } from 'react';
 import Peer, { MediaConnection, DataConnection } from 'peerjs';
 import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,16 +15,21 @@ import {
   Button,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
-import { MainContainer } from './index.style';
+import { VideoGrid, MainContainer, MyVideoWrapper } from './index.style';
 import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
+import RTCVideo from '~/components/main/RTCVideo';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
-  peerCalls: Record<string, MediaConnection>;
+  peerCalls: Record<
+    string,
+    { mediaConn: MediaConnection; isSendingVoice: boolean }
+  >;
   connections: Record<string, DataConnection>;
+  streams: { id: string; stream: MediaStream }[];
   minimi: Minimi;
   entered?: TypeCategoryIcon;
   y: number;
@@ -39,11 +44,24 @@ type MinimiUpdateMessage = {
   message: 'updateMinimi';
 };
 
+const toastMessage = {
+  pleaseTurnOnMic:
+    '누군가의 음성을 듣기시작하지만 상대는 못듣소. 마이크를 허용해주시오.',
+  speakConnected: '누군가 내 목소리를 듣기 시작했다오..',
+  userLeft: '누군가 퇴장했다오...',
+};
+
+const MEDIA_OPTIONS = {
+  audio: true,
+  video: {
+    width: { min: 100, ideal: 240 },
+    // facingMode: { exact: 'user' },
+    // height: { min: 75, ideal: 180 },
+  },
+};
+
 const [DY, DX] = [2, 2];
 const delayMS = 400;
-const pleaseAlloweRecord =
-  '음성녹음을 허용해주세요! 다른유저와 채팅할 수 있습니다.';
-
 const categoryCoords = {
   book: { x: 23, y: 15 },
   hat: { x: 14, y: 62 },
@@ -57,7 +75,6 @@ const categoryCoords = {
 };
 
 class Main extends Component<{ u?: string }, MainState> {
-  audioGridRef: RefObject<HTMLDivElement>;
   peer: Peer;
   myId: string;
   myStream?: MediaStream;
@@ -73,6 +90,7 @@ class Main extends Component<{ u?: string }, MainState> {
       y,
       x,
       users: [],
+      streams: [],
     };
     this.socket = createSocket();
     this.myId = uuidv4();
@@ -80,26 +98,19 @@ class Main extends Component<{ u?: string }, MainState> {
     this.peer.on('open', (id) => {
       this.socket.emit('join-room', id);
     });
-    this.audioGridRef = createRef<HTMLDivElement>();
-    this.setupConnections = this.setupConnections.bind(this);
-    this.addConnections = this.addConnections.bind(this);
-    this.addAudioStream = this.addAudioStream.bind(this);
-    this.updateMinimi = this.updateMinimi.bind(this);
     this.setupConnections();
   }
 
   componentDidMount() {
-    if (window.history.state) {
-      const { from, error } = window.history.state;
-      if (error === 'accessWithToken') {
-        alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
-      } else if (error === 'accessWithoutToken') {
-        alert(
-          `로그인을 하지 않은 채로 ${from.slice(
-            1,
-          )}페이지로 이동할 수 없습니다.`,
-        );
-      }
+    const { state } = this.context.location;
+    if (!state) return;
+    const { from, error } = state;
+    if (error === 'accessWithToken') {
+      alert(`로그인 한 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`);
+    } else if (error === 'accessWithoutToken') {
+      alert(
+        `로그인을 하지 않은 채로 ${from.slice(1)}페이지로 이동할 수 없습니다.`,
+      );
     }
   }
 
@@ -113,10 +124,9 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   setupConnections() {
-    this.setupAudioStream();
+    this.setupVideoStream();
 
     this.socket.on('user-connected', async (userId: string) => {
-      alert(`user-connected! ${userId}`);
       const conn = this.peer.connect(userId);
 
       setTimeout(() => {
@@ -139,30 +149,48 @@ class Main extends Component<{ u?: string }, MainState> {
         if (data.message === 'updateMinimi') {
           this.updateMinimi(data);
         } else if (data.message === 'hello') {
-          alert(`new user?: ${con.peer}`);
           const conn = this.peer.connect(con.peer);
           setTimeout(() => {
             conn.send({ message: 'hello2', from: this.myId });
             this.addConnections(con.peer, conn);
           }, delayMS);
+        } else if (data.message === 'callMe') {
+          alert(toastMessage.speakConnected);
+          this.callTo(con.peer);
         }
       });
     });
 
     this.socket.on('user-disconnected', (userId) => {
-      alert(`user-disconnected: , ${userId}`);
+      alert(toastMessage.userLeft);
       const { peerCalls } = this.state;
-      peerCalls[userId]?.close();
+      peerCalls[userId]?.mediaConn.close();
       delete peerCalls[userId];
       this.setState({
         peerCalls,
         users: this.state.users.filter((user) => user.id !== userId),
       });
       this.removeConnections(userId);
+      this.removeVideoStream(userId);
     });
 
     document.body.addEventListener('keydown', this.onKeyDown);
   }
+
+  callTo = (peerId: string) => {
+    navigator.mediaDevices.getUserMedia(MEDIA_OPTIONS).then((myVoice) => {
+      const call = this.peer.call(peerId, myVoice);
+      const { peerCalls } = this.state;
+      const nextPeers = {
+        ...peerCalls,
+        [peerId]: {
+          mediaConn: call,
+          isSendingVoice: false,
+        },
+      };
+      this.setState({ peerCalls: nextPeers });
+    });
+  };
 
   updateMinimi = (minimiMessage: MinimiUpdateMessage) => {
     const { y, x, from, minimi } = minimiMessage;
@@ -187,55 +215,77 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setState({ connections });
   };
 
-  addAudioStream = (video: HTMLAudioElement, stream: MediaStream) => {
-    // eslint-disable-next-line no-param-reassign
-    video.srcObject = stream;
-    video.addEventListener('loadedmetadata', () => {
-      video.play();
-    });
+  addVideoStream = (stream: MediaStream, id: string) => {
+    const { streams } = this.state;
+    const nextStreams = [
+      ...streams.filter((streamInfo) => streamInfo.id !== id),
+      {
+        stream,
+        id,
+      },
+    ];
+    this.setState({ streams: nextStreams });
   };
 
-  setupAudioStream = () => {
+  removeVideoStream = (id: string) => {
+    const { streams } = this.state;
+    const nextStreams = streams.filter((streamInfo) => streamInfo.id !== id);
+    this.setState({ streams: nextStreams });
+  };
+
+  setupVideoStream = () => {
     /* When Someone tries to call me */
     this.peer.on('call', (call) => {
       navigator.mediaDevices
-        .getUserMedia({ audio: true })
+        .getUserMedia(MEDIA_OPTIONS)
         .then((myStream) => {
           this.myStream = myStream;
           call.answer(myStream);
-          const newAudio = document.createElement('audio');
-          this.audioGridRef.current.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
+            this.addVideoStream(otherUserStream, call.peer);
           });
         })
         .catch((_) => {
-          alert(pleaseAlloweRecord, 3000);
+          const { peerCalls } = this.state;
+          const nextPeers = {
+            ...peerCalls,
+            [call.peer]: {
+              mediaConn: call,
+              isSendingVoice: false,
+            },
+          };
+          this.setState({ peerCalls: nextPeers });
+          call.answer(undefined);
+          call.on('stream', (otherUserStream) => {
+            this.addVideoStream(otherUserStream, call.peer);
+          });
+          alert(toastMessage.pleaseTurnOnMic, 3000);
         });
     });
     this.socket.on('user-connected', async (userId) => {
       navigator.mediaDevices
-        .getUserMedia({ audio: true })
+        .getUserMedia(MEDIA_OPTIONS)
         .then((myStream) => {
           this.myStream = myStream;
           const call = this.peer.call(userId, myStream);
-          const newAudio = document.createElement('audio');
-          this.audioGridRef.current?.appendChild(newAudio);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(newAudio, otherUserStream);
-          });
-          call.on('close', () => {
-            newAudio.remove();
+            this.addVideoStream(otherUserStream, call.peer);
           });
           const { peerCalls } = this.state;
           const nextPeers = {
             ...peerCalls,
-            [userId]: call,
+            [call.peer]: {
+              mediaConn: call,
+              isSendingVoice: true,
+            },
           };
           this.setState({ peerCalls: nextPeers });
         })
         .catch((_) => {
-          alert(pleaseAlloweRecord, 3000);
+          setTimeout(() => {
+            const { connections } = this.state;
+            connections[userId]?.send({ message: 'callMe', from: this.myId });
+          }, delayMS);
         });
     });
   };
@@ -255,7 +305,6 @@ class Main extends Component<{ u?: string }, MainState> {
     });
   };
 
-  // {category : string
   boundChecker = () => {
     const threshold = {
       y: 14,
@@ -325,10 +374,24 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   render() {
-    const { minimi, y, x, users, entered } = this.state;
+    const { minimi, y, x, users, entered, streams, connections } = this.state;
     return (
       <MainContainer>
-        <div className="audio-grid" ref={this.audioGridRef} />
+        <VideoGrid>
+          {streams.map((streamInfo) => (
+            <RTCVideo
+              key={streamInfo.id}
+              id={streamInfo.id}
+              stream={streamInfo.stream}
+            />
+          ))}
+        </VideoGrid>
+        <MyVideoWrapper>
+          <div>{Object.keys(connections).length + 1} 명 접속중</div>
+          {this.myStream && (
+            <RTCVideo id={this.myId} stream={this.myStream} me />
+          )}
+        </MyVideoWrapper>
         <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
