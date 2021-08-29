@@ -3,7 +3,6 @@ import { useHistory } from '~/core/Router';
 import Button from '~/components/common/Button';
 import Copyright from '~/components/base/Copyright';
 import Space from '~/components/common/Space';
-import { oauthUrl } from '~/lib/api/oauth';
 import * as userAPI from '~/lib/api/users';
 import UserContext from '~/lib/contexts/userContext';
 import { alert } from '~/utils/modal';

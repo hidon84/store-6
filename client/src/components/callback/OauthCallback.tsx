@@ -67,7 +67,7 @@ const OauthCallback: FC<Props> = ({
         })
         .catch((e: ErrorResponse) => {
           alert(e.message);
-          userDispatch(setError({ ...userState.user, error: e}));
+          userDispatch(setError({ ...userState.user, error: e }));
           push('/login');
         });
       return;
@@ -92,7 +92,7 @@ const OauthCallback: FC<Props> = ({
       });
   }, []);
 
-  return <EmptyContents/>;
+  return <EmptyContents />;
 };
 
 export default OauthCallback;
