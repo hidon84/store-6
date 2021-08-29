@@ -16,25 +16,12 @@ import {
   doodleSkeletonSVG,
   doodleStickmanSVG,
   doodleAssKickSVG,
-  doodleRobotSVG,
   verticalLineSVG,
   socialFacebookSVG,
   socialGoogleSVG,
 } from '~/assets';
 
-import {
-  StyledLoginPage,
-  LeftDoodles,
-  RightDoodles,
-  LoginForm,
-  LoginFormHeader,
-  ButtonWrapper,
-  SocialButtons,
-  RegisterSection,
-  SocialButton,
-  RegisterLink,
-  LoginDemo,
-} from './index.style';
+import S from './index.style';
 import { useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
 import { oauthUrl } from '~/lib/api/oauth';
@@ -42,6 +29,7 @@ import UserContext from '~/lib/contexts/userContext';
 import { setLogin } from '~/stores/userModule';
 
 import * as usersApi from '~/lib/api/users';
+import HeaderTitle from '~/components/base/HeaderTitle';
 
 const MESSAGE_LOGIN_FAIL = '로그인 실패';
 
@@ -102,21 +90,17 @@ const LoginPage: FC = () => {
   }, []);
 
   return (
-    <StyledLoginPage>
-      <LeftDoodles>
+    <S.StyledLoginPage>
+      <S.LeftDoodles>
         <div>
           <img src={doodleTeasingSVG} alt="teasing" />
         </div>
         <div style={{ marginLeft: '96px' }}>
           <img src={doodleSkeletonSVG} alt="skeleton" />
         </div>
-      </LeftDoodles>
-      <LoginForm onSubmit={onSubmit}>
-        <LoginFormHeader>
-          <img src={doodleRobotSVG} alt="robot" />
-          <h1 className="text-baemin100">배민</h1>
-          <h1>문방구</h1>
-        </LoginFormHeader>
+      </S.LeftDoodles>
+      <S.LoginForm onSubmit={onSubmit}>
+        <HeaderTitle />
         <Input
           autoComplete="off"
           type="text"
@@ -133,52 +117,52 @@ const LoginPage: FC = () => {
           onChange={handlePW}
         />
         <InputHelp> </InputHelp>
-        <ButtonWrapper>
+        <S.ButtonWrapper>
           <Button size="lg">로그인</Button>
-        </ButtonWrapper>
-        <RegisterSection>
-          <LoginDemo
+        </S.ButtonWrapper>
+        <S.RegisterSection>
+          <S.LoginDemo
             onClick={() => {
               alert('아직 시연용계정 안만들었습니다');
             }}
           >
             시연용 계정 로그인
-          </LoginDemo>
-          <RegisterLink
+          </S.LoginDemo>
+          <S.RegisterLink
             onClick={() => {
               push('/signup/select');
             }}
           >
             회원가입
-          </RegisterLink>
-        </RegisterSection>
+          </S.RegisterLink>
+        </S.RegisterSection>
         <Divider />
-        <SocialButtons>
-          <SocialButton
+        <S.SocialButtons>
+          <S.SocialButton
             src={socialFacebookSVG}
             alt="facebook"
             onClick={onFacebookLogin}
           />
           <img src={verticalLineSVG} alt="vertical" />
-          <SocialButton
+          <S.SocialButton
             src={socialGoogleSVG}
             alt="google"
             onClick={onGoogleLogin}
           />
-        </SocialButtons>
+        </S.SocialButtons>
         <Copyright>
           COPYRIGHT © 2021 우아한형제들 ALL RIGHTS RESERVED.
         </Copyright>
-      </LoginForm>
-      <RightDoodles>
+      </S.LoginForm>
+      <S.RightDoodles>
         <img src={doodleStickmanSVG} alt="stickman" />
         <img
           src={doodleAssKickSVG}
           alt="assKick"
           style={{ marginTop: '16px' }}
         />
-      </RightDoodles>
-    </StyledLoginPage>
+      </S.RightDoodles>
+    </S.StyledLoginPage>
   );
 };
 

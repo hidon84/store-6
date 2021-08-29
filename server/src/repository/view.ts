@@ -1,4 +1,4 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository, getManager } from 'typeorm';
 import ViewEntity from '@/entity/view';
 import UserEntity from '@/entity/user';
 import ProductEntity from '@/entity/product';
@@ -12,6 +12,21 @@ class ViewRepository extends Repository<ViewEntity> {
 
     const savedView = await this.save(view);
     return savedView;
+  }
+
+  async findTopViewedCategoryByUser(userIdx: number) {
+    const views = getManager().query(`
+      select c.idx, count(c.idx) as cnt
+      from view v
+      left join product p on p.idx = v.product_idx
+      left join category c on category_idx = c.idx
+      where user_idx=${userIdx}
+      group by c.idx
+      order by cnt desc
+      limit 1;
+    `);
+
+    return views;
   }
 
   async findByIdxOfProductAndUser(productIdx: number, userIdx: number) {

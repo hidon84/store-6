@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { MutableRefObject, useEffect, useState } from 'react';
+import debounce from '~/utils/debounce';
 
 interface IntersectionOption extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
@@ -16,10 +17,15 @@ interface IntersectionOption extends IntersectionObserverInit {
  */
 export const useIntersection = (
   ref: MutableRefObject<HTMLElement>,
-  { threshold = 0 }: IntersectionOption,
+  { threshold = 1 }: IntersectionOption,
 ): IntersectionObserverEntry => {
+  const DELAY_TIME = 500;
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
-  const updateEntry = ([entry]: IntersectionObserverEntry[]) => setEntry(entry);
+
+  const updateEntry = debounce(
+    ([entry]: IntersectionObserverEntry[]) => setEntry(entry),
+    DELAY_TIME,
+  );
 
   useEffect(() => {
     const node = ref.current;

@@ -10,6 +10,7 @@ export const ProductName = styled.div`
   margin-bottom: 32px;
   font-size: 35px;
   line-height: 44px;
+  font-family: 'BM Hanna' !important;
 `;
 
 export const PriceParagraph = styled.p`

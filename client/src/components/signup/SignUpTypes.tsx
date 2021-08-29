@@ -6,9 +6,9 @@ import {
   signUpWithOwnSVG,
 } from '~/assets';
 import Space from '~/components/common/Space';
-import HeaderTitle from '~/components/signup/HeaderTitle';
 import { useHistory } from '~/core/Router';
 import { oauthUrl } from '~/lib/api/oauth';
+import HeaderTitle from '../base/HeaderTitle';
 
 const SignUpTypesWrapper = styled.div`
   display: flex;
