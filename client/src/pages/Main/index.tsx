@@ -377,7 +377,7 @@ class Main extends Component<{ u?: string }, MainState> {
   };
 
   render() {
-    const { minimi, y, x, users, entered, streams } = this.state;
+    const { minimi, y, x, users, entered, streams, connections } = this.state;
     return (
       <MainContainer>
         <VideoGrid>
@@ -390,6 +390,7 @@ class Main extends Component<{ u?: string }, MainState> {
           ))}
         </VideoGrid>
         <MyVideoWrapper>
+          <div>{Object.keys(connections).length} 명 접속중</div>
           {this.myStream && (
             <RTCVideo id={this.myId} stream={this.myStream} muted />
           )}
