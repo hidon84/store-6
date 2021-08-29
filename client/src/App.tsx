@@ -43,14 +43,20 @@ const App = () => {
     });
   }, [location]);
 
-  const onEnterTransition = useCallback(() => setShowLoading(true), [setShowLoading]);
-  const onExitedTransition = useCallback(() => setShowLoading(false), [setShowLoading]);
+  const onEnterTransition = useCallback(
+    () => setShowLoading(true),
+    [setShowLoading],
+  );
+  const onExitedTransition = useCallback(
+    () => setShowLoading(false),
+    [setShowLoading],
+  );
 
   return (
     <>
       <Navigation />
       <TransitionGroup className="transition-group" component={null}>
-        <CSSTransition 
+        <CSSTransition
           key={location.pathname}
           classNames="loading"
           timeout={loadingAnimationDuration}
@@ -64,7 +70,10 @@ const App = () => {
           </Main>
         </CSSTransition>
       </TransitionGroup>
-      <LoadingText show={showLoading} fadeOutDuration={loadingAnimationDuration / 2}/>
+      <LoadingText
+        show={showLoading}
+        fadeOutDuration={loadingAnimationDuration / 2}
+      />
       <AlertModal />
       <ConfirmModal />
     </>

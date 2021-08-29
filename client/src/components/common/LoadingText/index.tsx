@@ -9,17 +9,23 @@ interface IProps {
   fadeOutDuration?: number;
 }
 
-const phrasesWithIndex = phrases.map((v, i) => ({i, v}));
-const initialPhrasesCount = '0'.repeat(phrases.length).split('').map((v) => Number(v));
+const phrasesWithIndex = phrases.map((v, i) => ({ i, v }));
+const initialPhrasesCount = '0'
+  .repeat(phrases.length)
+  .split('')
+  .map((v) => Number(v));
 
 const LoadingText: FC<IProps> = ({ show, fadeOutDuration = 400 }) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const [loadingText, setLoadingText] = useState([]);
   const [phrasesCount, setPhrasesCount] = useState(initialPhrasesCount);
-  
+
   const minCount = useMemo(() => Math.min(...phrasesCount), [phrasesCount]);
-  const minPhrases = useMemo(() => phrasesWithIndex.filter((p) => phrasesCount[p.i] <= minCount), [minCount, phrasesCount]);
-  
+  const minPhrases = useMemo(
+    () => phrasesWithIndex.filter((p) => phrasesCount[p.i] <= minCount),
+    [minCount, phrasesCount],
+  );
+
   const setRandomLoadingText = () => {
     const nextPhrasesCount = [...phrasesCount];
 
