@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import queryString from 'query-string';
 import { useLocation, useHistory } from '~/core/Router';
 import { alert } from '~/utils/modal';
@@ -12,9 +13,19 @@ import {
 } from '~/lib/api/types';
 import oauthStateDecoder from '~/utils/oauthStateDecoder';
 import UserContext from '~/lib/contexts/userContext';
-import { setUserInfo } from '~/stores/userModule';
+import { setError, setLogin, setUserInfo } from '~/stores/userModule';
+import * as usersAPI from '~/lib/api/users';
 
 const invalidCallbackUrl = 'Invalid Oauth Callback URL';
+
+const EmptyContents = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+`;
 
 interface Props {
   oauthLoginCallback: (
@@ -49,12 +60,14 @@ const OauthCallback: FC<Props> = ({
 
     if (parsedState.is_login_request === 'true') {
       oauthLoginCallback(requestQuery)
-        .then(() => {
-          // @TODO use replace instead of push
-          push('/');
+        .then(() => usersAPI.getMe())
+        .then((result) => {
+          userDispatch(setLogin({ ...userState.user, ...result.data }));
+          push('/products');
         })
         .catch((e: ErrorResponse) => {
           alert(e.message);
+          userDispatch(setError({ ...userState.user, error: e}));
           push('/login');
         });
       return;
@@ -79,7 +92,7 @@ const OauthCallback: FC<Props> = ({
       });
   }, []);
 
-  return <></>;
+  return <EmptyContents/>;
 };
 
 export default OauthCallback;
