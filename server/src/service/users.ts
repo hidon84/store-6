@@ -43,6 +43,7 @@ class UsersService {
     type,
     email,
     phone,
+    profile,
     privacyTermsAndConditions,
     serviceTermsAndConditions,
   }: CreatableUserInfo) {
@@ -82,6 +83,7 @@ class UsersService {
       user.email = email;
       user.phone = phone;
       user.login = login;
+      user.profile = user.profile ?? profile;
 
       const { updatedUser } =
         await this.userRepository.transactionSaveWithLogin(user, login);
