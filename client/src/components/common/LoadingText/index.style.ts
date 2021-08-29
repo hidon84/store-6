@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LoadingTextWrapper = styled.div<{ show?: boolean }>`
+const LoadingTextWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -9,8 +9,9 @@ const LoadingTextWrapper = styled.div<{ show?: boolean }>`
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
   background-color: #fff;
+  justify-content: center;
+  z-index: 2;
 `;
 
 const Text = styled.span`
@@ -23,10 +24,8 @@ const Text = styled.span`
   line-height: 40px;
 `;
 
-const TextArea = styled.div<{ show: boolean }>`
+const TextArea = styled.div`
   text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
-  opacity: ${({ show }) => (show ? 1 : 0)};
-  transition: opacity 0.5s;
 `;
 
 export default { LoadingTextWrapper, Text, TextArea };

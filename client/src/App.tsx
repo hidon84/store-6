@@ -1,7 +1,7 @@
 import '~/styles/app.css';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { TransitionGroup, Transition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useHistory } from '~/core/Router';
 import titles from './lib/constants/titles';
 
@@ -14,9 +14,13 @@ import Routes from './Routes';
 
 const Main = styled.main<{ nonScroll: boolean }>`
   position: relative;
-  height: calc(100% - 104px);
+  height: 100%;
   width: 1156px;
   ${({ nonScroll }) => nonScroll && `overflow: hidden;`}
+
+  &.loading-exit {
+    display: none;
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -31,6 +35,7 @@ const loadingAnimationDuration = 400;
 
 const App = () => {
   const { location } = useHistory();
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     Object.entries(titles).forEach(([key, val]) => {
@@ -38,24 +43,27 @@ const App = () => {
     });
   }, [location]);
 
+  const onEnterTransition = useCallback(() => setShowLoading(true), [setShowLoading]);
+  const onExitedTransition = useCallback(() => setShowLoading(false), [setShowLoading]);
+
   return (
     <>
       <Navigation />
       <TransitionGroup className="transition-group" component={null}>
-        <Transition key={location.pathname} timeout={loadingAnimationDuration}>
-          {(state: string) => {
-            return (
-              <>
-                <Main nonScroll={state !== 'entered'}>
-                  <StyledWrapper>
-                    <Routes />
-                  </StyledWrapper>
-                </Main>
-                <LoadingText show={state !== 'entered'} />
-              </>
-            );
-          }}
-        </Transition>
+        <CSSTransition 
+          key={location.pathname}
+          classNames="loading"
+          timeout={loadingAnimationDuration}
+          onEnter={onEnterTransition}
+          onExited={onExitedTransition}
+        >
+          <Main nonScroll={showLoading}>
+            <StyledWrapper>
+              <Routes />
+            </StyledWrapper>
+            <LoadingText show={showLoading} fadeOutDuration={loadingAnimationDuration}/>
+          </Main>
+        </CSSTransition>
       </TransitionGroup>
 
       <AlertModal />

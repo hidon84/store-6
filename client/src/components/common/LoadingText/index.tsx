@@ -6,9 +6,10 @@ import { PHRASES } from './phrases';
 
 interface IProps {
   show: boolean;
+  fadeOutDuration?: number;
 }
 
-const LoadingText: FC<IProps> = ({ show }) => {
+const LoadingText: FC<IProps> = ({ show, fadeOutDuration = 400 }) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const [loadingText, setLoadingText] = useState([]);
 
@@ -19,12 +20,12 @@ const LoadingText: FC<IProps> = ({ show }) => {
   useEffect(() => {
     if (show && wrapperRef.current) {
       elementFadeIn(wrapperRef.current, 0);
-    } else {
-      elementFadeOut(wrapperRef.current, 400).then(() => {
+    } else if (wrapperRef.current) {
+      elementFadeOut(wrapperRef.current, fadeOutDuration).then(() => {
         setRandomLoadingText();
       });
     }
-  }, [show]);
+  }, [show, wrapperRef.current]);
 
   const loadingTexts = useMemo(() => {
     return loadingText.map((ph) => <S.Text key={ph}>{ph}</S.Text>);
@@ -32,7 +33,7 @@ const LoadingText: FC<IProps> = ({ show }) => {
 
   return (
     <S.LoadingTextWrapper ref={wrapperRef}>
-      <S.TextArea show={show}>{loadingTexts}</S.TextArea>
+      <S.TextArea>{loadingTexts}</S.TextArea>
     </S.LoadingTextWrapper>
   );
 };
