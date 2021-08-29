@@ -89,6 +89,7 @@ const SignUpForm: FC<{
         password: userAccount.pw,
         phone,
         email,
+        profile: social ? userState.user?.profile : null,
         privacyTermsAndConditions: policyCheck.privacyTerms,
         serviceTermsAndConditions: policyCheck.serviceTerms,
         type: social ?? 'OWN',
@@ -98,21 +99,8 @@ const SignUpForm: FC<{
         alert(message.successToSignUp);
       }
 
-      if (social === 'FACEBOOK') {
-        setTimeout(() => {
-          window.location.href = oauthUrl.facebook.login;
-        }, 500);
-        return;
-      }
-      if (social === 'GOOGLE') {
-        setTimeout(() => {
-          window.location.href = oauthUrl.google.login;
-        }, 500);
-        return;
-      }
-
       push('/login', {
-        id: social ? userState.user.id : userAccount.id,
+        id: social ? '' : userAccount.id,
         from: '/signup',
       });
     } catch (e) {
