@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback, MouseEvent, memo } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import {
   BigBaedalSVG,
@@ -36,6 +36,7 @@ const rotate = keyframes`
 
 const ButtonWrapper = styled.button<{ category: string; entered?: boolean }>`
   position: absolute;
+  cursor: pointer;
   left: ${({ category }) => BUTTON_INFOS[category][0]};
   top: ${({ category }) => BUTTON_INFOS[category][1]};
 
@@ -62,11 +63,26 @@ export type TypeCategoryIcon =
 const Button: FC<{
   category: TypeCategoryIcon;
   entered?: boolean;
-}> = ({ category, entered }) => (
-  <ButtonWrapper category={category} type="button" entered={entered}>
-    <img src={BUTTON_INFOS[category][2]} alt="icon" />
-  </ButtonWrapper>
-);
+  onClick?: (y: number, x: number) => void;
+}> = ({ category, entered, onClick }) => {
+  const cb = useCallback((_: MouseEvent<HTMLElement>) => {
+    const top = BUTTON_INFOS[category][1];
+    const left = BUTTON_INFOS[category][0];
+    const myY = parseInt(top.replace('%', ''), 10);
+    const myX = parseInt(left.replace('%', ''), 10);
+    onClick?.(myY, myX);
+  }, []);
+  return (
+    <ButtonWrapper
+      onClick={cb}
+      category={category}
+      type="button"
+      entered={entered}
+    >
+      <img src={BUTTON_INFOS[category][2]} alt="icon" />
+    </ButtonWrapper>
+  );
+};
 
 const Stain: FC = () => (
   <button
@@ -119,4 +135,12 @@ const DoodleAnnouncement2: FC = () => (
   />
 );
 
-export { Stain, Logo, Button, DoodleAnnouncement1, DoodleAnnouncement2 };
+const CategoryButton = memo(Button);
+
+export {
+  Stain,
+  Logo,
+  CategoryButton,
+  DoodleAnnouncement1,
+  DoodleAnnouncement2,
+};
