@@ -83,7 +83,7 @@ const ProductDetail: FC = () => {
     if (!userState.error && !userState.isLoggedIn) return;
 
     if (userState.user) {
-      productsApi.postProductToView(idx);
+      productsApi.postProductToView(idx).catch(() => {});
     }
 
     productsApi

@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-syntax */
+/* eslint-disable consistent-return */
 
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
@@ -86,6 +87,7 @@ class ProductService {
         productIdx,
         userIdx,
       );
+
       if (existingView) {
         const { idx, updatedAt, createdAt } = existingView;
         return { idx, updatedAt, createdAt };
@@ -99,7 +101,9 @@ class ProductService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(productViewError.unable);
+      if (e.errno !== 1062) {
+        throw new ErrorResponse(productViewError.unable);
+      }
     }
   }
 

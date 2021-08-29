@@ -80,11 +80,16 @@ export const handleAddView = async (
       throw new ErrorResponse(commonError.invalidPathParams);
     }
 
-    const { idx, createdAt, updatedAt } = await productServiceInstance.addView(
+    const data = await productServiceInstance.addView(
       productIdx,
       req.currentUser.idx,
     );
-    res.json({ idx, createdAt, updatedAt });
+
+    res.json({
+      idx: data?.idx,
+      createdAt: data?.createdAt,
+      updatedAt: data?.updatedAt,
+    });
   } catch (e) {
     next(e);
   }
