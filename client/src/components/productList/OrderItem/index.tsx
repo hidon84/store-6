@@ -1,10 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FetchContext, FilterContext } from '~/pages/ProductList';
 import { UnderlineBaeminColorSVG } from '~/assets';
-import { setOrder } from '~/stores/productListModule';
-import { TitleContainer, Title } from './index.style';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
+
+import { setOrder } from '~/stores/productListModule';
 import { startFetch } from '~/stores/fetchModule';
+import scrollToTop from '~/utils/scrollToTop';
+
+import FilterContext from '~/lib/contexts/filterContext';
+import FetchContext from '~/lib/contexts/fetchContext';
+
+import { TitleContainer, Title } from './index.style';
 
 interface Props {
   content: string;
@@ -20,6 +25,7 @@ const OrderItem: React.FC<Props> = ({ order, content }) => {
   const handleImgClick = () => {
     dispatch(setOrder(order as ProductsGetRequestQuery['order']));
     fetchDispatch(startFetch());
+    scrollToTop({ behavior: 'auto' });
   };
 
   useEffect(() => setIsSelected(order === currentState.state.order));

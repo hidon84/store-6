@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { FC, useContext } from 'react';
-
 import {
+  CategoryAllSVG,
   Hat2SVG,
   SmallBaedalSVG,
   SmallBookSVG,
@@ -12,7 +12,8 @@ import {
   SmallPencilSVG,
   SmallTreeSVG,
 } from '~/assets';
-import { FilterContext } from '~/pages/ProductList';
+
+import FilterContext from '~/lib/contexts/filterContext';
 
 import {
   IdentifierWrapper,
@@ -26,12 +27,10 @@ const CategoryIdentifier: FC = () => {
 
   return (
     <IdentifierWrapper>
-      {categoryIndex !== 0 && (
-        <PhotoIdentification
-          src={CategoryPhoto[categoryIndex]}
-          isImage={![0, 5, 7].includes(categoryIndex)}
-        />
-      )}
+      <PhotoIdentification
+        src={CategoryPhoto[categoryIndex]}
+        isImage={![5, 7].includes(categoryIndex)}
+      />
       <NameIdentification>{CategoryName[categoryIndex]}</NameIdentification>
     </IdentifierWrapper>
   );
@@ -40,7 +39,7 @@ const CategoryIdentifier: FC = () => {
 export default CategoryIdentifier;
 
 const CategoryPhoto = {
-  0: null,
+  0: CategoryAllSVG,
   1: SmallBookSVG,
   2: SmallPencilSVG,
   3: SmallHouseSVG,

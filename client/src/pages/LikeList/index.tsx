@@ -12,6 +12,7 @@ import * as likesApi from '~/lib/api/likes';
 import { LikesGetResponseBody } from '~/lib/api/types/likes';
 import { ErrorResponse } from '~/lib/api/types';
 import UserContext from '~/lib/contexts/userContext';
+
 import { alert } from '~/utils/modal';
 
 import { ProductLikeItemWrapper, NoResourceWrapper } from './index.style';
@@ -23,15 +24,17 @@ const LikeListPage: FC = () => {
   const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
 
   useEffect(() => {
-    if (!userState.isLoggedIn) {
+    if (userState.error) {
       history.push('/', { from: '/like', error: 'accessWithoutToken' });
       return;
     }
 
-    likesApi
-      .getLikeItems()
-      .then((result) => setItemList(result.data))
-      .catch((e: ErrorResponse) => alert(e.message));
+    if (userState.isLoggedIn) {
+      likesApi
+        .getLikeItems()
+        .then((result) => setItemList(result.data))
+        .catch((e: ErrorResponse) => alert(e.message));
+    }
   }, [userState]);
 
   const onClickItem = useCallback(

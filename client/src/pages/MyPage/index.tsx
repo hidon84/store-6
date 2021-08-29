@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import Divider from '~/components/common/Divider';
 import UserInfoInput from '~/components/my/UserInfoInput';
-import PhoneInput from '~/components/my/PhoneInput';
 import EmailInput from '~/components/my/EmailInput';
 import SubPageWrapper from '~/components/subpage/SubPageWrapper';
 import SubPageHeader from '~/components/subpage/SubPageHeader';
@@ -24,6 +23,7 @@ import {
   MyPageContent,
 } from './index.style';
 import { useHistory } from '~/core/Router';
+import MyPagePhoneInput from '~/components/my/MyPagePhoneInput';
 
 const message = {
   emailUpdateSuccess: '이메일이 수정되었습니다.',
@@ -35,15 +35,13 @@ const message = {
   phoneInvalid: '올바른 연락처 형식이 아닙니다.',
   phoneUpdateFail: '연락처 수정에 실패했습니다.',
   photoUpdateFail: '사진 수정에 실패했습니다',
+  photoUpdateLarge: '1mb 이하의 사진만 업로드 가능합니다.',
 };
 
 const MyPage: React.FC = () => {
-  const [profile, setProfile] = useState<string>(
-    'https://user-images.githubusercontent.com/47776356/129712816-13701b24-57cc-451e-93c6-ca7afe190af1.jpeg',
-  );
-
   const { push } = useHistory();
   const { user: userState, userDispatch } = useContext(UserContext);
+  const mb = 1;
 
   const handleSubmitEmail = (value: string) => {
     return putMe({ email: value })
@@ -66,7 +64,7 @@ const MyPage: React.FC = () => {
   const handleSubmitProfile = (file: File, fileToString: string) => {
     return putMe({ profile: file })
       .then(() => {
-        setProfile(fileToString);
+        userDispatch(setUserInfo({ ...userState.user, profile: fileToString }));
         alert(message.photoUpdateSuccess);
       })
       .catch(() => alert(message.photoUpdateFail));
@@ -85,7 +83,11 @@ const MyPage: React.FC = () => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = (event) => {
-      handleSubmitProfile(file, event.target.result.toString());
+      if (file.size / (1024 * 1024) > mb) {
+        alert(message.photoUpdateLarge);
+      } else {
+        handleSubmitProfile(file, event.target.result.toString());
+      }
     };
   };
 
@@ -97,12 +99,9 @@ const MyPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!userState.isLoggedIn) {
+    if (userState.error) {
       push('/', { from: '/me', error: 'accessWithoutToken' });
-      return;
     }
-
-    if (userState.user?.profile) setProfile(userState.user.profile);
   }, [userState]);
 
   return (
@@ -115,12 +114,16 @@ const MyPage: React.FC = () => {
           <RowTitle>사진</RowTitle>
           <PhotoWrapper>
             <div>
-              <ImagePreview image={profile} size="60px" />
-              <ImageInput onChange={handleImageInput} id="img" type="file" />
+              <ImagePreview image={userState.user?.profile} size="60px" />
+              <ImageInput
+                onChange={handleImageInput}
+                accept=".jpg, .png, .jpeg"
+                id="img"
+                type="file"
+              />
             </div>
             <ImageDesc>
               <p>사진을 클릭하면 등록된 사진을 수정할 수 있습니다.</p>
-              <p>등록된 사진은 상품 리뷰, 댓글 등에 사용됩니다.</p>
             </ImageDesc>
           </PhotoWrapper>
           <div />
@@ -146,7 +149,7 @@ const MyPage: React.FC = () => {
           value={userState.user?.phone}
           placeholder={userState.user?.phone?.split('-').join(' ')}
           onSubmit={handleSubmitPhone}
-          inputComponent={PhoneInput}
+          inputComponent={MyPagePhoneInput}
           validator={phoneValidator}
         />
       </MyPageContent>

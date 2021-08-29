@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-syntax */
+/* eslint-disable consistent-return */
 
 import { Service } from 'typedi';
 import { InjectRepository } from 'typeorm-typedi-extensions';
@@ -86,6 +87,7 @@ class ProductService {
         productIdx,
         userIdx,
       );
+
       if (existingView) {
         const { idx, updatedAt, createdAt } = existingView;
         return { idx, updatedAt, createdAt };
@@ -99,7 +101,9 @@ class ProductService {
       if (e?.isOperational) {
         throw e;
       }
-      throw new ErrorResponse(productViewError.unable);
+      if (e.errno !== 1062) {
+        throw new ErrorResponse(productViewError.unable);
+      }
     }
   }
 
@@ -115,8 +119,24 @@ class ProductService {
         productIdx,
       );
 
+      let categoryIdx;
+
+      if (includeCategory) {
+        categoryIdx = includeCategory.category.idx;
+      }
+
+      if (loginIdx) {
+        const views = await this.viewRepository.findTopViewedCategoryByUser(
+          loginIdx,
+        );
+
+        if (views.length) {
+          categoryIdx = views[0].idx;
+        }
+      }
+
       const recommend = await this.productRepository.findTopRankByCategory(
-        includeCategory!.category.idx,
+        categoryIdx,
         product.idx,
       );
 
@@ -151,6 +171,7 @@ class ProductService {
         userIdx,
         productIdx,
       );
+
       if (like) {
         result.isLike = true;
       }

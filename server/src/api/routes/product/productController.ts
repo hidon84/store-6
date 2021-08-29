@@ -39,10 +39,12 @@ export const handleGetProductDetail = async (
     }
 
     const token = getTokenFromHeader(req);
+
     if (token) {
       let productDetailInfoResult;
       try {
         const decodedToken = jwtHelper.decodeAccessToken(token);
+
         productDetailInfoResult = await productServiceInstance.getProductDetail(
           productIdx,
           decodedToken.idx,
@@ -78,11 +80,16 @@ export const handleAddView = async (
       throw new ErrorResponse(commonError.invalidPathParams);
     }
 
-    const { idx, createdAt, updatedAt } = await productServiceInstance.addView(
+    const data = await productServiceInstance.addView(
       productIdx,
       req.currentUser.idx,
     );
-    res.json({ idx, createdAt, updatedAt });
+
+    res.json({
+      idx: data?.idx,
+      createdAt: data?.createdAt,
+      updatedAt: data?.updatedAt,
+    });
   } catch (e) {
     next(e);
   }

@@ -1,10 +1,9 @@
-/* eslint-disable no-useless-escape */
 const REG_ID = /[a-zA-Z0-9]{4,}/;
 const REG_PW =
-  /^(?=.*[A-Z])(?=.*[a-z])([^\s]){10,}|(?=.*[A-Z])(?=.*[0-9])([^\s]){10,}|(?=.*[A-Z])(?=.*[<>{}|;:.,~!?@#$%^=&*\”\\/])([^\s]){10,}|(?=.*[a-z])(?=.*[0-9])([^\s]){10,}|(?=.*[a-z])(?=.*[<>{}|;:.,~!?@#$%^=&*\”\\/])([^\s]){10,}|(?=.*[0-9])(?=.*[<>{}|;:.,~!?@#$%^=&*\”\\/])([^\s]){10,}$/;
+  /^(?=.*[A-Z])(?=.*[a-z])([^\s]){10,}|(?=.*[A-Z])(?=.*[0-9])([^\s]){10,}|(?=.*[A-Z])(?=.*[<>{}|;:.,~!?@#$%^=&*"\\/])([^\s]){10,}|(?=.*[a-z])(?=.*[0-9])([^\s]){10,}|(?=.*[a-z])(?=.*[<>{}|;:.,~!?@#$%^=&*"\\/])([^\s]){10,}|(?=.*[0-9])(?=.*[<>{}|;:.,~!?@#$%^=&*"\\/])([^\s]){10,}$/;
 const REG_EMAIL =
   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-const REG_IMAGE = /(jpeg|jpg|png|JPG|JPEG|PNG)$/;
+const REG_IMAGE = /(jpeg|jpg|png)$/i;
 const REG_PH0 = /^010$/;
 const REG_PH1 = /^\d{4}$/;
 const REG_PH2 = /^\d{4}$/;
@@ -19,42 +18,55 @@ const WARNING_EMAIL = '이상한 이메일 적지 말거라.';
 const WARNING_PHONE = '이상한 번호 적지 말거라.';
 
 const idValidator = (idIn: string) => {
-  if (idIn === '') return ' ';
+  if (!idIn) return ' ';
   if (REG_ID.test(idIn)) return '';
 
   return WARNING_ID;
 };
 
 const pwValidator = (pwIn: string) => {
-  if (pwIn === '') return ' ';
+  if (!pwIn) return ' ';
   if (REG_PW.test(pwIn)) return '';
 
   return WARNING_PW;
 };
 
-const emailValidator = (mailIn: string) => {
-  if (mailIn === '') return ' ';
-  if (REG_EMAIL.test(mailIn)) return '';
+const rePwValidator = (rePwIn: string, pwIn: string) => {
+  if (!rePwIn) return ' ';
+  if (rePwIn === pwIn) return '';
+  return WARNING_PWRE;
+};
+
+const emailValidator = (emailIn: string) => {
+  if (!emailIn) return ' ';
+  if (REG_EMAIL.test(emailIn)) return '';
 
   return WARNING_EMAIL;
 };
 
+const phoneValidator = (phoneIn: string) => {
+  if (!phoneIn.replace(/-/g, '')) return ' ';
+  if (REG_PHONE.test(phoneIn)) return '';
+
+  return WARNING_PHONE;
+};
+
 const ph0Validator = (ph0In: string) => {
-  if (ph0In === '') return ' ';
+  if (!ph0In) return ' ';
   if (REG_PH0.test(ph0In)) return '';
 
   return WARNING_PHONE;
 };
 
 const ph1Validator = (ph1In: string) => {
-  if (ph1In === '') return ' ';
+  if (!ph1In) return ' ';
   if (REG_PH1.test(ph1In)) return '';
 
   return WARNING_PHONE;
 };
 
 const ph2Validator = (ph2In: string) => {
-  if (ph2In === '') return ' ';
+  if (!ph2In) return ' ';
   if (REG_PH2.test(ph2In)) return '';
 
   return WARNING_PHONE;
@@ -77,7 +89,9 @@ export {
   WARNING_PHONE,
   idValidator,
   pwValidator,
+  rePwValidator,
   emailValidator,
+  phoneValidator,
   ph0Validator,
   ph1Validator,
   ph2Validator,

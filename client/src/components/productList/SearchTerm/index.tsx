@@ -1,8 +1,11 @@
 import { FC, useContext } from 'react';
 import { XSVG } from '~/assets';
-import { FetchContext, FilterContext } from '~/pages/ProductList';
+
 import { startFetch } from '~/stores/fetchModule';
 import { setSearchValue } from '~/stores/productListModule';
+
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
 
 import { SearchTermWrapper, Term, X } from './index.style';
 

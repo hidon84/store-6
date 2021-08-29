@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { VertLineSVG } from '~/assets';
 
-export const ProductListWrapper = styled.div`
+const ProductListWrapper = styled.div`
   display: flex;
   width: 100%;
 `;
 
-export const LeftSection = styled.section`
+const LeftSection = styled.section`
   height: 700px;
   position: sticky;
   margin-top: 50px;
@@ -16,14 +16,21 @@ export const LeftSection = styled.section`
   gap: 100px;
 `;
 
-export const RightSection = styled.section`
+const RightSection = styled.section`
   width: 100%;
 `;
 
-export const VerticalDivider = styled.div`
+const VerticalDivider = styled.div`
   width: 1px;
   margin: 0 45px;
   min-height: 100%;
   background: url(${VertLineSVG}) bottom left no-repeat;
   background-size: cover;
 `;
+
+export default {
+  ProductListWrapper,
+  LeftSection,
+  RightSection,
+  VerticalDivider,
+};

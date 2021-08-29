@@ -9,15 +9,12 @@ import NoResource from '~/components/common/NoResource';
 import ProductItem from '~/components/product/ProductItem';
 
 import { useHistory } from '~/core/Router';
-import { FetchContext, ProductData } from '~/pages/ProductList';
-import { INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
+import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
+import { ProductData } from '~/pages/ProductList';
+import { FINISH_FETCH, INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
 
-import {
-  ProductItemContainerWrapper,
-  ListFooter,
-  ItemList,
-  NoResourceWrapper,
-} from './index.style';
+import S from './index.style';
 
 interface Props {
   products: ProductData[];
@@ -30,6 +27,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
 ) => {
   const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
   const { state: fetchState } = useContext(FetchContext);
+  const { state: filterState } = useContext(FilterContext);
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
     (idx: number) => push(`/products/${idx}`),
@@ -37,8 +35,8 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   );
 
   return (
-    <ProductItemContainerWrapper>
-      <ItemList
+    <S.ProductItemContainerWrapper>
+      <S.ItemList
         isFetching={fetchState.action === START_FETCH}
         delayedTime={fetchState.forcedDelayTime / 1000}
       >
@@ -53,15 +51,20 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
               onClick={() => pushToProductDetailPage(idx)}
             />
           ))}
-        <NoResourceWrapper>
+        <S.NoResourceWrapper>
           {products.length === 0 && fetchState.action !== INIT_FETCH && (
             <NoResource content={NO_RESOURCE_CONTENT} />
           )}
-        </NoResourceWrapper>
-      </ItemList>
-      {/* TODO: 원활한 UX를 위하여 추후에 로딩 스피너 또는 lazy loading 로직을 추가해야 합니다. */}
-      <ListFooter ref={ref} />
-    </ProductItemContainerWrapper>
+        </S.NoResourceWrapper>
+      </S.ItemList>
+      <S.ListFooter>
+        <S.ScrollTriggerDiv ref={ref} />
+        {fetchState.action === FINISH_FETCH && !filterState.isLastPage && (
+          <S.LoadingText>로딩중</S.LoadingText>
+        )}
+        {filterState.isLastPage && <S.LoadingText>끝</S.LoadingText>}
+      </S.ListFooter>
+    </S.ProductItemContainerWrapper>
   );
 };
 

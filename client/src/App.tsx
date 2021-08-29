@@ -1,30 +1,41 @@
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import { Switch, Route, useHistory } from '~/core/Router';
 import '~/styles/app.css';
-import Navigation from '~/components/base/Navigation';
-import LoginPage from '~/pages/Login';
-import SignUpPage from '~/pages/SignUp';
-import AlertModal from './components/modal/AlertModal';
-import ConfirmModal from './components/modal/ConfirmModal';
-import MyPage from './pages/MyPage';
-import ProductList from './pages/ProductList';
-import MainPage from './pages/Main';
-import CartPage from './pages/Cart';
-import ProductDetail from './pages/ProductDetail';
-import GoogleCallbackPage from './pages/GoogleCallback';
-import FacebookCallbackPage from './pages/FacebookCallback';
-import LikeListPage from './pages/LikeList';
+import { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { useHistory } from '~/core/Router';
 import titles from './lib/constants/titles';
 
-const Main = styled.main`
+import AlertModal from './components/modal/AlertModal';
+import ConfirmModal from './components/modal/ConfirmModal';
+
+import Navigation from '~/components/base/Navigation';
+import LoadingText from './components/common/LoadingText';
+import Routes from './Routes';
+
+const Main = styled.main<{ nonScroll: boolean }>`
   position: relative;
-  height: calc(100% - 104px);
+  height: 100%;
   width: 1156px;
+  ${({ nonScroll }) => nonScroll && `overflow: hidden;`}
+
+  &.loading-exit {
+    display: none;
+  }
 `;
+
+const StyledWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+`;
+
+const loadingAnimationDuration = 550;
 
 const App = () => {
   const { location } = useHistory();
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     Object.entries(titles).forEach(([key, val]) => {
@@ -32,46 +43,37 @@ const App = () => {
     });
   }, [location]);
 
+  const onEnterTransition = useCallback(
+    () => setShowLoading(true),
+    [setShowLoading],
+  );
+  const onExitedTransition = useCallback(
+    () => setShowLoading(false),
+    [setShowLoading],
+  );
+
   return (
     <>
       <Navigation />
-      <Main>
-        <Switch>
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-          <Route exact path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/signup/:stage">
-            <SignUpPage />
-          </Route>
-          <Route path="/hello/:name/:number">
-            <div>임시 Route</div>
-          </Route>
-          <Route exact path="/products">
-            <ProductList />
-          </Route>
-          <Route path="/products/:id">
-            <ProductDetail />
-          </Route>
-          <Route exact path="/me">
-            <MyPage />
-          </Route>
-          <Route exact path="/cart">
-            <CartPage />
-          </Route>
-          <Route exact path="/like">
-            <LikeListPage />
-          </Route>
-          <Route exact path="/oauth/google/callback">
-            <GoogleCallbackPage />
-          </Route>
-          <Route exact path="/oauth/facebook/callback">
-            <FacebookCallbackPage />
-          </Route>
-        </Switch>
-      </Main>
+      <TransitionGroup className="transition-group" component={null}>
+        <CSSTransition
+          key={location.pathname}
+          classNames="loading"
+          timeout={loadingAnimationDuration}
+          onEnter={onEnterTransition}
+          onExited={onExitedTransition}
+        >
+          <Main nonScroll={showLoading}>
+            <StyledWrapper>
+              <Routes />
+            </StyledWrapper>
+          </Main>
+        </CSSTransition>
+      </TransitionGroup>
+      <LoadingText
+        show={showLoading}
+        fadeOutDuration={loadingAnimationDuration / 2}
+      />
       <AlertModal />
       <ConfirmModal />
     </>

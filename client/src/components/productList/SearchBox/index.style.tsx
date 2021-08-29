@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SearchBoxForm = styled.form`
+const SearchBoxForm = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ export const SearchBoxForm = styled.form`
   margin-bottom: 13px;
 `;
 
-export const SearchInput = styled.input`
+const SearchInput = styled.input`
   height: 46px;
   font-size: 25px;
   line-height: 31px;
@@ -21,7 +21,7 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const SearchButton = styled.button`
+const SearchButton = styled.button`
   all: unset;
   position: absolute;
   left: 23px;
@@ -30,13 +30,13 @@ export const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-export const SearchLine = styled.img`
+const SearchLine = styled.img`
   height: 4px;
   all: unset;
   margin: 0;
 `;
 
-export const ValueRemoveButton = styled.button<{ isEmpty: boolean }>`
+const ValueRemoveButton = styled.button<{ isEmpty: boolean }>`
   all: unset;
   transition: opacity 0.2s ease-in-out;
   opacity: ${({ isEmpty }) => (isEmpty ? 0 : 1)};
@@ -47,3 +47,11 @@ export const ValueRemoveButton = styled.button<{ isEmpty: boolean }>`
   width: 30px;
   cursor: pointer;
 `;
+
+export default {
+  SearchBoxForm,
+  SearchInput,
+  SearchButton,
+  SearchLine,
+  ValueRemoveButton,
+};
