@@ -98,10 +98,6 @@ class Main extends Component<{ u?: string }, MainState> {
     this.peer.on('open', (id) => {
       this.socket.emit('join-room', id);
     });
-    this.setupConnections = this.setupConnections.bind(this);
-    this.addConnections = this.addConnections.bind(this);
-    this.addVideoStream = this.addVideoStream.bind(this);
-    this.updateMinimi = this.updateMinimi.bind(this);
     this.setupConnections();
   }
 
