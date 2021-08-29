@@ -13,12 +13,12 @@ import {
   pwValidator,
   rePwValidator,
 } from '~/utils/validation';
-import HeaderTitle from '~/components/signup/HeaderTitle';
 import SignUpOwnForm from '~/components/signup/SignUpOwnForm';
 import SignUpEmailInput from '~/components/signup/SignUpEmailInput';
 import SignUpPhoneInput from '~/components/signup/SignUpPhoneInput';
 import SignUpPolicyCheck from '~/components/signup/SignUpPolicyCheck';
 import S from './index.style';
+import HeaderTitle from '~/components/base/HeaderTitle';
 
 const message = {
   needCheckTerms: '약관을 동의해주세요.',
