@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { doodleRobotSVG } from '~/assets';
+import { Link } from '~/core/Router';
 
 const SignUpFormHeader = styled.header`
   display: flex;
@@ -13,11 +14,13 @@ const SignUpFormHeader = styled.header`
 
 const HeaderTitle: FC = () => {
   return (
-    <SignUpFormHeader>
-      <img src={doodleRobotSVG} alt="robot" />
-      <h1 className="text-baemin100">배민</h1>
-      <h1>문방구</h1>
-    </SignUpFormHeader>
+    <Link to="/products">
+      <SignUpFormHeader>
+        <img src={doodleRobotSVG} alt="robot" />
+        <h1 className="text-baemin100">배민</h1>
+        <h1>문방구</h1>
+      </SignUpFormHeader>
+    </Link>
   );
 };
 
