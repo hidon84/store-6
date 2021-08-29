@@ -13,7 +13,9 @@ import { alert } from '~/utils/modal';
 
 const NOT_LOGGED_IN_ERROR = '로그인이 필요한 서비스입니다.';
 
-ReactGA.initialize(process.env.TRACKING_ID);
+ReactGA.initialize(process.env.TRACKING_ID, {
+  testMode: process.env.TRACKING_ID === undefined,
+});
 
 interface RouterLocation {
   pathname: string;
