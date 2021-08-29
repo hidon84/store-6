@@ -12,7 +12,7 @@ import {
   TypeCategoryIcon,
   DoodleAnnouncement1,
   DoodleAnnouncement2,
-  Button,
+  CategoryButton,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
 import { VideoGrid, MainContainer, MyVideoWrapper } from './index.style';
@@ -28,6 +28,7 @@ interface MainState {
     string,
     { mediaConn: MediaConnection; isSendingVoice: boolean }
   >;
+  pathQueue: { tarY: number; tarX: number }[][];
   connections: Record<string, DataConnection>;
   streams: { id: string; stream: MediaStream }[];
   minimi: Minimi;
@@ -91,6 +92,7 @@ class Main extends Component<{ u?: string }, MainState> {
       x,
       users: [],
       streams: [],
+      pathQueue: [],
     };
     this.socket = createSocket();
     this.myId = uuidv4();
@@ -99,6 +101,21 @@ class Main extends Component<{ u?: string }, MainState> {
       this.socket.emit('join-room', id);
     });
     this.setupConnections();
+    setInterval(() => {
+      const { pathQueue } = this.state;
+      // window.console.log(pathQueue);
+      if (pathQueue.length === 0) return;
+      this.onMinimiMove();
+      const top = pathQueue[0];
+      if (top.length === 0) {
+        pathQueue.shift();
+        this.setState({ pathQueue });
+        return;
+      }
+      const task = top.shift();
+      const { tarY, tarX } = task;
+      this.setState({ y: tarY, x: tarX, pathQueue });
+    }, 50);
   }
 
   componentDidMount() {
@@ -373,6 +390,34 @@ class Main extends Component<{ u?: string }, MainState> {
     }
   };
 
+  addPathQueue = (tarY: number, tarX: number) => {
+    let { y, x } = this.state;
+    const pathQueue = this.state.pathQueue.slice();
+    if (pathQueue.length > 0) {
+      const lastQueue = pathQueue.slice().pop();
+      const lastCoord = lastQueue.slice().pop();
+      if (lastCoord) {
+        y = lastCoord.tarY;
+        x = lastCoord.tarX;
+      }
+    }
+    const nextQueue = [];
+    for (let i = y; i < tarY; i += 2) {
+      nextQueue.push({ tarY: i, tarX: x });
+    }
+    for (let i = y; i > tarY; i -= 2) {
+      nextQueue.push({ tarY: i, tarX: x });
+    }
+    for (let i = x; i < tarX; i += 2) {
+      nextQueue.push({ tarY, tarX: i });
+    }
+    for (let i = x; i > tarX; i -= 2) {
+      nextQueue.push({ tarY, tarX: i });
+    }
+    pathQueue.push(nextQueue);
+    this.setState({ pathQueue });
+  };
+
   render() {
     const { minimi, y, x, users, entered, streams, connections } = this.state;
     return (
@@ -408,15 +453,51 @@ class Main extends Component<{ u?: string }, MainState> {
         ))}
         <DoodleAnnouncement1 />
         <DoodleAnnouncement2 />
-        <Button category="book" entered={entered === 'book'} />
-        <Button category="baedal" entered={entered === 'baedal'} />
-        <Button category="hat" entered={entered === 'hat'} />
-        <Button category="gift" entered={entered === 'gift'} />
-        <Button category="house" entered={entered === 'house'} />
-        <Button category="kk" entered={entered === 'kk'} />
-        <Button category="tree" entered={entered === 'tree'} />
-        <Button category="pencil" entered={entered === 'pencil'} />
-        <Button category="colab" entered={entered === 'colab'} />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="book"
+          entered={entered === 'book'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="baedal"
+          entered={entered === 'baedal'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="hat"
+          entered={entered === 'hat'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="gift"
+          entered={entered === 'gift'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="house"
+          entered={entered === 'house'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="kk"
+          entered={entered === 'kk'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="tree"
+          entered={entered === 'tree'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="pencil"
+          entered={entered === 'pencil'}
+        />
+        <CategoryButton
+          onClick={this.addPathQueue}
+          category="colab"
+          entered={entered === 'colab'}
+        />
         <Stain />
         <Logo />
       </MainContainer>
