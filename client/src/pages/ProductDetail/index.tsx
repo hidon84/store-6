@@ -10,17 +10,7 @@ import ProductDetailContainer from '~/components/productDetail/ProductDetailCont
 import { useHistory, useParams } from '~/core/Router';
 import { ErrorResponse, ProductDetailGetResponseBody } from '~/lib/api/types';
 import * as productsApi from '~/lib/api/products';
-import {
-  ProductDetailWrapper,
-  PrevPageArrow,
-  LeftSection,
-  RightSection,
-  DivideLine,
-  LayoutDivider,
-  PrevPageButton,
-  ScrollProgress,
-  scrollProgressTransform,
-} from './index.style';
+import S from './index.style';
 import { alert, confirm } from '~/utils/modal';
 import useSetCartAmount from '~/lib/hooks/useSetCartAmount';
 import ProductRecommendContainer from '~/components/productDetail/ProductRecommend';
@@ -68,7 +58,7 @@ const ProductDetail: FC = () => {
       const currentScrollPos = imagesContainerRef.current.scrollTop;
       const scrollProgress = currentScrollPos / maxScrollHeight;
       scrollProgressRef.current.style.transform =
-        scrollProgressTransform(scrollProgress);
+        S.scrollProgressTransform(scrollProgress);
     };
 
     document.addEventListener('wheel', scrollImagesWhenWheel);
@@ -148,29 +138,29 @@ const ProductDetail: FC = () => {
   const { thumbnail, images } = product;
 
   return (
-    <ProductDetailWrapper>
-      <PrevPageButton onClick={goPrevPage}>
-        <PrevPageArrow />
-      </PrevPageButton>
+    <S.ProductDetailWrapper>
+      <S.PrevPageButton onClick={goPrevPage}>
+        <S.PrevPageArrow />
+      </S.PrevPageButton>
 
-      <LeftSection ref={imagesContainerRef}>
+      <S.LeftSection ref={imagesContainerRef}>
         <ProductDetailImages thumbnail={thumbnail} images={images} />
-      </LeftSection>
+      </S.LeftSection>
 
-      <LayoutDivider aria-hidden="true">
-        <DivideLine />
-        <ScrollProgress ref={scrollProgressRef} />
-      </LayoutDivider>
+      <S.LayoutDivider aria-hidden="true">
+        <S.DivideLine />
+        <S.ScrollProgress ref={scrollProgressRef} />
+      </S.LayoutDivider>
 
-      <RightSection>
+      <S.RightSection>
         <ProductDetailContainer
           product={product}
           onClickAddToCart={onClickAddToCart}
           onClickLike={onClickLike}
         />
         <ProductRecommendContainer products={product.recommend} />
-      </RightSection>
-    </ProductDetailWrapper>
+      </S.RightSection>
+    </S.ProductDetailWrapper>
   );
 };
 
