@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { FC, useRef, useEffect, memo } from 'react';
+import { getHashedNickName } from '~/utils/hashedNickname';
 import { MirroredVideo, Video } from './index.style';
 
 const RTCAudio: FC<{ id: string; stream: MediaStream; me?: boolean }> = ({
@@ -16,7 +17,7 @@ const RTCAudio: FC<{ id: string; stream: MediaStream; me?: boolean }> = ({
 
   return (
     <figure>
-      <figcaption>{id.slice(0, 8)}</figcaption>
+      <figcaption>{getHashedNickName(id)}</figcaption>
       {me ? (
         <MirroredVideo ref={videoRef} autoPlay muted />
       ) : (
