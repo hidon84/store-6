@@ -390,7 +390,7 @@ class Main extends Component<{ u?: string }, MainState> {
           ))}
         </VideoGrid>
         <MyVideoWrapper>
-          <div>{Object.keys(connections).length} 명 접속중</div>
+          <div>{Object.keys(connections).length + 1} 명 접속중</div>
           {this.myStream && (
             <RTCVideo id={this.myId} stream={this.myStream} muted />
           )}
