@@ -390,7 +390,9 @@ class Main extends Component<{ u?: string }, MainState> {
           ))}
         </VideoGrid>
         <MyVideoWrapper>
-          <RTCVideo id={this.myId} stream={this.myStream} muted />
+          {this.myStream && (
+            <RTCVideo id={this.myId} stream={this.myStream} muted />
+          )}
         </MyVideoWrapper>
         <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
