@@ -101,21 +101,7 @@ class Main extends Component<{ u?: string }, MainState> {
       this.socket.emit('join-room', id);
     });
     this.setupConnections();
-    setInterval(() => {
-      const { pathQueue } = this.state;
-      // window.console.log(pathQueue);
-      if (pathQueue.length === 0) return;
-      this.onMinimiMove();
-      const top = pathQueue[0];
-      if (top.length === 0) {
-        pathQueue.shift();
-        this.setState({ pathQueue });
-        return;
-      }
-      const task = top.shift();
-      const { tarY, tarX } = task;
-      this.setState({ y: tarY, x: tarX, pathQueue });
-    }, 50);
+    this.setupPathConsumer();
   }
 
   componentDidMount() {
@@ -139,6 +125,23 @@ class Main extends Component<{ u?: string }, MainState> {
     this.peer.destroy();
     document.body.removeEventListener('keydown', this.onKeyDown);
   }
+
+  setupPathConsumer = () => {
+    setInterval(() => {
+      const { pathQueue } = this.state;
+      if (pathQueue.length === 0) return;
+      this.onMinimiMove();
+      const top = pathQueue[0];
+      if (top.length === 0) {
+        pathQueue.shift();
+        this.setState({ pathQueue });
+        return;
+      }
+      const task = top.shift();
+      const { tarY, tarX } = task;
+      this.setState({ y: tarY, x: tarX, pathQueue });
+    }, 50);
+  };
 
   setupConnections() {
     this.setupVideoStream();
