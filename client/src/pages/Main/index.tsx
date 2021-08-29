@@ -15,12 +15,11 @@ import {
   Button,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
-import { MainContainer } from './index.style';
+import { VideoGrid, MainContainer } from './index.style';
 import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
-import './audio-grid.css';
 import RTCVideo from './RTCVideo';
 
 interface MainState {
@@ -100,7 +99,7 @@ class Main extends Component<{ u?: string }, MainState> {
     });
     this.setupConnections = this.setupConnections.bind(this);
     this.addConnections = this.addConnections.bind(this);
-    this.addAudioStream = this.addAudioStream.bind(this);
+    this.addVideoStream = this.addVideoStream.bind(this);
     this.updateMinimi = this.updateMinimi.bind(this);
     this.setupConnections();
   }
@@ -128,7 +127,7 @@ class Main extends Component<{ u?: string }, MainState> {
   }
 
   setupConnections() {
-    this.setupAudioStream();
+    this.setupVideoStream();
 
     this.socket.on('user-connected', async (userId: string) => {
       const conn = this.peer.connect(userId);
@@ -218,8 +217,7 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setState({ connections });
   };
 
-  addAudioStream = (stream: MediaStream, id: string) => {
-    // eslint-disable-next-line no-param-reassign
+  addVideoStream = (stream: MediaStream, id: string) => {
     const { streams } = this.state;
     const nextStreams = [
       ...streams.filter((streamInfo) => streamInfo.id !== id),
@@ -231,13 +229,13 @@ class Main extends Component<{ u?: string }, MainState> {
     this.setState({ streams: nextStreams });
   };
 
-  removeAudioStream = (id: string) => {
+  removeVideoStream = (id: string) => {
     const { streams } = this.state;
     const nextStreams = streams.filter((streamInfo) => streamInfo.id !== id);
     this.setState({ streams: nextStreams });
   };
 
-  setupAudioStream = () => {
+  setupVideoStream = () => {
     /* When Someone tries to call me */
     this.peer.on('call', (call) => {
       navigator.mediaDevices
@@ -246,10 +244,10 @@ class Main extends Component<{ u?: string }, MainState> {
           this.myStream = myStream;
           call.answer(myStream);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(otherUserStream, call.peer);
+            this.addVideoStream(otherUserStream, call.peer);
           });
           call.on('close', () => {
-            this.removeAudioStream(call.peer);
+            this.removeVideoStream(call.peer);
           });
         })
         .catch((_) => {
@@ -264,10 +262,10 @@ class Main extends Component<{ u?: string }, MainState> {
           this.setState({ peerCalls: nextPeers });
           call.answer(undefined);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(otherUserStream, call.peer);
+            this.addVideoStream(otherUserStream, call.peer);
           });
           call.on('close', () => {
-            this.removeAudioStream(call.peer);
+            this.removeVideoStream(call.peer);
           });
           alert(toastMessage.pleaseTurnOnMic, 3000);
         });
@@ -279,10 +277,10 @@ class Main extends Component<{ u?: string }, MainState> {
           this.myStream = myStream;
           const call = this.peer.call(userId, myStream);
           call.on('stream', (otherUserStream) => {
-            this.addAudioStream(otherUserStream, call.peer);
+            this.addVideoStream(otherUserStream, call.peer);
           });
           call.on('close', () => {
-            this.removeAudioStream(call.peer);
+            this.removeVideoStream(call.peer);
           });
           const { peerCalls } = this.state;
           const nextPeers = {
@@ -390,7 +388,7 @@ class Main extends Component<{ u?: string }, MainState> {
     const { minimi, y, x, users, entered, streams } = this.state;
     return (
       <MainContainer>
-        <div className="audio-grid">
+        <VideoGrid>
           {streams.map((streamInfo) => (
             <RTCVideo
               key={streamInfo.id}
@@ -398,7 +396,7 @@ class Main extends Component<{ u?: string }, MainState> {
               stream={streamInfo.stream}
             />
           ))}
-        </div>
+        </VideoGrid>
         <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />

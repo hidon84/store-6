@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { FC, useRef, useEffect, memo } from 'react';
+import { Video } from './index.style';
 
 const RTCAudio: FC<{ id: string; stream: MediaStream }> = ({ id, stream }) => {
   const audioRef = useRef<HTMLVideoElement>(null);
@@ -12,7 +13,7 @@ const RTCAudio: FC<{ id: string; stream: MediaStream }> = ({ id, stream }) => {
   return (
     <figure>
       <figcaption>{id.slice(0, 8)}</figcaption>
-      <video ref={audioRef} autoPlay controls />
+      <Video ref={audioRef} autoPlay controls />
     </figure>
   );
 };
