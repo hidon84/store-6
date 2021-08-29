@@ -31,7 +31,7 @@ const StyledWrapper = styled.div`
   left: 0;
 `;
 
-const loadingAnimationDuration = 400;
+const loadingAnimationDuration = 550;
 
 const App = () => {
   const { location } = useHistory();
@@ -61,11 +61,10 @@ const App = () => {
             <StyledWrapper>
               <Routes />
             </StyledWrapper>
-            <LoadingText show={showLoading} fadeOutDuration={loadingAnimationDuration}/>
           </Main>
         </CSSTransition>
       </TransitionGroup>
-
+      <LoadingText show={showLoading} fadeOutDuration={loadingAnimationDuration / 2}/>
       <AlertModal />
       <ConfirmModal />
     </>
