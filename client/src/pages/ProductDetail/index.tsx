@@ -81,6 +81,11 @@ const ProductDetail: FC = () => {
     }
 
     if (!userState.error && !userState.isLoggedIn) return;
+
+    if (userState.user) {
+      productsApi.postProductToView(idx).catch(() => {});
+    }
+
     productsApi
       .getProductDetail(idx)
       .then((result) => setProduct(result.data))
