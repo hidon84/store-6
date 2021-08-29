@@ -15,7 +15,7 @@ import {
   Button,
 } from '~/components/main/IconButtons';
 import PixelArt, { Minimi, genRandomPixelArt } from '~/components/main/Minimi';
-import { VideoGrid, MainContainer } from './index.style';
+import { VideoGrid, MainContainer, MyVideoWrapper } from './index.style';
 import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
@@ -389,6 +389,9 @@ class Main extends Component<{ u?: string }, MainState> {
             />
           ))}
         </VideoGrid>
+        <MyVideoWrapper>
+          <RTCVideo id={this.myId} stream={this.myStream} muted />
+        </MyVideoWrapper>
         <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />
         <PixelArt className="chicken" coord={{ left: '35%', top: '20%' }} />
         <PixelArt className="sonic" coord={{ left: '15%', top: '30%' }} />
