@@ -7,7 +7,6 @@ import { alert } from '~/utils/modal';
 import {
   ApiResponse,
   AuthResponseBody,
-  ErrorResponse,
   OauthCallbackGetRequestQuery,
   OauthCallbackGetResponseBody,
 } from '~/lib/api/types';
@@ -48,48 +47,60 @@ const OauthCallback: FC<Props> = ({
   const parsedQuery = queryString.parse(location.search);
   const parsedState = oauthStateDecoder(parsedQuery?.state.toString());
 
-  useEffect(() => {
-    if (!parsedQuery || !parsedState) {
-      throw new Error(invalidCallbackUrl);
-    }
-    const { code, state } = parsedQuery;
-    const requestQuery = {
-      code: code.toString(),
-      state: state.toString(),
-    };
+  if (!parsedQuery || !parsedState) {
+    throw new Error(invalidCallbackUrl);
+  }
 
+  const { code, state } = parsedQuery;
+  const requestQuery = {
+    code: code.toString(),
+    state: state.toString(),
+  };
+
+  const apiRequestForOauthLogin = async () => {
+    try {
+      await oauthLoginCallback(requestQuery);
+      const userInfoResponse = await usersAPI.getMe();
+
+      userDispatch(setLogin({ ...userState.user, ...userInfoResponse.data }));
+      return userInfoResponse.data;
+    } catch (e) {
+      alert(e.message);
+      userDispatch(setError({ ...userState.user, error: e }));
+      throw e;
+    }
+  };
+
+  const apiRequestForGetOuathUser = async () => {
+    try {
+      const response = await oauthCallback(requestQuery);
+      const { id, email, picture } = response.data;
+      userDispatch(
+        setUserInfo({
+          ...userState.user,
+          id,
+          email,
+          profile: picture,
+        }),
+      );
+    } catch (e) {
+      alert(e.message);
+      userDispatch(setError({ ...userState.user, error: e }));
+      throw e;
+    }
+  };
+
+  useEffect(() => {
     if (parsedState.is_login_request === 'true') {
-      oauthLoginCallback(requestQuery)
-        .then(() => usersAPI.getMe())
-        .then((result) => {
-          userDispatch(setLogin({ ...userState.user, ...result.data }));
-          push('/products');
-        })
-        .catch((e: ErrorResponse) => {
-          alert(e.message);
-          userDispatch(setError({ ...userState.user, error: e }));
-          push('/login');
-        });
+      apiRequestForOauthLogin()
+        .then(() => push('/products'))
+        .catch(() => push('/login'));
       return;
     }
 
-    oauthCallback(requestQuery)
-      .then((response) => {
-        const { id, email, picture } = response.data;
-        userDispatch(
-          setUserInfo({
-            ...userState.user,
-            id,
-            email,
-            profile: picture,
-          }),
-        );
-        push(`/signup/${social}`);
-      })
-      .catch((e: ErrorResponse) => {
-        alert(e.message);
-        push('/signup/select');
-      });
+    apiRequestForGetOuathUser()
+      .then(() => push(`/signup/${social}`))
+      .catch(() => push('/signup/select'));
   }, []);
 
   return <EmptyContents />;
