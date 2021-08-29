@@ -23,7 +23,7 @@ export const initFetch = () => ({ type: INIT_FETCH });
 // State
 const INITIAL_FETCH_STATE = {
   action: 'INIT_FETCH',
-  forcedDelayTime: 300,
+  forcedDelayTime: 210,
 };
 
 // Reducer
