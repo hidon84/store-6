@@ -50,7 +50,18 @@ class OAuthService {
     try {
       const response = await oauthHelper.getGoogleUserInfo(accessToken);
       const { id, email, picture } = response;
-      return { id, email, picture };
+
+      const alreadyCreatedLogin = await this.loginRepository.findById(
+        id,
+        LoginType.Google,
+      );
+
+      return {
+        id,
+        email,
+        picture,
+        isRegistered: alreadyCreatedLogin?.id === id,
+      };
     } catch (e) {
       throw new ErrorResponse(commonError.unauthorized);
     }
@@ -73,7 +84,17 @@ class OAuthService {
     try {
       const response = await oauthHelper.getFacebookUserInfo(accessToken);
       const { id, email, picture } = response;
-      return { id, email, picture };
+      const alreadyCreatedLogin = await this.loginRepository.findById(
+        id,
+        LoginType.Facebook,
+      );
+
+      return {
+        id,
+        email,
+        picture,
+        isRegistered: alreadyCreatedLogin?.id === id,
+      };
     } catch (e) {
       throw new ErrorResponse(commonError.unauthorized);
     }
