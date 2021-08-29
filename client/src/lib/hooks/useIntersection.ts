@@ -19,10 +19,12 @@ export const useIntersection = (
   ref: MutableRefObject<HTMLElement>,
   { threshold = 1 }: IntersectionOption,
 ): IntersectionObserverEntry => {
+  const DELAY_TIME = 500;
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
+
   const updateEntry = debounce(
     ([entry]: IntersectionObserverEntry[]) => setEntry(entry),
-    500,
+    DELAY_TIME,
   );
 
   useEffect(() => {
