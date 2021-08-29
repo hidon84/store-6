@@ -40,7 +40,7 @@ const LoginForm = styled.form`
   gap: 12px;
 `;
 
-const LoginFormHeader = styled.header`
+const Logo = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -93,7 +93,7 @@ export default {
   LeftDoodles,
   RightDoodles,
   LoginForm,
-  LoginFormHeader,
+  Logo,
   ButtonWrapper,
   RegisterSection,
   LoginDemo,

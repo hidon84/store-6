@@ -23,7 +23,7 @@ import {
 } from '~/assets';
 
 import S from './index.style';
-import { useHistory, useLocation } from '~/core/Router';
+import { Link, useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
 import { oauthUrl } from '~/lib/api/oauth';
 import UserContext from '~/lib/contexts/userContext';
@@ -100,11 +100,13 @@ const LoginPage: FC = () => {
         </div>
       </S.LeftDoodles>
       <S.LoginForm onSubmit={onSubmit}>
-        <S.LoginFormHeader>
-          <img src={doodleRobotSVG} alt="robot" />
-          <h1 className="text-baemin100">배민</h1>
-          <h1>문방구</h1>
-        </S.LoginFormHeader>
+        <Link to="/products">
+          <S.Logo>
+            <img src={doodleRobotSVG} alt="robot" />
+            <h1 className="text-baemin100">배민</h1>
+            <h1>문방구</h1>
+          </S.Logo>
+        </Link>
         <Input
           autoComplete="off"
           type="text"
