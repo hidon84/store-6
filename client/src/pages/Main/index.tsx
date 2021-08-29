@@ -174,6 +174,7 @@ class Main extends Component<{ u?: string }, MainState> {
         users: this.state.users.filter((user) => user.id !== userId),
       });
       this.removeConnections(userId);
+      this.removeVideoStream(userId);
     });
 
     document.body.addEventListener('keydown', this.onKeyDown);
@@ -246,9 +247,6 @@ class Main extends Component<{ u?: string }, MainState> {
           call.on('stream', (otherUserStream) => {
             this.addVideoStream(otherUserStream, call.peer);
           });
-          call.on('close', () => {
-            this.removeVideoStream(call.peer);
-          });
         })
         .catch((_) => {
           const { peerCalls } = this.state;
@@ -264,9 +262,6 @@ class Main extends Component<{ u?: string }, MainState> {
           call.on('stream', (otherUserStream) => {
             this.addVideoStream(otherUserStream, call.peer);
           });
-          call.on('close', () => {
-            this.removeVideoStream(call.peer);
-          });
           alert(toastMessage.pleaseTurnOnMic, 3000);
         });
     });
@@ -278,9 +273,6 @@ class Main extends Component<{ u?: string }, MainState> {
           const call = this.peer.call(userId, myStream);
           call.on('stream', (otherUserStream) => {
             this.addVideoStream(otherUserStream, call.peer);
-          });
-          call.on('close', () => {
-            this.removeVideoStream(call.peer);
           });
           const { peerCalls } = this.state;
           const nextPeers = {
