@@ -14,14 +14,7 @@ import FilterContext from '~/lib/contexts/filterContext';
 import { ProductData } from '~/pages/ProductList';
 import { FINISH_FETCH, INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
 
-import {
-  ProductItemContainerWrapper,
-  ListFooter,
-  ItemList,
-  NoResourceWrapper,
-  ScrollTriggerDiv,
-  LoadingText,
-} from './index.style';
+import S from './index.style';
 
 interface Props {
   products: ProductData[];
@@ -42,8 +35,8 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
   );
 
   return (
-    <ProductItemContainerWrapper>
-      <ItemList
+    <S.ProductItemContainerWrapper>
+      <S.ItemList
         isFetching={fetchState.action === START_FETCH}
         delayedTime={fetchState.forcedDelayTime / 1000}
       >
@@ -58,20 +51,20 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
               onClick={() => pushToProductDetailPage(idx)}
             />
           ))}
-        <NoResourceWrapper>
+        <S.NoResourceWrapper>
           {products.length === 0 && fetchState.action !== INIT_FETCH && (
             <NoResource content={NO_RESOURCE_CONTENT} />
           )}
-        </NoResourceWrapper>
-      </ItemList>
-      <ListFooter>
-        <ScrollTriggerDiv ref={ref} />
+        </S.NoResourceWrapper>
+      </S.ItemList>
+      <S.ListFooter>
+        <S.ScrollTriggerDiv ref={ref} />
         {fetchState.action === FINISH_FETCH && !filterState.isLastPage && (
-          <LoadingText>로딩중</LoadingText>
+          <S.LoadingText>로딩중</S.LoadingText>
         )}
-        {filterState.isLastPage && <LoadingText>끝</LoadingText>}
-      </ListFooter>
-    </ProductItemContainerWrapper>
+        {filterState.isLastPage && <S.LoadingText>끝</S.LoadingText>}
+      </S.ListFooter>
+    </S.ProductItemContainerWrapper>
   );
 };
 
