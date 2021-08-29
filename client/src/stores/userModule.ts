@@ -57,10 +57,15 @@ const userReducer = (
     case SET_LOGOUT:
       return { ...INITIAL_STATE };
     case SET_ERROR:
-      return { ...UserModuleState, ...action.payload };
+      return { 
+        ...UserModuleState, 
+        ...action.payload, 
+        user: null, 
+      };
     case SET_USER_INFO: {
       return {
         ...UserModuleState,
+        error: null,
         user: { ...UserModuleState.user, ...action.payload },
       };
     }
