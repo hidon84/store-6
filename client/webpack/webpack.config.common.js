@@ -6,7 +6,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   entry: {
-    'js/app': ['./src/index.tsx']
+    'js/app': ['./src/index.tsx'],
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -44,7 +44,8 @@ module.exports = {
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.SOCKET_URI': JSON.stringify(process.env.SOCKET_URI),
+      'process.env.TRACKING_ID': JSON.stringify(process.env.TRACKING_ID),
     }),
     new ForkTsCheckerWebpackPlugin({ typescript: true }),
   ],
-}
+};

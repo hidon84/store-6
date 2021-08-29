@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 import UserContext from '~/lib/contexts/userContext';
@@ -12,6 +13,10 @@ import { confirm } from '~/utils/modal';
 
 const NOT_LOGGED_IN_ERROR = `로그인이 필요한 서비스입니다. 
 로그인 페이지로 이동하시겠습니까?`;
+
+ReactGA.initialize(process.env.TRACKING_ID, {
+  testMode: process.env.TRACKING_ID === undefined,
+});
 
 interface RouterLocation {
   pathname: string;
@@ -62,11 +67,15 @@ const BrowserRouter: React.FC<{
   const handleHashChange = (popEvent: PopStateEvent) => {
     const { pathname, hash, search } = window.location;
     const { state } = popEvent;
+    // window.location.reload();
     setWindowLocation({ ...windowLocation, pathname, hash, search, state });
   };
 
   useEffect(() => {
+    const { pathname } = window.location;
     window.addEventListener('popstate', handleHashChange);
+    ReactGA.set({ page: pathname });
+    ReactGA.pageview(pathname);
     return () => window.removeEventListener('popstate', handleHashChange);
   });
 
