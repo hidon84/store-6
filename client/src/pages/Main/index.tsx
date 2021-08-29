@@ -55,6 +55,7 @@ const MEDIA_OPTIONS = {
   audio: true,
   video: {
     width: { min: 100, ideal: 240 },
+    // facingMode: { exact: 'user' },
     // height: { min: 75, ideal: 180 },
   },
 };
@@ -392,7 +393,7 @@ class Main extends Component<{ u?: string }, MainState> {
         <MyVideoWrapper>
           <div>{Object.keys(connections).length + 1} 명 접속중</div>
           {this.myStream && (
-            <RTCVideo id={this.myId} stream={this.myStream} muted />
+            <RTCVideo id={this.myId} stream={this.myStream} me />
           )}
         </MyVideoWrapper>
         <PixelArt className="cat" coord={{ left: '4%', top: '14%' }} />

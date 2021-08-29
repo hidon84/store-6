@@ -1,23 +1,27 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import { FC, useRef, useEffect, memo } from 'react';
-import { Video } from './index.style';
+import { MirroredVideo, Video } from './index.style';
 
-const RTCAudio: FC<{ id: string; stream: MediaStream; muted?: boolean }> = ({
+const RTCAudio: FC<{ id: string; stream: MediaStream; me?: boolean }> = ({
   id,
   stream,
-  muted,
+  me,
 }) => {
-  const audioRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (!audioRef.current) return;
-    audioRef.current.srcObject = stream ?? null;
+    if (!videoRef.current) return;
+    videoRef.current.srcObject = stream ?? null;
   });
 
   return (
     <figure>
       <figcaption>{id.slice(0, 8)}</figcaption>
-      <Video ref={audioRef} autoPlay controls muted={muted ?? false} />
+      {me ? (
+        <MirroredVideo ref={videoRef} autoPlay muted />
+      ) : (
+        <Video ref={videoRef} autoPlay controls />
+      )}
     </figure>
   );
 };
