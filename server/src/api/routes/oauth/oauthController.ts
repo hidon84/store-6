@@ -59,11 +59,10 @@ export const handleOauthGoogleCallback = async (
     const oauthAccessToken = await oauthServiceInstance.getGoogleAccessToken(
       code as string,
     );
-    const { id, email, picture } = await oauthServiceInstance.getGoogleUserInfo(
-      oauthAccessToken,
-    );
+    const { id, email, picture, isRegistered } =
+      await oauthServiceInstance.getGoogleUserInfo(oauthAccessToken);
     if (decodedState?.is_login_request !== 'true') {
-      res.json({ id, email, picture });
+      res.json({ id, email, picture, isRegistered });
       return;
     }
 
@@ -134,11 +133,11 @@ export const handleOauthFacebookCallback = async (
     const oauthAccessToken = await oauthServiceInstance.getFacebookAccessToken(
       code as string,
     );
-    const { id, email, picture } =
+    const { id, email, picture, isRegistered } =
       await oauthServiceInstance.getFacebookUserInfo(oauthAccessToken);
 
     if (decodedState?.is_login_request !== 'true') {
-      res.json({ id, email, picture });
+      res.json({ id, email, picture, isRegistered });
       return;
     }
 
