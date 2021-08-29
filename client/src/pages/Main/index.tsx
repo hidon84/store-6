@@ -55,7 +55,7 @@ const MEDIA_OPTIONS = {
   audio: true,
   video: {
     width: { min: 100, ideal: 240 },
-    height: { min: 75, ideal: 180 },
+    // height: { min: 75, ideal: 180 },
   },
 };
 
