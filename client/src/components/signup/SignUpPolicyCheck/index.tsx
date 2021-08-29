@@ -21,10 +21,10 @@ const SignUpPolicyCheck: FC<IProps> = ({
     }
   };
 
-  const onCheckAll = useCallback(
-    () => onChangeCheckedTerms(!serviceTermsCheck, !privacyTermsCheck),
-    [serviceTermsCheck, privacyTermsCheck],
-  );
+  const onCheckAll = useCallback(() => {
+    const isAll = serviceTermsCheck && privacyTermsCheck;
+    onChangeCheckedTerms(!isAll, !isAll);
+  }, [serviceTermsCheck, privacyTermsCheck]);
   const onCheckServiceTerms = useCallback(
     () => onChangeCheckedTerms(!serviceTermsCheck, privacyTermsCheck),
     [serviceTermsCheck, privacyTermsCheck],

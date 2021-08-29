@@ -27,11 +27,8 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 'off',
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
-    ],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'no-restricted-syntax': 'off',
     'no-continue': 'off',
     'react/react-in-jsx-scope': 'off',
@@ -42,7 +39,7 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'import/extensions': ['off'],
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
   },
   ignorePatterns: [
     '.eslintrc.js',
@@ -50,5 +47,6 @@ module.exports = {
     'webpack.config.js',
     'setUpTests.ts',
     'images.d.ts',
+    'webpack.config.*.js',
   ],
 };

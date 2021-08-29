@@ -6,8 +6,6 @@
 
 [![TypeScript Badge](https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white)]() [![React Badge](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white)]() [![styled Badge](https://img.shields.io/badge/Styled-DB7093?style=flat-square&logo=styled-components&logoColor=white)]() [![webpack Badge](https://img.shields.io/badge/webpack-8DD6F9?style=flat-square&logo=webpack&logoColor=white)]() [![babel Badge](https://img.shields.io/badge/babel-F9DC3E?style=flat-square&logo=babel&logoColor=black)]() [![typeorm Badge](https://img.shields.io/badge/typeorm-000?style=flat-square&logo=typeorm&logoColor=white)]()
 
-
-
 # 자랑거리
 
 ## 멤버가 자랑거리임!!
@@ -20,9 +18,9 @@
 
 ## 게더 왜씀! 그거 쓸바에 뜨끈~한 배민문방구 쓰고말지!
 
-메인페이지에서 webRTC p2p 통신을 통해서 음성통화 + 캐릭터 위치동기화 기능으로 친구랑 놀 수 있어요!
+메인페이지에서 webRTC p2p 통신을 통해서 비디오챗 + 캐릭터 위치동기화 기능으로 친구랑 놀 수 있어요!
 
-![gate](https://user-images.githubusercontent.com/13645032/131062072-6a26a15e-644c-4b94-be7c-027b9d760692.gif)
+![gate](https://user-images.githubusercontent.com/13645032/131249774-6f854196-4f77-4c03-9b35-f709ef54627e.gif)
 
 ~~아니 이사람들 왜 쇼핑몰만들라는데 게더를 만들어놨어~~
 

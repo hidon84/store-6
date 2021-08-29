@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledLoginPage = styled.div`
+const StyledLoginPage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -9,7 +9,7 @@ export const StyledLoginPage = styled.div`
   height: 100vh;
 `;
 
-export const LeftDoodles = styled.aside`
+const LeftDoodles = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -18,7 +18,7 @@ export const LeftDoodles = styled.aside`
   justify-content: space-evenly;
 `;
 
-export const RightDoodles = styled.aside`
+const RightDoodles = styled.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -28,7 +28,7 @@ export const RightDoodles = styled.aside`
   justify-content: center;
 `;
 
-export const LoginForm = styled.form`
+const LoginForm = styled.form`
   display: flex;
   flex: 2;
   min-width: 400px;
@@ -40,7 +40,7 @@ export const LoginForm = styled.form`
   gap: 12px;
 `;
 
-export const LoginFormHeader = styled.header`
+const Logo = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,11 +48,11 @@ export const LoginFormHeader = styled.header`
   font-size: 48px;
 `;
 
-export const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div`
   margin-top: 42px;
 `;
 
-export const RegisterSection = styled.section`
+const RegisterSection = styled.section`
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -60,14 +60,14 @@ export const RegisterSection = styled.section`
   margin-top: 32px;
 `;
 
-export const LoginDemo = styled.span`
+const LoginDemo = styled.span`
   font-size: 20px;
   line-height: 26px;
   padding-left: 20px;
   cursor: pointer;
 `;
 
-export const RegisterLink = styled.span`
+const RegisterLink = styled.span`
   color: var(--baemin100);
   font-size: 20px;
   line-height: 26px;
@@ -75,7 +75,7 @@ export const RegisterLink = styled.span`
   cursor: pointer;
 `;
 
-export const SocialButtons = styled.div`
+const SocialButtons = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -84,6 +84,20 @@ export const SocialButtons = styled.div`
   align-items: center;
 `;
 
-export const SocialButton = styled.img`
+const SocialButton = styled.img`
   cursor: pointer;
 `;
+
+export default {
+  StyledLoginPage,
+  LeftDoodles,
+  RightDoodles,
+  LoginForm,
+  Logo,
+  ButtonWrapper,
+  RegisterSection,
+  LoginDemo,
+  RegisterLink,
+  SocialButtons,
+  SocialButton,
+};

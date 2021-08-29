@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BackArrowSVG, ProductPageLayoutDividerSVG } from '~/assets';
 import ScrollProgressImage from '~/assets/scrollProgressImage.png';
 
-export const ProductDetailWrapper = styled.main`
+const ProductDetailWrapper = styled.main`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -12,7 +12,7 @@ export const ProductDetailWrapper = styled.main`
   width: 900px;
 `;
 
-export const LeftSection = styled.section`
+const LeftSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 400px;
@@ -25,7 +25,7 @@ export const LeftSection = styled.section`
   }
 `;
 
-export const RightSection = styled(LeftSection)`
+const RightSection = styled(LeftSection)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,14 +34,14 @@ export const RightSection = styled(LeftSection)`
   right: 150px;
 `;
 
-export const LayoutDivider = styled.div`
+const LayoutDivider = styled.div`
   width: fit-content;
   position: absolute;
   left: 50%;
   top: 0%;
 `;
 
-export const DivideLine = styled.img.attrs({
+const DivideLine = styled.img.attrs({
   src: ProductPageLayoutDividerSVG,
   alt: 'divider',
 })`
@@ -49,7 +49,7 @@ export const DivideLine = styled.img.attrs({
   position: relative;
 `;
 
-export const PrevPageButton = styled.button`
+const PrevPageButton = styled.button`
   position: absolute;
   top: 90px;
   left: 0;
@@ -57,15 +57,15 @@ export const PrevPageButton = styled.button`
   cursor: pointer;
 `;
 
-export const PrevPageArrow = styled.img.attrs({
+const PrevPageArrow = styled.img.attrs({
   src: BackArrowSVG,
   alt: 'prev page',
 })``;
 
-export const scrollProgressTransform = (progress: number) =>
+const scrollProgressTransform = (progress: number) =>
   `translateY(${820 * progress}px) rotate(-90deg)`;
 
-export const ScrollProgress = styled.img.attrs({
+const ScrollProgress = styled.img.attrs({
   src: ScrollProgressImage,
   alt: 'scroll progress bar',
   width: '40px',
@@ -75,3 +75,15 @@ export const ScrollProgress = styled.img.attrs({
   right: 3px;
   transform: rotate(-90deg);
 `;
+
+export default {
+  ProductDetailWrapper,
+  LeftSection,
+  RightSection,
+  LayoutDivider,
+  DivideLine,
+  PrevPageButton,
+  PrevPageArrow,
+  ScrollProgress,
+  scrollProgressTransform,
+};

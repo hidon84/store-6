@@ -14,6 +14,7 @@ export const handleCreateUser = async (
       type,
       email,
       phone,
+      profile,
       privacyTermsAndConditions,
       serviceTermsAndConditions,
     } = req.body;
@@ -27,6 +28,7 @@ export const handleCreateUser = async (
       phone,
       privacyTermsAndConditions,
       serviceTermsAndConditions,
+      profile: typeof profile === 'string' ? profile : undefined,
     });
 
     return res.json({ idx, createdAt, updatedAt });

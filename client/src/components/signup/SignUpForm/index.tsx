@@ -3,7 +3,6 @@ import { useHistory } from '~/core/Router';
 import Button from '~/components/common/Button';
 import Copyright from '~/components/base/Copyright';
 import Space from '~/components/common/Space';
-import { oauthUrl } from '~/lib/api/oauth';
 import * as userAPI from '~/lib/api/users';
 import UserContext from '~/lib/contexts/userContext';
 import { alert } from '~/utils/modal';
@@ -14,12 +13,12 @@ import {
   pwValidator,
   rePwValidator,
 } from '~/utils/validation';
-import HeaderTitle from '~/components/signup/HeaderTitle';
 import SignUpOwnForm from '~/components/signup/SignUpOwnForm';
 import SignUpEmailInput from '~/components/signup/SignUpEmailInput';
 import SignUpPhoneInput from '~/components/signup/SignUpPhoneInput';
 import SignUpPolicyCheck from '~/components/signup/SignUpPolicyCheck';
 import S from './index.style';
+import HeaderTitle from '~/components/base/HeaderTitle';
 
 const message = {
   needCheckTerms: '약관을 동의해주세요.',
@@ -89,6 +88,7 @@ const SignUpForm: FC<{
         password: userAccount.pw,
         phone,
         email,
+        profile: social ? userState.user?.profile : null,
         privacyTermsAndConditions: policyCheck.privacyTerms,
         serviceTermsAndConditions: policyCheck.serviceTerms,
         type: social ?? 'OWN',
@@ -98,21 +98,8 @@ const SignUpForm: FC<{
         alert(message.successToSignUp);
       }
 
-      if (social === 'FACEBOOK') {
-        setTimeout(() => {
-          window.location.href = oauthUrl.facebook.login;
-        }, 500);
-        return;
-      }
-      if (social === 'GOOGLE') {
-        setTimeout(() => {
-          window.location.href = oauthUrl.google.login;
-        }, 500);
-        return;
-      }
-
       push('/login', {
-        id: social ? userState.user.id : userAccount.id,
+        id: social ? '' : userAccount.id,
         from: '/signup',
       });
     } catch (e) {

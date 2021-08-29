@@ -5,13 +5,23 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 import UserContext from '~/lib/contexts/userContext';
+<<<<<<< HEAD
 import { isSafari } from '~/utils/browserChecker';
 import { alert } from '~/utils/modal';
+=======
+import { confirm } from '~/utils/modal';
+>>>>>>> 3012935fe132ac60588b52479b27aa1f04383372
 
-const NOT_LOGGED_IN_ERROR = '로그인이 필요한 서비스입니다.';
+const NOT_LOGGED_IN_ERROR = `로그인이 필요한 서비스입니다. 
+로그인 페이지로 이동하시겠습니까?`;
+
+ReactGA.initialize(process.env.TRACKING_ID, {
+  testMode: process.env.TRACKING_ID === undefined,
+});
 
 interface RouterLocation {
   pathname: string;
@@ -70,7 +80,10 @@ const BrowserRouter: React.FC<{
   };
 
   useEffect(() => {
+    const { pathname } = window.location;
     window.addEventListener('popstate', handleHashChange);
+    ReactGA.set({ page: pathname });
+    ReactGA.pageview(pathname);
     return () => window.removeEventListener('popstate', handleHashChange);
   });
 
@@ -231,7 +244,7 @@ const Link: React.FC<{ to: string; children: React.ReactNode }> = ({
   const handleLinkClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!user.isLoggedIn && ['/like', '/cart'].includes(to)) {
-      return alert(NOT_LOGGED_IN_ERROR);
+      return confirm(NOT_LOGGED_IN_ERROR, () => push('/login'));
     }
     return push(to);
   };
