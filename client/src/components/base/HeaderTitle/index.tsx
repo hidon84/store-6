@@ -17,8 +17,10 @@ const HeaderTitle: FC = () => {
     <Link to="/products">
       <SignUpFormHeader>
         <img src={doodleRobotSVG} alt="robot" />
-        <h1 className="text-baemin100">배민</h1>
-        <h1>문방구</h1>
+        <h1>
+          <span className="text-baemin100">배민</span>
+          <span>문방구</span>
+        </h1>
       </SignUpFormHeader>
     </Link>
   );
