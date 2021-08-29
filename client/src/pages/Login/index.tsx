@@ -50,6 +50,21 @@ const LoginPage: FC = () => {
     }
   }, [userState.isLoggedIn, isPageAccessed]);
 
+  const requestLogin = (uid: string, password: string) =>
+    login({ id: uid, password })
+      .then(usersApi.getMe)
+      .then((res) => {
+        userDispatch(setLogin(res.data));
+      })
+      .then(goBack)
+      .catch((err: ErrorResponse) => {
+        if (err.message === 'Unauthorized') {
+          alert(
+            '로그인에 실패하였습니다. 아이디, 비밀번호를 다시 확인해보세요.',
+          );
+        }
+      });
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPageAccessed(true);
@@ -63,22 +78,7 @@ const LoginPage: FC = () => {
       return;
     }
 
-    await login({
-      id,
-      password: pw,
-    })
-      .then(usersApi.getMe)
-      .then((res) => {
-        userDispatch(setLogin(res.data));
-      })
-      .then(goBack)
-      .catch((err: ErrorResponse) => {
-        if (err.message === 'Unauthorized') {
-          alert(
-            '로그인에 실패하였습니다. 아이디, 비밀번호를 다시 확인해보세요.',
-          );
-        }
-      });
+    requestLogin(id, pw);
   };
 
   const onGoogleLogin = useCallback(() => {
@@ -88,6 +88,13 @@ const LoginPage: FC = () => {
   const onFacebookLogin = useCallback(() => {
     window.location.href = oauthUrl.facebook.login;
   }, []);
+
+  const DEMO_ID = 'store6';
+  const DEMO_PW = 'qudgus&dlsrb&dbstj&whdgh';
+  const onDemoLogin = () => {
+    setIsPageAccessed(true);
+    requestLogin(DEMO_ID, DEMO_PW);
+  };
 
   return (
     <S.StyledLoginPage>
@@ -121,13 +128,7 @@ const LoginPage: FC = () => {
           <Button size="lg">로그인</Button>
         </S.ButtonWrapper>
         <S.RegisterSection>
-          <S.LoginDemo
-            onClick={() => {
-              alert('아직 시연용계정 안만들었습니다');
-            }}
-          >
-            시연용 계정 로그인
-          </S.LoginDemo>
+          <S.LoginDemo onClick={onDemoLogin}>시연용 계정 로그인</S.LoginDemo>
           <S.RegisterLink
             onClick={() => {
               push('/signup/select');
