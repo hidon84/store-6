@@ -13,5 +13,6 @@
 
 .audio-grid video {
   display: block;
+  border-radius: 10px;
   width: 200px;
 }
