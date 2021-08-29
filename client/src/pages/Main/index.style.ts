@@ -24,6 +24,7 @@ const Video = styled.video`
   display: block;
   border-radius: 10px;
   width: 200px;
+  z-index: 15;
 `;
 
 const MyVideoWrapper = styled.div`
