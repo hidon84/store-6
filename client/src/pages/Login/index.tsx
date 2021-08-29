@@ -30,6 +30,7 @@ import UserContext from '~/lib/contexts/userContext';
 import { setLogin } from '~/stores/userModule';
 
 import * as usersApi from '~/lib/api/users';
+import HeaderTitle from '~/components/base/HeaderTitle';
 
 const MESSAGE_LOGIN_FAIL = '로그인 실패';
 
@@ -100,13 +101,7 @@ const LoginPage: FC = () => {
         </div>
       </S.LeftDoodles>
       <S.LoginForm onSubmit={onSubmit}>
-        <Link to="/products">
-          <S.Logo>
-            <img src={doodleRobotSVG} alt="robot" />
-            <h1 className="text-baemin100">배민</h1>
-            <h1>문방구</h1>
-          </S.Logo>
-        </Link>
+        <HeaderTitle />
         <Input
           autoComplete="off"
           type="text"
