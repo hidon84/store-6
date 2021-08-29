@@ -16,14 +16,13 @@ import {
   doodleSkeletonSVG,
   doodleStickmanSVG,
   doodleAssKickSVG,
-  doodleRobotSVG,
   verticalLineSVG,
   socialFacebookSVG,
   socialGoogleSVG,
 } from '~/assets';
 
 import S from './index.style';
-import { Link, useHistory, useLocation } from '~/core/Router';
+import { useHistory, useLocation } from '~/core/Router';
 import { ErrorResponse } from '~/lib/api/types';
 import { oauthUrl } from '~/lib/api/oauth';
 import UserContext from '~/lib/contexts/userContext';
