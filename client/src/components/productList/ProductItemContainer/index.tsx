@@ -10,14 +10,17 @@ import ProductItem from '~/components/product/ProductItem';
 
 import { useHistory } from '~/core/Router';
 import FetchContext from '~/lib/contexts/fetchContext';
+import FilterContext from '~/lib/contexts/filterContext';
 import { ProductData } from '~/pages/ProductList';
-import { INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
+import { FINISH_FETCH, INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
 
 import {
   ProductItemContainerWrapper,
   ListFooter,
   ItemList,
   NoResourceWrapper,
+  ScrollTriggerDiv,
+  LoadingText,
 } from './index.style';
 
 interface Props {
@@ -31,6 +34,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
 ) => {
   const NO_RESOURCE_CONTENT = '상품이 없어요 ㅜ ㅜ';
   const { state: fetchState } = useContext(FetchContext);
+  const { state: filterState } = useContext(FilterContext);
   const { push } = useHistory();
   const pushToProductDetailPage = useCallback(
     (idx: number) => push(`/products/${idx}`),
@@ -60,8 +64,13 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
           )}
         </NoResourceWrapper>
       </ItemList>
-      {/* TODO: 원활한 UX를 위하여 추후에 로딩 스피너 또는 lazy loading 로직을 추가해야 합니다. */}
-      <ListFooter ref={ref} />
+      <ListFooter>
+        <ScrollTriggerDiv ref={ref} />
+        {fetchState.action === FINISH_FETCH && !filterState.isLastPage && (
+          <LoadingText>로딩중</LoadingText>
+        )}
+        {filterState.isLastPage && <LoadingText>끝</LoadingText>}
+      </ListFooter>
     </ProductItemContainerWrapper>
   );
 };

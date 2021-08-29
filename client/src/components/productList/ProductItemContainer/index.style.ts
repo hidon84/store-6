@@ -33,6 +33,23 @@ export const NoResourceWrapper = styled.div`
 `;
 
 export const ListFooter = styled.div`
+  position: relative;
   width: 100%;
   height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LoadingText = styled.span`
+  font-size: 30px;
+  font-family: 'BM Hanna' !important;
+`;
+
+export const ScrollTriggerDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
 `;

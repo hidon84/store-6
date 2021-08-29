@@ -1,9 +1,8 @@
-import { ActionType } from '~/stores/productListModule';
-import { ProductsGetRequestQuery } from '../api/types';
+import { ActionType, IFilter } from '~/stores/productListModule';
 import createNamedContext from './createNamedContext';
 
 interface FilterContextState {
-  state: ProductsGetRequestQuery;
+  state: IFilter;
   dispatch: (action: ActionType) => void;
 }
 
