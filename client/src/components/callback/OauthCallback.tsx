@@ -26,6 +26,10 @@ const EmptyContents = styled.div`
   background-color: #fff;
 `;
 
+const message = {
+  isAlreadySignUp: '이미 계정이 존재합니다. 로그인을 해주세요.',
+};
+
 interface Props {
   oauthLoginCallback: (
     query: OauthCallbackGetRequestQuery,
@@ -74,7 +78,11 @@ const OauthCallback: FC<Props> = ({
   const apiRequestForGetOuathUser = async () => {
     try {
       const response = await oauthCallback(requestQuery);
-      const { id, email, picture } = response.data;
+      const { id, email, picture, isRegistered } = response.data;
+      if (isRegistered) {
+        throw new Error(message.isAlreadySignUp);
+      }
+
       userDispatch(
         setUserInfo({
           ...userState.user,
@@ -100,7 +108,13 @@ const OauthCallback: FC<Props> = ({
 
     apiRequestForGetOuathUser()
       .then(() => push(`/signup/${social}`))
-      .catch(() => push('/signup/select'));
+      .catch((e: Error) => {
+        if (e.message === message.isAlreadySignUp) {
+          push('/login');
+          return;
+        }
+        push('/signup/select');
+      });
   }, []);
 
   return <EmptyContents />;
