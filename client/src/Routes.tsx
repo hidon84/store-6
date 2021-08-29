@@ -24,9 +24,6 @@ const Routes: FC = () => {
       <Route path="/signup/:stage">
         <SignUpPage />
       </Route>
-      <Route path="/hello/:name/:number">
-        <div>임시 Route</div>
-      </Route>
       <Route exact path="/products">
         <ProductList />
       </Route>
