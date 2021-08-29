@@ -20,7 +20,7 @@ import createSocket from '~/lib/api/socket';
 import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
-import RTCVideo from './RTCVideo';
+import RTCVideo from '~/components/main/RTCVideo';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];

@@ -20,23 +20,6 @@ const VideoGrid = styled.div`
   overflow-y: auto;
 `;
 
-const Video = styled.video`
-  display: block;
-  border-radius: 10px;
-  width: 200px;
-  z-index: 15;
-`;
-
-const MirroredVideo = styled.video`
-  display: block;
-  border-radius: 10px;
-  width: 200px;
-  z-index: 15;
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
-  -moz-transform: rotateY(180deg); /* Firefox */
-`;
-
 const MyVideoWrapper = styled.div`
   position: fixed;
   left: 20px;
@@ -44,4 +27,4 @@ const MyVideoWrapper = styled.div`
   width: 220px;
 `;
 
-export { MainContainer, VideoGrid, Video, MyVideoWrapper, MirroredVideo };
+export { MainContainer, VideoGrid, MyVideoWrapper };
