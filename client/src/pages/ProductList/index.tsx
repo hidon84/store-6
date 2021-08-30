@@ -29,7 +29,7 @@ import {
 
 import S from './index.style';
 import { useHistory, useLocation } from '~/core/Router';
-import CATEGORY_TO_IDX from '~/lib/constants/categories';
+import { CATEGORY_TO_IDX } from '~/lib/constants/categories';
 import { alert } from '~/utils/modal';
 
 // Interface
