@@ -68,10 +68,10 @@ const BrowserRouter: React.FC<{
   const handleHashChange = (popEvent: PopStateEvent) => {
     const { pathname, hash, search } = window.location;
     const { state } = popEvent;
+    setWindowLocation({ ...windowLocation, pathname, hash, search, state });
     if (isSafari()) {
       window.location.reload();
     }
-    setWindowLocation({ ...windowLocation, pathname, hash, search, state });
   };
 
   useEffect(() => {
