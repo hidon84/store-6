@@ -35,7 +35,7 @@ const RightSection = styled(LeftSection)`
 `;
 
 const LayoutDivider = styled.div`
-  width: fit-content;
+  height: 100%;
   position: absolute;
   left: 50%;
   top: 0%;
@@ -62,8 +62,17 @@ const PrevPageArrow = styled.img.attrs({
   alt: 'prev page',
 })``;
 
-const scrollProgressTransform = (progress: number) =>
-  `translateY(${820 * progress}px) rotate(-90deg)`;
+const scrollProgressTop = (progress: number) =>
+  `calc(${progress * 100}% - 40px)`;
+
+const ScrollProgressWrapper = styled.div`
+  position: absolute;
+  margin-top: 45px;
+  top: 0;
+  right: 3px;
+  height: calc(100% - 100px);
+  box-sizing: border-box;
+`;
 
 const ScrollProgress = styled.img.attrs({
   src: ScrollProgressImage,
@@ -71,9 +80,7 @@ const ScrollProgress = styled.img.attrs({
   width: '40px',
 })`
   position: absolute;
-  top: 10px;
   right: 3px;
-  transform: rotate(-90deg);
 `;
 
 export default {
@@ -84,6 +91,7 @@ export default {
   DivideLine,
   PrevPageButton,
   PrevPageArrow,
+  ScrollProgressWrapper,
   ScrollProgress,
-  scrollProgressTransform,
+  scrollProgressTop,
 };
