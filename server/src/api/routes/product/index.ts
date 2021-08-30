@@ -58,6 +58,7 @@ export default (router: Router) => {
     handleRemoveLike,
   );
 
-  productRouter.post('/', handleAddProduct);
+  if (process.env.NODE_ENV === 'development')
+    productRouter.post('/', handleAddProduct);
   return router;
 };
