@@ -15,6 +15,7 @@ import {
   doodleAnnouncement1,
   doodleAnnouncement2,
 } from '~/assets';
+import { CATEGORY_TO_STR } from '~/lib/constants/categories';
 
 export const BUTTON_INFOS = {
   book: ['23%', '15%', BigBookSVG],
@@ -47,6 +48,24 @@ const ButtonWrapper = styled.button<{ category: string; entered?: boolean }>`
         `
       : ``};
   animation-play-state: ${({ entered }) => (entered ? 'running' : 'paused')};
+
+  .category-text {
+    display: inline-block;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100px;
+    padding: 5px 10px;
+    transform: translateX(-50%);
+    color: #fff;
+    background-color: #000;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  &:hover .category-text {
+    opacity: 1;
+  }
 `;
 
 export type TypeCategoryIcon =
@@ -79,6 +98,7 @@ const Button: FC<{
       type="button"
       entered={entered}
     >
+      <span className="category-text">{CATEGORY_TO_STR[category]}</span>
       <img src={BUTTON_INFOS[category][2]} alt="icon" />
     </ButtonWrapper>
   );
