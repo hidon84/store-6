@@ -21,6 +21,7 @@ import createPeer from '~/lib/api/peer';
 import { alert } from '~/utils/modal';
 import { RouterContext } from '~/core/Router';
 import RTCVideo from '~/components/main/RTCVideo';
+import { CATEGORY_TO_STR } from '~/lib/constants/categories';
 
 interface MainState {
   users: { id: string; y: number; x: number; minimi: Minimi }[];
@@ -350,7 +351,9 @@ class Main extends Component<{ u?: string }, MainState> {
     );
     if (enteredCategory) {
       this.setState({ entered: enteredCategory }, () => {
-        alert(`스페이스 버튼을 눌러서 ${enteredCategory} 카테고리로 이동해요`);
+        alert(
+          `스페이스 버튼을 눌러서 ${CATEGORY_TO_STR[enteredCategory]} 카테고리로 이동해요`,
+        );
       });
     } else {
       this.setState({ entered: undefined });
