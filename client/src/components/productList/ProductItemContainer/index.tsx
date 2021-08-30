@@ -82,7 +82,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
         </S.NoResourceWrapper>
       </S.ItemList>
       <S.ListFooter>
-        <S.ScrollTriggerDiv ref={ref} />
+        <S.ScrollTriggerDiv ref={ref} aria-hidden="true" />
         {fetchState.action === FINISH_FETCH && !filterState.isLastPage && (
           <S.LoadingText>로딩중</S.LoadingText>
         )}
