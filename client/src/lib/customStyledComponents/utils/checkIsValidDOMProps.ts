@@ -1,4 +1,4 @@
-import { PropsType } from '~/lib/customStyledComponents';
+import { PropsType } from '~/lib/customStyledComponents/constructWithTag';
 
 const checkIsValidDOMProps = (tag: string, props: PropsType) => {
   const domProps: PropsType = {};

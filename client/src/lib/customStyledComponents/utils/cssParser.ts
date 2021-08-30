@@ -1,4 +1,4 @@
-import { PropsType } from '~/lib/customStyledComponents';
+import { PropsType } from '~/lib/customStyledComponents/constructWithTag';
 
 /**
  * Template String으로 둘러쌓인 string은 배열로 들어오게 됩니다.
