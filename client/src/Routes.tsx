@@ -4,13 +4,12 @@ import { Switch, Route } from '~/core/Router';
 import LoginPage from '~/pages/Login';
 import SignUpPage from '~/pages/SignUp';
 import MyPage from './pages/MyPage';
-import ProductList from './pages/ProductList';
 import MainPage from './pages/Main';
 import CartAndShippingPage from './pages/CartAndShipping';
-import ProductDetail from './pages/ProductDetail';
 import GoogleCallbackPage from './pages/GoogleCallback';
 import FacebookCallbackPage from './pages/FacebookCallback';
 import LikeListPage from './pages/LikeList';
+import ProductPage from './pages/Product';
 
 const Routes: FC = () => {
   return (
@@ -25,10 +24,10 @@ const Routes: FC = () => {
         <SignUpPage />
       </Route>
       <Route exact path="/products">
-        <ProductList />
+        <ProductPage />
       </Route>
       <Route path="/products/:id">
-        <ProductDetail />
+        <ProductPage />
       </Route>
       <Route exact path="/me">
         <MyPage />
