@@ -7,6 +7,11 @@ interface IProps {
 }
 
 const ProductDetailImages: FC<IProps> = ({ thumbnail, images }) => {
+  const imagesWithKey = images.map((image, imgIdx) => ({
+    src: image,
+    key: imgIdx,
+  }));
+
   return (
     <>
       <ImageMagnifier
@@ -14,11 +19,11 @@ const ProductDetailImages: FC<IProps> = ({ thumbnail, images }) => {
         imageSrc={thumbnail}
         imageAlt="product thumbnail"
       />
-      {images.map((image, imgIdx) => (
+      {imagesWithKey.map((image) => (
         <ImageMagnifier
-          key={`${image}-${imgIdx}`}
-          imageSrc={image}
-          imageAlt={`detail image ${imgIdx}`}
+          key={`${image.src}-${image.key}`}
+          imageSrc={image.src}
+          imageAlt={`detail image ${image.key}`}
         />
       ))}
     </>

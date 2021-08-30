@@ -90,7 +90,7 @@ const ProductListPage: FC = () => {
       productFilterDispatch(
         setCategory(CATEGORY_TO_IDX[locationState?.category]),
       );
-      productFilterDispatch(setOrder('recent'))
+      productFilterDispatch(setOrder('recent'));
       replace(location.pathname, {});
     }
   }, [locationState]);
