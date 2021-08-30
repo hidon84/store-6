@@ -12,7 +12,7 @@ import { useHistory } from '~/core/Router';
 import FetchContext from '~/lib/contexts/fetchContext';
 import FilterContext from '~/lib/contexts/filterContext';
 import { ProductData } from '~/pages/ProductList';
-import { FINISH_FETCH, INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
+import { FINISH_FETCH, START_FETCH } from '~/stores/fetchModule';
 
 import S from './index.style';
 
