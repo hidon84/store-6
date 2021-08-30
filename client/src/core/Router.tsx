@@ -9,6 +9,7 @@ import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 import UserContext from '~/lib/contexts/userContext';
+import { isSafari } from '~/utils/browserDetect';
 import { confirm } from '~/utils/modal';
 
 const NOT_LOGGED_IN_ERROR = `로그인이 필요한 서비스입니다. 
@@ -32,6 +33,7 @@ interface RouterContextType {
     [key: string]: string;
   };
   push: (location: Partial<RouterLocation>) => void;
+  replace: (location: Partial<RouterLocation>) => void;
   goBack: () => void;
 }
 
@@ -42,6 +44,7 @@ export const RouterContext = createContext<RouterContextType>({
     search: '?some=search-string',
   },
   push: () => {},
+  replace: () => {},
   goBack: () => window.history.back(),
 });
 
@@ -61,14 +64,21 @@ const BrowserRouter: React.FC<{
       window.history.pushState(state, '', pathname);
       setWindowLocation({ ...windowLocation, ...newLocation });
     },
+    replace: (newLocation: Partial<RouterLocation>) => {
+      const { state, pathname } = newLocation;
+      window.history.replaceState(state, '', pathname);
+      setWindowLocation({ ...windowLocation, ...newLocation });
+    },
     goBack: () => window.history.back(),
   };
 
   const handleHashChange = (popEvent: PopStateEvent) => {
     const { pathname, hash, search } = window.location;
     const { state } = popEvent;
-    // window.location.reload();
     setWindowLocation({ ...windowLocation, pathname, hash, search, state });
+    if (isSafari()) {
+      window.location.reload();
+    }
   };
 
   useEffect(() => {
@@ -217,6 +227,9 @@ const useHistory = () => {
     goBack: routerCtx.goBack,
     push: (pathname: string, state?: Record<string, unknown>) => {
       routerCtx.push({ pathname, state });
+    },
+    replace: (pathname: string, state?: Record<string, unknown>) => {
+      routerCtx.replace({ pathname, state });
     },
   } as const;
 };

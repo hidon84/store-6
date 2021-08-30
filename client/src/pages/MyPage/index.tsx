@@ -100,7 +100,7 @@ const MyPage: React.FC = () => {
 
   useEffect(() => {
     if (userState.error) {
-      push('/', { from: '/me', error: 'accessWithoutToken' });
+      push('/products', { from: '/me', error: 'accessWithoutToken' });
     }
   }, [userState]);
 

@@ -1,15 +1,17 @@
 import styled from 'styled-components';
+import * as customStyled from '~/lib/customStyledComponents';
 
-const StyledLoginPage = styled.div`
+const StyledLoginPage = customStyled.default.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
+  justify-self: center;
   height: 100vh;
 `;
 
-const LeftDoodles = styled.aside`
+const LeftDoodles = customStyled.default.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -18,7 +20,7 @@ const LeftDoodles = styled.aside`
   justify-content: space-evenly;
 `;
 
-const RightDoodles = styled.aside`
+const RightDoodles = customStyled.default.aside`
   display: flex;
   flex: 1;
   flex-direction: column;

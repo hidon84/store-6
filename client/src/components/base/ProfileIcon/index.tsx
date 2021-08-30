@@ -11,6 +11,7 @@ import ProfileImage from '~/components/common/ProfileImage';
 import { Link, useHistory } from '~/core/Router';
 import * as authAPI from '~/lib/api/auth';
 import { UsersGetResponseBody, ErrorResponse } from '~/lib/api/types';
+import urls from '~/lib/constants/urls';
 import UserContext from '~/lib/contexts/userContext';
 import { setLogout } from '~/stores/userModule';
 import { alert } from '~/utils/modal';
@@ -40,12 +41,15 @@ const ProfileIcon: FC<IProps> = ({ user, pathname }) => {
   }, []);
 
   const requestLogout = () => {
+    const { myPage, cart, shipping, likeList } = urls;
+
     authAPI
       .logout()
-      .then(() => {
-        if (['/me', '/like'].includes(pathname)) push('/login');
-      })
       .then(() => userDispatch(setLogout()))
+      .then(() => {
+        if ([myPage, cart, shipping, likeList].includes(pathname))
+          push('/login');
+      })
       .catch((e: ErrorResponse) => alert(e.message));
   };
 

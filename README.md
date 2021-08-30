@@ -4,7 +4,14 @@
 
 <p align="center"><b>6팀 배 출발!</b></p>
 
-[![TypeScript Badge](https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white)]() [![React Badge](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white)]() [![styled Badge](https://img.shields.io/badge/Styled-DB7093?style=flat-square&logo=styled-components&logoColor=white)]() [![webpack Badge](https://img.shields.io/badge/webpack-8DD6F9?style=flat-square&logo=webpack&logoColor=white)]() [![babel Badge](https://img.shields.io/badge/babel-F9DC3E?style=flat-square&logo=babel&logoColor=black)]() [![typeorm Badge](https://img.shields.io/badge/typeorm-000?style=flat-square&logo=typeorm&logoColor=white)]()
+<div align='center'>
+  <img src="https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white" alt="ts-badge" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white" alt="react-badge" />
+  <img src="https://img.shields.io/badge/Styled-DB7093?style=flat-square&logo=styled-components&logoColor=white" alt="styled-component-badge" />
+  <img src="https://img.shields.io/badge/webpack-8DD6F9?style=flat-square&logo=webpack&logoColor=white" alt="webpack-badge" />
+  <img src="https://img.shields.io/badge/babel-F9DC3E?style=flat-square&logo=babel&logoColor=black" alt="babel-badge" />
+  <img src="https://img.shields.io/badge/typeorm-000?style=flat-square&logo=typeorm&logoColor=white" alt="typeorm-badge" />
+</div>
 
 # 자랑거리
 
@@ -49,11 +56,12 @@
         <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060139-7d4d57d6-6ebe-4c3b-9011-f7f4705a07f9.png">
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060782-bcd91232-99ab-4d43-8f6b-a203e971501c.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/19240202/131251805-f004cc32-1fdf-4652-8529-f73145d6736c.png">
       </td>
     </tr>
   </tbody>
 </table>
+
 
 <table>
   <thead>
@@ -81,6 +89,7 @@
         <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061478-53303408-9743-4661-b82a-058a7308a45a.png">
       </td>
     </tr>
+
   </tbody>
 </table>
 

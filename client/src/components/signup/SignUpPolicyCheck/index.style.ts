@@ -8,11 +8,14 @@ const Policy = styled.pre`
   border-radius: 10px;
   overflow-y: scroll;
   width: 100%;
-  padding: 16px;
+  padding: 10px 16px;
   box-sizing: border-box;
   height: 80px;
   font-family: 'noto sans', sans-serif !important;
   white-space: pre-line;
+  color: #999;
+  font-size: 12px;
+  line-height: 1.5;
 `;
 
 const CheckboxSection = styled.section`

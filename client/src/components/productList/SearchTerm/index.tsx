@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { XSVG } from '~/assets';
 
 import { startFetch } from '~/stores/fetchModule';
-import { setSearchValue } from '~/stores/productListModule';
+import { setSearchValue } from '~/stores/productFilterModule';
 
 import FetchContext from '~/lib/contexts/fetchContext';
 import FilterContext from '~/lib/contexts/filterContext';

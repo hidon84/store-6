@@ -32,10 +32,10 @@ const message = {
 
 const statusCodeAlreadyAdded = 409;
 
-const ProductDetail: FC = () => {
+const ProductDetailPage: FC = () => {
   const { user: userState } = useContext(UserContext);
   const setCartAmount = useSetCartAmount();
-  const idx = Number(useParams().id);
+  const idx = Number(useParams()?.id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [isNotFound, setIsNotFound] = useState(false);
@@ -57,8 +57,7 @@ const ProductDetail: FC = () => {
         imagesContainerRef.current.clientHeight;
       const currentScrollPos = imagesContainerRef.current.scrollTop;
       const scrollProgress = currentScrollPos / maxScrollHeight;
-      scrollProgressRef.current.style.transform =
-        S.scrollProgressTransform(scrollProgress);
+      scrollProgressRef.current.style.top = S.scrollProgressTop(scrollProgress);
     };
 
     document.addEventListener('wheel', scrollImagesWhenWheel);
@@ -149,7 +148,9 @@ const ProductDetail: FC = () => {
 
       <S.LayoutDivider aria-hidden="true">
         <S.DivideLine />
-        <S.ScrollProgress ref={scrollProgressRef} />
+        <S.ScrollProgressWrapper>
+          <S.ScrollProgress ref={scrollProgressRef} />
+        </S.ScrollProgressWrapper>
       </S.LayoutDivider>
 
       <S.RightSection>
@@ -164,4 +165,4 @@ const ProductDetail: FC = () => {
   );
 };
 
-export default ProductDetail;
+export default ProductDetailPage;

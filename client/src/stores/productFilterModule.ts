@@ -71,13 +71,14 @@ export const INITIAL_FILTER_STATE: IFilter = {
 const filterReducer = (state: IFilter, action: ActionType): IFilter => {
   switch (action.type) {
     case SET_CATEGORY: {
-      if (!('category' in state) || state.category !== action.payload)
+      if (!('category' in state) || state.category !== action.payload) {
         return {
           ...state,
           category: action.payload.category,
           page: 1,
           isLastPage: false,
         };
+      }
       const rest = { ...state };
       delete rest.category;
       return { ...rest, page: 1, isLastPage: false };
@@ -115,13 +116,13 @@ const filterReducer = (state: IFilter, action: ActionType): IFilter => {
   }
 };
 
-const productListModule = () => {
+const productFilterModule = () => {
   const [filterState, dispatch] = useReducer(
     filterReducer,
     INITIAL_FILTER_STATE,
   );
 
-  return { filterState, dispatch };
+  return { state: filterState, dispatch };
 };
 
-export default productListModule;
+export default productFilterModule;
