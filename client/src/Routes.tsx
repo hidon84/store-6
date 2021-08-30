@@ -9,7 +9,8 @@ import CartAndShippingPage from './pages/CartAndShipping';
 import GoogleCallbackPage from './pages/GoogleCallback';
 import FacebookCallbackPage from './pages/FacebookCallback';
 import LikeListPage from './pages/LikeList';
-import ProductPage from './pages/Product';
+import ProductListPage from './pages/ProductList';
+import ProductDetailPage from './pages/ProductDetail';
 
 const Routes: FC = () => {
   return (
@@ -24,10 +25,10 @@ const Routes: FC = () => {
         <SignUpPage />
       </Route>
       <Route exact path="/products">
-        <ProductPage />
+        <ProductListPage />
       </Route>
       <Route path="/products/:id">
-        <ProductPage />
+        <ProductDetailPage />
       </Route>
       <Route exact path="/me">
         <MyPage />

@@ -32,13 +32,10 @@ const message = {
 
 const statusCodeAlreadyAdded = 409;
 
-interface IProps {
-  idx: number;
-}
-
-const ProductDetail: FC<IProps> = ({ idx }) => {
+const ProductDetailPage: FC = () => {
   const { user: userState } = useContext(UserContext);
   const setCartAmount = useSetCartAmount();
+  const idx = Number(useParams()?.id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [isNotFound, setIsNotFound] = useState(false);
@@ -168,4 +165,4 @@ const ProductDetail: FC<IProps> = ({ idx }) => {
   );
 };
 
-export default ProductDetail;
+export default ProductDetailPage;

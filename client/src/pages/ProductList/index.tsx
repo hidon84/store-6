@@ -20,9 +20,17 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
-import { setLastPage, setNextPage } from '~/stores/productFilterModule';
+import {
+  setCategory,
+  setLastPage,
+  setNextPage,
+  setOrder,
+} from '~/stores/productFilterModule';
 
 import S from './index.style';
+import { useHistory, useLocation } from '~/core/Router';
+import CATEGORY_TO_IDX from '~/lib/constants/categories';
+import { alert } from '~/utils/modal';
 
 // Interface
 export interface ProductData {
@@ -33,14 +41,21 @@ export interface ProductData {
   discountedPrice: number;
 }
 
+const message = {
+  failedToGetProducts: '상품들을 가져오는 데 실패했습니다.',
+};
+
 // Component
-const ProductList: FC = () => {
+const ProductListPage: FC = () => {
   const TARGET_POINT = 500;
   const DEFAULT_PRODUCTS_AMOUNT = 9;
 
   const [products, setProducts] = useState<ProductsGetResponseBody[]>([]);
   const listFooterRef = useRef<HTMLDivElement>();
 
+  const location = useLocation();
+  const locationState = location.state;
+  const { replace } = useHistory();
   const { state: filterState, dispatch: productFilterDispatch } =
     useContext(FilterContext);
   const { state: fetchState, dispatch: fetchDispatch } = fetchModule();
@@ -66,9 +81,19 @@ const ProductList: FC = () => {
         fetchState.forcedDelayTime,
       );
     } catch (error) {
-      throw new Error(error.data.message);
+      alert(message.failedToGetProducts);
     }
   };
+
+  useEffect(() => {
+    if (locationState?.from === '/') {
+      productFilterDispatch(
+        setCategory(CATEGORY_TO_IDX[locationState?.category]),
+      );
+      productFilterDispatch(setOrder('recent'))
+      replace(location.pathname, {});
+    }
+  }, [locationState]);
 
   useEffect(() => {
     if (fetchState.action === INIT_FETCH) fetchProducts();
@@ -105,4 +130,4 @@ const ProductList: FC = () => {
   );
 };
 
-export default ProductList;
+export default ProductListPage;
