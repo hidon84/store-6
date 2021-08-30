@@ -6,6 +6,6 @@ import { compile, serialize, stringify } from 'stylis';
  * 이를 직렬화하여 반환합니다.
  */
 const cssSerializer = (tag: string, content: string) =>
-  serialize(compile(`${tag}{${content}}`), stringify);
+  serialize(compile(`.${tag}{${content}}`), stringify);
 
 export default cssSerializer;

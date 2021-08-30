@@ -5,11 +5,11 @@ import { PropsType } from '~/lib/customStyledComponents/constructWithTag';
  * cssParser는 이 배열을 한 줄의 string으로 만듭니다.
  */
 const cssParser = (
-  string: TemplateStringsArray,
+  strings: TemplateStringsArray,
   props: PropsType,
   ...args: unknown[]
 ): string => {
-  const css = string
+  const css = strings
     .map((str, idx) => {
       let arg = args[idx] ?? '';
 

@@ -12,7 +12,7 @@ import { generateAlphabeticName } from './utils/generateAlphaName';
 
 let classNameIndex = 1000;
 
-export type PropsType = { [key: string]: any };
+export type PropsType = { [key: string]: unknown };
 
 /**
  * Tag를 받아 Component 클로져를 반환합니다.
@@ -28,9 +28,9 @@ const constructWithTag = (tag: string) => {
 
       useEffect(() => {
         const parsedCSS = cssParser(templateStr, props, args);
-        const serializedString = cssSerializer(tag, parsedCSS);
+        const serializedString = cssSerializer(classNameWithSuffix, parsedCSS);
         applyToHead(serializedString);
-      }, [props]);
+      }, [classNameWithSuffix, props]);
 
       const domProps = checkIsValidDOMProps(tag, props);
 
