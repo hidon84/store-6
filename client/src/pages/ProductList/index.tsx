@@ -98,8 +98,13 @@ const ProductListPage: FC = () => {
   useEffect(() => {
     if (fetchState.action === INIT_FETCH) fetchProducts();
     if (fetchState.action === START_FETCH) {
-      setTimeout(() => fetchProducts(), fetchState.forcedDelayTime);
+      const timer = setTimeout(
+        () => fetchProducts(),
+        fetchState.forcedDelayTime,
+      );
+      return () => clearTimeout(timer);
     }
+    return () => {};
   }, [filterState, fetchState.action]);
 
   useEffect(() => {
