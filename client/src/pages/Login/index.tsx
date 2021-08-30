@@ -116,14 +116,14 @@ const LoginPage: FC = () => {
           placeholder="아이디"
           onChange={handleId}
         />
-        <InputHelp> </InputHelp>
+        <InputHelp />
         <Input
           autoComplete="off"
           type="password"
           placeholder="비밀번호"
           onChange={handlePW}
         />
-        <InputHelp> </InputHelp>
+        <InputHelp />
         <S.ButtonWrapper>
           <Button size="lg">로그인</Button>
         </S.ButtonWrapper>

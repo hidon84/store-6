@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import * as customStyled from '~/lib/customStyledComponents/index';
 import { phoneUnderLineSVG, underlineSVG } from '~/assets';
 
-const StyledSignUpPage = styled.div`
+const StyledSignUpPage = customStyled.default.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -10,7 +11,7 @@ const StyledSignUpPage = styled.div`
   height: 100%;
 `;
 
-const RightDoodleWrapper = styled.aside`
+const RightDoodleWrapper = customStyled.default.aside`
   display: flex;
   flex: 1;
   flex-direction: column;
