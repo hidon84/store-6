@@ -21,8 +21,8 @@ const CartAndShippingPage: FC<IProps> = ({ pageType = 'cart' }) => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (!user.isLoggedIn)
-      push('/', { from: '/like', error: 'accessWithoutToken' });
+    if (user.error)
+      push('/products', { from: '/like', error: 'accessWithoutToken' });
     return () => {};
   }, [user]);
 
