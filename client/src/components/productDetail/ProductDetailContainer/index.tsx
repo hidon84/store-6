@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Button from '~/components/common/Button';
 import ProductLikeButton from '~/components/product/ProductLikeButton';
 import { ProductDetailGetResponseBody } from '~/lib/api/types';
-import { formatPrice } from '~/utils/fotmatPrice';
+import { formatPrice } from '~/utils/formatPrice';
 import SubInfos from '../SubInfos';
 import {
   ProductDetailContainerWrapper,
