@@ -53,7 +53,7 @@ const ButtonWrapper = styled.button<{ category: string; entered?: boolean }>`
     display: inline-block;
     opacity: 0;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 50%;
     padding: 5px 20px;
     transform: translateX(-50%);
