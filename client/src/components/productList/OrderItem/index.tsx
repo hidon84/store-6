@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UnderlineBaeminColorSVG } from '~/assets';
 import { ProductsGetRequestQuery } from '~/lib/api/types';
 
-import { setOrder } from '~/stores/productListModule';
+import { setOrder } from '~/stores/productFilterModule';
 import { startFetch } from '~/stores/fetchModule';
 import scrollToTop from '~/utils/scrollToTop';
 

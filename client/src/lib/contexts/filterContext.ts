@@ -1,4 +1,4 @@
-import { ActionType, IFilter } from '~/stores/productListModule';
+import { ActionType, IFilter } from '~/stores/productFilterModule';
 import createNamedContext from './createNamedContext';
 
 interface FilterContextState {

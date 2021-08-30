@@ -9,6 +9,8 @@ import UserContext from './lib/contexts/userContext';
 import useAutoLogin from './lib/hooks/useAutoLogin';
 
 import { alert } from './utils/modal';
+import FilterContext from './lib/contexts/filterContext';
+import productFilterModule from './stores/productFilterModule';
 
 const message = {
   failedToGetCartAmount: '장바구니 개수를 가져오는 데 실패했습니다.',
@@ -17,6 +19,8 @@ const message = {
 const Root = () => {
   const { userState, userDispatch } = useAutoLogin();
   const [cartAmount, setCartAmount] = useState(0);
+  const { state: filterState, dispatch: productFilterDispatch } =
+    productFilterModule();
 
   useEffect(() => {
     if (userState.isLoggedIn) {
@@ -31,9 +35,13 @@ const Root = () => {
     <UserContext.Provider value={{ user: userState, userDispatch }}>
       <CartAmountContext.Provider value={{ cartAmount }}>
         <SetCartAmountContext.Provider value={{ setCartAmount }}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <FilterContext.Provider
+            value={{ state: filterState, dispatch: productFilterDispatch }}
+          >
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </FilterContext.Provider>
         </SetCartAmountContext.Provider>
       </CartAmountContext.Provider>
     </UserContext.Provider>

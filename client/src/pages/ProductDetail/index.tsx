@@ -32,10 +32,10 @@ const message = {
 
 const statusCodeAlreadyAdded = 409;
 
-const ProductDetail: FC = () => {
+const ProductDetailPage: FC = () => {
   const { user: userState } = useContext(UserContext);
   const setCartAmount = useSetCartAmount();
-  const idx = Number(useParams().id);
+  const idx = Number(useParams()?.id);
   const isIdxValid = !(Number.isNaN(idx) || idx <= 0);
   const history = useHistory();
   const [isNotFound, setIsNotFound] = useState(false);
@@ -165,4 +165,4 @@ const ProductDetail: FC = () => {
   );
 };
 
-export default ProductDetail;
+export default ProductDetailPage;

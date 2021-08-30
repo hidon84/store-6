@@ -33,6 +33,7 @@ interface RouterContextType {
     [key: string]: string;
   };
   push: (location: Partial<RouterLocation>) => void;
+  replace: (location: Partial<RouterLocation>) => void;
   goBack: () => void;
 }
 
@@ -43,6 +44,7 @@ export const RouterContext = createContext<RouterContextType>({
     search: '?some=search-string',
   },
   push: () => {},
+  replace: () => {},
   goBack: () => window.history.back(),
 });
 
@@ -60,6 +62,11 @@ const BrowserRouter: React.FC<{
     push: (newLocation: Partial<RouterLocation>) => {
       const { state, pathname } = newLocation;
       window.history.pushState(state, '', pathname);
+      setWindowLocation({ ...windowLocation, ...newLocation });
+    },
+    replace: (newLocation: Partial<RouterLocation>) => {
+      const { state, pathname } = newLocation;
+      window.history.replaceState(state, '', pathname);
       setWindowLocation({ ...windowLocation, ...newLocation });
     },
     goBack: () => window.history.back(),
@@ -220,6 +227,9 @@ const useHistory = () => {
     goBack: routerCtx.goBack,
     push: (pathname: string, state?: Record<string, unknown>) => {
       routerCtx.push({ pathname, state });
+    },
+    replace: (pathname: string, state?: Record<string, unknown>) => {
+      routerCtx.replace({ pathname, state });
     },
   } as const;
 };
