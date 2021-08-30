@@ -10,8 +10,6 @@ import cssParser from './utils/cssParser';
 import cssSerializer from './utils/cssStringify';
 import { generateAlphabeticName } from './utils/generateAlphaName';
 
-let classNameIndex = 1000;
-
 export type PropsType = { [key: string]: unknown };
 
 /**
@@ -19,6 +17,7 @@ export type PropsType = { [key: string]: unknown };
  */
 const constructWithTag = (tag: string) => {
   const Tag = `${tag}` as keyof JSX.IntrinsicElements;
+  let classNameIndex = 1000;
 
   const construct =
     (templateStr: TemplateStringsArray, ...args: unknown[]) =>
