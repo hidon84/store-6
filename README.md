@@ -126,7 +126,7 @@ yarn p2p # 배포용 브로커 서버
 client/ 디렉토리에 아래 명령어를 실행합니다.
 
 ```sh
-yarn start:dev # 개발용 핫로딩 서버 (.env.dev 필요)
+yarn dev # 개발용 핫로딩 서버 (.env.dev 필요)
 # or
 yarn build # 배포용 빌드 (.env.prod 필요)
 ```
