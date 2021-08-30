@@ -15,6 +15,12 @@
         "rootPathPrefix": "~",
         "rootPathSuffix": "src"
       }
+    ],
+    [
+      "babel-plugin-styled-components",
+      {
+        "transpileTemplateLiterals": true
+      }
     ]
   ],
   "env": {

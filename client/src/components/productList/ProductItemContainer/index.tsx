@@ -12,7 +12,7 @@ import { useHistory } from '~/core/Router';
 import FetchContext from '~/lib/contexts/fetchContext';
 import FilterContext from '~/lib/contexts/filterContext';
 import { ProductData } from '~/pages/ProductList';
-import { FINISH_FETCH, INIT_FETCH, START_FETCH } from '~/stores/fetchModule';
+import { FINISH_FETCH, START_FETCH } from '~/stores/fetchModule';
 
 import S from './index.style';
 
@@ -52,7 +52,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
             />
           ))}
         <S.NoResourceWrapper>
-          {products.length === 0 && fetchState.action !== INIT_FETCH && (
+          {products.length === 0 && fetchState.action !== START_FETCH && (
             <NoResource content={NO_RESOURCE_CONTENT} />
           )}
         </S.NoResourceWrapper>
@@ -62,7 +62,9 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
         {fetchState.action === FINISH_FETCH && !filterState.isLastPage && (
           <S.LoadingText>로딩중</S.LoadingText>
         )}
-        {filterState.isLastPage && <S.LoadingText>끝</S.LoadingText>}
+        {products.length !== 0 && filterState.isLastPage && (
+          <S.LoadingText>끝</S.LoadingText>
+        )}
       </S.ListFooter>
     </S.ProductItemContainerWrapper>
   );
