@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SmallCircleSVG } from '~/assets';
 
-export const ImageContainer = styled.div`
+const ImageContainer = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,15 +13,18 @@ export const ImageContainer = styled.div`
     width: 47px;
   }
 
-  &:not(.selected) {
-    img:hover {
-      transition: all 300ms;
-      transform: scale(1.2);
-    }
-  }
-
-  &.selected {
-    transform: scale(1.2);
-    background: url(${SmallCircleSVG}) no-repeat center center;
-  }
+  ${({ isSelected }) =>
+    !isSelected
+      ? css`
+          img:hover {
+            transition: all 300ms;
+            transform: scale(1.2);
+          }
+        `
+      : css`
+          transform: scale(1.2);
+          background: url(${SmallCircleSVG}) no-repeat center center;
+        `}
 `;
+
+export default { ImageContainer };
