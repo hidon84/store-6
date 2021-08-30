@@ -10,13 +10,13 @@ const ProductDetailImages: FC<IProps> = ({ thumbnail, images }) => {
   return (
     <>
       <ImageMagnifier
-        key={thumbnail}
+        key={`${thumbnail}-thumbnail`}
         imageSrc={thumbnail}
         imageAlt="product thumbnail"
       />
       {images.map((image, imgIdx) => (
         <ImageMagnifier
-          key={image}
+          key={`${image}-${imgIdx}`}
           imageSrc={image}
           imageAlt={`detail image ${imgIdx}`}
         />
