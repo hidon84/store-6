@@ -57,8 +57,7 @@ const ProductDetail: FC = () => {
         imagesContainerRef.current.clientHeight;
       const currentScrollPos = imagesContainerRef.current.scrollTop;
       const scrollProgress = currentScrollPos / maxScrollHeight;
-      scrollProgressRef.current.style.transform =
-        S.scrollProgressTransform(scrollProgress);
+      scrollProgressRef.current.style.top = S.scrollProgressTop(scrollProgress);
     };
 
     document.addEventListener('wheel', scrollImagesWhenWheel);
@@ -149,7 +148,9 @@ const ProductDetail: FC = () => {
 
       <S.LayoutDivider aria-hidden="true">
         <S.DivideLine />
-        <S.ScrollProgress ref={scrollProgressRef} />
+        <S.ScrollProgressWrapper>
+          <S.ScrollProgress ref={scrollProgressRef} />
+        </S.ScrollProgressWrapper>
       </S.LayoutDivider>
 
       <S.RightSection>
