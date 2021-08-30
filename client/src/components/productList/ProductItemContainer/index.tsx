@@ -44,7 +44,7 @@ const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (
    * 만약 item container의 높이가 윈도우 높이보다 작은데 마지막 페이지고,
    * fetchState.action이 FINISH_FETCH일 경우, 다음 페이지를 바로 요청합니다.
    * 이 조건은 화면을 축소 시켰을 때 요청할 경우,
-   * intersection observer 가 observe 이벤트가 트리거되기 전 렌더가 되서 발생하는 문제입니다.
+   * 렌더가 되기 전 observing 이벤트가 발생해서 수정하게 된 조건입니다.
    */
   useEffect(() => {
     if (
