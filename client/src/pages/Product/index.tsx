@@ -4,7 +4,7 @@ import ProductList from '~/components/productList/ProductList';
 import { useHistory, useLocation, useParams } from '~/core/Router';
 import CATEGORY_TO_IDX from '~/lib/constants/categories';
 import FilterContext from '~/lib/contexts/filterContext';
-import productListModule, { setCategory } from '~/stores/productListModule';
+import productListModule, { setCategory } from '~/stores/productFilterModule';
 
 const ProductPage = () => {
   const location = useLocation();
@@ -12,7 +12,7 @@ const ProductPage = () => {
   const { state: filterState, dispatch: productFilterDispatch } =
     productListModule();
   const idx = useParams()?.id;
-  let idxNumber = Number(idx);
+  const idxNumber = Number(idx);
 
   useEffect(() => {
     if (location.state?.from === '/') {

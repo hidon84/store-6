@@ -4,7 +4,7 @@ import FetchContext from '~/lib/contexts/fetchContext';
 import FilterContext from '~/lib/contexts/filterContext';
 
 import { startFetch } from '~/stores/fetchModule';
-import { resetCategory, setCategory } from '~/stores/productListModule';
+import { resetCategory, setCategory } from '~/stores/productFilterModule';
 
 import scrollToTop from '~/utils/scrollToTop';
 

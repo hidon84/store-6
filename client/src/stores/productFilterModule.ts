@@ -116,7 +116,7 @@ const filterReducer = (state: IFilter, action: ActionType): IFilter => {
   }
 };
 
-const productListModule = () => {
+const productFilterModule = () => {
   const [filterState, dispatch] = useReducer(
     filterReducer,
     INITIAL_FILTER_STATE,
@@ -125,4 +125,4 @@ const productListModule = () => {
   return { state: filterState, dispatch };
 };
 
-export default productListModule;
+export default productFilterModule;

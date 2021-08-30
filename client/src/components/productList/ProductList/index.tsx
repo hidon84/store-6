@@ -20,10 +20,7 @@ import fetchModule, {
   INIT_FETCH,
   START_FETCH,
 } from '~/stores/fetchModule';
-import {
-  setLastPage,
-  setNextPage,
-} from '~/stores/productListModule';
+import { setLastPage, setNextPage } from '~/stores/productFilterModule';
 
 import S from './index.style';
 

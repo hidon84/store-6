@@ -9,7 +9,7 @@ import FilterContext from '~/lib/contexts/filterContext';
 import useSearchTerm from '~/lib/hooks/useSearchTerm';
 
 import { startFetch } from '~/stores/fetchModule';
-import { removeSearchValue } from '~/stores/productListModule';
+import { removeSearchValue } from '~/stores/productFilterModule';
 
 import S from './index.style';
 
