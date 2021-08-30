@@ -55,13 +55,14 @@ const ButtonWrapper = styled.button<{ category: string; entered?: boolean }>`
     position: absolute;
     top: 0;
     left: 50%;
-    width: 100px;
-    padding: 5px 10px;
+    padding: 5px 20px;
     transform: translateX(-50%);
     color: #fff;
     background-color: #000;
     border-radius: 20px;
+    border: 1px solid #fff;
     transition: 0.3s;
+    word-break: keep-all;
   }
   &:hover .category-text {
     opacity: 1;
