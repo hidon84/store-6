@@ -21,7 +21,7 @@ const RTCAudio: FC<{ id: string; stream: MediaStream; me?: boolean }> = ({
       {me ? (
         <MirroredVideo ref={videoRef} autoPlay muted />
       ) : (
-        <Video ref={videoRef} autoPlay controls />
+        <Video ref={videoRef} autoPlay controls muted />
       )}
     </figure>
   );

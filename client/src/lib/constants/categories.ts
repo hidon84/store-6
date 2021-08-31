@@ -1,4 +1,4 @@
-const CATEGORY_TO_IDX = {
+export const CATEGORY_TO_IDX = {
   book: 1,
   pencil: 2,
   house: 3,
@@ -10,4 +10,14 @@ const CATEGORY_TO_IDX = {
   colab: 9,
 };
 
-export default CATEGORY_TO_IDX;
+export const CATEGORY_TO_STR = {
+  book: '책',
+  hat: '을지로에디션',
+  house: '리빙',
+  kk: 'ㅋㅋ에디션',
+  baedal: '배달이친구들',
+  tree: '배민그린',
+  pencil: '문구',
+  colab: '콜라보레이션',
+  gift: '선물세트',
+};
