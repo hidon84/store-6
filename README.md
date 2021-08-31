@@ -13,6 +13,12 @@
   <img src="https://img.shields.io/badge/typeorm-000?style=flat-square&logo=typeorm&logoColor=white" alt="typeorm-badge" />
 </div>
 
+<p align="center" style="margin-top: 40px;">
+  <a href="https://store.woowa.link">
+    §§배민☆ 문방구§§가입시$$전원 카드팩☜☜ 즉시이동 https://store.woowa.link
+  </a>
+</p>
+
 # 자랑거리
 
 ## 멤버가 자랑거리임!!
@@ -161,7 +167,7 @@
 
 # 실행방법
 
-[라이브데모 store.woowa.link](https://store.woowa.link)
+직접 실행하기 귀찮으면 [라이브데모 페이지](https://store.woowa.link)로 접속하세요
 
 ## 서버 환경변수 설정 (.env)
 
