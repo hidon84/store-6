@@ -4,6 +4,12 @@
 
 <p align="center"><b>6팀 배 출발!</b></p>
 
+<p align="center" style="margin-top: 40px;">
+  <a href="https://store.woowa.link">
+    §§배민☆ 문방구§§가입시$$전원 카드팩☜☜ 즉시이동 https://store.woowa.link
+  </a>
+</p>
+
 <div align='center'>
   <img src="https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white" alt="ts-badge" />
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white" alt="react-badge" />
@@ -12,12 +18,6 @@
   <img src="https://img.shields.io/badge/babel-F9DC3E?style=flat-square&logo=babel&logoColor=black" alt="babel-badge" />
   <img src="https://img.shields.io/badge/typeorm-000?style=flat-square&logo=typeorm&logoColor=white" alt="typeorm-badge" />
 </div>
-
-<p align="center" style="margin-top: 40px;">
-  <a href="https://store.woowa.link">
-    §§배민☆ 문방구§§가입시$$전원 카드팩☜☜ 즉시이동 https://store.woowa.link
-  </a>
-</p>
 
 # 자랑거리
 
