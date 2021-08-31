@@ -98,13 +98,19 @@
   <tbody>
   <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426468-66070c4d-2726-4b53-8419-9f40807100a4.png">
+        <a href="https://snow-bagpipe-339.notion.site/fe8281f1606c4418bc7079a7d8c87d9c?v=00a2b3a456334514b7fd58955a6e1da7">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426468-66070c4d-2726-4b53-8419-9f40807100a4.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426481-d2429904-fe2d-4bdd-871b-1d427780a34a.png">
+        <a href="https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=0">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426481-d2429904-fe2d-4bdd-871b-1d427780a34a.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426490-082d480e-3a01-4bc1-95af-dd2cdedae89a.png">
+        <a href="https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=1222181688">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426490-082d480e-3a01-4bc1-95af-dd2cdedae89a.png">
+        </a>
       </td>
     </tr>
   </tbody>
@@ -127,13 +133,19 @@
   <tbody>
     <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426585-291b06db-1e90-49d1-97c0-637478d0f9c4.png">
+        <a href="https://snow-bagpipe-339.notion.site/59f1c69982314c10b13163c7f29638af">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426585-291b06db-1e90-49d1-97c0-637478d0f9c4.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426635-3be89751-b166-4e4f-83df-9bb0741a9124.png">
+        <a href="https://www.figma.com/file/4zOaAFuQAkAb6uKSPSXOjz/%EB%B0%B0%EB%8A%94-%ED%95%AD%EA%B5%AC%EC%97%90-%EC%A0%95%EB%B0%95%ED%95%B4-%EC%9E%88%EC%9D%84-%EB%95%8C-%EA%B0%80%EC%9E%A5-%EC%95%88%EC%A0%84%ED%95%98%EB%8B%A4.-%EA%B7%B8%EB%9F%AC%EB%82%98-%EA%B7%B8%EA%B2%83%EC%9D%B4-6%ED%8C%80%EC%9D%98-%EC%A1%B4%EC%9E%AC-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EC%95%84%EB%8B%88%EB%8B%A4.?node-id=0%3A1">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426635-3be89751-b166-4e4f-83df-9bb0741a9124.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426638-dc1c60ea-28f4-43f9-8bc5-ffdc00d1ac20.png">
+        <a href="https://github.com/woowa-techcamp-2021/store-6/wiki">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426638-dc1c60ea-28f4-43f9-8bc5-ffdc00d1ac20.png">
+        </a>
       </td>
     </tr>
   </tbody>
