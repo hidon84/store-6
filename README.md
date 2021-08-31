@@ -47,10 +47,14 @@
   <tbody>
     <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426042-9cdca73b-f611-4f88-b356-6be342f28354.png">
+        <a href="https://store.woowa.link/products">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426042-9cdca73b-f611-4f88-b356-6be342f28354.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426050-c924cf5e-0019-41e3-a4fa-3ebd4464075b.png">
+        <a href="https://store.woowa.link/products/246">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426050-c924cf5e-0019-41e3-a4fa-3ebd4464075b.png">
+        </a>
       </td>
     </tr>
   </tbody>
@@ -70,10 +74,14 @@
   <tbody>
     <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426055-c2150246-c620-47d6-aa8a-ea3dcc3e1405.png">
+        <a href="https://store.woowa.link/cart">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426055-c2150246-c620-47d6-aa8a-ea3dcc3e1405.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426063-0a5566a6-2fb3-46a8-ada3-de33340272e3.png">
+        <a href="https://store.woowa.link/like">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426063-0a5566a6-2fb3-46a8-ada3-de33340272e3.png">
+        </a>
       </td>
     </tr>
   </tbody>
