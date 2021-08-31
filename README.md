@@ -4,6 +4,12 @@
 
 <p align="center"><b>6팀 배 출발!</b></p>
 
+<p align="center" style="margin-top: 40px;">
+  <a href="https://store.woowa.link">
+    §§배민☆ 문방구§§가입시$$전원 카드팩☜☜ 즉시이동 https://store.woowa.link
+  </a>
+</p>
+
 <div align='center'>
   <img src="https://img.shields.io/badge/Typescript-235A97?style=flat-square&logo=Typescript&logoColor=white" alt="ts-badge" />
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white" alt="react-badge" />
@@ -31,6 +37,62 @@
 
 ~~아니 이사람들 왜 쇼핑몰만들라는데 게더를 만들어놨어~~
 
+## 1px 차이? 디테일 차이? 아무튼 중요!
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        상품목록
+      </th>
+      <th>
+        상품 디테일
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://store.woowa.link/products">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426042-9cdca73b-f611-4f88-b356-6be342f28354.png">
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://store.woowa.link/products/246">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426050-c924cf5e-0019-41e3-a4fa-3ebd4464075b.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        장바구니
+      </th>
+      <th>
+        좋아요
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://store.woowa.link/products">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426055-c2150246-c620-47d6-aa8a-ea3dcc3e1405.png">
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://store.woowa.link/products">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426063-0a5566a6-2fb3-46a8-ada3-de33340272e3.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 # 🐾 6팀의 즐거운 항해 발자취
 
 <table>
@@ -50,18 +112,23 @@
   <tbody>
   <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060069-88355934-ace1-467f-a936-f76604e94de4.png">
+        <a href="https://snow-bagpipe-339.notion.site/fe8281f1606c4418bc7079a7d8c87d9c?v=00a2b3a456334514b7fd58955a6e1da7">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426468-66070c4d-2726-4b53-8419-9f40807100a4.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060139-7d4d57d6-6ebe-4c3b-9011-f7f4705a07f9.png">
+        <a href="https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=0">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426481-d2429904-fe2d-4bdd-871b-1d427780a34a.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/19240202/131251805-f004cc32-1fdf-4652-8529-f73145d6736c.png">
+        <a href="https://docs.google.com/spreadsheets/d/1JHx64IJu5w4gNWNk-02ZHw7kVe4nT4PXDLvnqgEBEN8/edit#gid=1222181688">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426490-082d480e-3a01-4bc1-95af-dd2cdedae89a.png">
+        </a>
       </td>
     </tr>
   </tbody>
 </table>
-
 
 <table>
   <thead>
@@ -78,24 +145,36 @@
     </tr>
   </thead>
   <tbody>
-  <tr>
+    <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061393-e434fdf3-d989-4207-9b55-2dded8fe49ee.png">
+        <a href="https://snow-bagpipe-339.notion.site/59f1c69982314c10b13163c7f29638af">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426585-291b06db-1e90-49d1-97c0-637478d0f9c4.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061443-856d1ca8-25ee-40b5-97b8-1580e26de979.png">
+        <a href="https://www.figma.com/file/4zOaAFuQAkAb6uKSPSXOjz/%EB%B0%B0%EB%8A%94-%ED%95%AD%EA%B5%AC%EC%97%90-%EC%A0%95%EB%B0%95%ED%95%B4-%EC%9E%88%EC%9D%84-%EB%95%8C-%EA%B0%80%EC%9E%A5-%EC%95%88%EC%A0%84%ED%95%98%EB%8B%A4.-%EA%B7%B8%EB%9F%AC%EB%82%98-%EA%B7%B8%EA%B2%83%EC%9D%B4-6%ED%8C%80%EC%9D%98-%EC%A1%B4%EC%9E%AC-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EC%95%84%EB%8B%88%EB%8B%A4.?node-id=0%3A1">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426635-3be89751-b166-4e4f-83df-9bb0741a9124.png">
+        </a>
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061478-53303408-9743-4661-b82a-058a7308a45a.png">
+        <a href="https://github.com/woowa-techcamp-2021/store-6/wiki">
+          <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426638-dc1c60ea-28f4-43f9-8bc5-ffdc00d1ac20.png">
+        </a>
       </td>
     </tr>
-
   </tbody>
 </table>
 
+## 👇 이것도 봐주삼!
+
+- [유튜브 최종 데모 영상](https://www.youtube.com/watch?v=A_SIZJq4Hns)
+- [6팀에서 일 잘하는 11가지 방법](https://github.com/woowa-techcamp-2021/store-6/wiki/6%ED%8C%80%EC%9D%98-%ED%8C%80-%ED%99%9C%EB%8F%99-%EB%B0%A9%EB%B2%95)
+- [왜 기존 배민 문방구에서 새로운 UI UX를 기획하게 되었나요?](https://github.com/woowa-techcamp-2021/store-6/wiki/%EC%99%9C-%EA%B8%B0%EC%A1%B4-%EB%B0%B0%EB%AF%BC-%EB%AC%B8%EB%B0%A9%EA%B5%AC%EC%97%90%EC%84%9C-%EC%83%88%EB%A1%9C%EC%9A%B4-UI-UX%EB%A5%BC-%EA%B8%B0%ED%9A%8D%ED%95%98%EA%B2%8C-%EB%90%98%EC%97%88%EB%82%98%EC%9A%94%3F)
+
+
 # 실행방법
 
-[라이브데모 store.woowa.link](https://store.woowa.link)
+직접 실행하기 귀찮으면 [라이브데모 페이지](https://store.woowa.link)로 접속하세요
 
 ## 서버 환경변수 설정 (.env)
 
