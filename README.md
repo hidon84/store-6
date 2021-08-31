@@ -31,6 +31,54 @@
 
 ~~아니 이사람들 왜 쇼핑몰만들라는데 게더를 만들어놨어~~
 
+## 수려한 디자인
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        상품목록
+      </th>
+      <th>
+        상품 디테일
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426042-9cdca73b-f611-4f88-b356-6be342f28354.png">
+      </td>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426050-c924cf5e-0019-41e3-a4fa-3ebd4464075b.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        장바구니
+      </th>
+      <th>
+        좋아요
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426055-c2150246-c620-47d6-aa8a-ea3dcc3e1405.png">
+      </td>
+      <td align="center">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426063-0a5566a6-2fb3-46a8-ada3-de33340272e3.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 # 🐾 6팀의 즐거운 항해 발자취
 
 <table>
@@ -50,18 +98,17 @@
   <tbody>
   <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060069-88355934-ace1-467f-a936-f76604e94de4.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426468-66070c4d-2726-4b53-8419-9f40807100a4.png">
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131060139-7d4d57d6-6ebe-4c3b-9011-f7f4705a07f9.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426481-d2429904-fe2d-4bdd-871b-1d427780a34a.png">
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/19240202/131251805-f004cc32-1fdf-4652-8529-f73145d6736c.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426490-082d480e-3a01-4bc1-95af-dd2cdedae89a.png">
       </td>
     </tr>
   </tbody>
 </table>
-
 
 <table>
   <thead>
@@ -78,18 +125,17 @@
     </tr>
   </thead>
   <tbody>
-  <tr>
+    <tr>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061393-e434fdf3-d989-4207-9b55-2dded8fe49ee.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426585-291b06db-1e90-49d1-97c0-637478d0f9c4.png">
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061443-856d1ca8-25ee-40b5-97b8-1580e26de979.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426635-3be89751-b166-4e4f-83df-9bb0741a9124.png">
       </td>
       <td align="center">
-        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131061478-53303408-9743-4661-b82a-058a7308a45a.png">
+        <img width="789" alt="image" src="https://user-images.githubusercontent.com/13645032/131426638-dc1c60ea-28f4-43f9-8bc5-ffdc00d1ac20.png">
       </td>
     </tr>
-
   </tbody>
 </table>
 
