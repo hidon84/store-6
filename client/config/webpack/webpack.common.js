@@ -43,19 +43,11 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(bmp|gif|jpe?g|png|webp)$/i,
+        test: /\.(bmp|gif|jpe?g|png|webp|svg)$/i,
         loader: 'url-loader',
         options: {
           limit: imageInlineSizeLimit,
           name: 'static/media/[name].[contenthash].[ext]',
-        },
-      },
-      {
-        test: /\.svg$/i,
-        loader: 'svg-url-loader',
-        options: {
-          limit: imageInlineSizeLimit,
-          name: 'static/media/[name].[contenthash].svg',
         },
       },
       {
