@@ -42,11 +42,8 @@ module.exports = {
     'import/prefer-default-export': 'off',
   },
   ignorePatterns: [
-    '.eslintrc.js',
-    'jest.config.js',
-    'webpack.config.js',
+    '**/*.js',
     'setUpTests.ts',
     'images.d.ts',
-    'webpack.config.*.js',
   ],
 };
