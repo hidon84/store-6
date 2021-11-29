@@ -1,15 +1,13 @@
 const os = require('os');
-const path = require('path');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    chunkFilename: "[name].[chunkhash].js",
+    filename: 'static/js/[name].[contenthash].js',
+    chunkFilename: "static/js/[name].[chunkhash].chunk.js",
   },
   module: {
     rules: [
@@ -19,31 +17,13 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader'
         ]
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        loader: 'url-loader',
-        options: {
-          limit: 8 * 1024,
-        },
-      },
-      {
-        test: /\.svg$/i,
-        loader: 'svg-url-loader',
-        options: {
-          limit: 8 * 1024,
-        },
-      },
-      {
-        test: /\.(svg|png|jpe?g|gif)$/i,
-        loader: 'image-webpack-loader',
-        enforce: 'pre',
-      },
+      }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].[contenthash].css',
+    }),
   ],
   optimization: {
     minimize: true,
@@ -57,7 +37,7 @@ module.exports = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: "js/vendor",
+          name: "vendor",
           chunks: "all",
         },
       },

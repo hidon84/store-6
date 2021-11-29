@@ -1,28 +1,26 @@
-const path = require('path');
+'use strict';
+
+const paths = require('./paths.js');
 
 module.exports = {
   mode: 'development',
+  devtool: 'source-map',
   optimization: {
     providedExports: false,
   },
-  devtool: 'source-map',
+  output: {
+    filename: 'static/js/build.js',
+  },
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader',]
       },
-      {
-        test: /\.(svg|png|jpg|gif)$/i,
-        loader: 'url-loader',
-        options: {
-          limit: 8 * 1024,
-        },
-      },
     ]
   },
   devServer: {
-    contentBase: path.join(__dirname, '../dist'),
+    static: paths.appBuild,
     compress: true,
     port: 8080,
     historyApiFallback: true,

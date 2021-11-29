@@ -8,15 +8,15 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
-    "dev": "env-cmd -f .env.dev webpack serve --mode development",
-    "build": "env-cmd -f .env.prod webpack --mode production --progress",
-    "lint": "yarn eslint --ext .tsx --ext .ts src",
-    "lint:fix": "yarn eslint --ext .tsx --ext .ts src --fix",
-    "prettier:write": "yarn prettier --write src",
-    "precommit": "yarn lint-staged",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "test:coverage": "jest --coverage"
+    "dev": "env-cmd -f .env.dev webpack serve --mode development --config ./config/webpack.config.js",
+    "build": "env-cmd -f .env.prod webpack --mode production --progress --config ./config/webpack.config.js",
+    "lint": "yarn eslint --ext .tsx --ext .ts .",
+    "lint:fix": "yarn eslint --ext .tsx --ext .ts . --fix",
+    "prettier:write": "yarn prettier --write .",
+    "precommit": "yarn lint-staged --config ./config/lintstagedrc.json",
+    "test": "jest --config ./config/jest.config.js",
+    "test:watch": "jest --watchAll --config ./config/jest.config.js",
+    "test:coverage": "jest --coverage --config ./config/jest.config.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.3",
@@ -55,7 +55,9 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-root-import": "^6.6.0",
     "babel-plugin-styled-components": "^1.13.2",
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^10.0.0",
     "css-loader": "^6.2.0",
     "css-minimizer-webpack-plugin": "^3.0.2",
     "env-cmd": "^10.1.0",
@@ -72,7 +74,6 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.3.2",
     "html-webpack-plugin": "^5.3.2",
-    "image-webpack-loader": "^7.0.1",
     "jest": "^27.0.4",
     "jest-styled-components": "^7.0.5",
     "jest-transform-stub": "^2.0.0",
@@ -88,7 +89,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.49.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2",
+    "webpack-dev-server": "^4.6.0",
     "webpack-merge": "^5.8.0"
   }
 }
