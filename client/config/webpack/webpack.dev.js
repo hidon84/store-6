@@ -20,7 +20,7 @@ module.exports = {
     ]
   },
   devServer: {
-    static: paths.appBuild,
+    contentBase: paths.appBuild,
     compress: true,
     port: 8080,
     historyApiFallback: true,
