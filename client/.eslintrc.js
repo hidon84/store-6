@@ -42,5 +42,5 @@ module.exports = {
     'import/extensions': ['off'],
     'import/prefer-default-export': 'off',
   },
-  ignorePatterns: ['**/*.js', 'setUpTests.ts', 'images.d.ts'],
+  ignorePatterns: ['**/*.js', 'setUpTests.ts', 'dist', 'images.d.ts'],
 };
