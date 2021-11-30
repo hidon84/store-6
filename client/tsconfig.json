@@ -14,7 +14,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
-    }
+    },
+    "lib": ["ES2017", "DOM"]
   },
   "typeRoots": ["node_modules/@types", "src/@type"],
   "exclude": [

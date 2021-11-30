@@ -21,7 +21,6 @@ import S from './index.style';
 
 interface Props {
   products: ProductData[];
-  ref: React.MutableRefObject<HTMLDivElement>;
 }
 
 const ProductItemContainer: ForwardRefRenderFunction<HTMLDivElement, Props> = (

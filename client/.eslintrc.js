@@ -27,6 +27,7 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'no-restricted-syntax': 'off',
@@ -41,12 +42,5 @@ module.exports = {
     'import/extensions': ['off'],
     'import/prefer-default-export': 'off',
   },
-  ignorePatterns: [
-    '.eslintrc.js',
-    'jest.config.js',
-    'webpack.config.js',
-    'setUpTests.ts',
-    'images.d.ts',
-    'webpack.config.*.js',
-  ],
+  ignorePatterns: ['**/*.js', 'setUpTests.ts', 'dist', 'images.d.ts'],
 };

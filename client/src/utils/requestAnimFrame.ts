@@ -5,11 +5,7 @@ const fallbackRequestAnimFrame = (callback: FrameRequestCallback) => {
 };
 
 const getRequestAnimFrame = () => {
-  return (
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    fallbackRequestAnimFrame
-  );
+  return window.requestAnimationFrame || fallbackRequestAnimFrame;
 };
 
 const requestAnimFrame = getRequestAnimFrame();
