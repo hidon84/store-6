@@ -4,6 +4,8 @@
 const APP_ENV = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
+  const nodeEnv = process.env.NODE_ENV;
+
   const raw = Object.keys(process.env)
     .filter((key) => APP_ENV.test(key))
     .reduce(
@@ -13,6 +15,7 @@ function getClientEnvironment(publicUrl) {
       },
       {
         PUBLIC_URL: publicUrl,
+        NODE_ENV: nodeEnv,
       },
     );
   const stringified = {
