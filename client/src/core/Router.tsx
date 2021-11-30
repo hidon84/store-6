@@ -11,12 +11,13 @@ import NoMatchingRoute from '~/components/common/NoMatchingRoute';
 import UserContext from '~/lib/contexts/userContext';
 import { isSafari } from '~/utils/browserDetect';
 import { confirm } from '~/utils/modal';
+import config from '~/config';
 
 const NOT_LOGGED_IN_ERROR = `로그인이 필요한 서비스입니다. 
 로그인 페이지로 이동하시겠습니까?`;
 
-ReactGA.initialize(process.env.TRACKING_ID, {
-  testMode: process.env.TRACKING_ID === undefined,
+ReactGA.initialize(config.gaTrackingID, {
+  testMode: config.gaTrackingID === undefined,
 });
 
 interface RouterLocation {
