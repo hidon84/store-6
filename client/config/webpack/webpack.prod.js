@@ -7,18 +7,15 @@ module.exports = {
   mode: 'production',
   output: {
     filename: 'static/js/[name].[contenthash].js',
-    chunkFilename: "static/js/[name].[chunkhash].chunk.js",
+    chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -37,10 +34,10 @@ module.exports = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "all",
+          name: 'vendor',
+          chunks: 'all',
         },
       },
     },
   },
-}
+};

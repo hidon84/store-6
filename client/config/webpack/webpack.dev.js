@@ -15,9 +15,9 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader',]
+        use: ['style-loader', 'css-loader'],
       },
-    ]
+    ],
   },
   devServer: {
     contentBase: paths.appBuild,
@@ -25,4 +25,4 @@ module.exports = {
     port: 8080,
     historyApiFallback: true,
   },
-}
+};
