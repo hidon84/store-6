@@ -8,8 +8,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn clean",
-    "dev": "env-cmd -f .env.dev webpack serve --mode development --config ./config/webpack.config.js",
-    "build": "env-cmd -f .env.prod webpack --mode production --progress --config ./config/webpack.config.js",
+    "dev": "env-cmd -f env/.env.dev webpack serve --mode development --config ./config/webpack.config.js",
+    "build": "env-cmd -f env/.env.prod webpack --mode production --progress --config ./config/webpack.config.js",
     "lint": "yarn eslint --ext .tsx --ext .ts .",
     "lint:fix": "yarn eslint --ext .tsx --ext .ts . --fix",
     "prettier:write": "yarn prettier --write .",
