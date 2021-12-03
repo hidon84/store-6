@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f .env.dev nodemon --exec ts-node -r tsconfig-paths/register ./src/bin/www.ts --watch ./src -e ts",
+    "dev": "env-cmd nodemon --exec ts-node -r tsconfig-paths/register ./src/bin/www.ts --watch ./src -e ts",
     "start": "env-cmd ts-node -r tsconfig-paths/register ./src/bin/www.ts",
     "p2p": "npx peer --port 5001 --key peerjs --path /p2p --proxied true --sslkey /etc/letsencrypt/live/store.woowa.link/privkey.pem --sslcert /etc/letsencrypt/live/store.woowa.link/fullchain.pem",
     "p2p-dev": "npx peer --port 5001 --key peerjs --path /p2p",
     "lint:fix": "eslint --fix .",
     "prettier:write": "prettier --write .",
     "precommit": "yarn lint-staged",
-    "test": "env-cmd -f .env.dev jest --detectOpenHandles --forceExit",
-    "coverage": "env-cmd -f .env.dev jest --coverage --detectOpenHandles --forceExit"
+    "test": "jest --detectOpenHandles --forceExit",
+    "coverage": "jest --coverage --detectOpenHandles --forceExit"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -26,7 +26,6 @@
     "@types/multer-s3": "^2.7.10",
     "@types/node": "^16.4.13",
     "@types/redis": "^2.8.31",
-    "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "env-cmd": "^10.1.0",
@@ -41,7 +40,6 @@
     "nodemon": "^2.0.12",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
-    "supertest": "^6.1.5",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.1.0",
     "tsconfig-paths": "^3.10.1",
