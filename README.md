@@ -171,14 +171,13 @@
 - [6팀에서 일 잘하는 11가지 방법](https://github.com/woowa-techcamp-2021/store-6/wiki/6%ED%8C%80%EC%9D%98-%ED%8C%80-%ED%99%9C%EB%8F%99-%EB%B0%A9%EB%B2%95)
 - [왜 기존 배민 문방구에서 새로운 UI UX를 기획하게 되었나요?](https://github.com/woowa-techcamp-2021/store-6/wiki/%EC%99%9C-%EA%B8%B0%EC%A1%B4-%EB%B0%B0%EB%AF%BC-%EB%AC%B8%EB%B0%A9%EA%B5%AC%EC%97%90%EC%84%9C-%EC%83%88%EB%A1%9C%EC%9A%B4-UI-UX%EB%A5%BC-%EA%B8%B0%ED%9A%8D%ED%95%98%EA%B2%8C-%EB%90%98%EC%97%88%EB%82%98%EC%9A%94%3F)
 
-
 # 실행방법
 
 직접 실행하기 귀찮으면 [라이브데모 페이지](https://store.woowa.link)로 접속하세요
 
 ## 서버 환경변수 설정 (.env)
 
-[server/.env.dev](server/.env.dev) 를 참고해서 환경변수 파일을 만들어주세요
+[server/.mock.env](server/.mock.env) 를 참고해서 환경변수 파일을 만들어주세요
 
 ## 서버 실행
 
@@ -186,7 +185,7 @@ server/ 디렉토리에서 아래 명령어를 실행합니다.
 
 ```sh
 yarn dev # 개발용 서버 (.env.dev 필요)
-# or 
+# or
 yarn start # 배포용 서버 (.env 필요)
 ```
 
@@ -195,7 +194,7 @@ yarn start # 배포용 서버 (.env 필요)
 server/ 디렉토리에서 아래 명령어를 실행합니다.
 
 ```sh
-yarn p2p-dev # 개발용 브로커 서버 
+yarn p2p-dev # 개발용 브로커 서버
 # or
 yarn p2p # 배포용 브로커 서버
 ```
